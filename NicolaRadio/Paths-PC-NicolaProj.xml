@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdtprojectproperties>
+<section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.IncludePaths">
+<language name="s">
+
+</language>
+<language name="c,S">
+<includepath>../NicolaRadio_bsp/ps7_cortexa9_0/include</includepath>
+<includepath workspace_path="true">/NicolaRadio/src</includepath>
+<includepath workspace_path="true">/NicolaRadio/src/include</includepath>
+<includepath workspace_path="true">/NicolaRadio/src/portable</includepath>
+<includepath workspace_path="true">/NicolaRadio/NicolaInclude</includepath>
+<includepath workspace_path="true">/PS_PL_wrapper_hw_platform_0</includepath>
+<includepath workspace_path="true">/NicolaRadio/FreeRTOS-Plus-FAT</includepath>
+
+</language>
+<language name="Object File">
+
+</language>
+<language name="ld">
+
+</language>
+</section>
+<section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.Macros">
+<language name="s">
+
+</language>
+<language name="c,S">
+
+</language>
+<language name="Object File">
+
+</language>
+<language name="ld">
+
+</language>
+</section>
+</cdtprojectproperties>
