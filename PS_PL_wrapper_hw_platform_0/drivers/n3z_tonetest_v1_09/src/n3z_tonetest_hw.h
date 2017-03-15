@@ -9,5 +9,6 @@
 #define N3Z_TONETEST_VALUES2RECOVER 0x0/**< values2recover */
 #define N3Z_TONETEST_AUDIOVOLUME 0x4/**< audiovolume */
 #define N3Z_TONETEST_ADCGAIN_AVE_PEAK 0x8/**< adcgain_ave_peak */
-#define N3Z_TONETEST_DEMODSIGNALLEVEL 0xc/**< demodsignallevel */
-#define N3Z_TONETEST_TXAUDIOLEVEL 0x10/**< txaudiolevel */
+#define N3Z_TONETEST_STARTTONEAMP 0xc/**< starttoneamp */
+#define N3Z_TONETEST_DEMODSIGNALLEVEL 0x10/**< demodsignallevel */
+#define N3Z_TONETEST_TXAUDIOLEVEL 0x14/**< txaudiolevel */

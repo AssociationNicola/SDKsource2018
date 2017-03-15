@@ -46,12 +46,20 @@ u32 n3z_tonetest_adcgain_ave_peak_read(n3z_tonetest *InstancePtr) {
     Data = n3z_tonetest_ReadReg(InstancePtr->n3z_tonetest_BaseAddress, 8);
     return Data;
 }
+u8 n3z_tonetest_starttoneamp_read(n3z_tonetest *InstancePtr) {
+
+    u8 Data;
+    Xil_AssertVoid(InstancePtr != NULL);
+
+    Data = n3z_tonetest_ReadReg(InstancePtr->n3z_tonetest_BaseAddress, 12);
+    return Data;
+}
 u32 n3z_tonetest_demodsignallevel_read(n3z_tonetest *InstancePtr) {
 
     u32 Data;
     Xil_AssertVoid(InstancePtr != NULL);
 
-    Data = n3z_tonetest_ReadReg(InstancePtr->n3z_tonetest_BaseAddress, 12);
+    Data = n3z_tonetest_ReadReg(InstancePtr->n3z_tonetest_BaseAddress, 16);
     return Data;
 }
 u32 n3z_tonetest_txaudiolevel_read(n3z_tonetest *InstancePtr) {
@@ -59,6 +67,6 @@ u32 n3z_tonetest_txaudiolevel_read(n3z_tonetest *InstancePtr) {
     u32 Data;
     Xil_AssertVoid(InstancePtr != NULL);
 
-    Data = n3z_tonetest_ReadReg(InstancePtr->n3z_tonetest_BaseAddress, 16);
+    Data = n3z_tonetest_ReadReg(InstancePtr->n3z_tonetest_BaseAddress, 20);
     return Data;
 }

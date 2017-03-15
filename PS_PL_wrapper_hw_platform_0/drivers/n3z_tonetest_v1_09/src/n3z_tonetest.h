@@ -130,6 +130,17 @@ u8 n3z_tonetest_audiovolume_read(n3z_tonetest *InstancePtr);
 */
 u32 n3z_tonetest_adcgain_ave_peak_read(n3z_tonetest *InstancePtr);
 /**
+* Read from starttoneamp gateway of n3z_tonetest. Assignments are LSB-justified.
+*
+* @param	InstancePtr is the starttoneamp instance to operate on.
+*
+* @return	u8
+*
+* @note    .
+*
+*/
+u8 n3z_tonetest_starttoneamp_read(n3z_tonetest *InstancePtr);
+/**
 * Read from demodsignallevel gateway of n3z_tonetest. Assignments are LSB-justified.
 *
 * @param	InstancePtr is the demodsignallevel instance to operate on.
