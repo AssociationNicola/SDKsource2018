@@ -222,6 +222,10 @@ typedef struct
 /* NOTE WELL - must change User Pico about line 500 if this changes */
 #define KEY_AERIAL_EARTHING		'e'		/* not really a KEY but ... */
 
+#define KEY_HEYPHONE_FREQ	'w'		/* not really a KEY but ... */
+#define KEY_NICOLA2_FREQ	'x'		/* not really a KEY but ... */
+#define KEY_31KHZ_FREQ		'y'		/* not really a KEY but ... */
+
 
 /* for use in LCD_Dispay and elsewhere		*/
 
