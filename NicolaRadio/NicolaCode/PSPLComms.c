@@ -122,7 +122,7 @@ int TxSend(XLlFifo *, u32  *, int );
 
 
 
-n3z_tonetest		*ZoneTestInstancePtr;
+n3z_tonetest		*ToneTestInstancePtr;
 
 #if OldSlowDownload
 u32 UserPicoDownload[] = {
@@ -162,17 +162,17 @@ void PSPLComms_Initialise()
     Buffer  = malloc(512 * sizeof(*Buffer));
 
 
-    ZoneTestInstancePtr = malloc(sizeof (n3z_tonetest));
+    ToneTestInstancePtr = malloc(sizeof (n3z_tonetest));
 
 
-    Status=n3z_tonetest_Initialize(ZoneTestInstancePtr, XPAR_N3Z_TONETEST_0_DEVICE_ID);
+    Status=n3z_tonetest_Initialize(ToneTestInstancePtr, XPAR_N3Z_TONETEST_0_DEVICE_ID);
     //printf("Status tonetest Axilite %d\n\r",Status);
 
     /*Set Audio volume to valid level
        *
        */
 
-    n3z_tonetest_audiovolume_write(ZoneTestInstancePtr, AudioVolume);
+    n3z_tonetest_audiovolume_write(ToneTestInstancePtr, AudioVolume);
 
 
 
@@ -215,6 +215,7 @@ void PSPLComms_Initialise()
 
 
 #if 1
+
 
    	//xil_printf("Send DSP\n\r");
    	//LoadPicoFast(DSPPico, sizeof(DSPPico)/4, 2);
@@ -417,10 +418,22 @@ static void PL_Receiver( void *pvParameters )
 
 				break;
 
-
 			case KEY_AERIAL_EARTHING:
 				xil_printf( "TRANSMIT QUAL %c %c\n\r", Buffer[2], Buffer[3] );
 				break;
+
+			case KEY_HEYPHONE_FREQ:			//	'w'
+				xil_printf( "HEYPhone frequency\n\r" );
+				break;
+
+			case KEY_NICOLA2_FREQ:			//	'x'
+				xil_printf( "Nicola 2 frequency\n\r" );
+				break;
+
+			case KEY_31KHZ_FREQ:			//	'y'
+				xil_printf( "31kHz frequency\n\r" );
+				break;
+
 
 			default:
 			{

@@ -54,7 +54,10 @@ void SetConfidenceBeepTime(int selected );			/* in this module			*/
 void SetBeaconBeepTime(int selected );				/* in this module			*/
 extern void SendPresetMessage(int selected);		/* in RadioInterface.c		*/
 void EffectTurnRadioOff(int selected );				/* in this module			*/
+void SetDebuggingState(int selected );				/* in this module			*/
 
+
+extern QueueHandle_t	DebugControlQueue; 	/* in DebugInterface.c */
 
 
 
@@ -187,6 +190,8 @@ typedef enum
 	MENU_ITEM_TYPE_BLUETOOTH_PAIRING,		/* F  5 */
 	MENU_ITEM_TYPE_PRESET_TEXT_MSGS,		/* G  6 */
 	MENU_ITEM_TYPE_RECVD_TEXT_MSGS,			/* H  7 */
+	MENU_ITEM_TYPE_DEBUGGING,				/* G  8 */
+
 	MENU_ITEM_TYPE_TURN_OFF = 'Z'
 
 } MENU_ITEM_TYPE;
@@ -356,6 +361,16 @@ SUB_MENU_SCROLL_ITEM	TextMessageTestSetting4 =
 		{ NULL, &TextMessageTestSetting3, 0, "Party Found; assistance needed", NULL };
 
 
+SUB_MENU_ITEM	debugOn;
+SUB_MENU_ITEM	debugOff;
+
+SUB_MENU_ITEM	debugOn =
+		{ &debugOff, NULL, 2 , "Trigger"};
+
+SUB_MENU_ITEM	debugOff =
+		{ &debugOn, NULL, 1, "OFF" };
+
+
 SUB_MENU_ITEM	turnRadioOffSetting;
 SUB_MENU_ITEM	turnRadioOffSetting1;
 
@@ -365,6 +380,7 @@ SUB_MENU_ITEM	turnRadioOffSetting =
 SUB_MENU_ITEM	turnRadioOffSetting1 =
 		{ NULL, &turnRadioOffSetting, 1, "TURN OFF" };
 
+MAIN_MENU_ITEM	theMenu_99;
 MAIN_MENU_ITEM	theMenu_8;
 MAIN_MENU_ITEM	theMenu_7a;
 MAIN_MENU_ITEM	theMenu_7;
@@ -377,12 +393,17 @@ MAIN_MENU_ITEM	theMenu_2;
 MAIN_MENU_ITEM	theMenu_1;
 
 
+
 /*  TITLE                   SUB MENU POINTER       		          TYPE           CURRENT      WORKING  */
 /*                                                                                     ITEM INDEX  ITEM INDEX */
 
 
+MAIN_MENU_ITEM	theMenu_99 =
+{ NULL, &theMenu_8, "TURN RADIO OFF", 		(void *) &turnRadioOffSetting, 	EffectTurnRadioOff, SUB_MENU_TEXT, MENU_ITEM_TYPE_TURN_OFF,	  	0, 	0, 0, 0 };
+
+
 MAIN_MENU_ITEM	theMenu_8 =
-{ NULL, &theMenu_7, "TURN RADIO OFF", 		(void *) &turnRadioOffSetting, 	EffectTurnRadioOff, SUB_MENU_TEXT, MENU_ITEM_TYPE_TURN_OFF,	  	0, 	0, 0, 0 };
+{ &theMenu_99, &theMenu_7a, "DEBUGGING", 	(void *) &debugOff, 			SetDebuggingState, SUB_MENU_TEXT, MENU_ITEM_TYPE_DEBUGGING,	  	0, 	0, 0, 0 };
 
 
 MAIN_MENU_ITEM	theMenu_7a =
@@ -418,7 +439,7 @@ MAIN_MENU_ITEM	theMenu_3 =
 
 
 MAIN_MENU_ITEM	theMenu_1 =
-{ &theMenu_3, &theMenu_8, "M-PHONE VOLUME", 		(void *) &microphoneVolume1, 	SetMicrophoneVolume, 	SUB_MENU_TEXT, MENU_ITEM_TYPE_MICROPHONE_VOLUME,		0, 0, 0, 0 };
+{ &theMenu_3, &theMenu_99, "M-PHONE VOLUME", 		(void *) &microphoneVolume1, 	SetMicrophoneVolume, 	SUB_MENU_TEXT, MENU_ITEM_TYPE_MICROPHONE_VOLUME,		0, 0, 0, 0 };
 
 
 #else
@@ -1040,6 +1061,8 @@ static void LCD_Main( void *pvParameters )
 
 	}
 
+	// loop but for some reason only one seems to get to the user pico
+
 	for ( i=0; i<2; i++ )
 	{
 
@@ -1643,6 +1666,12 @@ static void LCD_Main( void *pvParameters )
 							{
 								(thisMenuItem->menuItemChanged)(thisMenuItem->currentSubMenu->value);
 
+								if ( thisMenuItem->SubMenuType == MENU_ITEM_TYPE_DEBUGGING )
+								{
+									thisMenuItem->currentValue = 1 ;
+									thisMenuItem->currentSubMenu = NULL ;
+								}
+
 							}
 							else
 							{
@@ -1865,7 +1894,7 @@ static void LCD_Main( void *pvParameters )
 									subScrollMenuItem = (SUB_MENU_SCROLL_ITEM *) thisMenuItem->firstSubMenu ;	/* wrap around to first menu item */
 								}
 
-								if ( subScrollMenuItem->subMenuHeading != NULL )
+								if ( subScrollMenuItem && ( subScrollMenuItem->subMenuHeading != NULL ) )
 								{
 									subScrollMenuItem->currentPosition = subScrollMenuItem->subMenuHeading ;
 
@@ -3786,6 +3815,38 @@ void SetConfidenceBeepTime(int selected )
 	}
 
 }
+
+
+void SetDebuggingState(int selected )
+{
+	char DebugMessage[2] ;
+
+	switch ( selected )
+	{
+	case 1:
+		//xil_printf( "DEBUGGING OFF\r\n" );
+
+		DebugMessage[0] = 1;
+		while ( xQueueSendToBack( DebugControlQueue, DebugMessage, 0 ) != pdPASS )
+		{
+				vTaskDelay( pdMS_TO_TICKS( 5 ));
+		}
+
+		break;
+	case 2:
+		//xil_printf( "DEBUGGING ON\r\n" );
+
+		DebugMessage[0] = 2;
+		while ( xQueueSendToBack( DebugControlQueue, DebugMessage, 0 ) != pdPASS )
+		{
+				vTaskDelay( pdMS_TO_TICKS( 5 ));
+		}
+
+		break;
+	}
+}
+
+
 
 void SetBeaconBeepTime(int selected )
 {
