@@ -277,7 +277,7 @@ extern void TextMessageStartup();
 extern void Flash_Startup(void);
 extern int  FlashInit();
 extern void RadioInterfaceInit( );
-
+extern void DebugingGraham_Startup();
 
 //#define COPY_DATA_SECTION
 
@@ -427,6 +427,7 @@ int main( void )
 
 	//uart_SendByte(STDOUT_BASEADDRESS, '6' );
 
+	DebugingGraham_Startup();		// start the streaming debug interface
 
 	RadioInterfaceInit();		// start the PL to PS comms here
 
