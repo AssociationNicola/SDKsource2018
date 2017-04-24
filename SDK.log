@@ -1,0 +1,3 @@
+08:49:10 INFO  : Launching XSDB server: xsdb -n -interactive /home/gnaylor/Github/SDKsource/temp_xsdb_launch_script.tcl
+08:49:11 INFO  : XSDB server has started successfully.
+08:49:11 INFO  : Processing command line option -hwspec /home/gnaylor/Github/SDKsource/PS_PL_wrapper.hdf.
