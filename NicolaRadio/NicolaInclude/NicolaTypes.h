@@ -205,6 +205,7 @@ typedef struct
 #define KEY_LEFT_PRESSED	'Q'		// left = 01
 
 #define KEY_UPLEFT 'I'		// 08 + 01
+#define KEY_LEFTRIGHT 'C'  // 02 + 01
 
 #define KEY_PTT_ON			'0'
 #define KEY_PTT_OFF			'1'
