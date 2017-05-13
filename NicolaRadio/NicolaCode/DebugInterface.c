@@ -169,7 +169,11 @@ static void Debuging_Main( void *pvParameters )
     int NumberOfSamplesRead;
     u32 ReceiveLength;
     u32 DataStreamSpec;
+    u32 Input2DSPpico1;
+    u32 Input2DSPpico2;
+
     int Value;
+    u32 RegisterData;
     u32 DataStreamID ;
     u32 debuggingOn = 0;
     char theMessage[2];
@@ -212,6 +216,92 @@ static void Debuging_Main( void *pvParameters )
 
 	while ( 1 )
 	{
+		GetMsgFromUART( inBuffer, 3);	/* sit on this read till user sends c/r */
+
+
+	    n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);
+
+
+		debuggingOn = 1 ;		/* debugging is ON */
+
+		/*Add bit to read out signal levels:*/
+        RegisterData=n3z_tonetest_adcgain_ave_peak_read(ToneTestInstancePtr);
+
+        xil_printf("ADC peak value= %d \n\r",RegisterData % 256);
+        xil_printf("ADC average value= %d \n\r",(RegisterData % 65536)/256);
+        xil_printf("ADC Gain value is %d \n\n\r",RegisterData / 65536);
+        RegisterData=n3z_tonetest_demodsignallevel_read(ToneTestInstancePtr);
+        xil_printf("Demod signal level (24 bit signed)= %d \n\r",(RegisterData/256));
+        xil_printf("AGCvalue = %d \n\r",(RegisterData%256));
+
+        RegisterData=n3z_tonetest_txaudiolevel_read(ToneTestInstancePtr);
+        xil_printf("TX Audio level (average of AMP)= %d \n\n\r",RegisterData);
+
+
+       	xil_printf( "ENTER Test signal input to filter ( 0-3, default 0): \n\r");
+
+        GetMsgFromUART( inBuffer, 3);	/* read only 2 characters */
+
+        /* Set sample message input (bits 20:23 */
+
+       	Input2DSPpico1  = (u32) (inBuffer[0]&0x03) << 20 ;
+
+    	xil_printf( "ENTER Test signal input to DSPpico ( 0-3, default 0): \n\r");
+
+        GetMsgFromUART( inBuffer, 3);	/* read only 2 characters */
+
+         /* Set sample message input (bits 20:23 */
+
+          Input2DSPpico2  = (u32) (inBuffer[0]&0x03) << 22 ;
+
+
+
+
+		/*end Graham's addition */
+
+
+		/* get channel and number of samples */
+
+		xil_printf( "ENTER CHANNEL NUMBER (0 - 3): ");
+
+		GetMsgFromUART( inBuffer, 3);	/* read character */
+
+	    /* collect stream ID - can be 0 through 3 */
+
+	    /* convert to channel */
+
+	    DataStreamID = (u32) (inBuffer[0]&0x0F) << 16 ;
+
+
+		xil_printf( "\n\rENTER NUMBER OF SAMPLES:  ");
+
+		GetMsgFromUART( inBuffer, sizeof(inBuffer));
+
+		NumberOfSamples = (int) atoi( inBuffer ) ;
+		NumberOfSamplesRead = 0;
+
+		if ( NumberOfSamples > 16000 )
+		{
+			NumberOfSamples = 16000 ;		//Try and get more values
+		}
+
+		/* tell pico to start sending values */
+
+	    DataStreamSpec = DataStreamID + NumberOfSamples + Input2DSPpico1 + Input2DSPpico2;
+
+	    n3z_tonetest_values2recover_write(ToneTestInstancePtr, DataStreamSpec);
+
+		xil_printf( "\n\rNow just hit return:  ");
+
+		GetMsgFromUART( inBuffer, sizeof(inBuffer));
+
+
+	    //receiveBufferStart = pvPortMalloc( NumberOfSamples * sizeof(u32)) ;
+
+/* Disable this so as not to store
+	    receiveBuffer = receiveBufferStart;
+
+
 
 		if ( debuggingOn )
 		{
@@ -229,7 +319,7 @@ static void Debuging_Main( void *pvParameters )
 
 				// how often does the Pico send data?  Change delay to suit.
 
-				vTaskDelay( pdMS_TO_TICKS(5)); /* wait for data to appear - short time in long run? */
+				vTaskDelay( pdMS_TO_TICKS(5)); // wait for data to appear - short time in long run?
 
 				// Could write to flash at this point for larger volumes of data
 
@@ -241,21 +331,27 @@ static void Debuging_Main( void *pvParameters )
 		}
 
 
+*/
+
+
+	    /*
+#if 0
     	if ( xQueueReceive( DebugControlQueue, &theMessage, 0 ) == pdPASS )
     	{
-    		if ( theMessage[0] ==  2 )		/* start debugging */
+    		if ( theMessage[0] ==  2 )		// start debugging
 			{
-    			debuggingOn = 1 ;		/* debugging is ON */
+    			debuggingOn = 1 ;		// debugging is ON
 
-    			/* get channel and number of samples */
 
-    			xil_printf( "ENTER CHANNEL NUMBER (0 - 3): ");
+    			// get channel and number of samples
 
-    			GetMsgFromUART( inBuffer, 3);	/* read only 1 character */
+    			xil_printf( "ENTER CH NUMBER (0 - 3): ");
 
-    		    /* collect stream ID - can be 0 through 3 */
+    			GetMsgFromUART( inBuffer, 3);	// read only 1 character
 
-    		    /* convert to channel */
+    		    // collect stream ID - can be 0 through 3
+
+    		    // convert to channel
 
     		    DataStreamID = (u32) (inBuffer[0]&0x0F) << 16 ;
 
@@ -272,7 +368,7 @@ static void Debuging_Main( void *pvParameters )
     				NumberOfSamples = 2000 ;
     			}
 
-    			/* tell pico to start sending values */
+    			// tell pico to start sending values
 
     		    DataStreamSpec = DataStreamID + NumberOfSamples ;
 
@@ -288,11 +384,13 @@ static void Debuging_Main( void *pvParameters )
     		{
     			debuggingOn = 0 ;
 
-    			/* do whatever with the samples read */
+    			// do whatever with the samples read
 
     			//vPortFree( receiveBuffer ) ;
     		}
     	}
+
+#endif
 
 		if ( debuggingOn )
 		{
@@ -307,14 +405,14 @@ static void Debuging_Main( void *pvParameters )
 
 				for ( i=0; i < NumberOfSamplesRead; i++ )
 				{
-					xil_printf("%d\n\r", *receiveBuffer++ );
+					xil_printf("%d\n", *receiveBuffer++ );
 				}
 
-				xil_printf("DONE\n\r" );
+// Don't print this to file!				xil_printf("DONE\n\r" );
 
 				if ( NumberOfSamplesRead >= NumberOfSamples )
 				{
-					debuggingOn = 0 ;		/* stop collecting data */
+					debuggingOn = 0 ;		// stop collecting data 
 					//vPortFree( receiveBufferStart ) ;
 
 				    n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);
@@ -323,9 +421,15 @@ static void Debuging_Main( void *pvParameters )
 			}
 		}
 
+
+*/
+		ReceiveLength=Rx2Uart(&DataFifo);
+	    xil_printf("Receive Length= %d \n\r",ReceiveLength);
+
+
+
 	}
 
-	//ReceiveLength=Rx2Uart(&DataFifo);
 
 }
 
@@ -354,7 +458,7 @@ int Rx2Uart (XLlFifo *InstancePtr)
 		if(XLlFifo_iRxOccupancy(InstancePtr)){
 			RxWord = XLlFifo_RxGetWord(InstancePtr);
 		}
-		xil_printf("%d\n\r", RxWord);
+		xil_printf("%d\n", RxWord);
 	}
 
 	Status = XLlFifo_IsRxDone(InstancePtr);
@@ -419,7 +523,7 @@ static void GetMsgFromUART( char *MessageBuffer, int MaxCharCount )
 			}
 		}
 
-	} while ( (RecvChar!=13) && (charCount < MaxCharCount-1) ) ; /*until CR character*/
+	} while ( (RecvChar!=10) && (RecvChar!=13) && (charCount < MaxCharCount-1) ) ; /* until LF character*/
 
 
 }
