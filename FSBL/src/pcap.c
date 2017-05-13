@@ -252,7 +252,7 @@ u32 PcapLoadPartition(u32 *SourceDataPtr, u32 *DestinationDataPtr,
 		u32 SourceLength, u32 DestinationLength, u32 SecureTransfer)
 {
 	u32 Status;
-	u32 IntrStsReg;
+//	u32 IntrStsReg;
 	u32 PcapTransferType = XDCFG_NON_SECURE_PCAP_WRITE;
 
 	/*

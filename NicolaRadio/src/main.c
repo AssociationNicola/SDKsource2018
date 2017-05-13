@@ -75,14 +75,13 @@
 **
 **	Version:	Date:	Author:	Reason:
 **	00.0A	May 2016	PA		Original Version
-
 ** All Rights Reserved(c) Association Nicola, Graham Naylor, Pete Allwright
 
 
 
 *****************************************************************************/
 
-
+// Bluetooth disabled
 
 /* Standard includes. */
 #include <stdio.h>
@@ -418,7 +417,7 @@ int main( void )
 	//uart_SendByte(STDOUT_BASEADDRESS, '4' );
 
 
-	BluetoothStartup();			// to Bluetooth devices of all kinds
+	// Disable for debug BluetoothStartup();			// to Bluetooth devices of all kinds
 
 	//uart_SendByte(STDOUT_BASEADDRESS, '5' );
 

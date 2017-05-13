@@ -1,8 +1,139 @@
-20:55:23 **** Auto Build of configuration Release for project NicolaRadio ****
+11:11:33 **** Incremental Build of configuration Debug for project NicolaRadio ****
 make pre-build main-build 
 a9-linaro-pre-build-step
  
-make: Nothing to be done for `main-build'.
+Building file: ../src/main.c
+Invoking: ARM v7 gcc compiler
+arm-none-eabi-gcc -DDEBUG_CODE -Wall -O0 -g3 -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building file: ../src/ps7_init_Nicola.c
+Invoking: ARM v7 gcc compiler
+arm-none-eabi-gcc -DDEBUG_CODE -Wall -O0 -g3 -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"src/ps7_init_Nicola.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"src/ps7_init_Nicola.d" -MT"src/ps7_init_Nicola.o" -o "src/ps7_init_Nicola.o" "../src/ps7_init_Nicola.c"
+Finished building: ../src/ps7_init_Nicola.c
+ 
+Building file: ../NicolaCode/Bluetooth.c
+Invoking: ARM v7 gcc compiler
+arm-none-eabi-gcc -DDEBUG_CODE -Wall -O0 -g3 -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"NicolaCode/Bluetooth.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"NicolaCode/Bluetooth.d" -MT"NicolaCode/Bluetooth.o" -o "NicolaCode/Bluetooth.o" "../NicolaCode/Bluetooth.c"
+Finished building: ../NicolaCode/Bluetooth.c
+ 
+Building file: ../NicolaCode/ConsoleManager.c
+Invoking: ARM v7 gcc compiler
+arm-none-eabi-gcc -DDEBUG_CODE -Wall -O0 -g3 -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"NicolaCode/ConsoleManager.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"NicolaCode/ConsoleManager.d" -MT"NicolaCode/ConsoleManager.o" -o "NicolaCode/ConsoleManager.o" "../NicolaCode/ConsoleManager.c"
+Finished building: ../NicolaCode/ConsoleManager.c
+ 
+Building file: ../NicolaCode/DebugInterface.c
+Invoking: ARM v7 gcc compiler
+arm-none-eabi-gcc -DDEBUG_CODE -Wall -O0 -g3 -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"NicolaCode/DebugInterface.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"NicolaCode/DebugInterface.d" -MT"NicolaCode/DebugInterface.o" -o "NicolaCode/DebugInterface.o" "../NicolaCode/DebugInterface.c"
+../NicolaCode/DebugInterface.c: In function ‘Debuging_Main’:
+../NicolaCode/DebugInterface.c:280:3: warning: implicit declaration of function ‘atoi’ [-Wimplicit-function-declaration]
+   NumberOfSamples = (int) atoi( inBuffer ) ;
+   ^
+../NicolaCode/DebugInterface.c:426:3: warning: implicit declaration of function ‘Rx2Uart’ [-Wimplicit-function-declaration]
+   ReceiveLength=Rx2Uart(&DataFifo);
+   ^
+../NicolaCode/DebugInterface.c:183:7: warning: variable ‘receiveBufferStart’ set but not used [-Wunused-but-set-variable]
+  u32 *receiveBufferStart = NULL;
+       ^
+../NicolaCode/DebugInterface.c:182:7: warning: unused variable ‘receiveBuffer’ [-Wunused-variable]
+  u32 *receiveBuffer = NULL;
+       ^
+../NicolaCode/DebugInterface.c:181:6: warning: unused variable ‘RxWord’ [-Wunused-variable]
+  u32 RxWord;
+      ^
+../NicolaCode/DebugInterface.c:179:10: warning: unused variable ‘theMessage’ [-Wunused-variable]
+     char theMessage[2];
+          ^
+../NicolaCode/DebugInterface.c:178:9: warning: variable ‘debuggingOn’ set but not used [-Wunused-but-set-variable]
+     u32 debuggingOn = 0;
+         ^
+../NicolaCode/DebugInterface.c:175:9: warning: unused variable ‘Value’ [-Wunused-variable]
+     int Value;
+         ^
+../NicolaCode/DebugInterface.c:169:9: warning: variable ‘NumberOfSamplesRead’ set but not used [-Wunused-but-set-variable]
+     int NumberOfSamplesRead;
+         ^
+../NicolaCode/DebugInterface.c:167:6: warning: unused variable ‘Status’ [-Wunused-variable]
+  int Status;
+      ^
+../NicolaCode/DebugInterface.c:166:18: warning: unused variable ‘ConfigData’ [-Wunused-variable]
+  XLlFifo_Config *ConfigData;
+                  ^
+Finished building: ../NicolaCode/DebugInterface.c
+ 
+Building file: ../NicolaCode/LCD_Display.c
+Invoking: ARM v7 gcc compiler
+arm-none-eabi-gcc -DDEBUG_CODE -Wall -O0 -g3 -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"NicolaCode/LCD_Display.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"NicolaCode/LCD_Display.d" -MT"NicolaCode/LCD_Display.o" -o "NicolaCode/LCD_Display.o" "../NicolaCode/LCD_Display.c"
+../NicolaCode/LCD_Display.c: In function ‘LCD_Write_Char’:
+../NicolaCode/LCD_Display.c:2161:6: warning: unused variable ‘enable’ [-Wunused-variable]
+  int enable = 0;
+      ^
+../NicolaCode/LCD_Display.c:2160:7: warning: unused variable ‘i’ [-Wunused-variable]
+  int  i;
+       ^
+../NicolaCode/LCD_Display.c: In function ‘LCD_FirstLine’:
+../NicolaCode/LCD_Display.c:2281:6: warning: unused variable ‘enable’ [-Wunused-variable]
+  int enable = 0;
+      ^
+../NicolaCode/LCD_Display.c:2280:6: warning: unused variable ‘i’ [-Wunused-variable]
+  int i;
+      ^
+../NicolaCode/LCD_Display.c: In function ‘LCD_SecondLine’:
+../NicolaCode/LCD_Display.c:2352:6: warning: unused variable ‘enable’ [-Wunused-variable]
+  int enable = 0;
+      ^
+../NicolaCode/LCD_Display.c:2351:6: warning: unused variable ‘i’ [-Wunused-variable]
+  int i;
+      ^
+../NicolaCode/LCD_Display.c: In function ‘LCD_ControlWrite’:
+../NicolaCode/LCD_Display.c:2454:6: warning: unused variable ‘enable’ [-Wunused-variable]
+  int enable ;
+      ^
+../NicolaCode/LCD_Display.c:2453:6: warning: unused variable ‘i’ [-Wunused-variable]
+  int i;
+      ^
+../NicolaCode/LCD_Display.c: In function ‘MenuMessageFromHostComputer’:
+../NicolaCode/LCD_Display.c:2816:3: warning: implicit declaration of function ‘atoi’ [-Wimplicit-function-declaration]
+   thisNicolaSettings.thisNicolaID = atoi( parsedString);
+   ^
+../NicolaCode/LCD_Display.c: At top level:
+../NicolaCode/LCD_Display.c:490:13: warning: ‘KEYPAD_Temp’ declared ‘static’ but never defined [-Wunused-function]
+ static void KEYPAD_Temp( void *pvParameters );
+             ^
+Finished building: ../NicolaCode/LCD_Display.c
+ 
+Building file: ../NicolaCode/RadioInterface.c
+Invoking: ARM v7 gcc compiler
+arm-none-eabi-gcc -DDEBUG_CODE -Wall -O0 -g3 -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"NicolaCode/RadioInterface.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"NicolaCode/RadioInterface.d" -MT"NicolaCode/RadioInterface.o" -o "NicolaCode/RadioInterface.o" "../NicolaCode/RadioInterface.c"
+../NicolaCode/RadioInterface.c: In function ‘RadioInterfaceInit’:
+../NicolaCode/RadioInterface.c:66:2: warning: implicit declaration of function ‘malloc’ [-Wimplicit-function-declaration]
+  InstancePtr = (n3z_tonetest *)malloc(sizeof (n3z_tonetest));
+  ^
+../NicolaCode/RadioInterface.c:66:32: warning: incompatible implicit declaration of built-in function ‘malloc’
+  InstancePtr = (n3z_tonetest *)malloc(sizeof (n3z_tonetest));
+                                ^
+Finished building: ../NicolaCode/RadioInterface.c
+ 
+Building file: ../NicolaCode/RemoteProtocolHandler.c
+Invoking: ARM v7 gcc compiler
+arm-none-eabi-gcc -DDEBUG_CODE -Wall -O0 -g3 -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"NicolaCode/RemoteProtocolHandler.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"NicolaCode/RemoteProtocolHandler.d" -MT"NicolaCode/RemoteProtocolHandler.o" -o "NicolaCode/RemoteProtocolHandler.o" "../NicolaCode/RemoteProtocolHandler.c"
+../NicolaCode/RemoteProtocolHandler.c: In function ‘HandleRemoteNicolaMessage’:
+../NicolaCode/RemoteProtocolHandler.c:101:19: warning: unused variable ‘theSendMessage’ [-Wunused-variable]
+  TEXT_MESSAGE    *theSendMessage = &theReceivedMessage ;  //so the code reads OK
+                   ^
+Finished building: ../NicolaCode/RemoteProtocolHandler.c
+ 
+Building target: NicolaRadio.elf
+Invoking: ARM v7 gcc linker
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Xlinker -Map=Nicola.map -Wl,-T -Wl,../src/lscript.ld -L../../NicolaRadio_bsp/ps7_cortexa9_0/lib -o "NicolaRadio.elf"  ./src/portable/port.o ./src/portable/portASM.o  ./src/FreeRTOS_asm_vectors.o ./src/FreeRTOS_tick_config.o ./src/event_groups.o ./src/heap_4.o ./src/list.o ./src/main.o ./src/platform.o ./src/printf-stdarg.o ./src/ps7_init_Nicola.o ./src/queue.o ./src/tasks.o ./src/timers.o  ./NicolaCode/Bluetooth.o ./NicolaCode/ConsoleManager.o ./NicolaCode/DebugInterface.o ./NicolaCode/Flash-SDCard.o ./NicolaCode/LCD_Display.o ./NicolaCode/PSPLComms.o ./NicolaCode/RadioInterface.o ./NicolaCode/RemoteProtocolHandler.o ./NicolaCode/xsdps.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: NicolaRadio.elf
+ 
+Invoking: ARM v7 Print Size
+arm-none-eabi-size NicolaRadio.elf  |tee "NicolaRadio.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 129772	   8896	  93312	 231980	  38a2c	NicolaRadio.elf
+Finished building: NicolaRadio.elf.size
+ 
 
-20:55:23 Build Finished (took 75ms)
+11:11:35 Build Finished (took 1s.710ms)
 

@@ -1,3 +1,221 @@
-08:49:10 INFO  : Launching XSDB server: xsdb -n -interactive /home/gnaylor/Github/SDKsource/temp_xsdb_launch_script.tcl
-08:49:11 INFO  : XSDB server has started successfully.
-08:49:11 INFO  : Processing command line option -hwspec /home/gnaylor/Github/SDKsource/PS_PL_wrapper.hdf.
+21:34:04 INFO  : Launching XSDB server: xsdb -n -interactive /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/temp_xsdb_launch_script.tcl
+21:34:05 INFO  : XSDB server has started successfully.
+21:34:05 INFO  : Processing command line option -hwspec /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper.hdf.
+21:49:17 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1' command is executed.
+21:49:17 INFO  : 'fpga -state' command is executed.
+21:49:17 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+21:49:18 INFO  : Jtag cable 'Digilent JTAG-HS2 210249A0CF17' is selected.
+21:49:18 INFO  : 'jtag frequency' command is executed.
+21:49:18 INFO  : Sourcing of '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl' is done.
+21:49:18 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+21:49:18 INFO  : Hardware design information is loaded from '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf'.
+21:49:18 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+21:49:18 INFO  : 'stop' command is executed.
+21:50:45 ERROR : Failed to connect to hardware server on host '127.0.0.1' and port '3121'.
+Reason: 'connect -url tcp:127.0.0.1:3121' is cancelled.
+21:50:45 ERROR : Failed to connect to hardware server on host '127.0.0.1' and port '3121'.
+Reason: 'connect -url tcp:127.0.0.1:3121' is cancelled.
+21:50:45 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+----------------End of Script----------------
+
+21:50:45 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+----------------End of Script----------------
+
+21:50:45 ERROR : 'ps7_init' is cancelled.
+21:50:45 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+stop
+ps7_init
+----------------End of Script----------------
+
+21:50:45 ERROR : Failed to connect to hardware server on host '127.0.0.1' and port '3121'.
+Reason: 'connect -url tcp:127.0.0.1:3121' is cancelled.
+21:50:45 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+----------------End of Script----------------
+
+21:51:17 INFO  : Launching XSDB server: xsdb -n -interactive /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/temp_xsdb_launch_script.tcl
+21:51:18 INFO  : XSDB server has started successfully.
+21:51:18 INFO  : Processing command line option -hwspec /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper.hdf.
+21:51:21 INFO  : Checking for hwspec changes in the project PS_PL_wrapper_hw_platform_0.
+21:51:38 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+21:51:39 INFO  : Jtag cable 'Digilent JTAG-HS2 210249A0CF17' is selected.
+21:51:39 INFO  : 'jtag frequency' command is executed.
+21:51:39 INFO  : Sourcing of '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl' is done.
+21:51:39 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+21:51:39 INFO  : System reset is completed.
+21:51:42 INFO  : 'after 3000' command is executed.
+21:51:42 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1' command is executed.
+21:51:44 INFO  : FPGA configured successfully with bitstream "/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit"
+21:51:44 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+21:51:44 INFO  : Hardware design information is loaded from '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf'.
+21:51:44 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+21:51:45 INFO  : 'ps7_init' command is executed.
+21:51:45 INFO  : 'ps7_post_config' command is executed.
+21:51:45 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+21:51:45 INFO  : The application '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf' is downloaded to processor 'ps7_cortexa9_0'.
+21:51:45 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1
+fpga -file /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf
+----------------End of Script----------------
+
+21:51:45 INFO  : Memory regions updated for context APU
+21:51:45 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+21:51:45 INFO  : 'con' command is executed.
+21:51:45 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+con
+----------------End of Script----------------
+
+21:51:45 INFO  : Launch script is exported to file '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/.sdk/launch_scripts/xilinx_c-c++_application_(system_debugger)/system_debugger_on_local_nicolaradio.elf.tcl'
+08:44:37 INFO  : Disconnected from the channel tcfchan#1.
+08:44:37 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+08:44:38 INFO  : Jtag cable 'Digilent JTAG-HS2 210249A0CF17' is selected.
+08:44:38 INFO  : 'jtag frequency' command is executed.
+08:44:38 INFO  : Sourcing of '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl' is done.
+08:44:38 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+08:44:38 INFO  : System reset is completed.
+08:44:41 INFO  : 'after 3000' command is executed.
+08:44:41 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1' command is executed.
+08:44:43 INFO  : FPGA configured successfully with bitstream "/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit"
+08:44:43 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+08:44:47 INFO  : Hardware design information is loaded from '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf'.
+08:44:47 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+08:44:47 INFO  : 'ps7_init' command is executed.
+08:44:47 INFO  : 'ps7_post_config' command is executed.
+08:44:47 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+08:44:48 INFO  : The application '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf' is downloaded to processor 'ps7_cortexa9_0'.
+08:44:48 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1
+fpga -file /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf
+----------------End of Script----------------
+
+08:44:48 INFO  : Memory regions updated for context APU
+08:44:48 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+08:44:48 INFO  : 'con' command is executed.
+08:44:48 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+con
+----------------End of Script----------------
+
+08:44:48 INFO  : Launch script is exported to file '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/.sdk/launch_scripts/xilinx_c-c++_application_(system_debugger)/system_debugger_on_local_nicolaradio.elf.tcl'
+10:34:34 INFO  : Invoking Bootgen: bootgen -image NicolaRadioGNlaptop.bif -arch zynq -o /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/bootimage/BOOT.bin -w on
+10:34:35 INFO  : Bootgen command execution is done.
+10:51:57 INFO  : Disconnected from the channel tcfchan#2.
+10:51:57 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:51:57 INFO  : Jtag cable 'Digilent JTAG-HS2 210249A0CF17' is selected.
+10:51:57 INFO  : 'jtag frequency' command is executed.
+10:51:57 INFO  : Sourcing of '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl' is done.
+10:51:57 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+10:51:57 INFO  : System reset is completed.
+10:52:00 INFO  : 'after 3000' command is executed.
+10:52:00 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1' command is executed.
+10:52:02 INFO  : FPGA configured successfully with bitstream "/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit"
+10:52:02 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+10:52:07 INFO  : Hardware design information is loaded from '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf'.
+10:52:07 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+10:52:07 INFO  : 'ps7_init' command is executed.
+10:52:07 INFO  : 'ps7_post_config' command is executed.
+10:52:07 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+10:52:07 INFO  : The application '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf' is downloaded to processor 'ps7_cortexa9_0'.
+10:52:07 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1
+fpga -file /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf
+----------------End of Script----------------
+
+10:52:07 INFO  : Memory regions updated for context APU
+10:52:07 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+10:52:08 INFO  : 'con' command is executed.
+10:52:08 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+con
+----------------End of Script----------------
+
+10:52:08 INFO  : Launch script is exported to file '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/.sdk/launch_scripts/xilinx_c-c++_application_(system_debugger)/system_debugger_on_local_nicolaradio.elf.tcl'
+10:59:07 INFO  : Invoking Bootgen: bootgen -image NicolaRadioGNlaptop.bif -arch zynq -o /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/bootimage/BOOT.bin -w on
+10:59:07 INFO  : Bootgen command execution is done.
+11:11:40 INFO  : Disconnected from the channel tcfchan#3.
+11:11:40 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+11:11:41 INFO  : Jtag cable 'Digilent JTAG-HS2 210249A0CF17' is selected.
+11:11:41 INFO  : 'jtag frequency' command is executed.
+11:11:41 INFO  : Sourcing of '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl' is done.
+11:11:41 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+11:11:41 INFO  : System reset is completed.
+11:11:44 INFO  : 'after 3000' command is executed.
+11:11:44 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1' command is executed.
+11:11:48 INFO  : FPGA configured successfully with bitstream "/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit"
+11:11:48 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+11:11:52 INFO  : Hardware design information is loaded from '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf'.
+11:11:52 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0' command is executed.
+11:11:52 INFO  : 'ps7_init' command is executed.
+11:11:52 INFO  : 'ps7_post_config' command is executed.
+11:11:52 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+11:11:53 INFO  : The application '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf' is downloaded to processor 'ps7_cortexa9_0'.
+11:11:53 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1
+fpga -file /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf
+----------------End of Script----------------
+
+11:11:53 INFO  : Memory regions updated for context APU
+11:11:53 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+11:11:53 INFO  : 'con' command is executed.
+11:11:53 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0
+con
+----------------End of Script----------------
+
+11:11:53 INFO  : Launch script is exported to file '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/.sdk/launch_scripts/xilinx_c-c++_application_(system_debugger)/system_debugger_on_local_nicolaradio.elf.tcl'
