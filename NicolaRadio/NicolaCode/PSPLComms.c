@@ -67,10 +67,12 @@
 #define TEST_BUFFER_SIZE 32		/*for Uart buffers*/
 
 
-/* Initial AudioVolume was 133
- *
+/* Initial AudioVolume was 133, but 12 is minimum volume
+ *Changed April 2017 as speaker/amp is overloaded
  */
 #define AudioVolume  133
+/* This sets the radio state, lowest bits are the frequency. 1 is Heyphone */
+#define RadioState 1
 
 
 //#define BT_DEBUG
@@ -123,7 +125,7 @@ int TxSend(XLlFifo *, u32  *, int );
 
 n3z_tonetest		*ToneTestInstancePtr;
 
-#if OldSlowDownload
+#if 0
 u32 UserPicoDownload[] = {
 #include "../../../PicoSource/UserPicoDownload.c"
 };
@@ -138,15 +140,17 @@ u32 DSPPico[] = {
 
 #endif
 
+#if 0
 u32 KeypadPico[] = {
 #include "../../../PicoSource/KeyPadPico.c"
 };
+#endif
 
-
+#if 0
 u32 UserPico[] = {
 #include "../../../PicoSource/UserPico.c"
 };
-
+#endif
 
 
 
@@ -170,8 +174,10 @@ void PSPLComms_Initialise()
     /*Set Audio volume to valid level
        *
        */
-
     n3z_tonetest_audiovolume_write(ToneTestInstancePtr, AudioVolume);
+
+    /*Set radio config*/
+    n3z_tonetest_n3zconfig_write(ToneTestInstancePtr, RadioState);
 
 
 
@@ -213,7 +219,7 @@ void PSPLComms_Initialise()
 #endif
 
 
-#if 1
+#if 0
 
 
    	//xil_printf("Send DSP\n\r");
