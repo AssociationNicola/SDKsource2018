@@ -219,3 +219,13 @@ con
 ----------------End of Script----------------
 
 11:11:53 INFO  : Launch script is exported to file '/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/.sdk/launch_scripts/xilinx_c-c++_application_(system_debugger)/system_debugger_on_local_nicolaradio.elf.tcl'
+16:20:33 INFO  : SDK has detected change in the last modified timestamps for source hardware specification file Source:1494688806000,  Project:1494443959000
+16:20:33 INFO  : Project PS_PL_wrapper_hw_platform_0's source hardware specification located at /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper.hdf is now different from the local copy.
+		 The local copy will be replaced with the source specification and your workspace will be updated.
+16:20:45 INFO  : Copied contents of /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper.hdf into /PS_PL_wrapper_hw_platform_0/system.hdf.
+16:20:55 INFO  : Synchronizing projects in the workspace with the hardware platform specification changes.
+16:20:57 INFO  : 
+16:20:58 INFO  : 
+16:20:58 INFO  : Updating hardware inferred compiler options for FSBL.
+16:20:59 INFO  : Updating hardware inferred compiler options for NicolaRadio.
+16:20:59 INFO  : Clearing existing target manager status.
