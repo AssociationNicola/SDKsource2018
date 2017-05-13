@@ -80,6 +80,7 @@
 
 
 
+
 *****************************************************************************/
 
 
@@ -179,8 +180,8 @@ static void Debuging_Main( void *pvParameters )
     char theMessage[2];
     char inBuffer[10] ;
 	u32 RxWord;
-	u32 *receiveBuffer = NULL;
-	u32 *receiveBufferStart = NULL;
+	//u32 *receiveBuffer = NULL;
+	//u32 *receiveBufferStart = NULL;
 
 
 	vTaskDelay( pdMS_TO_TICKS(1000)); /* wait for PLPS comms to initialise (needs better interface) */
@@ -212,15 +213,15 @@ static void Debuging_Main( void *pvParameters )
 
     //n3z_tonetest_values2recover_write(ZoneTestInstancePtr, DataStreamSpec);
 
-    receiveBufferStart = pvPortMalloc( 2000 * sizeof(u32)) ;
+    //receiveBufferStart = pvPortMalloc( 2000 * sizeof(u32)) ;
 
 	while ( 1 )
 	{
-		GetMsgFromUART( inBuffer, 3);	/* sit on this read till user sends c/r */
-
 
 	    n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);
 
+	    xil_printf( "\n\rHit return to start:  ");
+		GetMsgFromUART( inBuffer, 3);	/* sit on this read till user sends c/r */
 
 		debuggingOn = 1 ;		/* debugging is ON */
 
@@ -301,7 +302,7 @@ static void Debuging_Main( void *pvParameters )
 /* Disable this so as not to store
 	    receiveBuffer = receiveBufferStart;
 
-
+*/
 
 		if ( debuggingOn )
 		{
@@ -313,8 +314,11 @@ static void Debuging_Main( void *pvParameters )
 				{
 					RxWord = XLlFifo_RxGetWord(&DataFifo);
 					//xil_printf( "Read %d\r\n", RxWord ) ;
+					//*receiveBuffer++ = RxWord ;
+
 					NumberOfSamplesRead += 1 ;
-					*receiveBuffer++ = RxWord ;
+
+					xil_printf("%d\n", RxWord );
 				}
 
 				// how often does the Pico send data?  Change delay to suit.
@@ -324,6 +328,8 @@ static void Debuging_Main( void *pvParameters )
 				// Could write to flash at this point for larger volumes of data
 
 			}
+
+			xil_printf( "FINISHED\r\n");
 		}
 		else
 		{
@@ -331,7 +337,7 @@ static void Debuging_Main( void *pvParameters )
 		}
 
 
-*/
+/**/
 
 
 	    /*
@@ -423,8 +429,8 @@ static void Debuging_Main( void *pvParameters )
 
 
 */
-		ReceiveLength=Rx2Uart(&DataFifo);
-	    xil_printf("Receive Length= %d \n\r",ReceiveLength);
+		//ReceiveLength=Rx2Uart(&DataFifo);
+	    //xil_printf("Receive Length= %d \n\r",ReceiveLength);
 
 
 
