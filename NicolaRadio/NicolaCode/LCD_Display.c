@@ -98,6 +98,7 @@ extern QueueHandle_t	DebugControlQueue; 	/* in DebugInterface.c */
 #define GPIO2OEN  ((unsigned int *) 0xE000A288)
 #define GPIO2dataMasked ((unsigned int *) 0xE000A010)
 #define GPIO2data ((unsigned int *) 0xE000A048)
+#define GPIO2dataX ((unsigned int *) 0xE000A048)
 
 
 
@@ -494,10 +495,14 @@ static void DisplaySubmenuItem( MAIN_MENU_ITEM *thisMenuItem );
 static void writeMenuToFlash();
 static int ReadMenuFromFlash( void );
 
+static MAIN_MENU_ITEM *FindMainMenuItem( int ) ;
+
 static void LCD_Home();
 static void LCD_Clear();
 void LCD_Write_String( int, int, char *);
 static void LCD_Write_Char( char DisplayCharacter);
+
+static void LCD_ControlWriteStart( int );
 static void LCD_ControlWrite( int );
 static void LCD_BackLight( char );
 #if 0
@@ -662,16 +667,16 @@ static void LED_Temp( void *pvParameters )
 	*GPIO2DIR = 0xFFFF;
 	*GPIO2OEN = 0xFFFF;
 
-	*GPIO2data = 0xF000;
+	*GPIO2dataX = 0xF000;
 	
 
 	while (1)
 	{
 		//*GPIO2data = 0x1F00 ;
-		*GPIO2data = 0x1000 ;
+		*GPIO2dataX = 0x1000 ;
     	vTaskDelay( pdMS_TO_TICKS(500));
 
-		*GPIO2data = 0x0 ;
+		*GPIO2dataX = 0x0 ;
     	vTaskDelay( pdMS_TO_TICKS(500));
 
 
@@ -943,7 +948,7 @@ static void LCD_Main( void *pvParameters )
 	*GPIO2DIR = 0xFFFF;
 	*GPIO2OEN = 0xFFFF;
 
-	*GPIO2data = 0xF000;
+	*GPIO2dataX = 0xF000;
 
 
 	CONTROL_SIGNAL_LOW;
@@ -957,23 +962,23 @@ static void LCD_Main( void *pvParameters )
 #if 1
 	//vTaskDelay( pdMS_TO_TICKS(2000));			/* wait  */
 
-	LCD_ControlWrite( 0x38 );				/* set 8 bit 2 line 5x8 format	*/
+	LCD_ControlWriteStart( 0x38 );				/* set 8 bit 2 line 5x8 format	*/
 
-	vTaskDelay( pdMS_TO_TICKS(5));			/* wait  */
+	vTaskDelay( pdMS_TO_TICKS(10));			/* wait  */
 
-	LCD_ControlWrite( 0x38 );				/* repeat set 8 bit 2 line 5x7 format	*/
+	LCD_ControlWriteStart( 0x38 );				/* repeat set 8 bit 2 line 5x7 format	*/
 
-	vTaskDelay( pdMS_TO_TICKS(2));			/* wait  */
+	vTaskDelay( pdMS_TO_TICKS(10));			/* wait  */
 
-	LCD_ControlWrite( 0x38 );				/* repeat set 8 bit 2 line 5x7 format	*/
+	LCD_ControlWriteStart( 0x38 );				/* repeat set 8 bit 2 line 5x7 format	*/
 
-	vTaskDelay( pdMS_TO_TICKS(2));			/* wait  */
+	vTaskDelay( pdMS_TO_TICKS(10));			/* wait  */
 
 	//LCD_ControlWrite( 0xF );				/* Display, on, cursor on, blink cursor	*/
-	LCD_ControlWrite( 0xE );				/* Display, on, cursor off, no blink cursor	*/
+	LCD_ControlWriteStart( 0xE );				/* Display, on, cursor off, no blink cursor	*/
 	vTaskDelay( pdMS_TO_TICKS(3));			/* wait  */
 
-	LCD_ControlWrite( 0x6 );				/* Entry mode, increment by 1, no shift	*/
+	LCD_ControlWriteStart( 0x6 );				/* Entry mode, increment by 1, no shift	*/
 	vTaskDelay( pdMS_TO_TICKS(3));			/* wait  */
 
 #else
@@ -999,7 +1004,7 @@ static void LCD_Main( void *pvParameters )
 
 
 	//LCD_ControlWrite( 0xF );				/* Display, on, cursor on, blink cursor	*/
-	LCD_ControlWrite( 0xD );				/* Display, on, cursor off, no blink cursor	*/
+	LCD_ControlWriteStart( 0xD );				/* Display, on, cursor off, no blink cursor	*/
 	vTaskDelay( pdMS_TO_TICKS(20));			/* wait  */
 
 	//LCD_ControlWrite( 0x12 );				/* Entry mode, increment by 1, no shift	*/
@@ -1015,6 +1020,9 @@ static void LCD_Main( void *pvParameters )
 	LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName);			// Nicola3Name);
 
 	LCD_Write_String( SECOND_LINE, 0, GetVersionString());
+
+	xil_printf( "Second line %s\r\n", GetVersionString() );
+
 
 
 	/* Start backlight timer */
@@ -1182,7 +1190,7 @@ static void LCD_Main( void *pvParameters )
 				}
 			}
 			else
-			if ( ( CurrentMenuPosition == TOP_LEVEL ) && ( theMessage[0] != KEY_UPLEFT ) )
+			if ( ( CurrentMenuPosition == TOP_LEVEL ) && ( theMessage[0] != KEY_UPLEFT ) && ( theMessage[0] != KEY_LEFTRIGHT ) )
 			{
 
 				/* look for PTT pressed when the LCD is not enabled - so we will light LCD and 	*/
@@ -1364,6 +1372,35 @@ static void LCD_Main( void *pvParameters )
     		{
 
     			xTimerReset( LCDTimer1, portMAX_DELAY );		/* reset the turn backlight off timer		*/
+
+				if ( theMessage[0] == KEY_LEFTRIGHT )
+				{
+					/* handle LEFT and RIGHT together as special case to power down */
+
+					if ( ( thisMenuItem = FindMainMenuItem( MENU_ITEM_TYPE_TURN_OFF )) != NULL )
+					{
+						thisMenuItem->currentSubMenu = &turnRadioOffSetting1 ;
+
+						//SUB_MENU_ITEM	*lastSubMenu;			/* pointer during editing process */
+						thisMenuItem->currentValue = 1;			/* current setting		*/
+						thisMenuItem->lastValue = 0 ;			/* last setting		*/
+
+						theMessage[0] = KEY_UP ;
+
+						CurrentMenuPosition = 0;
+
+						CurrentSubMenuPosition = &turnRadioOffSetting1 ;
+
+						CurrentMenuPosition == 0 ;
+
+						LCD_Clear();
+						LCD_Home();
+
+						LCD_Write_String( FIRST_LINE, 0, thisMenuItem->heading );
+
+						xil_printf( "SIMULATE KEYUP for power down\r\n");
+					}
+				}
 
 				switch (theMessage[0])
 				{
@@ -2113,6 +2150,24 @@ static void DisplaySubmenuItem( MAIN_MENU_ITEM *thisMenuItem )
 }
 
 
+static MAIN_MENU_ITEM *FindMainMenuItem( int MainMenuType )
+{
+	MAIN_MENU_ITEM	*theItem = firstMenuItem ;
+
+	do
+	{
+		if ( theItem->SubMenuType == MainMenuType )
+		{
+			break;
+		}
+		theItem = theItem->nextMainMenu ;
+	} while ( theItem != NULL );
+
+	return theItem;
+}
+
+
+#if 1
 
 static void LCD_Home()
 {
@@ -2125,10 +2180,6 @@ static void LCD_Clear()
 {
 	LCD_ClearLine( FIRST_LINE );
 	LCD_ClearLine( SECOND_LINE );
-
-	//LCD_ControlWrite( 0x01 );				/* 	*/
-	//vTaskDelay( pdMS_TO_TICKS(10));		/* wait >1.64 millsec (min) */
-
 }
 
 
@@ -2157,109 +2208,25 @@ void LCD_Write_String( int WhichLine, int position, char *DisplayString)
 
 static void LCD_Write_Char( char DisplayCharacter)
 {
-	int 	i;
-	int enable = 0;
+	//int 	i;
+	//int enable = 0;
 	u32  regValue ;
 
-//#define CONTROL_SIGNAL_HIGH (*GPIO2dataMasked = LCD_CommandMask + LCD_RS)
-//#define CONTROL_SIGNAL_LOW  (*GPIO2dataMasked = LCD_CommandMask + (~LCD_RS))
+	regValue = ( 0xFA000000) | LCD_RS | LCD_Enable  | ((DisplayCharacter)&0xFF)  ;	// write only 8 data bits
+	*GPIO2dataMasked = regValue ;
 
-//#define WRITE_SIGNAL_HIGH (*GPIO2dataMasked = LCD_WriteMask + LCD_RW)
-//#define WRITE_SIGNAL_LOW  (*GPIO2dataMasked = LCD_WriteMask + (~LCD_RW))
 
-//#define ENABLE_SIGNAL_HIGH (*GPIO2dataMasked = LCD_EnableMask + LCD_Enable)
-//#define ENABLE_SIGNAL_LOW  (*GPIO2dataMasked = LCD_EnableMask + (~LCD_Enable))
+	vTaskDelay( 5 );							/* wait > 1usec (min) */
 
-//	regValue = LCD_DataMask | (~value) ;	// write only 8 data bits and invert the value
+	regValue = ( 0xFA000000) ;	// write only 8 data bits
+	*GPIO2dataMasked = regValue ;
 
-//	regValue |= LCD_Enable;
-
-	//regValue = (~DisplayCharacter)&0xFF ;	// write only 8 data bits and invert the value
-	regValue = (DisplayCharacter)&0xFF ;	// write only 8 data bits
-
-	regValue |= LCD_RS ;
-	regValue |= LCD_Enable ;
-
-	//regValue |= 0xFFC00000 ;  // mask for control bits and data bits
-
-	//*GPIO2dataMasked = regValue ;
-	*GPIO2data = regValue ;
-
-	vTaskDelay( 3 );							/* wait > 1usec (min) */
-	//for ( i=0; i<40000; i++) { enable += 1; }
-
-	regValue &= ~LCD_Enable ;
-	regValue &= ~LCD_RS ;
-
-	regValue = 0;
-
-	//*GPIO2dataMasked = regValue ;
-	*GPIO2data = regValue ;
-
-	vTaskDelay( 3 );							/* wait > 1usec (min) */
-	//for ( i=0; i<40000; i++) { enable += 1; }
+	//xil_printf( "= %c\r\n", DisplayCharacter );
 
 	return;
 
 
-#if 0
-#if 1
 
-	int 	i;
-	int enable = 0;
-
-	*GPIO2dataMasked = (unsigned int ) (LCD_DataMask | DisplayCharacter) ;	// write only 8 data bits and invert the value
-
-	CONTROL_SIGNAL_HIGH;
-
-	vTaskDelay( pdMS_TO_TICKS(2) );							/* wait > 1usec (min) */
-	for ( i=0; i<20000; i++) { enable += 1; }
-
-	//ENABLE_SIGNAL_LOW;
-
-	//CONTROL_SIGNAL_LOW;
-
-	ENABLE_SIGNAL_HIGH;
-
-	vTaskDelay( pdMS_TO_TICKS(2) );							/* wait > 1usec (min) */
-	for ( i=0; i<20000; i++) { enable += 1; }
-
-	ENABLE_SIGNAL_LOW;
-
-	CONTROL_SIGNAL_LOW;
-
-	*GPIO2dataMasked = LCD_DataMask ;	// write only 8 data bits and invert the value
-
-#else
-	int i;
-	char Dchar = DisplayCharacter;
-
-	for ( i=0; i<8; i++ )
-	{
-		if ( (Dchar & 0x1) == 0x1)
-		{
-			XGpioPs_WritePin(&Gpio, DATA_0 + i, 0x1);
-		}
-		else
-		{
-			XGpioPs_WritePin(&Gpio, DATA_0 + i, 0x0);
-		}
-		Dchar = Dchar >> 1;
-	}
-
-	XGpioPs_WritePin(&Gpio, ENABLE_BIT, 0x1);
-	XGpioPs_WritePin(&Gpio, LCD_RS, 0x1);
-
-
-	vTaskDelay( (10) );							/* wait > 1usec (min) */
-
-	XGpioPs_WritePin(&Gpio, ENABLE_BIT, 0x0);
-	XGpioPs_WritePin(&Gpio, LCD_RS, 0x0);
-
-
-
-#endif
-#endif
 
 }
 
@@ -2281,68 +2248,18 @@ static void LCD_FirstLine( int position )
 	int enable = 0;
 	u32 regValue;
 
-	//LCD_ControlWrite( 0x80 | position );
 
-	regValue = (0x80 | position)&0xFF ;	// write only 8 data bits and invert the value
+	regValue = 0xFB000000 | LCD_Enable | ((0x80 | position)&0xFF) ;  // mask for control bits and data bits
 
-	//regValue |= LCD_RS ;
-	regValue |= LCD_Enable ;
+	*GPIO2dataMasked = regValue ;
 
-	//regValue |= 0xFFC00000 ;  // mask for control bits and data bits
+	vTaskDelay( 25 );							/* wait > 1usec (min) */
 
-	//*GPIO2dataMasked = regValue ;
-	*GPIO2data = regValue ;
+	regValue = 0xFB000000;
 
-	vTaskDelay( 10 );							/* wait > 1usec (min) */
-	//for ( i=0; i<40000; i++) { enable += 1; }
-
-	regValue &= ~LCD_Enable ;
-	//regValue &= ~LCD_RS ;
-
-	regValue = 0;
-
-	//*GPIO2dataMasked = regValue ;
-	*GPIO2data = regValue ;
+	*GPIO2dataMasked = regValue ;
 
 	return;
-
-#if 1
-
-	*GPIO2dataMasked = LCD_DataMask | 0x80 | position ;	// write only 8 data bits and invert the value
-
-
-	ENABLE_SIGNAL_HIGH;
-
-	vTaskDelay( pdMS_TO_TICKS(10) );								/* wait > 1usec (min) */
-	//for ( i=0; i<10000; i++) { enable += 1; }
-
-	ENABLE_SIGNAL_LOW;
-
-#else
-	int i;
-	char Dchar = position;
-
-	for ( i=0; i<7; i++ )
-	{
-		if ( (Dchar & 0x1) == 0x1)
-		{
-			XGpioPs_WritePin(&Gpio, DATA_0 + i, 0x1);
-		}
-		else
-		{
-			XGpioPs_WritePin(&Gpio, DATA_0 + i, 0x0);
-		}
-		Dchar = Dchar >> 1;
-	}
-	XGpioPs_WritePin(&Gpio, DATA_0 + 7, 0x1);
-
-	ENABLE_SIGNAL_HIGH;
-
-	vTaskDelay( pdMS_TO_TICKS(5) );			/* wait > 1usec (min) */
-
-	ENABLE_SIGNAL_LOW;
-
-#endif
 }
 
 
@@ -2352,79 +2269,18 @@ static void LCD_SecondLine( int position )
 	int enable = 0;
 	u32 regValue;
 
-	//LCD_ControlWrite( 0xC0 | position );
 
-	regValue = (0xC0 | position)&0xFF ;	// write only 8 data bits and invert the value
+	regValue = 0xFB000000 | LCD_Enable | ((0xC0 | position)&0xFF) ;  // mask for control bits and data bits
 
-	//regValue |= LCD_RS ;
-	regValue |= LCD_Enable ;
+	*GPIO2dataMasked = regValue ;
 
-	//regValue |= 0xFFC00000 ;  // mask for control bits and data bits
+	vTaskDelay( 25 );							/* wait > 1usec (min) */
 
-	//*GPIO2dataMasked = regValue ;
-	*GPIO2data = regValue ;
+	regValue = 0xFB000000;
 
-	vTaskDelay( 100 );							/* wait > 1usec (min) */
-	//for ( i=0; i<40000; i++) { enable += 1; }
-
-	regValue &= ~LCD_Enable ;
-	//regValue &= ~LCD_RS ;
-
-	regValue = 0;
-
-	//*GPIO2dataMasked = regValue ;
-	*GPIO2data = regValue ;
-
-
-	regValue= 0 ;
+	*GPIO2dataMasked = regValue ;
 
 	return;
-
-#if 0
-#if 1
-	int i;
-	int enable = 0;
-
-
-	*GPIO2dataMasked = LCD_DataMask | 0xC0 | position ;	// write only 8 data bits and invert the value
-
-
-	ENABLE_SIGNAL_HIGH;
-
-	vTaskDelay( pdMS_TO_TICKS(5) );								/* wait > 1usec (min) */
-	//for ( i=0; i<10000; i++) { enable += 1; }
-
-	ENABLE_SIGNAL_LOW;
-
-#else
-	int i;
-	char Dchar = position;
-
-	for ( i=0; i<6; i++ )
-	{
-		if ( (Dchar & 0x1) == 0x1)
-		{
-			XGpioPs_WritePin(&Gpio, DATA_0 + i, 0x1);
-		}
-		else
-		{
-			XGpioPs_WritePin(&Gpio, DATA_0 + i, 0x0);
-		}
-		Dchar = Dchar >> 1;
-	}
-	XGpioPs_WritePin(&Gpio, DATA_0 + 6, 0x1);
-	XGpioPs_WritePin(&Gpio, DATA_0 + 7, 0x1);
-
-	ENABLE_SIGNAL_HIGH;
-
-	vTaskDelay( pdMS_TO_TICKS(5) );			/* wait > 1usec (min) */
-
-	ENABLE_SIGNAL_LOW;
-
-
-#endif
-#endif
-
 }
 
 
@@ -2447,26 +2303,15 @@ static void LCD_ClearLine( int whichLine )
 	}
 
 }
-static void LCD_ControlWrite( int value )
+
+
+static void LCD_ControlWriteStart( int value )
 {
-#if 1
-	int i;
-	int enable ;
+
+	//int i;
+	//int enable ;
 
 	u32  regValue ;
-
-//#define CONTROL_SIGNAL_HIGH (*GPIO2dataMasked = LCD_CommandMask + LCD_RS)
-//#define CONTROL_SIGNAL_LOW  (*GPIO2dataMasked = LCD_CommandMask + (~LCD_RS))
-
-//#define WRITE_SIGNAL_HIGH (*GPIO2dataMasked = LCD_WriteMask + LCD_RW)
-//#define WRITE_SIGNAL_LOW  (*GPIO2dataMasked = LCD_WriteMask + (~LCD_RW))
-
-//#define ENABLE_SIGNAL_HIGH (*GPIO2dataMasked = LCD_EnableMask + LCD_Enable)
-//#define ENABLE_SIGNAL_LOW  (*GPIO2dataMasked = LCD_EnableMask + (~LCD_Enable))
-
-//	regValue = LCD_DataMask | (~value) ;	// write only 8 data bits and invert the value
-
-//	regValue |= LCD_Enable;
 
 	//regValue = (~value)&0xFF ;	// write only 8 data bits and invert the value
 	regValue = (value)&0xFF ;	// write only 8 data bits
@@ -2495,50 +2340,43 @@ static void LCD_ControlWrite( int value )
 
 	return ;
 
+}
 
-#if 0
-	/* write value to LCD data port i.e. the 8 data bits */
 
-	//value = (~value) & 0xFF;
 
-	*GPIO2dataMasked = LCD_DataMask | (~value) ;	// write only 8 data bits and invert the value
-
-	ENABLE_SIGNAL_HIGH;
-
-	vTaskDelay( 100 );							/* wait > 1usec (min) */
-	;for ( i=0; i<20000; i++) { enable += 1; }
-
-	ENABLE_SIGNAL_LOW;
-#endif
-
-#else
+static void LCD_ControlWrite( int value )
+{
 
 	int i;
-	char Dchar = value;
+	int enable ;
 
-	for ( i=0; i<8; i++ )
-	{
-		if ( (Dchar & 0x1) == 0x1)
-		{
-			XGpioPs_WritePin(&Gpio, DATA_0 + i, 0x0); // write only 8 data bits and invert the value
-		}
-		else
-		{
-			XGpioPs_WritePin(&Gpio, DATA_0 + i, 0x1); // write only 8 data bits and invert the value
-		}
-		Dchar = Dchar >> 1;
-	}
+	u32  regValue ;
 
-	ENABLE_SIGNAL_HIGH;
+	regValue = (value)&0xFF ;	// write only 8 data bits
 
-	vTaskDelay( pdMS_TO_TICKS(5) );			/* wait > 1usec (min) */
+	regValue |= LCD_Enable ;
 
-	ENABLE_SIGNAL_LOW;
+	regValue |= 0xFFC00000 ;  // mask for control bits and data bits
 
-#endif
+	*GPIO2dataMasked = regValue ;
+	//*GPIO2data = regValue ;
+
+	vTaskDelay( 10 );							/* wait > 1usec (min) */
+	//for ( i=0; i<40000; i++) { enable += 1; }
+
+	regValue &= ~LCD_Enable ;
+
+	regValue = 0;
+
+	*GPIO2dataMasked = regValue ;
+	//*GPIO2data = regValue ;
 
 
+	regValue= 0 ;
+
+	return ;
 }
+
 
 
 static void LCD_BackLight( char backLightSetting )
@@ -2556,21 +2394,10 @@ static void LCD_BackLight( char backLightSetting )
 	}
 }
 
-#if 0
-static void LCD_EnablePulse( int enable )
-{
-	int i;
-	//int t_enable = enable | ENABLE_BIT;
 
-	ENABLE_SIGNAL_HIGH;
+#else
 
-	//vTaskDelay( 1);							/* wait > 1usec (min) */
-	for ( i=0; i<2000; i++) { enable += 1; }
 
-	ENABLE_SIGNAL_LOW;
-	//vTaskDelay( pdMS_TO_TICKS(2));							/* wait >40 usecs (min) */
-
-}
 #endif
 
 
