@@ -110,7 +110,7 @@ void SetMicrophoneVolume(int selected )
 			vTaskDelay( pdMS_TO_TICKS( 5 ));
 		}
 
-		n3z_tonetest_audiovolume_write(InstancePtr, 255);
+		n3z_tonetest_audiovolume_write(InstancePtr, 150);
 
 		break;
 	case 3:
@@ -119,7 +119,7 @@ void SetMicrophoneVolume(int selected )
 			vTaskDelay( pdMS_TO_TICKS( 5 ));
 		}
 
-		n3z_tonetest_audiovolume_write(InstancePtr, 192);
+		n3z_tonetest_audiovolume_write(InstancePtr, 100);
 
 		break;
 	case 2:
@@ -128,7 +128,7 @@ void SetMicrophoneVolume(int selected )
 			vTaskDelay( pdMS_TO_TICKS( 5 ));
 		}
 
-		n3z_tonetest_audiovolume_write(InstancePtr, 128);
+		n3z_tonetest_audiovolume_write(InstancePtr, 50);
 
 		break;
 	case 1:
@@ -137,7 +137,7 @@ void SetMicrophoneVolume(int selected )
 			vTaskDelay( pdMS_TO_TICKS( 5 ));
 		}
 
-		n3z_tonetest_audiovolume_write(InstancePtr, 64);
+		n3z_tonetest_audiovolume_write(InstancePtr, 12);
 
 		break;
 	case 0:
@@ -146,7 +146,7 @@ void SetMicrophoneVolume(int selected )
 			vTaskDelay( pdMS_TO_TICKS( 5 ));
 		}
 
-		n3z_tonetest_audiovolume_write(InstancePtr, 0);
+		n3z_tonetest_audiovolume_write(InstancePtr, 12);
 
 		break;
 	default:

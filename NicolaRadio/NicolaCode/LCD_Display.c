@@ -3287,6 +3287,8 @@ static int ReadMenuFromFlash( void )
 
 		//ApplyDefaultSettings();
 
+		SetMicrophoneVolume( thisNicolaSettings.microphoneVolume );
+
 		return pdFAIL;
 	}
 

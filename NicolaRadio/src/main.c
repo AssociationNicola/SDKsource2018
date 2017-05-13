@@ -383,6 +383,8 @@ int main( void )
 	strcpy( thisNicolaSettings.thisNicolaName, "NICOLADEFAULT");
 	strcpy( thisNicolaSettings.thisNicolaLocation, "NOT CHANGED");
 
+	thisNicolaSettings.microphoneVolume = 1 ;		// 4 is HIGH; 1 is 1/4
+
 #if 0
 	while ( 1 )
 	{
