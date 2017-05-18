@@ -1195,6 +1195,7 @@ static void LCD_Main( void *pvParameters )
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
 
 <<<<<<< refs/remotes/origin/master
@@ -1277,6 +1278,10 @@ static void LCD_Main( void *pvParameters )
 
 			else
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
+=======
+
+			else
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 			if ( theMessage[0] == KEY_DOWNLEFT )		/* special to reduce volume */
 			{
 				SetMicrophoneVolume( DECREMENT_VOLUME ) ;
@@ -1285,7 +1290,10 @@ static void LCD_Main( void *pvParameters )
 
 			}
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 =======
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 			else
@@ -1296,6 +1304,7 @@ static void LCD_Main( void *pvParameters )
 				xil_printf( "VOLUME UP = %d\r\n", MicrophoneVolume );
 			}
 
+<<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
 =======
 >>>>>>> WorkingVolumeControl
@@ -1332,6 +1341,8 @@ static void LCD_Main( void *pvParameters )
 
 			// Tone Detect Messages
 
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 			else
 			if ( theMessage[0] == '+' )		/* Tone detect pico messages */
 			{

@@ -106,6 +106,7 @@ void SetMicrophoneVolume(int changeValue )
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
 <<<<<<< refs/remotes/origin/master
 =======
@@ -119,6 +120,8 @@ void SetMicrophoneVolume(int changeValue )
 =======
 <<<<<<< HEAD
 >>>>>>> Further refinements. Hopefully check in ok this time.
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 
 	if ( changeValue > 0 )
 	{
@@ -154,6 +157,9 @@ void SetMicrophoneVolume(int changeValue )
 
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 =======
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 #if 0
@@ -244,6 +250,7 @@ void SetMicrophoneVolume(int changeValue )
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
 =======
 >>>>>>> WorkingVolumeControl
 >>>>>>> WorkingVolumeControl
@@ -257,6 +264,8 @@ void SetMicrophoneVolume(int changeValue )
 =======
 >>>>>>> WorkingVolumeControl
 >>>>>>> Further refinements. Hopefully check in ok this time.
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 }
 
 void SetAerialType(int selected )

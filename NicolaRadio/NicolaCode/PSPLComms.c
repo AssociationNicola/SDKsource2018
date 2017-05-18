@@ -247,6 +247,7 @@ void PSPLComms_Initialise()
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
     //xil_printf("Send Keypad\n\r");
    	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
@@ -273,6 +274,10 @@ void PSPLComms_Initialise()
    	LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
 >>>>>>> WorkingVolumeControl
 >>>>>>> Further refinements. Hopefully check in ok this time.
+=======
+    //xil_printf("Send Keypad\n\r");
+   	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 
    	xil_printf("Send User Pico\n\r");
    	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
@@ -286,6 +291,11 @@ void PSPLComms_Initialise()
 #endif
 
 >>>>>>> Further refinements. Hopefully check in ok this time.
+
+
+   	xil_printf("Send User Pico\n\r");
+   	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
+
 
 
    	xil_printf("Send User Pico\n\r");
