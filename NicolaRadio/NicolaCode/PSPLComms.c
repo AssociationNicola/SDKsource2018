@@ -142,7 +142,7 @@ u32 KeypadPico[] = {
 };
 #endif
 
-#if 0
+#if 1
 u32 UserPico[] = {
 #include "../../../PicoSource/UserPico.c"
 };
@@ -204,6 +204,7 @@ void PSPLComms_Initialise()
    	xil_printf("Send DSP\n\r");
    	LoadPicoFast(DSPPico, sizeof(DSPPico)/4, 1);
 
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
 <<<<<<< refs/remotes/origin/master
 =======
@@ -212,19 +213,28 @@ void PSPLComms_Initialise()
    	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
 =======
 >>>>>>> WorkingVolumeControl
+=======
+<<<<<<< refs/remotes/origin/master
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
    	xil_printf("Send TD Pico\n\r");
    	LoadPicoFast(TDPico, sizeof(TDPico)/4, 3);
 
     xil_printf("Send Keypad\n\r");
    	LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 =======
     //xil_printf("Send Keypad\n\r");
    	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
+<<<<<<< refs/remotes/origin/master
 =======
 >>>>>>> WorkingVolumeControl
 >>>>>>> WorkingVolumeControl
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 
    	xil_printf("Send User Pico\n\r");
    	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
@@ -233,6 +243,7 @@ void PSPLComms_Initialise()
 #endif
 
 
+<<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
 =======
 =======
@@ -304,6 +315,8 @@ void PSPLComms_Initialise()
 
 >>>>>>> Further refinements. Hopefully check in ok this time.
 
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 
    	xil_printf("Send User Pico\n\r");
    	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);

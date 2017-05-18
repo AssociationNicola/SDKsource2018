@@ -1368,6 +1368,7 @@ static void LCD_Main( void *pvParameters )
 
 			// Keyboard Messages
 
+<<<<<<< refs/remotes/origin/master
 			// Tone Detect Messages
 
 =======
@@ -1393,6 +1394,8 @@ static void LCD_Main( void *pvParameters )
 
 			// Keyboard Messages
 
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 			else
 			if ( theMessage[0] == KEY_DOWNLEFT )		/* special to reduce volume */
 			{
