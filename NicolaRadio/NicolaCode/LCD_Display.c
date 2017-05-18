@@ -1188,10 +1188,29 @@ static void LCD_Main( void *pvParameters )
 				}
 			}
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
 
 <<<<<<< refs/remotes/origin/master
 			// Tone Detect Messages
+=======
+
+			else
+			if ( theMessage[0] == KEY_DOWNLEFT )		/* special to reduce volume */
+			{
+				SetMicrophoneVolume( DECREMENT_VOLUME ) ;
+
+				xil_printf( "VOLUME DOWN = %d\r\n", MicrophoneVolume );
+
+			}
+			else
+			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
+			{
+				SetMicrophoneVolume( INCREMENT_VOLUME ) ;
+
+				xil_printf( "VOLUME UP = %d\r\n", MicrophoneVolume );
+			}
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 
 			else
 			if ( theMessage[0] == '+' )		/* Tone detect pico messages */

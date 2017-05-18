@@ -104,12 +104,15 @@ void SetMicrophoneVolume(int changeValue )
 {
 	extern int 	MicrophoneVolume ;
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
 <<<<<<< refs/remotes/origin/master
 =======
 =======
 <<<<<<< HEAD
 >>>>>>> WorkingVolumeControl
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 =======
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 
@@ -146,6 +149,9 @@ void SetMicrophoneVolume(int changeValue )
 	n3z_tonetest_audiovolume_write(InstancePtr, MicrophoneVolume);
 
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 #if 0
 	switch ( selected )
 	{
@@ -217,6 +223,7 @@ void SetMicrophoneVolume(int changeValue )
 #endif
 
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
 =======
 >>>>>>> WorkingVolumeControl
 >>>>>>> WorkingVolumeControl
@@ -224,6 +231,8 @@ void SetMicrophoneVolume(int changeValue )
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 =======
 >>>>>>> Further refinements. Hopefully check in ok this time.
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 }
 
 void SetAerialType(int selected )
