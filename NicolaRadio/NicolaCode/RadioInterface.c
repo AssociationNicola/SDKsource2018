@@ -103,12 +103,15 @@ static void Radio_Main( void *pvParameters )
 void SetMicrophoneVolume(int changeValue )
 {
 	extern int 	MicrophoneVolume ;
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
 <<<<<<< refs/remotes/origin/master
 =======
 =======
 <<<<<<< HEAD
 >>>>>>> WorkingVolumeControl
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 
 	if ( changeValue > 0 )
 	{
@@ -212,9 +215,12 @@ void SetMicrophoneVolume(int changeValue )
 	}
 #endif
 
+<<<<<<< refs/remotes/origin/master
 =======
 >>>>>>> WorkingVolumeControl
 >>>>>>> WorkingVolumeControl
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 }
 
 void SetAerialType(int selected )

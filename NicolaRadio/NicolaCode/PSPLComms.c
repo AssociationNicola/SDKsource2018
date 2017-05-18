@@ -230,6 +230,22 @@ void PSPLComms_Initialise()
 #endif
 
 
+<<<<<<< refs/remotes/origin/master
+=======
+#if 0
+	/* PicoNo=0; %User=0, DSP=1, KP=2,TD=3 */
+
+   	xil_printf("Send DSP\n\r");
+   	LoadPicoFast(DSPPico, sizeof(DSPPico)/4, 1);
+
+    //xil_printf("Send Keypad\n\r");
+   	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
+
+   	xil_printf("Send User Pico\n\r");
+   	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
+
+
 
    	xil_printf("Send User Pico\n\r");
    	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);

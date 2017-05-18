@@ -1182,6 +1182,7 @@ static void LCD_Main( void *pvParameters )
 					xTimerStart( LCDTimer1, portMAX_DELAY );	// and start the backlight timer
 				}
 			}
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
 
 <<<<<<< refs/remotes/origin/master
@@ -1222,6 +1223,10 @@ static void LCD_Main( void *pvParameters )
 			else
 <<<<<<<
 >>>>>>> WorkingVolumeControl
+=======
+
+			else
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 			if ( theMessage[0] == KEY_DOWNLEFT )		/* special to reduce volume */
 			{
 				SetMicrophoneVolume( DECREMENT_VOLUME ) ;
@@ -1229,7 +1234,10 @@ static void LCD_Main( void *pvParameters )
 				xil_printf( "VOLUME DOWN = %d\r\n", MicrophoneVolume );
 
 			}
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 			else
 			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
 			{
@@ -1238,6 +1246,7 @@ static void LCD_Main( void *pvParameters )
 				xil_printf( "VOLUME UP = %d\r\n", MicrophoneVolume );
 			}
 
+<<<<<<< refs/remotes/origin/master
 =======
 >>>>>>> WorkingVolumeControl
 			else
@@ -1278,6 +1287,8 @@ static void LCD_Main( void *pvParameters )
 				xil_printf( "VOLUME DOWN = %d\r\n", MicrophoneVolume );
 
 			}
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 			else
 			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
 			{
