@@ -142,7 +142,7 @@ u32 KeypadPico[] = {
 };
 #endif
 
-#if 1
+#if 0
 u32 UserPico[] = {
 #include "../../../PicoSource/UserPico.c"
 };
@@ -195,6 +195,7 @@ void PSPLComms_Initialise()
 
     Status = XLlFifo_Status(&PSPLFifo);
 
+<<<<<<< refs/remotes/origin/master
 #if 0
 	/* PicoNo=0; %User=0, DSP=1, KP=2,TD=3 */
 
@@ -232,24 +233,35 @@ void PSPLComms_Initialise()
 
 <<<<<<< refs/remotes/origin/master
 =======
+=======
+>>>>>>> Further refinements. Hopefully check in ok this time.
 #if 0
 	/* PicoNo=0; %User=0, DSP=1, KP=2,TD=3 */
 
    	xil_printf("Send DSP\n\r");
    	LoadPicoFast(DSPPico, sizeof(DSPPico)/4, 1);
 
+<<<<<<< refs/remotes/origin/master
     //xil_printf("Send Keypad\n\r");
    	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
+=======
+   	xil_printf("Send TD Pico\n\r");
+   	LoadPicoFast(TDPico, sizeof(TDPico)/4, 3);
+
+    xil_printf("Send Keypad\n\r");
+   	LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
+>>>>>>> Further refinements. Hopefully check in ok this time.
 
    	xil_printf("Send User Pico\n\r");
    	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
 
+<<<<<<< refs/remotes/origin/master
+=======
 
+#endif
 
-   	xil_printf("Send User Pico\n\r");
-   	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
-
+>>>>>>> Further refinements. Hopefully check in ok this time.
 
     PLTransmitQueue = xQueueCreate( 4,					// max item count
 									4 ) ;				// size of each item (max) ) ;
