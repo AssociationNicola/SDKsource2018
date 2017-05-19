@@ -540,6 +540,7 @@ static int BluetoothTimer = (30 * 1000) ;		// temp - set to 30 seconds
 #define RECEIVE_TONE_DETECT_OFF (101)
 #define RECEIVE_TONE_DETECT_ON	(102)
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
 
 
@@ -547,6 +548,10 @@ static int BluetoothTimer = (30 * 1000) ;		// temp - set to 30 seconds
 
 
 >>>>>>> WorkingVolumeControl
+=======
+
+
+>>>>>>> Further refinements. Hopefully check in ok this time.
 =======
 
 
@@ -1189,6 +1194,7 @@ static void LCD_Main( void *pvParameters )
 			}
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
 
 <<<<<<< refs/remotes/origin/master
@@ -1196,6 +1202,17 @@ static void LCD_Main( void *pvParameters )
 =======
 
 			else
+=======
+<<<<<<<
+
+=======
+
+			// Tone Detect Messages
+
+>>>>>>>
+			else
+<<<<<<<
+>>>>>>> Further refinements. Hopefully check in ok this time.
 			if ( theMessage[0] == KEY_DOWNLEFT )		/* special to reduce volume */
 			{
 				SetMicrophoneVolume( DECREMENT_VOLUME ) ;
@@ -1210,9 +1227,15 @@ static void LCD_Main( void *pvParameters )
 
 				xil_printf( "VOLUME UP = %d\r\n", MicrophoneVolume );
 			}
+<<<<<<< refs/remotes/origin/master
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 
 			else
+=======
+
+			else
+=======
+>>>>>>> Further refinements. Hopefully check in ok this time.
 			if ( theMessage[0] == '+' )		/* Tone detect pico messages */
 			{
 				if ( theMessage[1] == '0' )		/* tone detect off */
@@ -1232,6 +1255,7 @@ static void LCD_Main( void *pvParameters )
 			}
 
 			// Keyboard Messages
+<<<<<<< refs/remotes/origin/master
 
 =======
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
@@ -1248,6 +1272,8 @@ static void LCD_Main( void *pvParameters )
 <<<<<<<
 >>>>>>> WorkingVolumeControl
 =======
+=======
+>>>>>>> Further refinements. Hopefully check in ok this time.
 
 			else
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
@@ -1274,6 +1300,7 @@ static void LCD_Main( void *pvParameters )
 =======
 >>>>>>> WorkingVolumeControl
 			else
+<<<<<<< refs/remotes/origin/master
 			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
 			{
 				SetMicrophoneVolume( INCREMENT_VOLUME ) ;
@@ -1345,6 +1372,8 @@ static void LCD_Main( void *pvParameters )
 			}
 
 			else
+=======
+>>>>>>> Further refinements. Hopefully check in ok this time.
 >>>>>>>
 			if ( ( CurrentMenuPosition == TOP_LEVEL ) && ( theMessage[0] != KEY_UPLEFT ) && ( theMessage[0] != KEY_LEFTRIGHT ) )
 			{
