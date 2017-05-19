@@ -142,7 +142,7 @@ u32 KeypadPico[] = {
 };
 #endif
 
-#if 1
+#if 0
 u32 UserPico[] = {
 #include "../../../PicoSource/UserPico.c"
 };
@@ -197,6 +197,7 @@ void PSPLComms_Initialise()
 
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
 #if 0
 	/* PicoNo=0; %User=0, DSP=1, KP=2,TD=3 */
 
@@ -238,6 +239,8 @@ void PSPLComms_Initialise()
 >>>>>>> Further refinements. Hopefully check in ok this time.
 =======
 >>>>>>> Further refinements. Hopefully check in ok this time.
+=======
+>>>>>>> Further refinements. Hopefully check in ok this time.
 #if 0
 	/* PicoNo=0; %User=0, DSP=1, KP=2,TD=3 */
 
@@ -248,15 +251,19 @@ void PSPLComms_Initialise()
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
     //xil_printf("Send Keypad\n\r");
    	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 =======
+=======
+>>>>>>> Further refinements. Hopefully check in ok this time.
    	xil_printf("Send TD Pico\n\r");
    	LoadPicoFast(TDPico, sizeof(TDPico)/4, 3);
 
     xil_printf("Send Keypad\n\r");
    	LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
+<<<<<<< refs/remotes/origin/master
 >>>>>>> Further refinements. Hopefully check in ok this time.
 =======
     //xil_printf("Send Keypad\n\r");
@@ -278,24 +285,24 @@ void PSPLComms_Initialise()
     //xil_printf("Send Keypad\n\r");
    	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
 >>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
+=======
+>>>>>>> Further refinements. Hopefully check in ok this time.
 
    	xil_printf("Send User Pico\n\r");
    	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
 
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
 =======
+=======
+>>>>>>> Further refinements. Hopefully check in ok this time.
 =======
 >>>>>>> Further refinements. Hopefully check in ok this time.
 
 #endif
 
 >>>>>>> Further refinements. Hopefully check in ok this time.
-
-
-   	xil_printf("Send User Pico\n\r");
-   	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
-
 
 
    	xil_printf("Send User Pico\n\r");

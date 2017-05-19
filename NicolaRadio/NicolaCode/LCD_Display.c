@@ -541,6 +541,7 @@ static int BluetoothTimer = (30 * 1000) ;		// temp - set to 30 seconds
 #define RECEIVE_TONE_DETECT_ON	(102)
 <<<<<<< refs/remotes/origin/master
 <<<<<<< refs/remotes/origin/master
+<<<<<<< refs/remotes/origin/master
 <<<<<<< HEAD
 
 
@@ -548,6 +549,10 @@ static int BluetoothTimer = (30 * 1000) ;		// temp - set to 30 seconds
 
 
 >>>>>>> WorkingVolumeControl
+=======
+
+
+>>>>>>> Further refinements. Hopefully check in ok this time.
 =======
 
 
@@ -1210,7 +1215,31 @@ static void LCD_Main( void *pvParameters )
 
 			// Tone Detect Messages
 
+<<<<<<< refs/remotes/origin/master
 >>>>>>>
+=======
+			else
+			if ( theMessage[0] == '+' )		/* Tone detect pico messages */
+			{
+				if ( theMessage[1] == '0' )		/* tone detect off */
+				{
+					xil_printf( "Implement Tone Detect off\n\r" );
+
+					DisplayAerialEarthing = TRUE;
+
+				}
+				else
+				if ( theMessage[1] == '1' )		/* tone detect on */
+				{
+					xil_printf( "Implement Tone Detect on\n\r" );
+
+					DisplayAerialEarthing = FALSE;
+				}
+			}
+
+			// Keyboard Messages
+
+>>>>>>> Further refinements. Hopefully check in ok this time.
 			else
 <<<<<<<
 >>>>>>> Further refinements. Hopefully check in ok this time.
