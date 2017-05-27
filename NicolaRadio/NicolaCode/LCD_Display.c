@@ -10,6 +10,7 @@
 ** All Rights Reserved(c) Association Nicola, Graham Naylor, Pete Allwright
 
 
+
 *****************************************************************************/
 
 
@@ -107,31 +108,6 @@ extern QueueHandle_t	DebugControlQueue; 	/* in DebugInterface.c */
 #define SECOND_LINE	1
 
 
-#if 0
-
-#define DATA_0		(GPIO_BANK2 + 0)	/* first data bit */
-
-#define LCD_RS		(GPIO_BANK2 + 8)	/* command (1) or data (0) */
-#define LCD_RW		(GPIO_BANK2 + 9)	/* read (1) or write (0)   */
-#define ENABLE_BIT	(GPIO_BANK2 + 10)	/* enable if 1 */
-#define BACKLIGHT	(GPIO_BANK2 + 11)
-
-#define CONTROL_SIGNAL_HIGH (XGpioPs_WritePin(&Gpio, LCD_RS, 0x1))
-#define CONTROL_SIGNAL_LOW  (XGpioPs_WritePin(&Gpio, LCD_RS, 0x0))
-
-#define WRITE_SIGNAL_HIGH (XGpioPs_WritePin(&Gpio, LCD_RW, 0x1))
-#define WRITE_SIGNAL_LOW  (XGpioPs_WritePin(&Gpio, LCD_RW, 0x0))
-
-#define ENABLE_SIGNAL_HIGH (XGpioPs_WritePin(&Gpio, ENABLE_BIT, 0x1))
-#define ENABLE_SIGNAL_LOW  (XGpioPs_WritePin(&Gpio, ENABLE_BIT, 0x0))
-
-#define		LCD_BackLightMaskOn	(XGpioPs_WritePin(&Gpio, BACKLIGHT, 0x1))
-#define		LCD_BackLightMaskOff	(XGpioPs_WritePin(&Gpio, BACKLIGHT, 0x0))
-
-#else
-
-
-
 #define LCD_RS		0x0100	/* command (1) or data (0) */
 #define LCD_RW		0x0200	/* read (1) or write (0)   */
 #define ENABLE_BIT	0x0400	/* enable if 1 */
@@ -158,7 +134,6 @@ extern QueueHandle_t	DebugControlQueue; 	/* in DebugInterface.c */
 
 #define ENABLE_SIGNAL_HIGH (*GPIO2dataMasked = LCD_EnableMask + LCD_Enable)
 #define ENABLE_SIGNAL_LOW  (*GPIO2dataMasked = LCD_EnableMask + (~LCD_Enable))
-#endif
 
 /* Menu scrolling constants */
 
@@ -251,12 +226,19 @@ typedef struct main_menu_item_struct
 
 extern void SetMicrophoneVolume(int  );
 
+int 	MicrophoneVolume = DEFAULT_VOLUME ;
 
 
 #ifdef TEST_DEFAULT_MENU
 
 
 /* test harness for the menu system - September 2016 */
+
+
+
+#if 0
+
+// now uses LEFT and DOWN or RIGHT and DOWN to decrease or increase volume
 
 SUB_MENU_ITEM	microphoneVolume1;
 SUB_MENU_ITEM	microphoneVolume2;
@@ -279,6 +261,7 @@ SUB_MENU_ITEM	microphoneVolume4 =
 
 SUB_MENU_ITEM	microphoneVolume5 =
 		{ NULL, &microphoneVolume4, 0, "OFF " };
+#endif
 
 
 SUB_MENU_ITEM	aerialTypeSetting;
@@ -431,16 +414,17 @@ MAIN_MENU_ITEM	theMenu_4 =
 
 
 MAIN_MENU_ITEM	theMenu_3 =
-{ &theMenu_4, &theMenu_1, "AERIAL TYPE",			(void *) &aerialTypeSetting, 	SetAerialType, 	SUB_MENU_TEXT, MENU_ITEM_TYPE_AERIAL_TYPE,		0, 0, 0, 0 };
+{ &theMenu_4, &theMenu_99, "AERIAL TYPE",			(void *) &aerialTypeSetting, 	SetAerialType, 	SUB_MENU_TEXT, MENU_ITEM_TYPE_AERIAL_TYPE,		0, 0, 0, 0 };
 
 
 //MAIN_MENU_ITEM	theMenu_2 =
 //{ &theMenu_3, &theMenu_1, "BLOCKED", 			(void *) &frequencySetting, 	NULL, 	SUB_MENU_TEXT, MENU_ITEM_TYPE_AERIAL_TYPE,		0, 0, 0, 0 };	/* to test the mechanism only */
 
 
+#if 0
 MAIN_MENU_ITEM	theMenu_1 =
 { &theMenu_3, &theMenu_99, "M-PHONE VOLUME", 		(void *) &microphoneVolume1, 	SetMicrophoneVolume, 	SUB_MENU_TEXT, MENU_ITEM_TYPE_MICROPHONE_VOLUME,		0, 0, 0, 0 };
-
+#endif
 
 #else
 
@@ -476,7 +460,7 @@ QueueHandle_t	KeysReceivedQueue ;
 
 int	CurrentMenuPosition = TOP_LEVEL;
 int	CurrentSubMenuPosition = TOP_LEVEL;
-int DisplayAerialEarthing = FALSE;
+int DisplayAerialEarthing = TRUE;			// assume legacy mode at start up until a tone detect is received
 
 MAIN_MENU_ITEM *firstMenuItem = NULL;
 
@@ -552,8 +536,18 @@ static int BluetoothTimer = (30 * 1000) ;		// temp - set to 30 seconds
 
 #define DATA_TRANSMITTING       (20)
 
+#define RECEIVE_LEGACY			(100)
+#define RECEIVE_TONE_DETECT_OFF (101)
+#define RECEIVE_TONE_DETECT_ON	(102)
+<<<<<<< HEAD
 
-static int TransmitStatus = NO_TRANSMIT ;
+
+=======
+
+
+>>>>>>> WorkingVolumeControl
+static int TransmitReceiveStatus = NO_TRANSMIT ;
+static int ToneDetectStatus = RECEIVE_LEGACY ;
 
 
 #define NO_BEEP_MODE	0
@@ -1014,13 +1008,13 @@ static void LCD_Main( void *pvParameters )
 
 	LCD_Home();
 
-	xil_printf( "First line %s\r\n", thisNicolaSettings.thisNicolaName);
+	//xil_printf( "First line %s\r\n", thisNicolaSettings.thisNicolaName);
 
 	LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName);			// Nicola3Name);
 
 	LCD_Write_String( SECOND_LINE, 0, GetVersionString());
 
-	xil_printf( "Second line %s\r\n", GetVersionString() );
+	//xil_printf( "Second line %s\r\n", GetVersionString() );
 
 
 
@@ -1159,14 +1153,14 @@ static void LCD_Main( void *pvParameters )
 			else
 			if ( theMessage[0] == KEY_TIMEOUT4 )		/* Bluetooth Transmit timeout */
 			{
-				if ( TransmitStatus == BLUETOOTH_TRANSMITTING )
+				if ( TransmitReceiveStatus == BLUETOOTH_TRANSMITTING )
 				{
 					/* Bluetooth transmit period exceeded so 				*/
 					/* stop transmitting in case user forgot				*/
 
-					TransmitStatus = NO_TRANSMIT ;
+					TransmitReceiveStatus = NO_TRANSMIT ;
 
-					DisplayAerialEarthing = FALSE;
+					//DisplayAerialEarthing = FALSE;
 
 					PLMessage[0] = '*' ;
 					PLMessage[1] = SEND_RECEIVE_STATE;
@@ -1188,7 +1182,112 @@ static void LCD_Main( void *pvParameters )
 					xTimerStart( LCDTimer1, portMAX_DELAY );	// and start the backlight timer
 				}
 			}
+<<<<<<< HEAD
+
+<<<<<<< refs/remotes/origin/master
+			// Tone Detect Messages
+
 			else
+			if ( theMessage[0] == '+' )		/* Tone detect pico messages */
+			{
+				if ( theMessage[1] == '0' )		/* tone detect off */
+				{
+					xil_printf( "Implement Tone Detect off\n\r" );
+
+					DisplayAerialEarthing = TRUE;
+
+				}
+				else
+				if ( theMessage[1] == '1' )		/* tone detect on */
+				{
+					xil_printf( "Implement Tone Detect on\n\r" );
+
+					DisplayAerialEarthing = FALSE;
+				}
+			}
+
+			// Keyboard Messages
+
+=======
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
+			else
+=======
+<<<<<<<
+
+=======
+
+			// Tone Detect Messages
+
+>>>>>>>
+			else
+<<<<<<<
+>>>>>>> WorkingVolumeControl
+			if ( theMessage[0] == KEY_DOWNLEFT )		/* special to reduce volume */
+			{
+				SetMicrophoneVolume( DECREMENT_VOLUME ) ;
+
+				xil_printf( "VOLUME DOWN = %d\r\n", MicrophoneVolume );
+
+			}
+<<<<<<< HEAD
+			else
+			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
+			{
+				SetMicrophoneVolume( INCREMENT_VOLUME ) ;
+
+				xil_printf( "VOLUME UP = %d\r\n", MicrophoneVolume );
+			}
+
+=======
+>>>>>>> WorkingVolumeControl
+			else
+			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
+			{
+				SetMicrophoneVolume( INCREMENT_VOLUME ) ;
+
+				xil_printf( "VOLUME UP = %d\r\n", MicrophoneVolume );
+			}
+
+			else
+=======
+			if ( theMessage[0] == '+' )		/* Tone detect pico messages */
+			{
+				if ( theMessage[1] == '0' )		/* tone detect off */
+				{
+					xil_printf( "Implement Tone Detect off\n\r" );
+
+					DisplayAerialEarthing = TRUE;
+
+				}
+				else
+				if ( theMessage[1] == '1' )		/* tone detect on */
+				{
+					xil_printf( "Implement Tone Detect on\n\r" );
+
+					DisplayAerialEarthing = FALSE;
+				}
+			}
+
+			// Keyboard Messages
+
+			else
+			if ( theMessage[0] == KEY_DOWNLEFT )		/* special to reduce volume */
+			{
+				SetMicrophoneVolume( DECREMENT_VOLUME ) ;
+
+				xil_printf( "VOLUME DOWN = %d\r\n", MicrophoneVolume );
+
+			}
+			else
+			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
+			{
+				SetMicrophoneVolume( INCREMENT_VOLUME ) ;
+
+				xil_printf( "VOLUME UP = %d\r\n", MicrophoneVolume );
+			}
+
+			else
+>>>>>>>
 			if ( ( CurrentMenuPosition == TOP_LEVEL ) && ( theMessage[0] != KEY_UPLEFT ) && ( theMessage[0] != KEY_LEFTRIGHT ) )
 			{
 
@@ -1205,6 +1304,8 @@ static void LCD_Main( void *pvParameters )
 					 * 									*/
 
 					earthingValue = hexToInt( &theMessage[1] );
+
+					xil_printf( "Earthing = %d\r\n", earthingValue );
 
 					if ( earthingValue < 50 ) blockCharacter = 'x' ;		//0xAA;
 					else
@@ -1227,14 +1328,14 @@ static void LCD_Main( void *pvParameters )
 				else
 				if ( theMessage[0] == KEY_PTT_ON )
 				{
-					if ( TransmitStatus == NO_TRANSMIT )
+					if ( TransmitReceiveStatus == NO_TRANSMIT )
 					{
 						/* PTT is pressed as detected by KEYPAD pico 				*/
 						/* trigger or stop display									*/
 
-						TransmitStatus = HANDSET_TRANSMITTING ;
+						TransmitReceiveStatus = HANDSET_TRANSMITTING ;
 
-						DisplayAerialEarthing = TRUE;
+						//DisplayAerialEarthing = TRUE;
 						LCD_Clear();
 						LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName );
 
@@ -1257,14 +1358,14 @@ static void LCD_Main( void *pvParameters )
 				else
 				if ( theMessage[0] == KEY_PTT_OFF )
 				{
-					if ( TransmitStatus == HANDSET_TRANSMITTING )
+					if ( TransmitReceiveStatus == HANDSET_TRANSMITTING )
 					{
 						/* PTT is released as detected by KEYPAD pico 				*/
 						/* trigger or stop display									*/
 
-						TransmitStatus = NO_TRANSMIT ;
+						TransmitReceiveStatus = NO_TRANSMIT ;
 
-						DisplayAerialEarthing = FALSE;
+						//DisplayAerialEarthing = FALSE;
 
 						PLMessage[0] = '*' ;
 						PLMessage[1] = SEND_RECEIVE_STATE;
@@ -1293,14 +1394,14 @@ static void LCD_Main( void *pvParameters )
 				else
 				if ( theMessage[0] == KEY_BLUETOOTH_PTT )
 				{
-					if ( TransmitStatus == NO_TRANSMIT )
+					if ( TransmitReceiveStatus == NO_TRANSMIT )
 					{
 						/* PTT is released as detected by KEYPAD pico 				*/
 						/* trigger or stop display									*/
 
-						TransmitStatus = BLUETOOTH_TRANSMITTING ;
+						TransmitReceiveStatus = BLUETOOTH_TRANSMITTING ;
 
-						DisplayAerialEarthing = TRUE;
+						//DisplayAerialEarthing = TRUE;
 						LCD_Clear();
 						LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName );
 
@@ -1333,14 +1434,14 @@ static void LCD_Main( void *pvParameters )
 
 					}
 					else
-					if ( TransmitStatus == BLUETOOTH_TRANSMITTING )
+					if ( TransmitReceiveStatus == BLUETOOTH_TRANSMITTING )
 					{
 						/* PTT is released as detected by KEYPAD pico 				*/
 						/* trigger or stop display									*/
 
-						TransmitStatus = NO_TRANSMIT ;
+						TransmitReceiveStatus = NO_TRANSMIT ;
 
-						DisplayAerialEarthing = FALSE;
+						//DisplayAerialEarthing = FALSE;
 
 						PLMessage[0] = '*' ;
 						PLMessage[1] = SEND_RECEIVE_STATE;
@@ -1366,6 +1467,7 @@ static void LCD_Main( void *pvParameters )
 					}
 				}
     		}
+
     		else
     		// no PTT and key received - manage menu system
     		{
@@ -1435,40 +1537,6 @@ static void LCD_Main( void *pvParameters )
 						//LCD_Write_String( SECOND_LINE, 0, thisMenuItem->subHeading );
 
 						DisplaySubmenuItem( thisMenuItem );
-
-#if 0
-
-						if ( thisMenuItem->SubMenuClass == SUB_MENU_TEXT)
-						{
-							if ( thisMenuItem->currentSubMenu == NULL )
-							{
-								thisMenuItem->currentSubMenu = thisMenuItem->firstSubMenu;
-
-							}
-
-							subMenuItem = thisMenuItem->currentSubMenu;
-							thisMenuItem->lastSubMenu = thisMenuItem->currentSubMenu;
-
-							LCD_Write_String( SECOND_LINE, 0, subMenuItem->subMenuHeading );
-						}
-						else
-						if ( thisMenuItem->SubMenuClass == SUB_MENU_SCROLL_TEXT )
-						{
-							subMenuItem = thisMenuItem->currentSubMenu;
-							LCD_Write_String( SECOND_LINE, 0, subMenuItem->subMenuHeading );
-							xTimerStart( LCDTimer2, portMAX_DELAY );		// only start when we have a text emssage to scroll
-							xTimerStop( LCDTimer1, portMAX_DELAY );
-
-						}
-						else
-						if ( thisMenuItem->SubMenuClass == SUB_MENU_INTEGER)
-						{
-							thisMenuItem->currentValue = thisMenuItem->lastValue ;
-							ConvertToSeconds
-							LCD_Write_String( SECOND_LINE, 0, ConvertToMinutes( thisMenuItem->currentValue, theMessage ) );
-						}
-#endif
-
 					}
 					break;
 
@@ -1539,50 +1607,6 @@ static void LCD_Main( void *pvParameters )
 
 						subMenuItem = thisMenuItem->currentSubMenu ;
 
-
-						//DisplaySubmenuItem( thisMenuItem );
-
-#if 0
-						if ( thisMenuItem->SubMenuClass == SUB_MENU_TEXT)
-						{
-							if (subMenuItem->previousSubMenu == NULL )
-							{
-								thisMenuItem->currentSubMenu = thisMenuItem->firstSubMenu ;	/* wrap around to first menu item */
-								subMenuItem = thisMenuItem->currentSubMenu ;
-							}
-							else
-							{
-								subMenuItem = subMenuItem->previousSubMenu ;
-								thisMenuItem->currentSubMenu = subMenuItem ;
-							}
-
-							LCD_Write_String( SECOND_LINE, 0, subMenuItem->subMenuHeading );
-						}
-						else
-						if ( thisMenuItem->SubMenuClass == SUB_MENU_SCROLL_TEXT )
-						{
-							subMenuItem = thisMenuItem->currentSubMenu;
-
-							subScrollMenuItem = ( SUB_MENU_SCROLL_ITEM *) subMenuItem;
-
-							subScrollMenuItem->currentPosition = subScrollMenuItem->subMenuHeading ;
-
-							LCD_Write_String( SECOND_LINE, 0, subScrollMenuItem->subMenuHeading );
-
-							xTimerStart( LCDTimer2, portMAX_DELAY );		// only start when we have a text emssage to scroll
-							xTimerStop( LCDTimer1, portMAX_DELAY );
-
-						}
-						else
-						if ( thisMenuItem->SubMenuClass == SUB_MENU_INTEGER)
-						{
-							thisMenuItem->currentValue -= 1;
-							if ( thisMenuItem->currentValue < thisMenuItem->firstSubMenu[0].value ) thisMenuItem->currentValue = thisMenuItem->firstSubMenu[0].value;
-							LCD_Write_String( SECOND_LINE, 0, ConvertToMinutes( thisMenuItem->currentValue, theMessage ) );
-							ConvertToSeconds
-						}
-#endif
-
 						//LCD_ControlWrite( 0xF );				/* Display, on, cursor on, blink cursor	*/
 						//LCD_ControlWrite( 0xC );				/* Display, on, cursor off, no blink cursor	*/
 					}
@@ -1633,49 +1657,6 @@ static void LCD_Main( void *pvParameters )
 						thisMenuItem->currentValue = thisMenuItem->lastValue ;
 
 						DisplaySubmenuItem( thisMenuItem );
-
-#if 0
-						LCD_ClearLine( SECOND_LINE );
-						if ( thisMenuItem->SubMenuClass == SUB_MENU_TEXT)
-						{
-							if (subMenuItem->previousSubMenu == NULL )
-							{
-								thisMenuItem->currentSubMenu = thisMenuItem->firstSubMenu ;	/* wrap around to first menu item */
-								subMenuItem = thisMenuItem->currentSubMenu ;
-							}
-							else
-							{
-								subMenuItem = subMenuItem->previousSubMenu ;
-								thisMenuItem->currentSubMenu = subMenuItem ;
-							}
-
-							LCD_Write_String( SECOND_LINE, 0, subMenuItem->subMenuHeading );
-						}
-						else
-						if ( thisMenuItem->SubMenuClass == SUB_MENU_SCROLL_TEXT )
-						{
-							subMenuItem = thisMenuItem->currentSubMenu;
-
-							subScrollMenuItem = ( SUB_MENU_SCROLL_ITEM *) subMenuItem;
-
-							subScrollMenuItem->currentPosition = subScrollMenuItem->subMenuHeading ;
-
-							LCD_Write_String( SECOND_LINE, 0, subScrollMenuItem->subMenuHeading );
-
-							xTimerStart( LCDTimer2, portMAX_DELAY );		// only start when we have a text emssage to scroll
-							xTimerStop( LCDTimer1, portMAX_DELAY );
-
-						}
-						else
-						if ( thisMenuItem->SubMenuClass == SUB_MENU_INTEGER)
-						{
-							//thisMenuItem->currentValue -= 1;
-							if ( thisMenuItem->currentValue < thisMenuItem->firstSubMenu[0].value ) thisMenuItem->currentValue = thisMenuItem->firstSubMenu[0].value;
-							LCD_Write_String( SECOND_LINE, 0, ConvertToMinutes( thisMenuItem->currentValue, theMessage ) );
-							ConvertToSeconds
-						}
-#endif
-
 					}
 
 					break;
@@ -2950,7 +2931,7 @@ void MenuMessageFromHostComputer( char *theMessage )
 static void ApplyDefaultSettings()
 {
 
-	SetMicrophoneVolume( thisNicolaSettings.microphoneVolume );
+	SetMicrophoneVolume( 0 );
 
 	SetAerialType( thisNicolaSettings.aerialType);
 
@@ -3113,7 +3094,7 @@ static int ReadMenuFromFlash( void )
 
 		//ApplyDefaultSettings();
 
-		SetMicrophoneVolume( thisNicolaSettings.microphoneVolume );
+		SetMicrophoneVolume( 0 );
 
 		return pdFAIL;
 	}
@@ -3459,10 +3440,10 @@ static void LCD_LoadHandlerRoutine( MAIN_MENU_ITEM *mainMenuItem )
 
 	switch( mainMenuItem->SubMenuType )
 	{
-	case MENU_ITEM_TYPE_MICROPHONE_VOLUME:
+	//case MENU_ITEM_TYPE_MICROPHONE_VOLUME:
 		//mainMenuItem->SubMenuClass = SUB_MENU_TEXT;
-		mainMenuItem->menuItemChanged = &SetMicrophoneVolume;
-		break;
+	//	mainMenuItem->menuItemChanged = &SetMicrophoneVolume;
+	//	break;
 	case MENU_ITEM_TYPE_AERIAL_TYPE:
 		//mainMenuItem->SubMenuClass = SUB_MENU_TEXT;
 		mainMenuItem->menuItemChanged = &SetAerialType;

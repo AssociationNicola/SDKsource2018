@@ -111,27 +111,22 @@ static void PL_Receiver( void * );
 static void PL_Transmitter( void *pvParameters );
 
 
-#ifdef OldSlowDownload
-void LoadPicos( u32* , u32, u32  );
-void LoadUserPico( u32* , u32 , u32 );
-#endif
-
-
 void LoadPicoFast( u32* , u32 , u32  );
 
 int ReadResponse();
 int TxSend(XLlFifo *, u32  *, int );
 
 
-
 n3z_tonetest		*ToneTestInstancePtr;
 
-#if 0
-u32 UserPicoDownload[] = {
-#include "../../../PicoSource/UserPicoDownload.c"
-};
-#endif
 
+#if 0
+
+u32 TDPico[] = {
+#include "../../../PicoSource/ToneDetectPico.c"
+};
+
+#endif
 
 #if 0
 
@@ -147,7 +142,7 @@ u32 KeypadPico[] = {
 };
 #endif
 
-#if 0
+#if 1
 u32 UserPico[] = {
 #include "../../../PicoSource/UserPico.c"
 };
@@ -170,7 +165,6 @@ void PSPLComms_Initialise()
 
 
     Status=n3z_tonetest_Initialize(ToneTestInstancePtr, XPAR_N3Z_TONETEST_0_DEVICE_ID);
-    //printf("Status tonetest Axilite %d\n\r",Status);
 
     /*Set Audio volume to valid level
        *
@@ -179,8 +173,6 @@ void PSPLComms_Initialise()
 
     /*Set radio config*/
     n3z_tonetest_n3zconfig_write(ToneTestInstancePtr, RadioState);
-
-
 
 
     ConfigData=XLlFfio_LookupConfig(DataFIFO_DEV_ID);
@@ -203,38 +195,44 @@ void PSPLComms_Initialise()
 
     Status = XLlFifo_Status(&PSPLFifo);
 
-#ifdef OldSlowDownload
-
-    xil_printf("Send Loader\n\r");
-    LoadUserPico(UserPicoDownload, 32, 0x40);
-    //sleep(1);
-    xil_printf("Send Keypad\n\r");
-    LoadPicos(KeypadPico, 0, 0x43);
-    //sleep(1);
-    xil_printf("Send User Pico\n\r");
-
-    LoadUserPico(UserPico, 32, 0x40);
-
-    //sleep(1);
-
-#endif
-
-
 #if 0
+	/* PicoNo=0; %User=0, DSP=1, KP=2,TD=3 */
 
+   	xil_printf("Send DSP\n\r");
+   	LoadPicoFast(DSPPico, sizeof(DSPPico)/4, 1);
 
-   	//xil_printf("Send DSP\n\r");
-   	//LoadPicoFast(DSPPico, sizeof(DSPPico)/4, 2);
+<<<<<<< HEAD
+<<<<<<< refs/remotes/origin/master
+=======
+<<<<<<< HEAD
+    //xil_printf("Send Keypad\n\r");
+   	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
+=======
+>>>>>>> WorkingVolumeControl
+   	xil_printf("Send TD Pico\n\r");
+   	LoadPicoFast(TDPico, sizeof(TDPico)/4, 3);
 
     xil_printf("Send Keypad\n\r");
    	LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
+<<<<<<< HEAD
+=======
+    //xil_printf("Send Keypad\n\r");
+   	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
+>>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
+=======
+>>>>>>> WorkingVolumeControl
+>>>>>>> WorkingVolumeControl
 
    	xil_printf("Send User Pico\n\r");
    	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
 
-   	xil_printf("Done Load Pico\n\r");
 
 #endif
+
+
+
+   	xil_printf("Send User Pico\n\r");
+   	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
 
 
     PLTransmitQueue = xQueueCreate( 4,					// max item count
@@ -296,17 +294,32 @@ static void PL_Receiver( void *pvParameters )
 
     	if ( Buffer[0] == '&' )		// indicates key sent
     	{
-
-    		KeyMessage[0] = Buffer[1] & 0xFF;
-    		KeyMessage[1] = Buffer[2] & 0xFF;
-    		KeyMessage[2] = Buffer[3] & 0xFF;
+			KeyMessage[0] = Buffer[1] & 0xFF;
+			KeyMessage[1] = Buffer[2] & 0xFF;
+			KeyMessage[2] = Buffer[3] & 0xFF;
 
 			while ( xQueueSendToBack( KeysReceivedQueue, KeyMessage, 0 ) != pdPASS )
 			{
-					vTaskDelay( pdMS_TO_TICKS( 5 ));
+				vTaskDelay( pdMS_TO_TICKS( 5 ));
 			}
+    	}
+    	else
+		if ( Buffer[0] == '+' )		// indicates key sent
+		{
+			KeyMessage[0] = Buffer[0] & 0xFF;
+			KeyMessage[1] = Buffer[1] & 0xFF;
+			KeyMessage[2] = Buffer[3] & 0xFF;
+
+			while ( xQueueSendToBack( KeysReceivedQueue, KeyMessage, 0 ) != pdPASS )
+			{
+				vTaskDelay( pdMS_TO_TICKS( 5 ));
+			}
+		}
+
 
 #if 1
+    	if ( Buffer[0] == '&' )		// indicates key sent
+    	{
 			switch ( Buffer[1] )		// check the received key
 			{
 
@@ -424,8 +437,32 @@ static void PL_Receiver( void *pvParameters )
 
 				break;
 
+			case KEY_DOWNLEFT:
+				xil_printf( "KEY DOWN & LEFT PRESSED\n\r" );
+#ifdef BT_DEBUG
+				AddMessageToBluetoothTransmit("  KEY Down&Left PRESSED\n\r");
+#endif
+
+#ifdef LCD_DEBUG
+				LCD_Write_String( 1, 0 , "KEY DOWN & LEFT PRESSED");
+#endif
+
+				break;
+
+			case KEY_DOWNRIGHT:
+				xil_printf( "KEY DOWN & RIGHT PRESSED\n\r" );
+#ifdef BT_DEBUG
+				AddMessageToBluetoothTransmit("  KEY Down&Right PRESSED\n\r");
+#endif
+
+#ifdef LCD_DEBUG
+				LCD_Write_String( 1, 0 , "KEY DOWN & RIGHT PRESSED");
+#endif
+
+				break;
+
 			case KEY_AERIAL_EARTHING:
-				xil_printf( "TRANSMIT QUAL %c %c\n\r", Buffer[2], Buffer[3] );
+				//xil_printf( "TRANSMIT QUAL %c %c\n\r", Buffer[2], Buffer[3] );
 				break;
 
 			case KEY_HEYPHONE_FREQ:			//	'w'
@@ -442,31 +479,48 @@ static void PL_Receiver( void *pvParameters )
 
 
 			default:
-			{
-				xil_printf( "default not known %x\n\r", Buffer[1] );
-#ifdef BT_DEBUG
 				{
-					char *msg = "     =    default not known\r\n" ;
-					intToHexChars( Buffer[1], &msg[5]);
-					AddMessageToBluetoothTransmit(msg);
+					xil_printf( "default not known %x\n\r", Buffer[1] );
+	#ifdef BT_DEBUG
+					{
+						char *msg = "     =    default not known\r\n" ;
+						intToHexChars( Buffer[1], &msg[5]);
+						AddMessageToBluetoothTransmit(msg);
+					}
+	#endif
+
+
+	#ifdef LCD_DEBUG
+					{
+						char *msg = "x    not known" ;
+						intToHexChars( Buffer[1], &msg[1]);
+						LCD_Write_String( 1, 0, msg );
+					}
+	#endif
+
+					break;
 				}
-#endif
-
-
-#ifdef LCD_DEBUG
-				{
-					char *msg = "x    not known" ;
-					intToHexChars( Buffer[1], &msg[1]);
-					LCD_Write_String( 1, 0, msg );
-				}
-#endif
-
-				break;
 			}
-
-			}
-#endif
     	}
+
+    	else
+        if ( Buffer[0] == '+' )		// message from Tone Detect Pico
+    	{
+			switch ( Buffer[1] )		// check the received msg
+			{
+				case '0':
+					xil_printf( "TONE DETECT OFF\n\r" );
+					break;
+
+				case '1':
+					xil_printf( "TONE DETECT ON\n\r" );
+					break;
+			}
+
+    	}
+
+
+#endif
     }
 }
 
@@ -490,7 +544,7 @@ static void PL_Transmitter( void *pvParameters )
 	{
 		if ( xQueueReceive( PLTransmitQueue, &PLMessage, portMAX_DELAY ) == pdPASS )
 		{
-			if ( PLMessage[0] == '*' )
+			//if ( PLMessage[0] == '*' )
 			{
 				txCharacterCount = 4;
 			}
@@ -578,238 +632,6 @@ void LoadPicoFast( u32* LoadArray, u32 numberOfInstructions, u32 PicoType )
 
 }
 
-
-#ifdef OldSlowDownload
-
-void LoadPicos( u32* LoadArray, u32 offset, u32 type )
-{
-	int i;
-	//u32	Buffer[4] ;
-	int Status;
-
-    //xil_printf("Check Download cmd Status %d\n\r",Status);
-
-#define slowload 1
-
-
-#ifdef slowload
-	if ( offset == 0)
-	{
-
-
-	    xil_printf("Send Jump 0\n\r");
-
-	    Buffer[0] = (u32) 13 ;		// null
-	    Buffer[1] = (u32) 'Z' ;		// start load
-	    Buffer[2] = (u32) 13 ;		// c/r
-	    Buffer[3] = (u32) type ;		// load  pico
-
-	    Status=TxSend(&PSPLFifo, Buffer, 4);
-
-		for ( i=offset; i<1024; i++)
-		{
-		    Buffer[0] = (0x22000>>12) & 0x3F ;  // upper 6 bits
-		    Buffer[1] = (0x22000>>6) & 0x3F ;  	// middle 6 bits
-		    Buffer[2] = 0x22000 & 0x3F ;  		// lower 6 bits
-
-			//xil_printf( "%x\r\n", UserPico[i]);
-
-		    //xil_printf( "%d - %x %x %x\r\n", i, Buffer[0], Buffer[1], Buffer[2]);
-
-
-		    if ( Buffer[0] == 80 )
-		    {
-		    	xil_printf( "Will STOP\r\n");
-		    	sleep(5);
-		    }
-
-		    Status=TxSend(&PSPLFifo, Buffer, 3);
-
-		    xsleep(100);
-		}
-
-	    Buffer[0] = (u32) 'P' ;		// end load
-	    Buffer[1] = (u32) 10 ;		// load User pico
-
-	    Status=TxSend(&PSPLFifo, Buffer, 2);
-
-	}
-
-    //xil_printf("Send code\n\r");
-
-    Buffer[0] = (u32) 13 ;		// null
-    Buffer[1] = (u32) 'Z' ;		// start load
-    Buffer[2] = (u32) 13 ;		// c/r
-    Buffer[3] = (u32) type ;		// load  pico
-
-    Status=TxSend(&PSPLFifo, Buffer, 4);
-
-    Buffer[0] = (0x22000>>12) & 0x3F ;  // upper 6 bits
-    Buffer[1] = (0x22000>>6) & 0x3F ;  	// middle 6 bits
-    Buffer[2] = 0x22000 & 0x3F ;  		// lower 6 bits
-
-	//xil_printf( "%x\r\n", UserPico[i]);
-
-    //xil_printf( "%x %x %x\r\n", Buffer[0], Buffer[1], Buffer[2]);
-
-
-    if ( Buffer[0] == 80 )
-    {
-    	xil_printf( "Will STOP\r\n");
-    	sleep(5);
-    }
-
-    Status=TxSend(&PSPLFifo, Buffer, 3);
-#endif
-
-#ifndef slowload
-    sleep(4);
-#endif
-
-    xil_printf("Send code\n\r");
-
-    Buffer[0] = (u32) 13 ;		// null
-    Buffer[1] = (u32) 'Z' ;		// start load
-    Buffer[2] = (u32) 13 ;		// c/r
-    Buffer[3] = (u32) type ;		// load  pico
-
-#ifdef slowload
-
-	for ( i=1; i<sizeof(UserPico)/4; i++)
-
-#else
-
-	for ( i=0; i<sizeof(UserPico)/4; i++)
-
-#endif
-	{
-
-		if ( LoadArray[i] == 0 ) break;
-
-	    Buffer[0] = (LoadArray[i]>>12) & 0x3F ;  // upper 6 bits
-	    Buffer[1] = (LoadArray[i]>>6) & 0x3F ;  // middle 6 bits
-	    Buffer[2] = LoadArray[i] & 0x3F ;  // lower 6 bits
-
-		//xil_printf( "%x\r\n", UserPico[i]);
-
-	    //xil_printf( "%x %x %x\r\n", Buffer[0], Buffer[1], Buffer[2]);
-
-
-	    if ( Buffer[0] == 80 )
-	    {
-	    	xil_printf( "Will STOP\r\n");
-	    	sleep(5);
-	    }
-
-	    Status=TxSend(&PSPLFifo, Buffer, 3);
-
-	   // xil_printf("Check %d\n\r",Status);
-
-	    xsleep(100);
-
-	}
-
-
-#ifdef slowload
-    Buffer[0] = (u32) 'P' ;		// end load
-    Buffer[1] = (u32) 13 ;		// load User pico
-
-    Status=TxSend(&PSPLFifo, Buffer, 2);
-
-    //xil_printf("Check Download End Status %d\n\r",Status);
-
-
-
-	    Buffer[0] = (u32) 13 ;		// null
-	    Buffer[1] = (u32) 'Z' ;		// start load
-	    Buffer[2] = (u32) 13 ;		// c/r
-	    Buffer[3] = (u32) type ;		// load  pico
-
-	    Status=TxSend(&PSPLFifo, Buffer, 4);
-
-	    Buffer[0] = (LoadArray[0]>>12) & 0x3F ;  // upper 6 bits
-	    Buffer[1] = (LoadArray[0]>>6) & 0x3F ;  // middle 6 bits
-	    Buffer[2] = LoadArray[0] & 0x3F ;  // lower 6 bits
-
-		//xil_printf( "%x\r\n", UserPico[i]);
-
-	    //xil_printf( "%x %x %x\r\n", Buffer[0], Buffer[1], Buffer[2]);
-
-
-	    if ( Buffer[0] == 80 )
-	    {
-	    	xil_printf( "Will STOP\r\n");
-	    	sleep(5);
-	    }
-
-	    Status=TxSend(&PSPLFifo, Buffer, 3);
-
-	   // xil_printf("Check %d\n\r",Status);
-
-	    xsleep(100);
-#endif
-
-	    Buffer[0] = (u32) 'P' ;		// end load
-    	Buffer[1] = (u32) 10 ;		// load User pico
-
-    	Status=TxSend(&PSPLFifo, Buffer, 2);
-
-}
-
-
-void LoadUserPico( u32* LoadArray, u32 offset, u32 type )
-{
-	int i;
-	//u32	Buffer[4] ;
-	int Status;
-
-    //xil_printf("USer Check Download cmd Status %d\n\r",Status);
-
-    Buffer[0] = (u32) 13 ;		// null
-    Buffer[1] = (u32) 'Z' ;		// start load
-    Buffer[2] = (u32) 13 ;		// c/r
-    Buffer[3] = (u32) type ;		// load  pico
-
-    Status=TxSend(&PSPLFifo, Buffer, 4);
-
-    // for the user pico start at 32
-	for ( i=offset; i<sizeof(UserPico)/4; i++)
-	{
-
-		if ( LoadArray[i] == 0 ) break;
-
-	    Buffer[0] = (LoadArray[i]>>12) & 0x3F ;  // upper 6 bits
-	    Buffer[1] = (LoadArray[i]>>6) & 0x3F ;  // middle 6 bits
-	    Buffer[2] = LoadArray[i] & 0x3F ;  // lower 6 bits
-
-		//xil_printf( "%x\r\n", UserPico[i]);
-
-	    //xil_printf( "%x %x %x\r\n", Buffer[0], Buffer[1], Buffer[2]);
-
-	    if ( Buffer[0] == 80 )
-	    {
-	    	xil_printf( "Will STOP\r\n");
-	    	sleep(5);
-	    }
-
-	    Status=TxSend(&PSPLFifo, Buffer, 3);
-
-	   // xil_printf("Check %d\n\r",Status);
-
-	    xsleep(100);
-
-	}
-
-    Buffer[0] = (u32) 'P' ;		// end load
-    Buffer[1] = (u32) 10 ;		// load User pico
-
-    Status=TxSend(&PSPLFifo, Buffer, 2);
-
-    //xil_printf("User Check Download End Status %d\n\r",Status);
-
-}
-
-#endif
 
 
 int ReadResponse()
