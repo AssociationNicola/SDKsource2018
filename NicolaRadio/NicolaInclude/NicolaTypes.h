@@ -20,7 +20,6 @@
 
 /* LED defitions */
 
-#if 1
 
 #define GPIO_BANK2 (54)
 
@@ -34,19 +33,7 @@
 #define LED_WHITE		(0x8FFF8FFF)
 #define LED_OFF			(0x8FFFFFFF)
 
-#else
 
-#define LED_BLUE		(0x8FFF6FFF)
-#define LED_RED			(0x8FFF3FFF)
-#define LED_GREEN		(0x8FFF5FFF)
-
-#define LED_YELLOW		(0x8FFF1FFF)
-#define LED_PURPLE		(0x8FFF2FFF)
-#define LED_LIGHTBLUE	(0x8FFF4FFF)
-#define LED_WHITE		(0x8FFF8FFF)
-#define LED_OFF			(0x8FFFFFFF)
-
-#endif
 
 /*  need to hold all messages */
 #define MAX_STRING_LENGTH	128
@@ -188,7 +175,7 @@ typedef struct
 /*
  * Key event definitions
  *
- * Also messages from Keyoad Pico
+ * Also messages from Keypad Pico
  *
  */
 
@@ -204,8 +191,10 @@ typedef struct
 #define KEY_RIGHT_PRESSED	'R'		// right = 02
 #define KEY_LEFT_PRESSED	'Q'		// left = 01
 
-#define KEY_UPLEFT 'I'		// 08 + 01
-#define KEY_LEFTRIGHT 'C'  // 02 + 01
+#define KEY_UPLEFT     'I'	// 08 + 01
+#define KEY_LEFTRIGHT  'C'  // 02 + 01
+#define KEY_DOWNLEFT   'E'  // 04 + 01
+#define KEY_DOWNRIGHT  'F'  // 04 + 02
 
 #define KEY_PTT_ON			'0'
 #define KEY_PTT_OFF			'1'
@@ -227,6 +216,15 @@ typedef struct
 #define KEY_NICOLA2_FREQ	'x'		/* not really a KEY but ... */
 #define KEY_31KHZ_FREQ		'y'		/* not really a KEY but ... */
 
+
+// Microphone volume management
+
+#define MIN_VOLUME 15
+#define MAX_VOLUME 200
+#define INCREMENT_VOLUME	25
+#define DECREMENT_VOLUME	-25
+
+#define DEFAULT_VOLUME		25
 
 /* for use in LCD_Dispay and elsewhere		*/
 
