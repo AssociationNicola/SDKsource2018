@@ -156,7 +156,7 @@ Initialize n3z_tonetest pointer with a specifc instance of the device based devi
  @note    .<br/>
 <br/>
 </p>
-<h1>void n3z_tonetest_audiovolume_write(n3z_tonetest *InstancePtr, u8 Data);</h1>
+<h1>void n3z_tonetest_audiovolume_write(n3z_tonetest *InstancePtr, u32 Data);</h1>
 <p>
  Write to audiovolume gateway of n3z_tonetest. Assignments are LSB-justified.<br/>
 <br/>
@@ -168,13 +168,13 @@ Initialize n3z_tonetest pointer with a specifc instance of the device based devi
  @note    .<br/>
 <br/>
 </p>
-<h1>u8 n3z_tonetest_audiovolume_read(n3z_tonetest *InstancePtr);</h1>
+<h1>u32 n3z_tonetest_audiovolume_read(n3z_tonetest *InstancePtr);</h1>
 <p>
  Read from audiovolume gateway of n3z_tonetest. Assignments are LSB-justified.<br/>
 <br/>
  @param	InstancePtr is the audiovolume instance to operate on.<br/>
 <br/>
- @return	u8<br/>
+ @return	u32<br/>
 
  @note    .<br/>
 <br/>

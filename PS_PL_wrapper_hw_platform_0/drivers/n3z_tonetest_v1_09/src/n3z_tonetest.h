@@ -129,18 +129,18 @@ u32 n3z_tonetest_n3zconfig_read(n3z_tonetest *InstancePtr);
 * @note    .
 *
 */
-void n3z_tonetest_audiovolume_write(n3z_tonetest *InstancePtr, u8 Data);
+void n3z_tonetest_audiovolume_write(n3z_tonetest *InstancePtr, u32 Data);
 /**
 * Read from audiovolume gateway of n3z_tonetest. Assignments are LSB-justified.
 *
 * @param	InstancePtr is the audiovolume instance to operate on.
 *
-* @return	u8
+* @return	u32
 *
 * @note    .
 *
 */
-u8 n3z_tonetest_audiovolume_read(n3z_tonetest *InstancePtr);
+u32 n3z_tonetest_audiovolume_read(n3z_tonetest *InstancePtr);
 /**
 * Read from adcgain_ave_peak gateway of n3z_tonetest. Assignments are LSB-justified.
 *

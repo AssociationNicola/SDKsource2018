@@ -38,15 +38,15 @@ u32 n3z_tonetest_n3zconfig_read(n3z_tonetest *InstancePtr) {
     Data = n3z_tonetest_ReadReg(InstancePtr->n3z_tonetest_BaseAddress, 4);
     return Data;
 }
-void n3z_tonetest_audiovolume_write(n3z_tonetest *InstancePtr, u8 Data) {
+void n3z_tonetest_audiovolume_write(n3z_tonetest *InstancePtr, u32 Data) {
 
     Xil_AssertVoid(InstancePtr != NULL);
 
     n3z_tonetest_WriteReg(InstancePtr->n3z_tonetest_BaseAddress, 8, Data);
 }
-u8 n3z_tonetest_audiovolume_read(n3z_tonetest *InstancePtr) {
+u32 n3z_tonetest_audiovolume_read(n3z_tonetest *InstancePtr) {
 
-    u8 Data;
+    u32 Data;
     Xil_AssertVoid(InstancePtr != NULL);
 
     Data = n3z_tonetest_ReadReg(InstancePtr->n3z_tonetest_BaseAddress, 8);
