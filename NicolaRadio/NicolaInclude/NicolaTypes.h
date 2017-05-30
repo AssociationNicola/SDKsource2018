@@ -217,10 +217,10 @@ typedef struct
 #define KEY_31KHZ_FREQ		'y'		/* not really a KEY but ... */
 
 
-// Microphone volume management
+// Microphone volume management - increased top end 30/5/17 (GN)
 
 #define MIN_VOLUME 15
-#define MAX_VOLUME 200
+#define MAX_VOLUME 500
 #define INCREMENT_VOLUME	25
 #define DECREMENT_VOLUME	-25
 
