@@ -217,7 +217,7 @@ typedef struct
 #define KEY_31KHZ_FREQ		'y'		/* not really a KEY but ... */
 
 
-// Microphone volume management - increased top end 30/5/17 (GN)
+// Microphone volume management
 
 #define MIN_VOLUME 15
 #define MAX_VOLUME 500
@@ -253,6 +253,23 @@ void CDFlashWrite( u8 *writeToAddress, u32 flashAddress, u32 numberOfBytes);		//
 #define NUM_PAGES		0x10000
 #define PAGE_SIZE		512
 //#define PAGE_SIZE		256
+
+
+/*  GPIO definitions */
+
+#define GPIO0DIR  ((unsigned int *) 0xE000A204)
+#define GPIO0OEN  ((unsigned int *) 0xE000A208)
+#define GPIO0dataMasked ((unsigned int *) 0xE000A000)
+#define GPIO0InputData ((unsigned int *) 0xE000A060)
+#define GPIO0InputDataX ((unsigned int *) 0xE000A068)   /* inputs appear in this register ! */
+
+#define GPIO2DIR  ((unsigned int *) 0xE000A284)
+#define GPIO2OEN  ((unsigned int *) 0xE000A288)
+#define GPIO2dataMasked ((unsigned int *) 0xE000A010)
+#define GPIO2dataMaskedMSW ((unsigned int *) 0xE000A014)
+#define GPIO2data ((unsigned int *) 0xE000A048)
+#define GPIO2dataX ((unsigned int *) 0xE000A048)
+
 
 
 

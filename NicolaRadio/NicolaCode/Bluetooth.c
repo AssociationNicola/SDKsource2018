@@ -100,6 +100,8 @@ BLUETOOTH_CHANNELS *FindChannelTableFromSCOChannel( char theSCOChannel );
 BLUETOOTH_CHANNELS *FindChannelTableFromRFCommChannel( char theRFCommChannel );
 BLUETOOTH_CHANNELS *FindChannelTableForTablet( char theType );
 
+static void SetCommandMode();
+static void SetDataMode();
 
 
 static void AddMessageToTransmit( char *theMessage  );
@@ -118,8 +120,18 @@ QueueHandle_t	BluegigaReceiveQueue ;
 QueueHandle_t	consoleQueue ;
 
 static TimerHandle_t BluetoothTimer1 ;
+static TimerHandle_t BluetoothTimer2 ;
 
 static void BluetoothTimer1Callback( TimerHandle_t theHandle);
+static void BluetoothTimer2Callback( TimerHandle_t theHandle);
+
+#define IDLE_MODE 0
+#define COMMAND_MODE 1
+#define DATA_MODE 2
+
+static int theDataLinkID = -1;
+static int CommandDataMode = IDLE_MODE ;
+
 
 char * StartupMessages[] = {
 		//"SET RESET\n",
@@ -139,8 +151,14 @@ char * StartupMessages[] = {
 		"SET PROFILE SPP ON\n",
 		"SET CONTROL AUTOPAIR\n",
 		"SET CONTROL AUTOCALL\n",
+
+		"SET CONTROL ESCAPE 43 04 1\n",
+
+		//"SET CONTROL BIND 0 04 FALL\n",		/* this works successfully */
+
+
 		//"SET BT SSP 1 1\n",
-		//"SET BT SSP 3 0\n",
+		"SET BT SSP 3 0\n",
 		//"SET CONTROL AUDIO INTERNAL MULTISCO\n"
 
 		//"SET CONTROL AUTOPAIR 10 5 0000 0000\n",
@@ -182,6 +200,14 @@ void BluetoothStartup()
 		xTimerStart( BluetoothTimer1, portMAX_DELAY );
 	}
 
+	if ( (BluetoothTimer2 = xTimerCreate( "BT2",
+								10 * pdMS_TO_TICKS(1000),
+								pdFALSE,
+								(void *) 1,
+								BluetoothTimer2Callback) ) )
+
+	{
+	}
 
 	BluegigaTransmitQueue = xQueueCreate( 2,					// max item count
 										MAX_STRING_LENGTH ) ;	// size of each item (max) ) ;
@@ -242,6 +268,33 @@ static void BluetoothTimer1Callback( TimerHandle_t theHandle)
 
 }
 
+
+static void BluetoothTimer2Callback( TimerHandle_t theHandle)
+{
+	char theMessage[6] ;
+
+	theMessage[0] = 'S';
+	theMessage[1] = '-';
+	theMessage[2] = 'T';
+	theMessage[3] = 'M';
+	theMessage[4] = '2';
+	theMessage[5] = 0;
+
+	/* pass the Bluegiga message to the main task to be processed */
+	while ( xQueueSendToBack( BluegigaReceiveQueue, &theMessage, 0 ) != pdPASS )
+	{
+		vTaskDelay( pdMS_TO_TICKS( 3 ));
+	}
+
+#if 1
+	while ( xQueueSendToBack( consoleTransmitQueue, &theMessage, 0 ) != pdPASS )
+	{
+		vTaskDelay( pdMS_TO_TICKS( 1 ));
+	}
+#endif
+
+}
+
 static void BluetoothMain( void *pvParameters )
 {
 
@@ -262,6 +315,7 @@ static void BluetoothMain( void *pvParameters )
 
 
 	changeToCommmandMode( TRUE );
+
 
 	//AddMessageToTransmit("SET RESET\n");
 
@@ -303,6 +357,46 @@ static void BluetoothMain( void *pvParameters )
 			//	vTaskDelay( pdMS_TO_TICKS( 5 ));
 			//}
 
+
+
+			if ( strncmp( theMessage, "S-TM2", 6) == 0 )
+			{
+				if ( theDataLinkID != -1 )
+				{
+
+					// timer for swapping command and data mode looking for
+					// text message protocol
+
+					if ( CommandDataMode == DATA_MODE )
+					{
+						SetCommandMode();
+						xTimerChangePeriod( BluetoothTimer2, 10 * pdMS_TO_TICKS(1000), portMAX_DELAY );		// set 10 seconds timer for next poll
+						CommandDataMode = COMMAND_MODE ;
+						xil_printf( "Command Mode\r\n");
+
+					}
+					else
+					if ( CommandDataMode == COMMAND_MODE )
+					{
+						//SetDataMode();
+
+						//sprintf( theSendMessage, "LIST\n" );	// only 1 data link at a time
+						//AddMessageToTransmit(theSendMessage);
+
+						sprintf( theSendMessage, "SELECT %c\n", theDataLinkID );	// only 1 data link at a time
+						AddMessageToTransmit(theSendMessage);
+
+						xTimerChangePeriod( BluetoothTimer2, 1 * pdMS_TO_TICKS(1000), portMAX_DELAY );		// set 1/2 sec timer for data polling period
+						CommandDataMode = DATA_MODE ;
+
+						xil_printf( "Data Mode\r\n");
+					}
+
+					xTimerStart( BluetoothTimer2, portMAX_DELAY );		// restart command/data timer
+
+				}
+			}
+			else
 			if ( strncmp( theMessage, "S-INQ", 6) == 0 )
 			{
 				// send INQUIRY message
@@ -409,36 +503,39 @@ static void BluetoothMain( void *pvParameters )
 						//	 ( BluetoothChannel->Type != TABLET_TYPE ) )
 
 
-						if ( BluetoothChannel->Type != COMPUTER_TYPE )
+						//if ( BluetoothChannel->Type != COMPUTER_TYPE )
 						{
 
 
-							//if ( BluetoothChannel->Type == COMPUTER_TYPE )
+							//if ( BluetoothChannel->Type != TABLET_TYPE )
 							{
-							//sprintf( theSendMessage, "SET BT PAIR %s 3b41ca4f42401ca64ab3ca3303d8ccdc\n", BluetoothChannel->MACAddress);
-							//AddMessageToTransmit(theSendMessage);
+								//sprintf( theSendMessage, "SET BT PAIR %s 3b41ca4f42401ca64ab3ca3303d8ccdc\n", BluetoothChannel->MACAddress);
+								//AddMessageToTransmit(theSendMessage);
+
+
+								/* send PIN code message  */
+								if ( BluetoothChannel->Type == TABLET_TYPE )
+								{
+									//sprintf( theSendMessage, "SET BT AUTH * 000000\n");
+									sprintf( theSendMessage, "SET BT AUTH * 0000\n");
+								}
+								else
+								{
+									sprintf( theSendMessage, "SET BT AUTH * %s\n", PinCodes[BluetoothChannel->PinCodeIndex]);
+								}
+
+
+
+								AddMessageToTransmit(theSendMessage);
+
+								//AddMessageToTransmit("SET BT SSP 3 0\n");
+
+
+								/* send PAIR message */
+								sprintf( theSendMessage, "pair %s\n", BluetoothChannel->MACAddress);
+								AddMessageToTransmit(theSendMessage);
 							}
 
-							/* send PIN code message  */
-							if ( BluetoothChannel->Type == TABLET_TYPE )
-							{
-								sprintf( theSendMessage, "SET BT AUTH * 000000\n");
-							}
-							else
-							{
-								sprintf( theSendMessage, "SET BT AUTH * %s\n", PinCodes[BluetoothChannel->PinCodeIndex]);
-							}
-
-
-
-							AddMessageToTransmit(theSendMessage);
-
-							//AddMessageToTransmit("SET BT SSP 3 0\n");
-
-
-							/* send PAIR message */
-							sprintf( theSendMessage, "pair %s\n", BluetoothChannel->MACAddress);
-							AddMessageToTransmit(theSendMessage);
 						}
 						//else
 						//{
@@ -514,8 +611,11 @@ static void BluetoothMain( void *pvParameters )
 						countConnectedChannels += 1;
 
 						//InquiryGoing = 1;		// allow INQUIRY
-
-						xTimerStart( BluetoothTimer1, portMAX_DELAY );		// restart timer for next INQUIRY
+						if ( BluetoothChannel->Type !=  TABLET_TYPE )
+						{
+							xTimerStart( BluetoothTimer1, portMAX_DELAY );		// restart timer for next INQUIRY
+						}
+						//xTimerStop( BluetoothTimer1, portMAX_DELAY );		// stop the INQUIRY timer
 
 					}
 					else
@@ -535,7 +635,8 @@ static void BluetoothMain( void *pvParameters )
 
 							if ( BluetoothChannel->Type == TABLET_TYPE )
 							{
-								sprintf( theSendMessage, "SET BT AUTH * 000000\n");
+								//sprintf( theSendMessage, "SET BT AUTH * 000000\n");
+								sprintf( theSendMessage, "SET BT AUTH * 0000\n");
 							}
 							else
 							{
@@ -552,8 +653,10 @@ static void BluetoothMain( void *pvParameters )
 						}
 
 						//InquiryGoing = 1;		// allow INQUIRY
-
-						xTimerStart( BluetoothTimer1, portMAX_DELAY );		// restart timer for next INQUIRY
+						if ( BluetoothChannel->Type != TABLET_TYPE )
+						{
+							xTimerStart( BluetoothTimer1, portMAX_DELAY );		// restart timer for next INQUIRY
+						}
 					}
 #endif
 				}
@@ -634,6 +737,7 @@ static void BluetoothMain( void *pvParameters )
 				//AddMessageToTransmit(theSendMessage);
 
 				// RING 0 64:5a:04:86:01:c9 3 HFP
+				// RING 0 b0:ee:45:f4:47:06 1 RFCOMM
 				// 012345678901234567890123456789012345
 
 
@@ -660,7 +764,14 @@ static void BluetoothMain( void *pvParameters )
 
 
 						RfcommIsOpen = 1;
-						BluetoothChannel->RFCommChannel = theMessage[25];
+						BluetoothChannel->RFCommChannel = theMessage[5];
+
+
+						theDataLinkID = BluetoothChannel->RFCommChannel;
+						CommandDataMode = DATA_MODE ;
+
+						xTimerChangePeriod( BluetoothTimer2, 1 * pdMS_TO_TICKS(500), portMAX_DELAY );		// set 1/2 sec timer for data polling period
+						xTimerStart( BluetoothTimer2, portMAX_DELAY );		// start command/data timer
 
 	        			theIDMessage->header.StartCharacter = '#';
 	        			theIDMessage->header.MessageType = IDENTITY_MESSAGE_TYPE;	// simulate received message
@@ -672,6 +783,7 @@ static void BluetoothMain( void *pvParameters )
 
 	        			AddMessageToTransmit( (char *) theIDMessage);
 					}
+					else
 					if ( strncmp( &theMessage[27], "HFP", 6) == 0 )
 					{
 						RfcommIsOpen = 1;
@@ -921,8 +1033,6 @@ static void BluetoothMain( void *pvParameters )
 			}
 
 
-
-
 			else
 			if ( strncmp( theMessage, "SYNTAX ERROR", 12) == 0 )
 			{
@@ -933,6 +1043,8 @@ static void BluetoothMain( void *pvParameters )
 			if ( strncmp( theMessage, "£", 1) == 0 )		// received from computer - menu and settings download
 			{
 				MenuMessageFromHostComputer( &theMessage[1] );
+
+				xTimerStart( BluetoothTimer2, portMAX_DELAY );		// restart timer for next data message
 			}
 
 			else
@@ -942,6 +1054,8 @@ static void BluetoothMain( void *pvParameters )
 				{
 					vTaskDelay( pdMS_TO_TICKS( 5 ));
 				}
+
+				xTimerStart( BluetoothTimer2, portMAX_DELAY );		// restart timer for next data message
 			}
 
 			else
@@ -1018,7 +1132,7 @@ static void BluegigaOutput( void *pvParameters )
 
     	if ( ulTaskNotifyTake( pdTRUE, 0 ) != 0  )
     	{
-    		changeToCommmandMode( TRUE );
+    		SetCommandMode( );
 
     	}
 
@@ -1333,6 +1447,26 @@ BLUETOOTH_CHANNELS *FindChannelTableForTablet( char theType )
 	}
 
 	return( NULL );
+}
+
+
+/* Set Bluegiga into Command Mode using DTR signal */
+static void SetCommandMode()
+{
+	*GPIO2dataMasked = 0xEFFF0000 ;		/* high to low changes to data mode (I presume)*/
+
+	vTaskDelay( pdMS_TO_TICKS(10));
+
+	*GPIO2dataMasked = 0xEFFF1000 ;		/* low to high changes to command mode */
+
+}
+
+/* Set Bluegiga into Data Mode using DTR signal */
+static void SetDataMode()
+{
+	// may need to do a SET CONTROL COMMAND to configure but do we know the channel?
+	// certainly will need to transition so we can revert to command mode.
+	//*GPIO2dataMasked = 0xEFFF0000 ;		/* high to low changes to data mode (I presume)*/
 }
 
 

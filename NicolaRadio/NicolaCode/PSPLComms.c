@@ -195,128 +195,23 @@ void PSPLComms_Initialise()
 
     Status = XLlFifo_Status(&PSPLFifo);
 
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
 #if 0
 	/* PicoNo=0; %User=0, DSP=1, KP=2,TD=3 */
 
    	xil_printf("Send DSP\n\r");
    	LoadPicoFast(DSPPico, sizeof(DSPPico)/4, 1);
 
-<<<<<<< refs/remotes/origin/master
-<<<<<<< HEAD
-<<<<<<< refs/remotes/origin/master
-=======
-<<<<<<< HEAD
-    //xil_printf("Send Keypad\n\r");
-   	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
-=======
->>>>>>> WorkingVolumeControl
-=======
-<<<<<<< refs/remotes/origin/master
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
    	xil_printf("Send TD Pico\n\r");
    	LoadPicoFast(TDPico, sizeof(TDPico)/4, 3);
 
     xil_printf("Send Keypad\n\r");
    	LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
-<<<<<<< refs/remotes/origin/master
-<<<<<<< HEAD
-=======
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
-=======
-    //xil_printf("Send Keypad\n\r");
-   	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
-<<<<<<< refs/remotes/origin/master
-=======
->>>>>>> WorkingVolumeControl
->>>>>>> WorkingVolumeControl
-=======
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 
    	xil_printf("Send User Pico\n\r");
    	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
 
 
 #endif
-
-
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-=======
-=======
->>>>>>> Further refinements. Hopefully check in ok this time.
-=======
->>>>>>> Further refinements. Hopefully check in ok this time.
-=======
->>>>>>> Further refinements. Hopefully check in ok this time.
-#if 0
-	/* PicoNo=0; %User=0, DSP=1, KP=2,TD=3 */
-
-   	xil_printf("Send DSP\n\r");
-   	LoadPicoFast(DSPPico, sizeof(DSPPico)/4, 1);
-
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-    //xil_printf("Send Keypad\n\r");
-   	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
-=======
-=======
->>>>>>> Further refinements. Hopefully check in ok this time.
-   	xil_printf("Send TD Pico\n\r");
-   	LoadPicoFast(TDPico, sizeof(TDPico)/4, 3);
-
-    xil_printf("Send Keypad\n\r");
-   	LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
-<<<<<<< refs/remotes/origin/master
->>>>>>> Further refinements. Hopefully check in ok this time.
-=======
-    //xil_printf("Send Keypad\n\r");
-   	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
-=======
-<<<<<<< HEAD
-    //xil_printf("Send Keypad\n\r");
-   	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
-=======
-   	xil_printf("Send TD Pico\n\r");
-   	LoadPicoFast(TDPico, sizeof(TDPico)/4, 3);
-
-    xil_printf("Send Keypad\n\r");
-   	LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
->>>>>>> WorkingVolumeControl
->>>>>>> Further refinements. Hopefully check in ok this time.
-=======
-    //xil_printf("Send Keypad\n\r");
-   	//LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
-=======
->>>>>>> Further refinements. Hopefully check in ok this time.
-
-   	xil_printf("Send User Pico\n\r");
-   	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
-
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-=======
-=======
->>>>>>> Further refinements. Hopefully check in ok this time.
-=======
->>>>>>> Further refinements. Hopefully check in ok this time.
-
-#endif
-
->>>>>>> Further refinements. Hopefully check in ok this time.
-
-=======
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 
    	xil_printf("Send User Pico\n\r");
    	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);

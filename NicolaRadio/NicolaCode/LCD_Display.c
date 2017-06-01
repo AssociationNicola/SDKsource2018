@@ -86,7 +86,7 @@ extern QueueHandle_t	DebugControlQueue; 	/* in DebugInterface.c */
 #define KEY_DEBUG_MESSAGES
 
 
-/* temporary GPIO definitions */
+/*  GPIO definitions */
 
 #define GPIO0DIR  ((unsigned int *) 0xE000A204)
 #define GPIO0OEN  ((unsigned int *) 0xE000A208)
@@ -372,8 +372,8 @@ MAIN_MENU_ITEM	theMenu_5a;
 MAIN_MENU_ITEM	theMenu_5;
 MAIN_MENU_ITEM	theMenu_4;
 MAIN_MENU_ITEM	theMenu_3;
-MAIN_MENU_ITEM	theMenu_2;
-MAIN_MENU_ITEM	theMenu_1;
+//MAIN_MENU_ITEM	theMenu_2;
+//MAIN_MENU_ITEM	theMenu_1;
 
 
 
@@ -474,6 +474,7 @@ static void LED_Temp( void *pvParameters );
 static void KEYPAD_Temp( void *pvParameters );
 
 static void DisplaySubmenuItem( MAIN_MENU_ITEM *thisMenuItem );
+static void DisplayVolume() ;
 
 static void writeMenuToFlash();
 static int ReadMenuFromFlash( void );
@@ -539,28 +540,8 @@ static int BluetoothTimer = (30 * 1000) ;		// temp - set to 30 seconds
 #define RECEIVE_LEGACY			(100)
 #define RECEIVE_TONE_DETECT_OFF (101)
 #define RECEIVE_TONE_DETECT_ON	(102)
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-<<<<<<< HEAD
 
 
-=======
-
-
->>>>>>> WorkingVolumeControl
-=======
-
-
->>>>>>> Further refinements. Hopefully check in ok this time.
-=======
-
-
->>>>>>> Further refinements. Hopefully check in ok this time.
-=======
-
-
->>>>>>> Further refinements. Hopefully check in ok this time.
 static int TransmitReceiveStatus = NO_TRANSMIT ;
 static int ToneDetectStatus = RECEIVE_LEGACY ;
 
@@ -675,17 +656,23 @@ static void LED_Temp( void *pvParameters )
 	*GPIO2DIR = 0xFFFF;
 	*GPIO2OEN = 0xFFFF;
 
-	*GPIO2dataX = 0xF000;
+	//*GPIO2dataX = 0xF000;
 	
 
 	while (1)
 	{
 		//*GPIO2data = 0x1F00 ;
-		*GPIO2dataX = 0x1000 ;
-    	vTaskDelay( pdMS_TO_TICKS(500));
+		//*GPIO2dataX = 0x1000 ;			/* CTS signal for swapping data and control on Bluetooth */
 
-		*GPIO2dataX = 0x0 ;
-    	vTaskDelay( pdMS_TO_TICKS(500));
+		*GPIO2dataMasked = 0xEFFF1000 ;
+
+		vTaskDelay( pdMS_TO_TICKS(5000));
+
+		//*GPIO2dataX = 0x0 ;
+
+		*GPIO2dataMasked = 0xEFFF0000 ;
+
+    	vTaskDelay( pdMS_TO_TICKS(1000));
 
 
 	}
@@ -1035,7 +1022,7 @@ static void LCD_Main( void *pvParameters )
 
 	/* Start backlight timer */
 	if ( (LCDTimer1 = xTimerCreate( "T1",
-								30 * pdMS_TO_TICKS(1000),
+								10 * pdMS_TO_TICKS(1000),
 								pdFALSE,
 								(void *) 1,
 								LCDTimer1Callback) ) )
@@ -1197,27 +1184,9 @@ static void LCD_Main( void *pvParameters )
 					xTimerStart( LCDTimer1, portMAX_DELAY );	// and start the backlight timer
 				}
 			}
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-<<<<<<< HEAD
-
-<<<<<<< refs/remotes/origin/master
-			// Tone Detect Messages
-=======
-
-			else
-=======
-<<<<<<<
-
-=======
 
 			// Tone Detect Messages
 
-<<<<<<< refs/remotes/origin/master
->>>>>>>
-=======
 			else
 			if ( theMessage[0] == '+' )		/* Tone detect pico messages */
 			{
@@ -1239,163 +1208,6 @@ static void LCD_Main( void *pvParameters )
 
 			// Keyboard Messages
 
->>>>>>> Further refinements. Hopefully check in ok this time.
-			else
-<<<<<<<
->>>>>>> Further refinements. Hopefully check in ok this time.
-			if ( theMessage[0] == KEY_DOWNLEFT )		/* special to reduce volume */
-			{
-				SetMicrophoneVolume( DECREMENT_VOLUME ) ;
-
-				xil_printf( "VOLUME DOWN = %d\r\n", MicrophoneVolume );
-
-			}
-			else
-			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
-			{
-				SetMicrophoneVolume( INCREMENT_VOLUME ) ;
-
-				xil_printf( "VOLUME UP = %d\r\n", MicrophoneVolume );
-			}
-<<<<<<< refs/remotes/origin/master
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
-
-			else
-=======
-
-			else
-=======
->>>>>>> Further refinements. Hopefully check in ok this time.
-			if ( theMessage[0] == '+' )		/* Tone detect pico messages */
-			{
-				if ( theMessage[1] == '0' )		/* tone detect off */
-				{
-					xil_printf( "Implement Tone Detect off\n\r" );
-
-					DisplayAerialEarthing = TRUE;
-
-				}
-				else
-				if ( theMessage[1] == '1' )		/* tone detect on */
-				{
-					xil_printf( "Implement Tone Detect on\n\r" );
-
-					DisplayAerialEarthing = FALSE;
-				}
-			}
-
-			// Keyboard Messages
-<<<<<<< refs/remotes/origin/master
-
-=======
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
-			else
-=======
-<<<<<<<
-
-=======
-
-			// Tone Detect Messages
-
->>>>>>>
-			else
-<<<<<<<
->>>>>>> WorkingVolumeControl
-=======
-=======
->>>>>>> Further refinements. Hopefully check in ok this time.
-
-			else
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
-=======
-
-			else
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
-			if ( theMessage[0] == KEY_DOWNLEFT )		/* special to reduce volume */
-			{
-				SetMicrophoneVolume( DECREMENT_VOLUME ) ;
-
-				xil_printf( "VOLUME DOWN = %d\r\n", MicrophoneVolume );
-
-			}
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-<<<<<<< HEAD
-=======
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
-=======
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
-			else
-			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
-			{
-				SetMicrophoneVolume( INCREMENT_VOLUME ) ;
-
-				xil_printf( "VOLUME UP = %d\r\n", MicrophoneVolume );
-			}
-
-<<<<<<< refs/remotes/origin/master
-<<<<<<< refs/remotes/origin/master
-=======
->>>>>>> WorkingVolumeControl
-			else
-<<<<<<< refs/remotes/origin/master
-			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
-			{
-				SetMicrophoneVolume( INCREMENT_VOLUME ) ;
-
-				xil_printf( "VOLUME UP = %d\r\n", MicrophoneVolume );
-			}
-
-			else
-=======
-			if ( theMessage[0] == '+' )		/* Tone detect pico messages */
-			{
-				if ( theMessage[1] == '0' )		/* tone detect off */
-				{
-					xil_printf( "Implement Tone Detect off\n\r" );
-
-					DisplayAerialEarthing = TRUE;
-
-				}
-				else
-				if ( theMessage[1] == '1' )		/* tone detect on */
-				{
-					xil_printf( "Implement Tone Detect on\n\r" );
-
-					DisplayAerialEarthing = FALSE;
-				}
-			}
-
-			// Keyboard Messages
-
-<<<<<<< refs/remotes/origin/master
-			// Tone Detect Messages
-
-=======
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
-			else
-			if ( theMessage[0] == '+' )		/* Tone detect pico messages */
-			{
-				if ( theMessage[1] == '0' )		/* tone detect off */
-				{
-					xil_printf( "Implement Tone Detect off\n\r" );
-
-					DisplayAerialEarthing = TRUE;
-
-				}
-				else
-				if ( theMessage[1] == '1' )		/* tone detect on */
-				{
-					xil_printf( "Implement Tone Detect on\n\r" );
-
-					DisplayAerialEarthing = FALSE;
-				}
-			}
-
-			// Keyboard Messages
-
-=======
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 			else
 			if ( theMessage[0] == KEY_DOWNLEFT )		/* special to reduce volume */
 			{
@@ -1403,21 +1215,20 @@ static void LCD_Main( void *pvParameters )
 
 				xil_printf( "VOLUME DOWN = %d\r\n", MicrophoneVolume );
 
+				DisplayVolume();
+
 			}
-=======
->>>>>>> Volume control by LEFT+DOWN and RIGHT+DOWN
 			else
 			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
 			{
 				SetMicrophoneVolume( INCREMENT_VOLUME ) ;
 
 				xil_printf( "VOLUME UP = %d\r\n", MicrophoneVolume );
+
+				DisplayVolume();
 			}
 
 			else
-=======
->>>>>>> Further refinements. Hopefully check in ok this time.
->>>>>>>
 			if ( ( CurrentMenuPosition == TOP_LEVEL ) && ( theMessage[0] != KEY_UPLEFT ) && ( theMessage[0] != KEY_LEFTRIGHT ) )
 			{
 
@@ -1644,7 +1455,6 @@ static void LCD_Main( void *pvParameters )
 						if ( ( thisMenuItem != NULL ) && ( thisMenuItem->SubMenuClass == SUB_MENU_SCROLL_TEXT) )
 						{
 							xTimerStop( LCDTimer2, portMAX_DELAY );		// stop the scrolling timer
-							xTimerStart( LCDTimer1, portMAX_DELAY );	// and start the backlight timer
 						}
 
 
@@ -1659,6 +1469,7 @@ static void LCD_Main( void *pvParameters )
 
 
 						LCD_BackLight( SEND_LCD_BACKLIGHT_ON );		/* light the LCD */
+						xTimerStart( LCDTimer1, portMAX_DELAY );	// and start the backlight timer
 
 						LCD_Clear();
 						LCD_Home();
@@ -1862,7 +1673,10 @@ static void LCD_Main( void *pvParameters )
 									thisMenuItem->currentSubMenu = subMenuItem ;
 								}
 
-								LCD_Write_String( SECOND_LINE, 0, subMenuItem->subMenuHeading );
+								if ( subMenuItem->subMenuHeading != NULL )
+								{
+									LCD_Write_String( SECOND_LINE, 0, subMenuItem->subMenuHeading );
+								}
 							}
 							else
 							if ( thisMenuItem->SubMenuClass == SUB_MENU_SCROLL_TEXT )
@@ -2260,6 +2074,49 @@ static void DisplaySubmenuItem( MAIN_MENU_ITEM *thisMenuItem )
 }
 
 
+static void DisplayVolume()
+{
+	char VolMsg[16];
+	int Vol;
+	int i = 3 ;
+
+	memset( VolMsg, ' ', sizeof(VolMsg)) ;
+
+	VolMsg[0] = 'V' ;
+	VolMsg[1] = 'o' ;
+	VolMsg[2] = 'l' ;
+
+
+	if ( ( Vol = MicrophoneVolume ) == 0 )
+	{
+		VolMsg[4] = '0' ;
+		VolMsg[5] = 0 ;
+	}
+	else
+	{
+		while( Vol && (i>0) )
+		{
+			VolMsg[i+4] = (Vol%10) + '0' ;
+			i -= 1 ;
+			Vol /= 10 ;
+		}
+	}
+
+	LCD_BackLight( SEND_LCD_BACKLIGHT_ON );		/* light the LCD */
+	//xTimerStart( LCDTimer1, portMAX_DELAY );	// and start the backlight timer
+
+	LCD_Write_String( SECOND_LINE, 0, VolMsg);
+
+	if ( xTimerStart( LCDTimer1, portMAX_DELAY ) == pdPASS )	// and start the backlight timer
+	{
+		xil_printf( "BG Timer OK \r\n");
+	}
+	else
+	{
+		xil_printf( "BG Timer Failed \r\n");
+	}
+}
+
 static MAIN_MENU_ITEM *FindMainMenuItem( int MainMenuType )
 {
 	MAIN_MENU_ITEM	*theItem = firstMenuItem ;
@@ -2638,7 +2495,7 @@ void MenuMessageFromHostComputer( char *theMessage )
 		// try to download from a PC over it! This is because the test menu
 		// system is not allocated from the pool.
 
-		if ( firstMenuItem && (firstMenuItem != &theMenu_1) )
+		if ( firstMenuItem && (firstMenuItem != &theMenu_3) )
 		{
 
 			mainMenuItem = firstMenuItem ;
@@ -3220,7 +3077,7 @@ static int ReadMenuFromFlash( void )
 			vTaskDelay( pdMS_TO_TICKS( 5 ));
 		}
 
-		firstMenuItem = &theMenu_1;
+		firstMenuItem = &theMenu_3;
 
 		//ApplyDefaultSettings();
 
@@ -3253,12 +3110,12 @@ static int ReadMenuFromFlash( void )
 	if ( ( pageInFlash[0] == 0xFF ))	/* is there a menu on the CD card ? */
 	{
 
-		firstMenuItem = &theMenu_1;
+		firstMenuItem = &theMenu_3;
 
 #if 0
 		/* test phase - report then write the test menu to flash */
 
-		firstMenuItem = &theMenu_1 ;
+		firstMenuItem = &theMenu_3 ;
 		writeMenuToFlash();
 
 #endif
@@ -3267,7 +3124,7 @@ static int ReadMenuFromFlash( void )
 
 		/* now write the menu test harness */
 
-		mainMenuItem = &theMenu_1 ;
+		mainMenuItem = &theMenu_3 ;
 
 		pageData = &pageInFlash[4] ;
 		pageInFlash[0] = pageInFlash[1] = pageInFlash[2] = pageInFlash[3] = 0;
@@ -3491,7 +3348,7 @@ static int ReadMenuFromFlash( void )
 
 				if ( flashOffset > 0x10000 )
 				{
-					firstMenuItem = &theMenu_1;
+					firstMenuItem = &theMenu_3;
 					return pdFAIL;
 				}
 			}
