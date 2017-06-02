@@ -221,11 +221,14 @@ extern u32 QspiFlashSize;
 /*-----------------------------------------------------------*/
 /*-----------------------------------------------------------*/
 
-						   // 01234567890123456
-static char *VersionString = "00.01d Jun  1 17";
+
+						// 6 chars for version no; rest for date
+						//   01234567890123456
+char *VersionStringStart = 	"0.1dev dd mmm yy";
+char VersionString[18];
 
 							// 012345678901
-char *thisDate = __DATE__ ;	// Jun  1 2017
+char *thisDate = __DATE__ ;	// mmm dd yyyy
 char *thisTime = __TIME__ ;
 
 
@@ -370,40 +373,13 @@ int main( void )
 
 	prvSetupHardware();
 
-#if 0
-
-    print("Hello World\n\r");
-
-	for ( i=0; i<500000; i++);
-
-	uart_SendByte(STDOUT_BASEADDRESS, 'A' );
-
-	for ( i=0; i<500000; i++);
-
-#endif
-
-	//main_Hello();
+	memcpy( VersionString, VersionStringStart, 18 ) ;
 
 	thisNicolaSettings.thisNicolaID = 0;
 	strcpy( thisNicolaSettings.thisNicolaName, "NICOLADEFAULT");
 	strcpy( thisNicolaSettings.thisNicolaLocation, "NOT CHANGED");
 
-	thisNicolaSettings.microphoneVolume = 1 ;		// 4 is HIGH; 1 is 1/4
-
-#if 0
-	while ( 1 )
-	{
-	for ( i=0; i<5000000; i++);
-
-	uart_SendByte(STDOUT_BASEADDRESS, 'A' + ctr++ );
-
-	for ( i=0; i<5000000; i++);
-
-	if ( ctr == 20 ) ctr = 0;
-	}
-#endif
-
-
+	thisNicolaSettings.microphoneVolume = 50 ;		//
 
 	ConsoleStartup();			/* serial port interface */
 
@@ -424,7 +400,9 @@ int main( void )
 	//uart_SendByte(STDOUT_BASEADDRESS, '4' );
 
 
-	// Disable for debug BluetoothStartup();			// to Bluetooth devices of all kinds
+	// Disable for debug
+
+	BluetoothStartup();			// to Bluetooth devices of all kinds
 
 	//uart_SendByte(STDOUT_BASEADDRESS, '5' );
 
@@ -826,8 +804,8 @@ void tempFSBLCode()
 
 char *GetVersionString()
 {
-
-	memcpy( &VersionString[7], thisDate, 6 );
+	memcpy( &VersionString[7], &thisDate[4], 3 );
+	memcpy( &VersionString[10], thisDate, 4 );
 	memcpy( &VersionString[14], &thisDate[9], 2 );
 
 	return VersionString ;
