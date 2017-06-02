@@ -165,7 +165,8 @@ typedef enum
 	MENU_ITEM_TYPE_BLUETOOTH_PAIRING,		/* F  5 */
 	MENU_ITEM_TYPE_PRESET_TEXT_MSGS,		/* G  6 */
 	MENU_ITEM_TYPE_RECVD_TEXT_MSGS,			/* H  7 */
-	MENU_ITEM_TYPE_DEBUGGING,				/* G  8 */
+	MENU_ITEM_TYPE_DEBUGGING,				/* I  8 */
+	MENU_ITEM_TYPE_VERSION_NUMBER,			/* J  9 */
 
 	MENU_ITEM_TYPE_TURN_OFF = 'Z'
 
@@ -227,7 +228,7 @@ typedef struct main_menu_item_struct
 extern void SetMicrophoneVolume(int  );
 
 int 	MicrophoneVolume = DEFAULT_VOLUME ;
-
+int		DisplayVolumeCounter = 0 ;
 
 #ifdef TEST_DEFAULT_MENU
 
@@ -354,6 +355,9 @@ SUB_MENU_ITEM	debugOff =
 		{ &debugOn, NULL, 1, "OFF" };
 
 
+SUB_MENU_ITEM VersionNumberSubMenu =
+		{ NULL, NULL, 0, "1234567890123456" } ;
+
 SUB_MENU_ITEM	turnRadioOffSetting;
 SUB_MENU_ITEM	turnRadioOffSetting1;
 
@@ -364,6 +368,7 @@ SUB_MENU_ITEM	turnRadioOffSetting1 =
 		{ NULL, &turnRadioOffSetting, 1, "TURN OFF" };
 
 MAIN_MENU_ITEM	theMenu_99;
+MAIN_MENU_ITEM	theMenu_9;
 MAIN_MENU_ITEM	theMenu_8;
 MAIN_MENU_ITEM	theMenu_7a;
 MAIN_MENU_ITEM	theMenu_7;
@@ -385,8 +390,11 @@ MAIN_MENU_ITEM	theMenu_99 =
 { NULL, &theMenu_8, "TURN RADIO OFF", 		(void *) &turnRadioOffSetting, 	EffectTurnRadioOff, SUB_MENU_TEXT, MENU_ITEM_TYPE_TURN_OFF,	  	0, 	0, 0, 0 };
 
 
+MAIN_MENU_ITEM	theMenu_9 =
+{ &theMenu_99, &theMenu_8, "VERSION No.", 	(void *) &VersionNumberSubMenu,		NULL, SUB_MENU_TEXT, MENU_ITEM_TYPE_VERSION_NUMBER,	  	0, 	0, 0, 0 };
+
 MAIN_MENU_ITEM	theMenu_8 =
-{ &theMenu_99, &theMenu_7a, "DEBUGGING", 	(void *) &debugOff, 			SetDebuggingState, SUB_MENU_TEXT, MENU_ITEM_TYPE_DEBUGGING,	  	0, 	0, 0, 0 };
+{ &theMenu_99, &theMenu_9, "DEBUGGING", 	(void *) &debugOff, 			SetDebuggingState, SUB_MENU_TEXT, MENU_ITEM_TYPE_DEBUGGING,	  	0, 	0, 0, 0 };
 
 
 MAIN_MENU_ITEM	theMenu_7a =
@@ -1016,13 +1024,15 @@ static void LCD_Main( void *pvParameters )
 
 	LCD_Write_String( SECOND_LINE, 0, GetVersionString());
 
+	memcpy( VersionNumberSubMenu.subMenuHeading, GetVersionString(), 16 ) ;
+
 	//xil_printf( "Second line %s\r\n", GetVersionString() );
 
 
 
 	/* Start backlight timer */
 	if ( (LCDTimer1 = xTimerCreate( "T1",
-								10 * pdMS_TO_TICKS(1000),
+								30 * pdMS_TO_TICKS(1000),
 								pdFALSE,
 								(void *) 1,
 								LCDTimer1Callback) ) )
@@ -1089,6 +1099,10 @@ static void LCD_Main( void *pvParameters )
 
 			if ( theMessage[0] == KEY_TIMEOUT1 )		/* if turn off backlight	*/
 			{
+
+				LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName);			// Nicola3Name);
+				LCD_Write_String( SECOND_LINE, 0, GetVersionString());
+
 				LCD_BackLight( SEND_LCD_BACKLIGHT_OFF );		/* extinguish the LCD */
 				CurrentMenuPosition = TOP_LEVEL;
 				CurrentSubMenuPosition = TOP_LEVEL;
@@ -1244,25 +1258,32 @@ static void LCD_Main( void *pvParameters )
 					 *
 					 * 									*/
 
-					earthingValue = hexToInt( &theMessage[1] );
-
-					xil_printf( "Earthing = %d\r\n", earthingValue );
-
-					if ( earthingValue < 50 ) blockCharacter = 'x' ;		//0xAA;
-					else
-					if ( earthingValue < 80 ) blockCharacter = 'X' ;		// 0xD0;
-					else blockCharacter = 0xFF;
-
-					LCD_SecondLine( 0 ) ;
-
-					for ( i=0; i< (int) earthingValue/8; i++ )
+					if ( DisplayVolumeCounter >  0 )
 					{
-						LCD_Write_Char( blockCharacter ) ;
+						DisplayVolumeCounter -= 1 ;
 					}
-
-					for ( ; i<16; i++ )
+					else
 					{
-						LCD_Write_Char( ' ' ) ;
+						earthingValue = hexToInt( &theMessage[1] );
+
+						xil_printf( "Earthing = %d\r\n", earthingValue );
+
+						if ( earthingValue < 50 ) blockCharacter = 'x' ;		//0xAA;
+						else
+						if ( earthingValue < 80 ) blockCharacter = 'X' ;		// 0xD0;
+						else blockCharacter = 0xFF;
+
+						LCD_SecondLine( 0 ) ;
+
+						for ( i=0; i< (int) earthingValue/8; i++ )
+						{
+							LCD_Write_Char( blockCharacter ) ;
+						}
+
+						for ( ; i<16; i++ )
+						{
+							LCD_Write_Char( ' ' ) ;
+						}
 					}
 
 				}
@@ -1412,8 +1433,6 @@ static void LCD_Main( void *pvParameters )
     		else
     		// no PTT and key received - manage menu system
     		{
-
-    			xTimerReset( LCDTimer1, portMAX_DELAY );		/* reset the turn backlight off timer		*/
 
 				if ( theMessage[0] == KEY_LEFTRIGHT )
 				{
@@ -2106,6 +2125,8 @@ static void DisplayVolume()
 	//xTimerStart( LCDTimer1, portMAX_DELAY );	// and start the backlight timer
 
 	LCD_Write_String( SECOND_LINE, 0, VolMsg);
+
+	DisplayVolumeCounter = 3 ;
 
 	if ( xTimerStart( LCDTimer1, portMAX_DELAY ) == pdPASS )	// and start the backlight timer
 	{

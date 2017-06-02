@@ -221,8 +221,13 @@ extern u32 QspiFlashSize;
 /*-----------------------------------------------------------*/
 /*-----------------------------------------------------------*/
 
+						   // 01234567890123456
+static char *VersionString = "00.01d Jun  1 17";
 
-static char *VersionString = "Version 0.1dev";
+							// 012345678901
+char *thisDate = __DATE__ ;	// Jun  1 2017
+char *thisTime = __TIME__ ;
+
 
 /*-----------------------------------------------------------*/
 /*-----------------------------------------------------------*/
@@ -821,6 +826,10 @@ void tempFSBLCode()
 
 char *GetVersionString()
 {
+
+	memcpy( &VersionString[7], thisDate, 6 );
+	memcpy( &VersionString[14], &thisDate[9], 2 );
+
 	return VersionString ;
 }
 

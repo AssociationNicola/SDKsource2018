@@ -213,9 +213,6 @@ void PSPLComms_Initialise()
 
 #endif
 
-   	xil_printf("Send User Pico\n\r");
-   	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
-
 
     PLTransmitQueue = xQueueCreate( 4,					// max item count
 									4 ) ;				// size of each item (max) ) ;
