@@ -50,6 +50,10 @@
 #include "NicolaTypes.h"
 
 
+// comment out next lines to hide I/O messages to/from User Pico
+
+//#define RECEIVE_MESSAGE_DEBUG
+//#define SEND_MESSAGE_DEBUG
 
 
 /************************** Constant Definitions *****************************/
@@ -70,7 +74,7 @@
 /* Initial AudioVolume was 133, but 12 is minimum volume
  *Changed April 2017 as speaker/amp is overloaded
  */
-#define AudioVolume  133
+
 /* This sets the radio state, lowest bits are the frequency. 1 is Heyphone */
 #define RadioState 1
 
@@ -142,7 +146,7 @@ u32 KeypadPico[] = {
 };
 #endif
 
-#if 1
+#if 0
 u32 UserPico[] = {
 #include "../../../PicoSource/UserPico.c"
 };
@@ -166,13 +170,6 @@ void PSPLComms_Initialise()
 
     Status=n3z_tonetest_Initialize(ToneTestInstancePtr, XPAR_N3Z_TONETEST_0_DEVICE_ID);
 
-    /*Set Audio volume to valid level
-       *
-       */
-    n3z_tonetest_audiovolume_write(ToneTestInstancePtr, AudioVolume);
-
-    /*Set radio config*/
-    n3z_tonetest_n3zconfig_write(ToneTestInstancePtr, RadioState);
 
 
     ConfigData=XLlFfio_LookupConfig(DataFIFO_DEV_ID);
@@ -215,7 +212,7 @@ void PSPLComms_Initialise()
 
 
     PLTransmitQueue = xQueueCreate( 4,					// max item count
-									4 ) ;				// size of each item (max) ) ;
+									16 ) ;				// size of each item (max) ) ;
 
     TextMessageTransmitQueue = xQueueCreate( 2,			// max item count
 											 270 ) ;	// size of each item (max) ) ;
@@ -263,6 +260,7 @@ void intToHexChars( u32 value, char *s )
 	else *s = 'A' + ( second - 10 );
 }
 
+
 static void PL_Receiver( void *pvParameters )
 {
 	char	KeyMessage[4];
@@ -283,7 +281,7 @@ static void PL_Receiver( void *pvParameters )
 			}
     	}
     	else
-		if ( Buffer[0] == '+' )		// indicates key sent
+		if ( Buffer[0] == '+' )		// message from Tone Pico
 		{
 			KeyMessage[0] = Buffer[0] & 0xFF;
 			KeyMessage[1] = Buffer[1] & 0xFF;
@@ -295,8 +293,7 @@ static void PL_Receiver( void *pvParameters )
 			}
 		}
 
-
-#if 1
+#ifdef RECEIVE_MESSAGE_DEBUG
     	if ( Buffer[0] == '&' )		// indicates key sent
     	{
 			switch ( Buffer[1] )		// check the received key
@@ -456,10 +453,22 @@ static void PL_Receiver( void *pvParameters )
 				xil_printf( "31kHz frequency\n\r" );
 				break;
 
+			case KEY_USER_WDOG_REPLY:			//	's'
+#ifdef RECEIVE_MESSAGE_DEBUG
+				xil_printf( "User Watchdog Reply\n\r" );
+#endif
+				break;
+
+			case KEY_KEYP_WDOG_REPLY:			//	't'
+#ifdef RECEIVE_MESSAGE_DEBUG
+				xil_printf( "Keypad Watchdog Reply\n\r" );
+#endif
+				break;
+
 
 			default:
 				{
-					xil_printf( "default not known %x\n\r", Buffer[1] );
+					//xil_printf( "default not known %x\n\r", Buffer[1] );
 	#ifdef BT_DEBUG
 					{
 						char *msg = "     =    default not known\r\n" ;
@@ -488,31 +497,36 @@ static void PL_Receiver( void *pvParameters )
 			switch ( Buffer[1] )		// check the received msg
 			{
 				case '0':
-					xil_printf( "TONE DETECT OFF\n\r" );
+					xil_printf( "SPEAKER DETECT OFF\n\r" );
 					break;
 
 				case '1':
-					xil_printf( "TONE DETECT ON\n\r" );
+					xil_printf( "SPEAKER DETECT ON\n\r" );
+					break;
+
+				case '2':
+					xil_printf( "SPEAKER DETECT DISABLED\n\r" );
 					break;
 			}
 
     	}
-
+    	else
+        if ( Buffer[0] == '?' )		// message from Tone Detect Pico
+    	{
+        	xil_printf( "\r\n\nUser reports unknown\r\n\n") ;
+    	}
 
 #endif
     }
 }
 
 
-
-
 static void PL_Transmitter( void *pvParameters )
 {
 	int		i;
 	char	PLMessage[4];
-	int		theMessage[4];
+	u32		theMessage[4];
 	int		txCharacterCount ;
-
 
 	theMessage[0] = '!' ;
 	theMessage[1] = '\r' ;
@@ -523,6 +537,10 @@ static void PL_Transmitter( void *pvParameters )
 	{
 		if ( xQueueReceive( PLTransmitQueue, &PLMessage, portMAX_DELAY ) == pdPASS )
 		{
+#ifdef SEND_MESSAGE_DEBUG
+			xil_printf( "SEND %X %X %X %X\r\n", PLMessage[0], PLMessage[1], PLMessage[2], PLMessage[3] ) ;
+#endif
+
 			//if ( PLMessage[0] == '*' )
 			{
 				txCharacterCount = 4;
@@ -540,28 +558,6 @@ static void PL_Transmitter( void *pvParameters )
 	}
 }
 
-s32 xsleep(u32 seconds)
-{
-#if 0
-  XTime tEnd, tCur;
-
-  XTime_GetTime(&tCur);
-  tEnd  = tCur + (((XTime) seconds) * 1);
-  do
-  {
-    XTime_GetTime(&tCur);
-  } while (tCur < tEnd);
-#endif
-
-  int i, j;
-
-  //for ( i=0; i<200000; i++) {  for ( j=0; j<20; j++ ) ; }
-  for ( i=0; i<100000; i++) {  for ( j=0; j<20; j++ ) ; }
-  // this fails = for ( i=0; i<75000; i++) {  for ( j=0; j<20; j++ ) ; }
-  // this fails = for ( i=0; i<50000; i++) {  for ( j=0; j<20; j++ ) ; }
-
-  return 0;
-}
 
 
 void LoadPicoFast( u32* LoadArray, u32 numberOfInstructions, u32 PicoType )
@@ -612,14 +608,12 @@ void LoadPicoFast( u32* LoadArray, u32 numberOfInstructions, u32 PicoType )
 }
 
 
-
 int ReadResponse()
 {
 	int frame_len;
 	int i;
 
  	while (XLlFifo_RxOccupancy(&PSPLFifo) == 0) {
- 		//xsleep( 5 );
 
  		vTaskDelay( pdMS_TO_TICKS( 5 ));
  	}
@@ -630,7 +624,7 @@ int ReadResponse()
 
 
 
-#if 1
+#ifdef RECEIVE_MESSAGE_DEBUG
 	for ( i=0; i<frame_len/4; i+=1)	// * Buffer is a u32 !
 	{
 		//if ( Buffer[i] > 0x20 )
@@ -671,10 +665,8 @@ int TxSend(XLlFifo *InstancePtr, u32  *SourceAddr, int no_word)
 {
 
 	int i;
-	//int j;
-
-	//xil_printf(" Transmitting Data \r\n", );
-
+	int errorCount = 0;
+	char	KeyMessage[2] ;
 
 	/* Filling the buffer with data */
 	for (i=0;i<no_word;i++)
@@ -685,17 +677,25 @@ int TxSend(XLlFifo *InstancePtr, u32  *SourceAddr, int no_word)
 
 			XLlFifo_TxPutWord(InstancePtr,
 						      *(SourceAddr+i));
-
-			//xil_printf( "%C", *(SourceAddr+i));
 	}
 
-	//xil_printf( "\r\n" );
 	/* Start Transmission by writing transmission length into the TLR */
 	XLlFifo_iTxSetLen(InstancePtr, (no_word * WORD_SIZE));
 
 	/* Check for Transmission completion */
 	while( !(XLlFifo_IsTxDone(InstancePtr)) ){
+		if (errorCount++ == 4 )
+		{
+			KeyMessage[0] = KEY_FIFO_FAIL;
+			KeyMessage[1] = 0;
 
+			while ( xQueueSendToBack( KeysReceivedQueue, KeyMessage, 0 ) != pdPASS )
+			{
+				vTaskDelay( pdMS_TO_TICKS( 5 ));
+			}
+			xil_printf( "try send to user again\r\n");
+		}
+		vTaskDelay( pdMS_TO_TICKS( 500 ));
 	}
 
 	/* Transmission Complete */
@@ -726,14 +726,6 @@ int RxReceive (XLlFifo *InstancePtr, u32* DestinationAddr)
 	int Status;
 	u32 RxWord;
 	static u32 ReceiveLength;
-	//u32 numberofsamples;
-
-	//do {
-	//numberofsamples=XLlFifo_RxOccupancy(&DataFifo);
-	//print("Hello Data World\n\r");
-	//printf("Receive Data Occupancy is %d\r\n",numberofsamples);
-	//} while ( numberofsamples == 0);
-
 
 	//xil_printf(" Receiving data ....\n\r");
 	/* Read Recieve Length */

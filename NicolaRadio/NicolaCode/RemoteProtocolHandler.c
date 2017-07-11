@@ -103,6 +103,14 @@ static void HandleRemoteNicolaMessage( void *pvParameters )
 	int				characterCount;
 	int				i;
 
+	// turn off for now!
+
+	while ( 1 )
+	{
+    	vTaskDelay( 100 * pdMS_TO_TICKS(1000));
+
+	}
+
 
 	/* declare message reply timeout */
 	if ( (TXTMSGTimer1 = xTimerCreate( "XT1",

@@ -14,6 +14,7 @@
 *****************************************************************************/
 
 
+
 /* Standard includes. */
 #include <stdio.h>
 #include <limits.h>
@@ -43,11 +44,11 @@
 
 /* global references for other source modules */
 
-QueueHandle_t	PLSendQueue ;			// queue of message to be sent to PL
-//QueueHandle_t	PLSendQueue ;			// queue of message to be sent to PL
-
-
 extern QueueHandle_t	consoleTransmitQueue ;			// in ConsoleManager.c
+extern QueueHandle_t	PLTransmitQueue ;				// in PSPLComms.c
+
+extern int 	MicrophoneVolume ;
+
 
 void SetMicrophoneVolume(int selected );
 void SetAerialType(int selected );
@@ -57,16 +58,23 @@ void SendPresetMessage(int selected);
 
 n3z_tonetest* InstancePtr = NULL;
 
-static void Radio_Main( void *pvParameters );
+//static void Radio_Main( void *pvParameters );
 
 
 void RadioInterfaceInit( )
 {
 
-	InstancePtr = (n3z_tonetest *)malloc(sizeof (n3z_tonetest));
+	//InstancePtr = (n3z_tonetest *)malloc(sizeof (n3z_tonetest));
+	if ( ( InstancePtr = (n3z_tonetest *) pvPortMalloc( sizeof(n3z_tonetest)) ) == NULL )
+	{
+		xil_printf( "FAILED TO ALLOCATE MEM RadioInterface\r\n" );
+	}
 
     n3z_tonetest_Initialize(InstancePtr, XPAR_N3Z_TONETEST_0_DEVICE_ID);
 
+
+
+#if 0
 	PLSendQueue = xQueueCreate( 8,					// max item count
 								4 ) ;					// size of each item (max) ) ;
 
@@ -79,10 +87,11 @@ void RadioInterfaceInit( )
 				NULL, 								/* The parameter passed to the task - not used in this case. */
 				tskIDLE_PRIORITY + 2, 				/* The priority assigned to the task. Small number low priority */
 				NULL );								/* The task handle is not required, so NULL is passed. */
-
+#endif
 
 }
 
+#if 0
 static void Radio_Main( void *pvParameters )
 {
 	char theMessage;
@@ -95,15 +104,20 @@ static void Radio_Main( void *pvParameters )
     	//vTaskDelay( pdMS_TO_TICKS( 1000 ));
     }
 }
-
+#endif
 
 /* this section provides the routines to effect setting changes made by the user	*/
-/* through the menu system															*/
+/* through the menu system
+ * 													*/
+
+void SetMicrophoneVolumeAbs( int volumeValue )
+{
+	MicrophoneVolume = volumeValue;
+	xil_printf( "Mic Volume set to %d\r\n", volumeValue );
+}
 
 void SetMicrophoneVolume(int changeValue )
 {
-	extern int 	MicrophoneVolume ;
-
 	if ( changeValue > 0 )
 	{
 		if ( MicrophoneVolume == MIN_VOLUME )
@@ -140,34 +154,76 @@ void SetMicrophoneVolume(int changeValue )
 
 void SetAerialType(int selected )
 {
-	while ( xQueueSendToBack( consoleTransmitQueue, "Set aerial type\n", 0 ) != pdPASS )
+
+	//while ( xQueueSendToBack( consoleTransmitQueue, "Set aerial type\n", 0 ) != pdPASS )
+	//{
+	//	vTaskDelay( pdMS_TO_TICKS( 5 ));
+	//}
+}
+
+// The N3Z config bits:
+// 0:2		N3Z frequency (1=Heyphone; 2=N2; 3=31kHz ...)
+// 3		If 1 force ARM_ADC channel to 1 (ie not 0) which is the one used by the microphone or loop aerial (note this is heavy handed as the user pico normally controlls this)
+// 4		Switch to text mode (currently doesn't go anywhere)
+// 5,6		Beacon Select  (currently doesn't go anywhere) - for location beacon modes
+// 7		Turn tone detect off - 1 = tone off; 0 = tone on
+
+
+void SetToneDetect(int selected )
+{
+
+	if ( selected == 0 )
 	{
-		vTaskDelay( pdMS_TO_TICKS( 5 ));
+		thisNicolaSettings.toneDetectSelected = 0x80;
+
+		xil_printf( "Tone detect off\r\n");
 	}
+	else
+	{
+		thisNicolaSettings.toneDetectSelected = 0x00;
+
+		xil_printf( "Tone detect on\r\n");
+	}
+
+	n3z_tonetest_n3zconfig_write(InstancePtr,thisNicolaSettings.toneDetectSelected | thisNicolaSettings.aerialFrequency ) ;
+
 }
 
 void SetAerialFrequency(int selected )
 {
-	while ( xQueueSendToBack( consoleTransmitQueue, "Set aerial frequency\n", 0 ) != pdPASS )
-	{
-		vTaskDelay( pdMS_TO_TICKS( 5 ));
-	}
+	thisNicolaSettings.aerialFrequency = selected ;
+
+	xil_printf( "Frequency set to %x\r\n", thisNicolaSettings.aerialFrequency);
+
+	n3z_tonetest_n3zconfig_write(InstancePtr, thisNicolaSettings.toneDetectSelected | thisNicolaSettings.aerialFrequency ) ;
+
 }
 
 
 void SendPresetMessage(int selected)
 {
-	while ( xQueueSendToBack( consoleTransmitQueue, "Set preset text message\n", 0 ) != pdPASS )
-	{
-		vTaskDelay( pdMS_TO_TICKS( 5 ));
-	}
 
-	while ( xQueueSendToBack( consoleTransmitQueue, (char *) selected, 0 ) != pdPASS )
-	{
-		vTaskDelay( pdMS_TO_TICKS( 5 ));
-	}
-
+	xil_printf( "Set preset text message\r\n" ) ;
 
 }
+
+
+
+void SendWatchdogMessage( void )
+{
+	char	PLMessage[4] ;
+
+	PLMessage[0] = '*' ;
+	PLMessage[1] = SEND_WATCHDOG ;
+	PLMessage[2]  = (u32) '\r' ;		// c/r
+	PLMessage[3]  = (u32) '\n' ;		// load  pico
+
+	while ( xQueueSendToBack( PLTransmitQueue, PLMessage, 0 ) != pdPASS )
+	{
+			vTaskDelay( pdMS_TO_TICKS( 5 ));
+	}
+}
+
+
 
 

@@ -380,6 +380,12 @@ int main( void )
 	strcpy( thisNicolaSettings.thisNicolaLocation, "NOT CHANGED");
 
 	thisNicolaSettings.microphoneVolume = 50 ;		//
+	thisNicolaSettings.aerialType = 0 ;				// earthed
+	thisNicolaSettings.aerialFrequency = 1 ;		// HEYPhone
+	thisNicolaSettings.toneDetectSelected = 1 ;		// tone detect on
+	thisNicolaSettings.confidenceBeepTime = 0 ;		// no confidence beep
+
+
 
 	ConsoleStartup();			/* serial port interface */
 
@@ -391,6 +397,8 @@ int main( void )
 	//FlashDump();
 
 	//FlashInit();				/* after console start for debug messages */
+
+	CDCardInit() ;
 
 	//uart_SendByte(STDOUT_BASEADDRESS, '3' );
 
@@ -411,7 +419,7 @@ int main( void )
 
 	//uart_SendByte(STDOUT_BASEADDRESS, '6' );
 
-	DebugingGraham_Startup();		// start the streaming debug interface
+	//DebugingGraham_Startup();		// start the streaming debug interface
 
 	RadioInterfaceInit();		// start the PL to PS comms here
 

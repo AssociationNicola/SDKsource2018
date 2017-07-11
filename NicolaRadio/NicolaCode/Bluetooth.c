@@ -64,7 +64,7 @@ extern QueueHandle_t	KeysReceivedQueue ;					/* in LCD_Display.c */
 #define HSP_AG_TYPE		2
 #define TABLET_TYPE		3
 #define COMPUTER_TYPE	4
-
+#define IGNORE_TYPE     9
 
 typedef struct
 {
@@ -507,7 +507,8 @@ static void BluetoothMain( void *pvParameters )
 						{
 
 
-							//if ( BluetoothChannel->Type != TABLET_TYPE )
+							if ( ( BluetoothChannel->Type != TABLET_TYPE ) &&
+								 ( BluetoothChannel->Type != IGNORE_TYPE ) )
 							{
 								//sprintf( theSendMessage, "SET BT PAIR %s 3b41ca4f42401ca64ab3ca3303d8ccdc\n", BluetoothChannel->MACAddress);
 								//AddMessageToTransmit(theSendMessage);
@@ -516,8 +517,8 @@ static void BluetoothMain( void *pvParameters )
 								/* send PIN code message  */
 								if ( BluetoothChannel->Type == TABLET_TYPE )
 								{
-									//sprintf( theSendMessage, "SET BT AUTH * 000000\n");
-									sprintf( theSendMessage, "SET BT AUTH * 0000\n");
+									sprintf( theSendMessage, "SET BT AUTH * 000000\n");
+									//sprintf( theSendMessage, "SET BT AUTH * 0000\n");
 								}
 								else
 								{
@@ -536,6 +537,9 @@ static void BluetoothMain( void *pvParameters )
 								AddMessageToTransmit(theSendMessage);
 							}
 
+							xTimerStop( BluetoothTimer1, portMAX_DELAY );		// stop the INQUIRY timer
+
+
 						}
 						//else
 						//{
@@ -545,7 +549,6 @@ static void BluetoothMain( void *pvParameters )
 
 						//InquiryGoing = 0;		// suppress INQUIRY for now
 
-						xTimerStop( BluetoothTimer1, portMAX_DELAY );		// stop the INQUIRY timer
 #endif
 
 
@@ -635,8 +638,8 @@ static void BluetoothMain( void *pvParameters )
 
 							if ( BluetoothChannel->Type == TABLET_TYPE )
 							{
-								//sprintf( theSendMessage, "SET BT AUTH * 000000\n");
-								sprintf( theSendMessage, "SET BT AUTH * 0000\n");
+								sprintf( theSendMessage, "SET BT AUTH * 000000\n");
+								//sprintf( theSendMessage, "SET BT AUTH * 0000\n");
 							}
 							else
 							{
@@ -1352,6 +1355,11 @@ void DetermineChannelType( BLUETOOTH_CHANNELS *BluetoothChannel, char *theType )
 	{
 		BluetoothChannel->Type = COMPUTER_TYPE;
 	}
+	else
+	if ( strncmp( theType, "200408", 6) == 0)
+	{
+		BluetoothChannel->Type = IGNORE_TYPE;
+	}
 
 
 
@@ -1468,6 +1476,3 @@ static void SetDataMode()
 	// certainly will need to transition so we can revert to command mode.
 	//*GPIO2dataMasked = 0xEFFF0000 ;		/* high to low changes to data mode (I presume)*/
 }
-
-
-

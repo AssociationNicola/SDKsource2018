@@ -40,6 +40,10 @@
 #include "NicolaTypes.h"
 
 
+// leave in to enable user and keypad pico watchdog
+// comment out to disable user and keypad pico watchdog
+
+//#define USER_WATCHDOG 1
 
 
 extern QueueHandle_t	consoleTransmitQueue ;			// in ConsoleManager.c
@@ -50,6 +54,9 @@ extern void BluetoothBeginInquiry( int selected ) ;		// in Bluetooth.c
 extern void SetMicrophoneVolume(int selected );		/* in RadioInterface.c		*/
 extern void SetAerialType(int selected );			/* in RadioInterface.c		*/
 extern void SetAerialFrequency(int selected );		/* in RadioInterface.c		*/
+extern void SetToneDetect(int selected ) ;			/* in RadioInterface.c		*/
+extern void SendWatchdogMessage( void ) ;			/* in RadioInterface.c		*/
+
 void SetConfidenceBeepTime(int selected );			/* in this module			*/
 void SetBeaconBeepTime(int selected );				/* in this module			*/
 extern void SendPresetMessage(int selected);		/* in RadioInterface.c		*/
@@ -160,13 +167,14 @@ typedef enum
 	MENU_ITEM_TYPE_MICROPHONE_VOLUME = 'A',	/*    0 */
 	MENU_ITEM_TYPE_AERIAL_TYPE,				/* B  1 */
 	MENU_ITEM_TYPE_FREQUENCY,				/* C  2 */
-	MENU_ITEM_TYPE_CONFIDENCE_BEEP,			/* D  3 */
-	MENU_ITEM_TYPE_BEACON_BEEP,				/* E  4 */
-	MENU_ITEM_TYPE_BLUETOOTH_PAIRING,		/* F  5 */
-	MENU_ITEM_TYPE_PRESET_TEXT_MSGS,		/* G  6 */
-	MENU_ITEM_TYPE_RECVD_TEXT_MSGS,			/* H  7 */
-	MENU_ITEM_TYPE_DEBUGGING,				/* I  8 */
-	MENU_ITEM_TYPE_VERSION_NUMBER,			/* J  9 */
+	MENU_ITEM_TYPE_TONE_DETECT,				/* D  3 */
+	MENU_ITEM_TYPE_CONFIDENCE_BEEP,			/* E  4 */
+	MENU_ITEM_TYPE_BEACON_BEEP,				/* F  5 */
+	MENU_ITEM_TYPE_BLUETOOTH_PAIRING,		/* G  6 */
+	MENU_ITEM_TYPE_PRESET_TEXT_MSGS,		/* H  7 */
+	MENU_ITEM_TYPE_RECVD_TEXT_MSGS,			/* I  8 */
+	MENU_ITEM_TYPE_DEBUGGING,				/* J  9 */
+	MENU_ITEM_TYPE_VERSION_NUMBER,			/* L  10 */
 
 	MENU_ITEM_TYPE_TURN_OFF = 'Z'
 
@@ -225,10 +233,14 @@ typedef struct main_menu_item_struct
 #define SUB_MENU_SCROLL_TEXT_IN_FLASH 128		/* allow for futures */
 #define SUB_MENU_SCROLL_TEXT_STRLEN 128			/* allow for futures */
 
-extern void SetMicrophoneVolume(int  );
+extern void SetMicrophoneVolumeAbs( int );		// in RadioInterface.c
+extern void SetMicrophoneVolume(int  );			// in RadioInterface.c
 
 int 	MicrophoneVolume = DEFAULT_VOLUME ;
 int		DisplayVolumeCounter = 0 ;
+
+int ToneDetectSetting = 0;		// tone detect selected ON by default
+int FrequencySetting = 1;		// HEYPhone frequency selected by default
 
 #ifdef TEST_DEFAULT_MENU
 
@@ -269,10 +281,10 @@ SUB_MENU_ITEM	aerialTypeSetting;
 SUB_MENU_ITEM	aerialTypeSetting1;
 
 SUB_MENU_ITEM	aerialTypeSetting =
-		{ &aerialTypeSetting1, NULL, 2, "EARTHED" };
+		{ &aerialTypeSetting1, NULL, 0, "EARTHED" };
 
 SUB_MENU_ITEM	aerialTypeSetting1 =
-		{ NULL, &aerialTypeSetting1, 1 , "LOOP   "};
+		{ NULL, &aerialTypeSetting, 1 , "LOOP   "};
 
 
 
@@ -281,13 +293,23 @@ SUB_MENU_ITEM	frequencySetting2;
 SUB_MENU_ITEM	frequencySetting3;
 
 SUB_MENU_ITEM	frequencySetting =
-		{ &frequencySetting2, NULL, 3 , "HEYPhone"};
+		{ &frequencySetting2, NULL, 1 , "HEYPhone"};
 
 SUB_MENU_ITEM	frequencySetting2 =
 		{ &frequencySetting3, &frequencySetting, 2 , "Nicola 2"};
 
 SUB_MENU_ITEM	frequencySetting3 =
-		{ NULL, &frequencySetting2, 1, "31 kh   " };
+		{ NULL, &frequencySetting2, 3, "31 kh   " };
+
+
+SUB_MENU_ITEM	ToneDetectSetting0;
+SUB_MENU_ITEM	ToneDetectSetting1;
+
+SUB_MENU_ITEM	ToneDetectSetting0 =   // 0123456789012345
+		{ &ToneDetectSetting1, NULL, 0, "Tone Detect Off" };
+
+SUB_MENU_ITEM	ToneDetectSetting1 =
+		{ NULL, &ToneDetectSetting0, 1 , "Tone Detect On "};
 
 
 SUB_MENU_ITEM	confidenceBeepSetting[] = {
@@ -406,19 +428,25 @@ MAIN_MENU_ITEM	theMenu_7 =
 
 
 MAIN_MENU_ITEM	theMenu_6 =
-{ &theMenu_7, &theMenu_5a, "BLUETOOTH PAIRG", 	(void *) &BluetoothPairingSetting, NULL, SUB_MENU_TEXT, MENU_ITEM_TYPE_BLUETOOTH_PAIRING,  	0, 0, 0, 0 };
+{ &theMenu_7, &theMenu_5, "BLUETOOTH PAIRG", 	(void *) &BluetoothPairingSetting, NULL, SUB_MENU_TEXT, MENU_ITEM_TYPE_BLUETOOTH_PAIRING,  	0, 0, 0, 0 };
 
 
-MAIN_MENU_ITEM	theMenu_5a =
-{ &theMenu_6, &theMenu_5, "BEACON BEEP", 	(void *) &confidenceBeepSetting, SetBeaconBeepTime, 	SUB_MENU_INTEGER, MENU_ITEM_TYPE_BEACON_BEEP, 0, 0, 15, 15 };	/* 5 seconds */
+//MAIN_MENU_ITEM	theMenu_5a =
+//{ &theMenu_6, &theMenu_5, "BEACON BEEP", 	(void *) &confidenceBeepSetting, SetBeaconBeepTime, 	SUB_MENU_INTEGER, MENU_ITEM_TYPE_BEACON_BEEP, 0, 0, 15, 15 };	/* 5 seconds */
 
 
 MAIN_MENU_ITEM	theMenu_5 =
-{ &theMenu_5a, &theMenu_4, "CONFIDENCE BEEP", 	(void *) &confidenceBeepSetting, SetConfidenceBeepTime, 	SUB_MENU_INTEGER, MENU_ITEM_TYPE_CONFIDENCE_BEEP, 0, 0, 15, 15 };	/* 5 minutes */
+{ &theMenu_6, &theMenu_4, "CONFIDENCE BEEP", 	(void *) &confidenceBeepSetting, SetConfidenceBeepTime, 	SUB_MENU_INTEGER, MENU_ITEM_TYPE_CONFIDENCE_BEEP, 0, 0, 15, 15 };	/* 5 minutes */
+
+
+
+
+MAIN_MENU_ITEM	theMenu_4a =
+{ &theMenu_5, &theMenu_4, "TONE DETECT", 			(void *) &ToneDetectSetting0, 	SetToneDetect,  	SUB_MENU_TEXT, MENU_ITEM_TYPE_FREQUENCY,		0, 0, 0, 0 };
 
 
 MAIN_MENU_ITEM	theMenu_4 =
-{ &theMenu_5, &theMenu_3, "FREQUENCY", 			(void *) &frequencySetting, 	SetAerialFrequency,  	SUB_MENU_TEXT, MENU_ITEM_TYPE_FREQUENCY,		0, 0, 0, 0 };
+{ &theMenu_4a, &theMenu_3, "FREQUENCY", 			(void *) &frequencySetting, 	SetAerialFrequency,  	SUB_MENU_TEXT, MENU_ITEM_TYPE_FREQUENCY,		0, 0, 0, 0 };
 
 
 MAIN_MENU_ITEM	theMenu_3 =
@@ -510,6 +538,8 @@ static void LCDTimer3Callback( TimerHandle_t theHandle);
 
 static void LCDTimer4Callback( TimerHandle_t theHandle);
 
+static void LCDTimer5Callback( TimerHandle_t theHandle);		// watchdog timer to user and keypad picos
+
 static char *ConvertToMinutes( int value, char *buffer );
 static char *ConvertToSeconds( int value, char *buffer );
 
@@ -523,6 +553,14 @@ static TimerHandle_t LCDTimer3 ;		/* confidence beep timer */
 
 static TimerHandle_t LCDTimer4 ;		/* Bluetooth Transmit timer */
 
+
+#ifdef USER_WATCHDOG
+static TimerHandle_t LCDTimer5 ;		/* watchdog timer */
+#endif
+
+int		WatchdogCounter = 0;
+int		WatchdogReplyUser = TRUE;		// TRUE = make sure we do not get a false fail at start up
+int		WatchdogReplyKeypad = TRUE;
 
 /*
  * The following are declared globally so they are zeroed and can be
@@ -559,6 +597,7 @@ static int ToneDetectStatus = RECEIVE_LEGACY ;
 #define BEACON_MODE     2
 
 static int ConfidenceBeaconMode = NO_BEEP_MODE;
+static int ToneDetectMode = FALSE;
 
 
 
@@ -1018,17 +1057,11 @@ static void LCD_Main( void *pvParameters )
 
 	LCD_Home();
 
-	//xil_printf( "First line %s\r\n", thisNicolaSettings.thisNicolaName);
-
 	LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName);			// Nicola3Name);
 
 	LCD_Write_String( SECOND_LINE, 0, GetVersionString());
 
 	memcpy( VersionNumberSubMenu.subMenuHeading, GetVersionString(), 16 ) ;
-
-	//xil_printf( "Second line %s\r\n", GetVersionString() );
-
-
 
 	/* Start backlight timer */
 	if ( (LCDTimer1 = xTimerCreate( "T1",
@@ -1074,9 +1107,24 @@ static void LCD_Main( void *pvParameters )
 
 	}
 
-	// loop but for some reason only one seems to get to the user pico
+#ifdef USER_WATCHDOG
+	/* Start watchdog timer */
+	if ( (LCDTimer5 = xTimerCreate( "T5",
+								5 * pdMS_TO_TICKS(1000),
+								pdTRUE,			// auto restart
+								(void *) 1,
+								LCDTimer5Callback) ) )
 
-	for ( i=0; i<2; i++ )
+	{
+		xTimerStart( LCDTimer5, portMAX_DELAY );
+	}
+#endif
+
+	// apply default settings AFTER timers have been created
+
+	ApplyDefaultSettings();
+
+	//for ( i=0; i<2; i++ )
 	{
 
 		vTaskDelay( pdMS_TO_TICKS(1000));			/* wait  */
@@ -1097,6 +1145,15 @@ static void LCD_Main( void *pvParameters )
     	if ( xQueueReceive( KeysReceivedQueue, &theMessage, portMAX_DELAY ) == pdPASS )
     	{
 
+
+			if ( theMessage[0] == KEY_FIFO_FAIL )		/* ARM to user FIFO has failed	*/
+			{
+											//    0123456789012345"
+				LCD_Write_String( FIRST_LINE, 0, "FIFO HAS FAILED ");			// Nicola3Name);
+				LCD_Write_String( SECOND_LINE, 0, "FORCE POWER OFF ");
+
+			}
+			else
 			if ( theMessage[0] == KEY_TIMEOUT1 )		/* if turn off backlight	*/
 			{
 
@@ -1199,25 +1256,77 @@ static void LCD_Main( void *pvParameters )
 				}
 			}
 
+#ifdef USER_WATCHDOG
+			else
+			if ( theMessage[0] == KEY_TIMEOUT5 )		/* watchdog timeout */
+			{
+				if ( WatchdogReplyUser == FALSE )
+				{
+					/* User pico failed to reply      0123456789012345 */
+					LCD_Write_String( FIRST_LINE, 0, "USER WDOG      ");			// User watchdog failed
+					xil_printf( "\r\n\nUSER WATCHDOG FAIL\r\n\n");
+				}
+				else
+				if ( WatchdogReplyKeypad == FALSE )
+				{
+					/* User pico failed to reply      0123456789012345*/
+					LCD_Write_String( FIRST_LINE, 0, "KEYPAD WDOG    ");			// User watchdog failed
+					xil_printf( "\r\n\nKEYPAD WATCHDOG FAIL\r\n\n");
+				}
+
+				WatchdogCounter += 1 ;
+
+				if ( WatchdogCounter > 9 )
+				{
+					WatchdogCounter = 0 ;
+				}
+
+				//xil_printf( "wdog %d\r\n", WatchdogCounter) ;
+
+				LCD_FirstLine( 15 ) ;
+				LCD_Write_Char( '0' + WatchdogCounter ) ;
+
+				SendWatchdogMessage(  ) ;
+
+				WatchdogReplyUser = FALSE;
+				WatchdogReplyKeypad = FALSE;
+			}
+#endif
 			// Tone Detect Messages
 
 			else
 			if ( theMessage[0] == '+' )		/* Tone detect pico messages */
 			{
-				if ( theMessage[1] == '0' )		/* tone detect off */
+				if ( theMessage[1] == '0' )		/* speaker detect off = nothing received */
 				{
 					xil_printf( "Implement Tone Detect off\n\r" );
 
-					DisplayAerialEarthing = TRUE;
-
+					DisplayAerialEarthing = FALSE;
 				}
 				else
-				if ( theMessage[1] == '1' )		/* tone detect on */
+				if ( theMessage[1] == '1' )		/* speaker detect on = incoming message */
 				{
 					xil_printf( "Implement Tone Detect on\n\r" );
 
-					DisplayAerialEarthing = FALSE;
+					DisplayAerialEarthing = TRUE;
+
+					ToneDetectMode = TRUE ;
+
+					LCD_BackLight( SEND_LCD_BACKLIGHT_ON );		/* light the LCD */
 				}
+				else
+				if ( theMessage[1] == '2' )		/* tone detect mode off */
+				{
+					xil_printf( "Tone Detect disabled\n\r" );
+
+					DisplayAerialEarthing = TRUE;
+
+					LCD_BackLight( SEND_LCD_BACKLIGHT_ON );		/* light the LCD */
+
+					ToneDetectMode = FALSE ;
+
+				}
+
 			}
 
 			// Keyboard Messages
@@ -1241,6 +1350,24 @@ static void LCD_Main( void *pvParameters )
 
 				DisplayVolume();
 			}
+			else
+			if ( theMessage[0] == KEY_USER_WDOG_REPLY )		/* special user pico watchdog reply */
+			{
+				WatchdogReplyUser = TRUE;
+
+				//xil_printf( "LCDDisplay User Watchdog Reply\r\n" );
+
+			}
+
+			else
+			if ( theMessage[0] == KEY_KEYP_WDOG_REPLY )		/* special user pico watchdog reply */
+			{
+				WatchdogReplyKeypad = TRUE;
+
+				//xil_printf( "LCDDisplayKeypad Watchdog\r\n" );
+
+			}
+
 
 			else
 			if ( ( CurrentMenuPosition == TOP_LEVEL ) && ( theMessage[0] != KEY_UPLEFT ) && ( theMessage[0] != KEY_LEFTRIGHT ) )
@@ -1266,7 +1393,7 @@ static void LCD_Main( void *pvParameters )
 					{
 						earthingValue = hexToInt( &theMessage[1] );
 
-						xil_printf( "Earthing = %d\r\n", earthingValue );
+						//xil_printf( "Earthing = %d\r\n", earthingValue );
 
 						if ( earthingValue < 50 ) blockCharacter = 'x' ;		//0xAA;
 						else
@@ -1284,6 +1411,11 @@ static void LCD_Main( void *pvParameters )
 						{
 							LCD_Write_Char( ' ' ) ;
 						}
+
+						LCD_SecondLine( 0 ) ;
+						LCD_Write_Char(theMessage[1]);
+						LCD_Write_Char(theMessage[2]);
+
 					}
 
 				}
@@ -1297,7 +1429,8 @@ static void LCD_Main( void *pvParameters )
 
 						TransmitReceiveStatus = HANDSET_TRANSMITTING ;
 
-						//DisplayAerialEarthing = TRUE;
+						DisplayAerialEarthing = TRUE;
+
 						LCD_Clear();
 						LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName );
 
@@ -1327,7 +1460,7 @@ static void LCD_Main( void *pvParameters )
 
 						TransmitReceiveStatus = NO_TRANSMIT ;
 
-						//DisplayAerialEarthing = FALSE;
+						DisplayAerialEarthing = FALSE;
 
 						PLMessage[0] = '*' ;
 						PLMessage[1] = SEND_RECEIVE_STATE;
@@ -1363,7 +1496,8 @@ static void LCD_Main( void *pvParameters )
 
 						TransmitReceiveStatus = BLUETOOTH_TRANSMITTING ;
 
-						//DisplayAerialEarthing = TRUE;
+						DisplayAerialEarthing = TRUE;
+
 						LCD_Clear();
 						LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName );
 
@@ -1403,7 +1537,7 @@ static void LCD_Main( void *pvParameters )
 
 						TransmitReceiveStatus = NO_TRANSMIT ;
 
-						//DisplayAerialEarthing = FALSE;
+						DisplayAerialEarthing = FALSE;
 
 						PLMessage[0] = '*' ;
 						PLMessage[1] = SEND_RECEIVE_STATE;
@@ -1452,10 +1586,10 @@ static void LCD_Main( void *pvParameters )
 
 						CurrentSubMenuPosition = &turnRadioOffSetting1 ;
 
-						CurrentMenuPosition == 0 ;
-
 						LCD_Clear();
 						LCD_Home();
+
+						LCD_BackLight( SEND_LCD_BACKLIGHT_ON );		/* light the LCD */
 
 						LCD_Write_String( FIRST_LINE, 0, thisMenuItem->heading );
 
@@ -2130,11 +2264,11 @@ static void DisplayVolume()
 
 	if ( xTimerStart( LCDTimer1, portMAX_DELAY ) == pdPASS )	// and start the backlight timer
 	{
-		xil_printf( "BG Timer OK \r\n");
+		xil_printf( "Backlight Timer OK \r\n");
 	}
 	else
 	{
-		xil_printf( "BG Timer Failed \r\n");
+		xil_printf( "Backlight Timer Failed \r\n");
 	}
 }
 
@@ -2369,6 +2503,22 @@ static void LCD_ControlWrite( int value )
 
 static void LCD_BackLight( char backLightSetting )
 {
+	if ( ToneDetectMode == TRUE )
+	{
+		if ( backLightSetting == SEND_LCD_BACKLIGHT_OFF )
+		{
+			LCD_ControlWriteStart( 0xA );				/* Display, off, cursor off, no blink cursor	*/
+			vTaskDelay( pdMS_TO_TICKS(3));			/* wait  */
+		}
+		else
+		{
+			LCD_ControlWriteStart( 0xE );				/* Display, on, cursor off, no blink cursor	*/
+			vTaskDelay( pdMS_TO_TICKS(3));			/* wait  */
+
+		}
+	}
+
+#if 0
 	char	PLMessage[4] ;
 
 	PLMessage[0] = '*' ;
@@ -2380,6 +2530,8 @@ static void LCD_BackLight( char backLightSetting )
 	{
 			vTaskDelay( pdMS_TO_TICKS( 5 ));
 	}
+#endif
+
 }
 
 
@@ -2446,7 +2598,7 @@ static void LCDTimer3Callback( TimerHandle_t theHandle)
  */
 static void LCDTimer4Callback( TimerHandle_t theHandle)
 {
-	char KeyMessage[8];
+	char KeyMessage[2];
 
 	KeyMessage[0] = KEY_TIMEOUT4;
 
@@ -2457,6 +2609,23 @@ static void LCDTimer4Callback( TimerHandle_t theHandle)
 
 	//xTimerStart( LCDTimer4, pdMS_TO_TICKS(1)* 1000 );
 }
+
+/*
+ * watchdog timer
+ */
+static void LCDTimer5Callback( TimerHandle_t theHandle)
+{
+	char KeyMessage[2];
+
+	KeyMessage[0] = KEY_TIMEOUT5;
+
+	while ( xQueueSendToBack( KeysReceivedQueue, KeyMessage, 0 ) != pdPASS )
+	{
+			vTaskDelay( pdMS_TO_TICKS( 5 ));
+	}
+
+}
+
 
 
 
@@ -2690,46 +2859,42 @@ void MenuMessageFromHostComputer( char *theMessage )
 		if ( theSettingsType == 0 )					// "Microphone Vol") == 0)
 		{
 			thisNicolaSettings.microphoneVolume = atoi( parsedString );
+			xil_printf( "Default volume  %d\r\n", atoi( parsedString ) );
 		}
 		else
 		if ( theSettingsType == 1 )					// "Aerial Type") == 0)
 		{
 			thisNicolaSettings.aerialType = atoi( parsedString );
+			xil_printf( "Default aerial type  %d\r\n", atoi( parsedString ) );
 		}
 		else
 		if ( theSettingsType == 2 )					// "Aerial Freq") == 0)
 		{
 			thisNicolaSettings.aerialFrequency = atoi( parsedString );
+			xil_printf( "Default frequency  %d\r\n", atoi( parsedString ) );
 		}
 		else
-		if ( theSettingsType == 3 )					// "Confidence Beep Time") == 0)
+		if ( theSettingsType == 3 )					// "TONE DETECT") == 0)
+		{
+			thisNicolaSettings.toneDetectSelected = atoi( parsedString );
+			xil_printf( "Default tone detect  %d\r\n", atoi( parsedString ) );
+		}
+		else
+		if ( theSettingsType == 4 )					// "Confidence Beep Time") == 0)
 		{
 			thisNicolaSettings.confidenceBeepTime = atoi( parsedString );
+			xil_printf( "Default confidence beep  %d\r\n", atoi( parsedString ) );
 		}
 
 		else
-		if ( theSettingsType == 4 )					// "Beacon Beep Time") == 0)
+		if ( theSettingsType == 5 )					// "Beacon Beep Time") == 0)
 		{
 			thisNicolaSettings.beaconBeepTime = atoi( parsedString );
 		}
 		else
 		{
-#if 0
-			while ( xQueueSendToBack( consoleTransmitQueue, "Query Default Setting", 0 ) != pdPASS )
-			{
-				vTaskDelay( pdMS_TO_TICKS( 5 ));
-			}
-#endif
+			xil_printf( "Default setting not known %s\r\n", parsedString );
 		}
-
-
-#if 0
-		while ( xQueueSendToBack( consoleTransmitQueue, "D/L Settings\n\r", 0 ) != pdPASS )
-		{
-			vTaskDelay( pdMS_TO_TICKS( 5 ));
-		}
-#endif
-
 
 	}
 	else
@@ -2938,14 +3103,19 @@ void MenuMessageFromHostComputer( char *theMessage )
 
 static void ApplyDefaultSettings()
 {
+	//thisNicolaSettings.thisNicolaID = 0;
+	//strcpy( thisNicolaSettings.thisNicolaName, "NICOLADEFAULT");
+	//strcpy( thisNicolaSettings.thisNicolaLocation, "NOT CHANGED");
 
-	SetMicrophoneVolume( 0 );
+	SetMicrophoneVolumeAbs( thisNicolaSettings.microphoneVolume  );
 
 	SetAerialType( thisNicolaSettings.aerialType);
 
 	SetAerialFrequency( thisNicolaSettings.aerialFrequency);
 
 	SetConfidenceBeepTime( thisNicolaSettings.confidenceBeepTime);
+
+	SetToneDetect( thisNicolaSettings.toneDetectSelected ) ; // tone detect off
 
 	//BluetoothBeginInquiry( thisNicolaSettings.);  		//	if RADIO STARTS IN INQUIRY MODE
 
@@ -3093,16 +3263,14 @@ static int ReadMenuFromFlash( void )
 
 	if ( CDCardInit() == FALSE )
 	{
-		while ( xQueueSendToBack( consoleTransmitQueue, "CD FAIL- Default Menu\n\r", 0 ) != pdPASS )
-		{
-			vTaskDelay( pdMS_TO_TICKS( 5 ));
-		}
+		//while ( xQueueSendToBack( consoleTransmitQueue, "CD FAIL- Default Menu\n\r", 0 ) != pdPASS )
+		//{
+		//	vTaskDelay( pdMS_TO_TICKS( 5 ));
+		//}
+
+		xil_printf( "CD FAIL- Default Menu\n\r" );
 
 		firstMenuItem = &theMenu_3;
-
-		//ApplyDefaultSettings();
-
-		SetMicrophoneVolume( 0 );
 
 		return pdFAIL;
 	}
@@ -3118,6 +3286,7 @@ static int ReadMenuFromFlash( void )
 	//CDFlashRead( pageInFlash, (u8 *) LCD_MENU_FLASH_ADDRESS, PAGE_SIZE*2);
 	//CDFlashWrite( pageInFlash, LCD_MENU_FLASH_ADDRESS, PAGE_SIZE*2);
 
+	//CDFlashWrite( "Pete Was Here", LCD_MENU_FLASH_ADDRESS, sizeof("Pete Was Here"));
 
 	memset( pageInFlash, 0xA5, sizeof(pageInFlash));
 
@@ -3127,74 +3296,14 @@ static int ReadMenuFromFlash( void )
 
 	flashOffset = PAGE_SIZE;
 
+	//firstMenuItem = &theMenu_3;
+	//return pdFAIL;		/* menu not read */
 
-	if ( ( pageInFlash[0] == 0xFF ))	/* is there a menu on the CD card ? */
+	if ( ( pageInFlash[0] != 0xF4 ))	/* is there a menu on the CD card ? */
 	{
-
-		firstMenuItem = &theMenu_3;
-
-#if 0
-		/* test phase - report then write the test menu to flash */
+		/* default menu */
 
 		firstMenuItem = &theMenu_3 ;
-		writeMenuToFlash();
-
-#endif
-#if 0
-		// FlashErase( (u8 *) LCD_MENU_FLASH_ADDRESS, PAGE_SIZE);
-
-		/* now write the menu test harness */
-
-		mainMenuItem = &theMenu_3 ;
-
-		pageData = &pageInFlash[4] ;
-		pageInFlash[0] = pageInFlash[1] = pageInFlash[2] = pageInFlash[3] = 0;
-
-		memset( pageInFlash, 0xFF, sizeof(pageInFlash) );
-
-		while ( mainMenuItem != NULL )
-		{
-			*pageData = 0xF8;		// indicate a menu header
-			*(pageData+1) = 0;
-
-			memcpy( pageData+2, mainMenuItem, sizeof(MAIN_MENU_ITEM) );
-
-			pageData += sizeof(MAIN_MENU_ITEM) + 16 ;		/* 14 bytes for future use	*/
-
-			subMenuItem = mainMenuItem->firstSubMenu ;
-
-			while ( subMenuItem != NULL )
-			{
-				*pageData = 0xFA;		// indicate a menu header
-				*(pageData+1) = 0;
-
-				memcpy( pageData+2, subMenuItem, sizeof(SUB_MENU_ITEM)) ;
-				pageData += sizeof(SUB_MENU_ITEM) + 8 ;		/* 6 bytes for future use	*/
-
-
-				subMenuItem = subMenuItem->nextSubMenu ;
-			}
-
-			mainMenuItem = mainMenuItem->nextMainMenu ;
-
-			if ( (u32) pageData > (u32) &pageInFlash[4+256] )
-			{
-				/* filled the lower page; write it to flash */
-
-				// FlashWrite( pageInFlash, (u8 *) LCD_MENU_FLASH_ADDRESS + flashOffset, PAGE_SIZE);
-
-				flashOffset += PAGE_SIZE ;
-
-				memcpy( &pageInFlash[4], &pageInFlash[4+256], PAGE_SIZE );
-
-				pageData -= PAGE_SIZE ;
-
-			}
-		}
-		// FlashWrite( pageInFlash, (u8 *) LCD_MENU_FLASH_ADDRESS + flashOffset, PAGE_SIZE);
-
-#endif
-
 
 		return pdFAIL;		/* menu not read */
 	}
@@ -3257,10 +3366,7 @@ static int ReadMenuFromFlash( void )
 					pageData += MAIN_MENU_ITEM_IN_FLASH ;		/* enough bytes for future use	*/
 
 #if 0
-					while ( xQueueSendToBack( consoleTransmitQueue, mainMenuItem->heading, 0 ) != pdPASS )
-					{
-						vTaskDelay( pdMS_TO_TICKS( 5 ));
-					}
+					xil_printf( "FLASH: heading %s\r\n", mainMenuItem->heading) ;
 #endif
 
 				}
@@ -3296,10 +3402,7 @@ static int ReadMenuFromFlash( void )
 						}
 
 #if 0
-						while ( xQueueSendToBack( consoleTransmitQueue, subMenuItem->subMenuHeading, 0 ) != pdPASS )
-						{
-							vTaskDelay( pdMS_TO_TICKS( 5 ));
-						}
+						xil_printf( "FLASH: heading %s\r\n", subMenuItem->subMenuHeading) ;
 #endif
 
 					}
@@ -3360,10 +3463,7 @@ static int ReadMenuFromFlash( void )
 			}
 			else
 			{
-				while ( xQueueSendToBack( consoleTransmitQueue, " Flash layout error\n\r", 0 ) != pdPASS )
-				{
-					vTaskDelay( pdMS_TO_TICKS( 5 ));
-				}
+				xil_printf(" Flash layout error\n\r");
 
 				flashOffset += 64;		/* minimum block size */
 
@@ -3385,50 +3485,8 @@ static int ReadMenuFromFlash( void )
 				CDFlashRead( &pageInFlash[PAGE_SIZE], LCD_MENU_FLASH_ADDRESS + flashOffset, PAGE_SIZE);
 
 				pageData = pageData - PAGE_SIZE ;
-
-#if 0
-						while ( xQueueSendToBack( consoleTransmitQueue, ">> READ\n\r", 0 ) != pdPASS )
-						{
-							vTaskDelay( pdMS_TO_TICKS( 5 ));
-						}
-#endif
 			}
 		}
-
-#if 0
-		vTaskDelay( pdMS_TO_TICKS( 1000 ));
-		mainMenuItem = firstMenuItem;
-
-		while ( mainMenuItem != NULL )
-		{
-			while ( xQueueSendToBack( consoleTransmitQueue, mainMenuItem->heading, 0 ) != pdPASS )
-			{
-				vTaskDelay( pdMS_TO_TICKS( 5 ));
-			}
-			//while ( xQueueSendToBack( consoleTransmitQueue, " <<\n\r", 0 ) != pdPASS )
-			//{
-			//	vTaskDelay( pdMS_TO_TICKS( 5 ));
-			//}
-
-			subMenuItem = mainMenuItem->firstSubMenu;
-
-			while ( subMenuItem != NULL )
-			{
-				while ( xQueueSendToBack( consoleTransmitQueue, subMenuItem->subMenuHeading, 0 ) != pdPASS )
-				{
-					vTaskDelay( pdMS_TO_TICKS( 5 ));
-				}
-				subMenuItem = subMenuItem->nextSubMenu ;
-			}
-
-			mainMenuItem = mainMenuItem->nextMainMenu ;
-
-			while ( xQueueSendToBack( consoleTransmitQueue, "=====================\r\n", 0 ) != pdPASS )
-			{
-				vTaskDelay( pdMS_TO_TICKS( 5 ));
-			}
-		}
-#endif
 
 		return pdPASS ;
 
@@ -3614,21 +3672,25 @@ void SetConfidenceBeepTime(int selected )
 
 		if ( selected == 0 )
 		{
-			xTimerStop( LCDTimer3, pdMS_TO_TICKS(1 * 1000)  );		// stop the confidence timer
+			if ( LCDTimer3 != NULL )
+			{
+				xTimerStop( LCDTimer3, pdMS_TO_TICKS(1 * 1000)  );		// stop the confidence timer
+			}
 			ConfidenceBeaconMode = NO_BEEP_MODE ;
 		}
 		else
 		{
-			xTimerChangePeriod( LCDTimer3,pdMS_TO_TICKS(ConfidenceBeepTimer), pdMS_TO_TICKS(1 * 1000) );
-			xTimerStart( LCDTimer3, pdMS_TO_TICKS(1 * 1000) );	//
+			if ( LCDTimer3 != NULL )
+			{
+				xTimerChangePeriod( LCDTimer3,pdMS_TO_TICKS(ConfidenceBeepTimer), pdMS_TO_TICKS(1 * 1000) );
+				xTimerStart( LCDTimer3, pdMS_TO_TICKS(1 * 1000) );	//
+			}
 			ConfidenceBeaconMode = CONFIDENCE_MODE ;
 		}
 
 
-		while ( xQueueSendToBack( consoleTransmitQueue, "Set confidence beep time\n", 0 ) != pdPASS )
-		{
-			vTaskDelay( pdMS_TO_TICKS( 5 ));
-		}
+		xil_printf( "Set confidence beep time %d seconds\r\n", selected ) ;
+
 	}
 
 }
@@ -3667,7 +3729,7 @@ void SetDebuggingState(int selected )
 
 void SetBeaconBeepTime(int selected )
 {
-
+#if 0
 	if ( ( ConfidenceBeaconMode == NO_BEEP_MODE ) || ( ConfidenceBeaconMode == BEACON_MODE ))
 	{
 		ConfidenceBeepTimer = (selected * 1000) ;	// convert to milliseconds
@@ -3690,7 +3752,7 @@ void SetBeaconBeepTime(int selected )
 			vTaskDelay( pdMS_TO_TICKS( 5 ));
 		}
 	}
-
+#endif
 }
 
 

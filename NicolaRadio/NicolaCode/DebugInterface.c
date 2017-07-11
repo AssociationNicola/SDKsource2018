@@ -83,8 +83,6 @@
 
 *****************************************************************************/
 
-
-
 /* Standard includes. */
 #include <stdio.h>
 #include <limits.h>
@@ -130,12 +128,15 @@
 extern n3z_tonetest		*ToneTestInstancePtr ;		/* in PSPLComms.c	*/
 extern XLlFifo 			DataFifo;					/* in PSPLComms.c	*/
 
+QueueHandle_t	DebugControlQueue ;
+
+
+
+#if 1
 
 static void Debuging_Main( void *pvParameters );
 static void GetMsgFromUART( char *, int ) ;
 
-
-QueueHandle_t	DebugControlQueue ;
 
 
 // static u32 Buffer[512];		/* if storing to write to flash */
@@ -533,3 +534,6 @@ static void GetMsgFromUART( char *MessageBuffer, int MaxCharCount )
 
 
 }
+
+
+#endif

@@ -61,6 +61,7 @@ typedef struct
 	char			microphoneVolume;
 	char			aerialType;
 	char			aerialFrequency;
+	char			toneDetectSelected;
 	char			confidenceBeepTime;
 	char			beaconBeepTime;
 
@@ -167,6 +168,13 @@ typedef struct
 #define SEND_TRANSMIT_STATE 	('t')
 #define SEND_RECEIVE_STATE 		('r')
 
+#define SEND_FREQUENCY_HEYPHONE	('D')
+#define SEND_FREQUENCY_NICOLA2	('E')
+#define SEND_FREQUENCY_31KHZ	('F')
+
+#define SEND_WATCHDOG			('W')
+
+
 #define SEND_LCD_BACKLIGHT_ON	('y')
 #define SEND_LCD_BACKLIGHT_OFF	('Y')
 
@@ -207,14 +215,22 @@ typedef struct
 #define KEY_TIMEOUT2			'b'		/* for text scrolling */
 #define KEY_TIMEOUT3			'c'		/* confidence beep */
 #define KEY_TIMEOUT4			'd'		/* confidence beep */
+#define KEY_TIMEOUT5			'e'		/* watchdog timer */
 
+#define KEY_USER_WDOG_REPLY		'p'		/* watchdog reply from User Pico */
+#define KEY_KEYP_WDOG_REPLY		'q'		/* watchdog reply from Keypad Pico */
+
+#define KEY_KEYP_RECMITTING		'r'		/* radio receiving */
+#define KEY_KEYP_TRANSMITTING	't'		/* radio transmitting */
 
 /* NOTE WELL - must change User Pico about line 500 if this changes */
-#define KEY_AERIAL_EARTHING		'e'		/* not really a KEY but ... */
+#define KEY_AERIAL_EARTHING		'v'		/* not really a KEY but ... */
 
 #define KEY_HEYPHONE_FREQ	'w'		/* not really a KEY but ... */
 #define KEY_NICOLA2_FREQ	'x'		/* not really a KEY but ... */
 #define KEY_31KHZ_FREQ		'y'		/* not really a KEY but ... */
+
+#define KEY_FIFO_FAIL		0xFF	/* ARM to user pico FIFO failed */
 
 
 // Microphone volume management
