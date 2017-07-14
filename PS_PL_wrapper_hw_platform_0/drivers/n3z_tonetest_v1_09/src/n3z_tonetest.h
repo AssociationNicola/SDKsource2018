@@ -153,6 +153,17 @@ u32 n3z_tonetest_audiovolume_read(n3z_tonetest *InstancePtr);
 */
 u32 n3z_tonetest_adcgain_ave_peak_read(n3z_tonetest *InstancePtr);
 /**
+* Read from plstatus gateway of n3z_tonetest. Assignments are LSB-justified.
+*
+* @param	InstancePtr is the plstatus instance to operate on.
+*
+* @return	u32
+*
+* @note    .
+*
+*/
+u32 n3z_tonetest_plstatus_read(n3z_tonetest *InstancePtr);
+/**
 * Read from starttoneamp gateway of n3z_tonetest. Assignments are LSB-justified.
 *
 * @param	InstancePtr is the starttoneamp instance to operate on.
