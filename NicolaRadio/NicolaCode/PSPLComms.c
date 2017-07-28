@@ -52,9 +52,10 @@
 
 // comment out next lines to hide I/O messages to/from User Pico
 
-//#define RECEIVE_MESSAGE_DEBUG
+#ifdef DEBUG_CODE
+#define RECEIVE_MESSAGE_DEBUG
 //#define SEND_MESSAGE_DEBUG
-
+#endif
 
 /************************** Constant Definitions *****************************/
 
@@ -146,12 +147,11 @@ u32 KeypadPico[] = {
 };
 #endif
 
-#if 0
+#if 1
 u32 UserPico[] = {
 #include "../../../PicoSource/UserPico.c"
 };
 #endif
-
 
 
 void PSPLComms_Initialise()
@@ -210,9 +210,11 @@ void PSPLComms_Initialise()
 
 #endif
 
+   	xil_printf("Send User Pico\n\r");
+   	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
 
     PLTransmitQueue = xQueueCreate( 4,					// max item count
-									16 ) ;				// size of each item (max) ) ;
+    								PL_MESSAGE_MAX ) ;				// size of each item (max) ) ;
 
     TextMessageTransmitQueue = xQueueCreate( 2,			// max item count
 											 270 ) ;	// size of each item (max) ) ;
@@ -294,6 +296,15 @@ static void PL_Receiver( void *pvParameters )
 		}
 
 #ifdef RECEIVE_MESSAGE_DEBUG
+
+    	if ( Buffer[0] == 0x0F )
+    	{
+    		u32 statusReg = n3z_tonetest_plstatus_read(&PSPLFifo);
+
+
+    		xil_printf( "User Pico reports data in buffer %X\r\n", statusReg);
+
+    	}
     	if ( Buffer[0] == '&' )		// indicates key sent
     	{
 			switch ( Buffer[1] )		// check the received key
@@ -524,8 +535,8 @@ static void PL_Receiver( void *pvParameters )
 static void PL_Transmitter( void *pvParameters )
 {
 	int		i;
-	char	PLMessage[4];
-	u32		theMessage[4];
+	char	PLMessage[PL_MESSAGE_MAX];
+	u32		theMessage[PL_MESSAGE_MAX];
 	int		txCharacterCount ;
 
 	theMessage[0] = '!' ;
@@ -538,12 +549,18 @@ static void PL_Transmitter( void *pvParameters )
 		if ( xQueueReceive( PLTransmitQueue, &PLMessage, portMAX_DELAY ) == pdPASS )
 		{
 #ifdef SEND_MESSAGE_DEBUG
-			xil_printf( "SEND %X %X %X %X\r\n", PLMessage[0], PLMessage[1], PLMessage[2], PLMessage[3] ) ;
+			xil_printf( "SEND %X %X %X %X %X %X\r\n",
+					PLMessage[0], PLMessage[1], PLMessage[2], PLMessage[3], PLMessage[4], PLMessage[5] ) ;
 #endif
 
-			//if ( PLMessage[0] == '*' )
+
+			txCharacterCount = 0;
+
+			for ( i=0; i<PL_MESSAGE_MAX; i++)
 			{
-				txCharacterCount = 4;
+				txCharacterCount += 1 ;
+				if ( PLMessage[i] == '\n' )
+					break;
 			}
 
 			for ( i=0; i<txCharacterCount; i++ )
@@ -551,7 +568,7 @@ static void PL_Transmitter( void *pvParameters )
 				theMessage[i] = PLMessage[i] ;
 			}
 
-			TxSend(&PSPLFifo, theMessage, 4 ) ; //txCharacterCount);
+			TxSend(&PSPLFifo, theMessage, txCharacterCount);
 		}
 
 		// vTaskDelay( pdMS_TO_TICKS(250));
@@ -663,40 +680,46 @@ int ReadResponse()
 ******************************************************************************/
 int TxSend(XLlFifo *InstancePtr, u32  *SourceAddr, int no_word)
 {
-
 	int i;
 	int errorCount = 0;
-	char	KeyMessage[2] ;
+	u32 *baseAddress = (u32 *) InstancePtr->BaseAddress ;
+	//u32 *dataCount = (u32 *) InstancePtr->BaseAddress + 0x0C;
 
 	/* Filling the buffer with data */
 	for (i=0;i<no_word;i++)
-		{
-			while ( XLlFifo_iTxVacancy(InstancePtr) == 0){
-				vTaskDelay( pdMS_TO_TICKS( 50 ));
-			}
+	{
+		while ( XLlFifo_iTxVacancy(InstancePtr) == 0){
+			vTaskDelay( pdMS_TO_TICKS( 50 ));
+		}
 
-			XLlFifo_TxPutWord(InstancePtr,
-						      *(SourceAddr+i));
+		XLlFifo_TxPutWord(InstancePtr,
+						  *(SourceAddr+i));
+
+		//xil_printf( "ADD %X (%d) status %X\r\n", *dataCount, i, (u32) *baseAddress);
 	}
 
 	/* Start Transmission by writing transmission length into the TLR */
+
 	XLlFifo_iTxSetLen(InstancePtr, (no_word * WORD_SIZE));
+
+	//xil_printf( "TX %X status=%X\r\n", *dataCount, (u32) *baseAddress);
 
 	/* Check for Transmission completion */
 	while( !(XLlFifo_IsTxDone(InstancePtr)) ){
 		if (errorCount++ == 4 )
 		{
-			KeyMessage[0] = KEY_FIFO_FAIL;
-			KeyMessage[1] = 0;
+			xil_printf( "try send to user again %X\r\n", (u32) *baseAddress );
 
-			while ( xQueueSendToBack( KeysReceivedQueue, KeyMessage, 0 ) != pdPASS )
-			{
-				vTaskDelay( pdMS_TO_TICKS( 5 ));
-			}
-			xil_printf( "try send to user again\r\n");
+			errorCount = 0;
 		}
 		vTaskDelay( pdMS_TO_TICKS( 500 ));
+
+		//xil_printf( "TX %X status=%X\r\n", *dataCount, (u32) *baseAddress);
+
 	}
+
+	//xil_printf( "After TX %X status=%X\r\n", *dataCount, (u32) *baseAddress);
+
 
 	/* Transmission Complete */
 	return XST_SUCCESS;
@@ -728,7 +751,7 @@ int RxReceive (XLlFifo *InstancePtr, u32* DestinationAddr)
 	static u32 ReceiveLength;
 
 	//xil_printf(" Receiving data ....\n\r");
-	/* Read Recieve Length */
+	/* Read Receive Length */
 	ReceiveLength = (XLlFifo_iRxGetLen(InstancePtr))/WORD_SIZE;
 	xil_printf("Receive length = %d \n\r", ReceiveLength );
 	/* Start Receiving */

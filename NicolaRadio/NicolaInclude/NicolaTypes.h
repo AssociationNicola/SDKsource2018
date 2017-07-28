@@ -163,6 +163,8 @@ typedef struct
  *  Messages sent to User Pico and passed on as appropriate
  */
 
+#define PL_MESSAGE_MAX			(16)
+
 #define SEND_CONFIDENCE_BEEP 	('c')
 #define SEND_BEACON_BEEP 		('b')
 #define SEND_TRANSMIT_STATE 	('t')
@@ -220,7 +222,8 @@ typedef struct
 #define KEY_USER_WDOG_REPLY		'p'		/* watchdog reply from User Pico */
 #define KEY_KEYP_WDOG_REPLY		'q'		/* watchdog reply from Keypad Pico */
 
-#define KEY_KEYP_RECMITTING		'r'		/* radio receiving */
+#define KEY_KEYP_RECEIVING		'r'		/* radio receiving */
+#define KEY_WARBLE_COMPLETE		's'		/* transmission of warble complete */
 #define KEY_KEYP_TRANSMITTING	't'		/* radio transmitting */
 
 /* NOTE WELL - must change User Pico about line 500 if this changes */
@@ -248,12 +251,6 @@ typedef struct
 
 /* FLASH operations and Definitions */
 
-//int  qFlashInit();
-
-//void qFlashErase( u8 * Address, u32 ByteCount);
-
-//void FlashErasePage(XQspiPs *QspiPtr, u32 Address, u32 ByteCount);
-
 int CDCardInit();		// in Flash-SDCard.c
 
 void CDFlashRead( u8 *writeToAddress, u32 flashAddress, u32 numberOfBytes);			// in Flash-SDCard.c
@@ -268,7 +265,6 @@ void CDFlashWrite( u8 *writeToAddress, u32 flashAddress, u32 numberOfBytes);		//
 #define NUM_SECTORS		0x100
 #define NUM_PAGES		0x10000
 #define PAGE_SIZE		512
-//#define PAGE_SIZE		256
 
 
 /*  GPIO definitions */
@@ -277,14 +273,13 @@ void CDFlashWrite( u8 *writeToAddress, u32 flashAddress, u32 numberOfBytes);		//
 #define GPIO0OEN  ((unsigned int *) 0xE000A208)
 #define GPIO0dataMasked ((unsigned int *) 0xE000A000)
 #define GPIO0InputData ((unsigned int *) 0xE000A060)
-#define GPIO0InputDataX ((unsigned int *) 0xE000A068)   /* inputs appear in this register ! */
+
 
 #define GPIO2DIR  ((unsigned int *) 0xE000A284)
 #define GPIO2OEN  ((unsigned int *) 0xE000A288)
 #define GPIO2dataMasked ((unsigned int *) 0xE000A010)
 #define GPIO2dataMaskedMSW ((unsigned int *) 0xE000A014)
 #define GPIO2data ((unsigned int *) 0xE000A048)
-#define GPIO2dataX ((unsigned int *) 0xE000A048)
 
 
 

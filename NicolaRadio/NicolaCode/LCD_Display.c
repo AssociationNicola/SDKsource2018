@@ -581,6 +581,8 @@ static int BluetoothTimer = (30 * 1000) ;		// temp - set to 30 seconds
 #define HANDSET_TRANSMITTING	(12)
 #define BLUETOOTH_TRANSMITTING	(13)
 
+#define WAITING_WARBLE_COMPLETE (14)
+
 #define DATA_TRANSMITTING       (20)
 
 #define RECEIVE_LEGACY			(100)
@@ -952,7 +954,7 @@ static void LCD_Main( void *pvParameters )
 {
 	int		i;
 	char 	theMessage[20];
-	char	PLMessage[4];
+	char	PLMessage[6];
 	char	blockCharacter ;
 	static MAIN_MENU_ITEM		*thisMenuItem;
 	static SUB_MENU_ITEM		*subMenuItem;
@@ -1364,7 +1366,7 @@ static void LCD_Main( void *pvParameters )
 			{
 				WatchdogReplyKeypad = TRUE;
 
-				//xil_printf( "LCDDisplayKeypad Watchdog\r\n" );
+				//xil_printf( "LCDDisplay Keypad Watchdog\r\n" );
 
 			}
 
@@ -1420,6 +1422,13 @@ static void LCD_Main( void *pvParameters )
 
 				}
 				else
+				if ( theMessage[0] == KEY_WARBLE_COMPLETE )		/* ignore PTT operations until warble xmit done */
+				{
+					TransmitReceiveStatus = NO_TRANSMIT ;
+
+					xil_printf( "WARBLE DONE\r\n" ) ;
+				}
+				else
 				if ( theMessage[0] == KEY_PTT_ON )
 				{
 					if ( TransmitReceiveStatus == NO_TRANSMIT )
@@ -1448,7 +1457,11 @@ static void LCD_Main( void *pvParameters )
 
 						xTimerStop( LCDTimer3, pdMS_TO_TICKS(1 * 1000)  );		// stop the confidence beep timer
 					}
-
+					else
+					if (TransmitReceiveStatus == WAITING_WARBLE_COMPLETE )
+					{
+						xil_printf( "PTT waiting warble\r\n" ) ;
+					}
 				}
 				else
 				if ( theMessage[0] == KEY_PTT_OFF )
@@ -1458,7 +1471,8 @@ static void LCD_Main( void *pvParameters )
 						/* PTT is released as detected by KEYPAD pico 				*/
 						/* trigger or stop display									*/
 
-						TransmitReceiveStatus = NO_TRANSMIT ;
+						//TransmitReceiveStatus = NO_TRANSMIT ;
+						TransmitReceiveStatus = WAITING_WARBLE_COMPLETE ;
 
 						DisplayAerialEarthing = FALSE;
 
@@ -1535,7 +1549,8 @@ static void LCD_Main( void *pvParameters )
 						/* PTT is released as detected by KEYPAD pico 				*/
 						/* trigger or stop display									*/
 
-						TransmitReceiveStatus = NO_TRANSMIT ;
+						//TransmitReceiveStatus = NO_TRANSMIT ;
+						TransmitReceiveStatus = WAITING_WARBLE_COMPLETE ;
 
 						DisplayAerialEarthing = FALSE;
 
