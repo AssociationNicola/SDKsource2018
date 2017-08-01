@@ -1426,7 +1426,7 @@ static void LCD_Main( void *pvParameters )
 				{
 					TransmitReceiveStatus = NO_TRANSMIT ;
 
-					xil_printf( "WARBLE DONE\r\n" ) ;
+					//xil_printf( "WARBLE DONE\r\n" ) ;
 				}
 				else
 				if ( theMessage[0] == KEY_PTT_ON )

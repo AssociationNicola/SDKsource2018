@@ -147,7 +147,7 @@ u32 KeypadPico[] = {
 };
 #endif
 
-#if 1
+#if 0
 u32 UserPico[] = {
 #include "../../../PicoSource/UserPico.c"
 };
@@ -210,8 +210,6 @@ void PSPLComms_Initialise()
 
 #endif
 
-   	xil_printf("Send User Pico\n\r");
-   	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
 
     PLTransmitQueue = xQueueCreate( 4,					// max item count
     								PL_MESSAGE_MAX ) ;				// size of each item (max) ) ;
