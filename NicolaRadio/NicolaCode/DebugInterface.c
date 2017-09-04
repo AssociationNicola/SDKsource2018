@@ -83,6 +83,8 @@
 
 *****************************************************************************/
 
+
+
 /* Standard includes. */
 #include <stdio.h>
 #include <limits.h>
@@ -128,15 +130,12 @@
 extern n3z_tonetest		*ToneTestInstancePtr ;		/* in PSPLComms.c	*/
 extern XLlFifo 			DataFifo;					/* in PSPLComms.c	*/
 
-QueueHandle_t	DebugControlQueue ;
-
-
-
-#if 1
 
 static void Debuging_Main( void *pvParameters );
 static void GetMsgFromUART( char *, int ) ;
 
+
+QueueHandle_t	DebugControlQueue ;
 
 
 // static u32 Buffer[512];		/* if storing to write to flash */
@@ -147,7 +146,7 @@ static void GetMsgFromUART( char *, int ) ;
 void DebugingGraham_Startup()
 {
 	DebugControlQueue = xQueueCreate( 2,					// max item count
-									  2 ) ;					// size of each item (max) ) ;
+									 2 ) ;					// size of each item (max) ) ;
 
 	/* Start the tasks as described in the comments at the top of this file. */
 						/* The task handle is not required, so NULL is passed. */
@@ -176,8 +175,10 @@ static void Debuging_Main( void *pvParameters )
 
     int Value;
     u32 RegisterData;
+    u32 statusReg;
     u32 DataStreamID ;
-    u32 debuggingOn = 0;
+    u32 debuggingOn = 1;
+	u32 SelectRegisterData = 1;  //GN
     char theMessage[2];
     char inBuffer[10] ;
 	u32 RxWord;
@@ -217,13 +218,18 @@ static void Debuging_Main( void *pvParameters )
     //receiveBufferStart = pvPortMalloc( 2000 * sizeof(u32)) ;
 
 	while ( 1 )
-	{
+	{   //Add loop to repeat sending data
+		xil_printf( "Do you want register data or streamed fifo data? ( 0 for fifo data, 1 for register values): \n\r");
 
-	    n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);
+        GetMsgFromUART( inBuffer, 3);	/* read only 2 characters */
+		SelectRegisterData=inBuffer[0]&0x0F;
+		while(SelectRegisterData)
+		{
+	   n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);
 
-	    xil_printf( "\n\rHit return to start:  ");
+	   xil_printf( "\n\rHit return to continue, 0 to exit  ");
 		GetMsgFromUART( inBuffer, 3);	/* sit on this read till user sends c/r */
-
+		SelectRegisterData=inBuffer[0]&0x0F;
 		debuggingOn = 1 ;		/* debugging is ON */
 
 		/*Add bit to read out signal levels:*/
@@ -231,14 +237,18 @@ static void Debuging_Main( void *pvParameters )
 
         xil_printf("ADC peak value= %d \n\r",RegisterData % 256);
         xil_printf("ADC average value= %d \n\r",(RegisterData % 65536)/256);
-        xil_printf("ADC Gain value is %d \n\n\r",RegisterData / 65536);
+        xil_printf("ADC Gain value = %d \n\n\r",RegisterData / 65536);
         RegisterData=n3z_tonetest_demodsignallevel_read(ToneTestInstancePtr);
-        xil_printf("Demod signal level (24 bit signed)= %d \n\r",(RegisterData/256));
+        xil_printf("512ms sum (8 bit unsigned)= %d \n\r",(RegisterData/256/65536));
+        xil_printf("32ms sum (8 bit unsigned)= %d \n\r",(RegisterData>>16)%256);
+
         xil_printf("AGCvalue = %d \n\r",(RegisterData%256));
+        statusReg = n3z_tonetest_plstatus_read(ToneTestInstancePtr);
+        xil_printf("Status register = <%X> \n\r",(statusReg));
 
         RegisterData=n3z_tonetest_txaudiolevel_read(ToneTestInstancePtr);
         xil_printf("TX Audio level (average of AMP)= %d \n\n\r",RegisterData);
-
+        }
 
        	xil_printf( "ENTER Test signal input to filter ( 0-3, default 0): \n\r");
 
@@ -268,11 +278,11 @@ static void Debuging_Main( void *pvParameters )
 
 		GetMsgFromUART( inBuffer, 3);	/* read character */
 
-	    /* collect stream ID - can be 0 through 3 */
+	   /* collect stream ID - can be 0 through 3 */
 
-	    /* convert to channel */
+	   /* convert to channel */
 
-	    DataStreamID = (u32) (inBuffer[0]&0x0F) << 16 ;
+	   DataStreamID = (u32) (inBuffer[0]&0x0F) << 16 ;
 
 
 		xil_printf( "\n\rENTER NUMBER OF SAMPLES:  ");
@@ -289,19 +299,19 @@ static void Debuging_Main( void *pvParameters )
 
 		/* tell pico to start sending values */
 
-	    DataStreamSpec = DataStreamID + NumberOfSamples + Input2DSPpico1 + Input2DSPpico2;
+	   DataStreamSpec = DataStreamID + NumberOfSamples + Input2DSPpico1 + Input2DSPpico2;
 
-	    n3z_tonetest_values2recover_write(ToneTestInstancePtr, DataStreamSpec);
+	   n3z_tonetest_values2recover_write(ToneTestInstancePtr, DataStreamSpec);
 
 		xil_printf( "\n\rNow just hit return:  ");
 
 		GetMsgFromUART( inBuffer, sizeof(inBuffer));
 
 
-	    //receiveBufferStart = pvPortMalloc( NumberOfSamples * sizeof(u32)) ;
+	   //receiveBufferStart = pvPortMalloc( NumberOfSamples * sizeof(u32)) ;
 
 /* Disable this so as not to store
-	    receiveBuffer = receiveBufferStart;
+	   receiveBuffer = receiveBufferStart;
 
 */
 
@@ -331,6 +341,7 @@ static void Debuging_Main( void *pvParameters )
 			}
 
 			xil_printf( "FINISHED\r\n");
+		   n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000); //reset sample counter
 		}
 		else
 		{
@@ -341,7 +352,7 @@ static void Debuging_Main( void *pvParameters )
 /**/
 
 
-	    /*
+	   /*
 #if 0
     	if ( xQueueReceive( DebugControlQueue, &theMessage, 0 ) == pdPASS )
     	{
@@ -356,11 +367,11 @@ static void Debuging_Main( void *pvParameters )
 
     			GetMsgFromUART( inBuffer, 3);	// read only 1 character
 
-    		    // collect stream ID - can be 0 through 3
+    		   // collect stream ID - can be 0 through 3
 
-    		    // convert to channel
+    		   // convert to channel
 
-    		    DataStreamID = (u32) (inBuffer[0]&0x0F) << 16 ;
+    		   DataStreamID = (u32) (inBuffer[0]&0x0F) << 16 ;
 
 
     			xil_printf( "\n\rENTER NUMBER OF SAMPLES:  ");
@@ -377,14 +388,14 @@ static void Debuging_Main( void *pvParameters )
 
     			// tell pico to start sending values
 
-    		    DataStreamSpec = DataStreamID + NumberOfSamples ;
+    		   DataStreamSpec = DataStreamID + NumberOfSamples ;
 
-    		    n3z_tonetest_values2recover_write(ToneTestInstancePtr, DataStreamSpec);
+    		   n3z_tonetest_values2recover_write(ToneTestInstancePtr, DataStreamSpec);
 
 
-    		    //receiveBufferStart = pvPortMalloc( NumberOfSamples * sizeof(u32)) ;
+    		   //receiveBufferStart = pvPortMalloc( NumberOfSamples * sizeof(u32)) ;
 
-    		    receiveBuffer = receiveBufferStart;
+    		   receiveBuffer = receiveBufferStart;
 
 			}
     		else
@@ -422,7 +433,7 @@ static void Debuging_Main( void *pvParameters )
 					debuggingOn = 0 ;		// stop collecting data 
 					//vPortFree( receiveBufferStart ) ;
 
-				    n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);
+				   n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);
 
 				}
 			}
@@ -431,7 +442,7 @@ static void Debuging_Main( void *pvParameters )
 
 */
 		//ReceiveLength=Rx2Uart(&DataFifo);
-	    //xil_printf("Receive Length= %d \n\r",ReceiveLength);
+	   //xil_printf("Receive Length= %d \n\r",ReceiveLength);
 
 
 
@@ -479,6 +490,7 @@ int Rx2Uart (XLlFifo *InstancePtr)
 
 
 static void GetMsgFromUART( char *MessageBuffer, int MaxCharCount )
+/*This only reads characters of digits in the range 0-9 and converts to a byte with a value 0-9*/
 {
 	int 	charCount = 0;
 	char	RecvChar ;
@@ -491,7 +503,7 @@ static void GetMsgFromUART( char *MessageBuffer, int MaxCharCount )
     	/* Enable TX and RX for the device */
     XUartPs_WriteReg(UART_BASEADDR, XUARTPS_CR_OFFSET,
     				((CntrlRegister & ~XUARTPS_CR_EN_DIS_MASK) |
-    				 XUARTPS_CR_TX_EN | XUARTPS_CR_RX_EN));
+    				XUARTPS_CR_TX_EN | XUARTPS_CR_RX_EN));
 
 #endif
 
@@ -535,5 +547,3 @@ static void GetMsgFromUART( char *MessageBuffer, int MaxCharCount )
 
 }
 
-
-#endif

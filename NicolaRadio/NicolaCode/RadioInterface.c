@@ -168,34 +168,36 @@ void SetAerialType(int selected )
 // 5,6		Beacon Select  (currently doesn't go anywhere) - for location beacon modes
 // 7		Turn tone detect off - 1 = tone off; 0 = tone on
 
+int		toneDetectMask = 0x80 ;
+int		frequencyMask = 0x01;
 
 void SetToneDetect(int selected )
 {
 
 	if ( selected == 0 )
 	{
-		thisNicolaSettings.toneDetectSelected = 0x80;
+		toneDetectMask = 0x80;
 
-		xil_printf( "Tone detect off\r\n");
+		xil_printf( "SET Tone det off\r\n");
 	}
 	else
 	{
-		thisNicolaSettings.toneDetectSelected = 0x00;
+		toneDetectMask = 0x00;
 
-		xil_printf( "Tone detect on\r\n");
+		xil_printf( "SET Tone det on\r\n");
 	}
 
-	n3z_tonetest_n3zconfig_write(InstancePtr,thisNicolaSettings.toneDetectSelected | thisNicolaSettings.aerialFrequency ) ;
+	n3z_tonetest_n3zconfig_write(InstancePtr, toneDetectMask | frequencyMask ) ;
 
 }
 
 void SetAerialFrequency(int selected )
 {
-	thisNicolaSettings.aerialFrequency = selected ;
+	frequencyMask = selected ;
 
 	xil_printf( "Frequency set to %x\r\n", thisNicolaSettings.aerialFrequency);
 
-	n3z_tonetest_n3zconfig_write(InstancePtr, thisNicolaSettings.toneDetectSelected | thisNicolaSettings.aerialFrequency ) ;
+	n3z_tonetest_n3zconfig_write(InstancePtr, toneDetectMask | frequencyMask ) ;
 
 }
 

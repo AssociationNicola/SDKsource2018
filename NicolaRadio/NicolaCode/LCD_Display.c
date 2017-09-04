@@ -62,6 +62,7 @@ void SetBeaconBeepTime(int selected );				/* in this module			*/
 extern void SendPresetMessage(int selected);		/* in RadioInterface.c		*/
 void EffectTurnRadioOff(int selected );				/* in this module			*/
 void SetDebuggingState(int selected );				/* in this module			*/
+void SetKeypadCheckState(int selected );				/* in this module			*/
 
 
 extern QueueHandle_t	DebugControlQueue; 	/* in DebugInterface.c */
@@ -175,6 +176,7 @@ typedef enum
 	MENU_ITEM_TYPE_RECVD_TEXT_MSGS,			/* I  8 */
 	MENU_ITEM_TYPE_DEBUGGING,				/* J  9 */
 	MENU_ITEM_TYPE_VERSION_NUMBER,			/* L  10 */
+	MENU_ITEM_TYPE_KEYPAD_CHECK,			/* K 11 */
 
 	MENU_ITEM_TYPE_TURN_OFF = 'Z'
 
@@ -366,6 +368,16 @@ SUB_MENU_SCROLL_ITEM	TextMessageTestSetting3 =
 SUB_MENU_SCROLL_ITEM	TextMessageTestSetting4 =
 		{ NULL, &TextMessageTestSetting3, 0, "Party Found; assistance needed", NULL };
 
+SUB_MENU_ITEM	keypadCheckOn;
+SUB_MENU_ITEM	keypadCheckOff;
+
+SUB_MENU_ITEM	keypadCheckOn =
+		{ &keypadCheckOff, NULL, 2 , "Key Check On"};
+
+SUB_MENU_ITEM	keypadCheckOff =
+		{ &keypadCheckOn, NULL, 1, "OFF" };
+
+
 
 SUB_MENU_ITEM	debugOn;
 SUB_MENU_ITEM	debugOff;
@@ -391,6 +403,7 @@ SUB_MENU_ITEM	turnRadioOffSetting1 =
 
 MAIN_MENU_ITEM	theMenu_99;
 MAIN_MENU_ITEM	theMenu_9;
+MAIN_MENU_ITEM	theMenu_8a;
 MAIN_MENU_ITEM	theMenu_8;
 MAIN_MENU_ITEM	theMenu_7a;
 MAIN_MENU_ITEM	theMenu_7;
@@ -409,14 +422,17 @@ MAIN_MENU_ITEM	theMenu_3;
 
 
 MAIN_MENU_ITEM	theMenu_99 =
-{ NULL, &theMenu_8, "TURN RADIO OFF", 		(void *) &turnRadioOffSetting, 	EffectTurnRadioOff, SUB_MENU_TEXT, MENU_ITEM_TYPE_TURN_OFF,	  	0, 	0, 0, 0 };
+{ NULL, &theMenu_9, "TURN RADIO OFF", 		(void *) &turnRadioOffSetting, 	EffectTurnRadioOff, SUB_MENU_TEXT, MENU_ITEM_TYPE_TURN_OFF,	  	0, 	0, 0, 0 };
 
 
 MAIN_MENU_ITEM	theMenu_9 =
-{ &theMenu_99, &theMenu_8, "VERSION No.", 	(void *) &VersionNumberSubMenu,		NULL, SUB_MENU_TEXT, MENU_ITEM_TYPE_VERSION_NUMBER,	  	0, 	0, 0, 0 };
+{ &theMenu_99, &theMenu_8a, "VERSION No.", 	(void *) &VersionNumberSubMenu,		NULL, SUB_MENU_TEXT, MENU_ITEM_TYPE_VERSION_NUMBER,	  	0, 	0, 0, 0 };
+
+MAIN_MENU_ITEM	theMenu_8a =
+{ &theMenu_9, &theMenu_8, "KEYPAD CHECK", 	(void *) &keypadCheckOff, 		SetKeypadCheckState, SUB_MENU_TEXT, MENU_ITEM_TYPE_KEYPAD_CHECK,	  	0, 	0, 0, 0 };
 
 MAIN_MENU_ITEM	theMenu_8 =
-{ &theMenu_99, &theMenu_9, "DEBUGGING", 	(void *) &debugOff, 			SetDebuggingState, SUB_MENU_TEXT, MENU_ITEM_TYPE_DEBUGGING,	  	0, 	0, 0, 0 };
+{ &theMenu_8a, &theMenu_7a, "DEBUGGING", 	(void *) &debugOff, 			SetDebuggingState, SUB_MENU_TEXT, MENU_ITEM_TYPE_DEBUGGING,	  	0, 	0, 0, 0 };
 
 
 MAIN_MENU_ITEM	theMenu_7a =
@@ -442,7 +458,7 @@ MAIN_MENU_ITEM	theMenu_5 =
 
 
 MAIN_MENU_ITEM	theMenu_4a =
-{ &theMenu_5, &theMenu_4, "TONE DETECT", 			(void *) &ToneDetectSetting0, 	SetToneDetect,  	SUB_MENU_TEXT, MENU_ITEM_TYPE_FREQUENCY,		0, 0, 0, 0 };
+{ &theMenu_5, &theMenu_4, "TONE DETECT", 			(void *) &ToneDetectSetting0, 	SetToneDetect,  	SUB_MENU_TEXT, MENU_ITEM_TYPE_TONE_DETECT,		0, 0, 0, 0 };
 
 
 MAIN_MENU_ITEM	theMenu_4 =
@@ -601,6 +617,7 @@ static int ToneDetectStatus = RECEIVE_LEGACY ;
 static int ConfidenceBeaconMode = NO_BEEP_MODE;
 static int ToneDetectMode = FALSE;
 
+static int KeypadDiagnostics = FALSE ;		/* display incoming keys to check keypad */
 
 
 void LCD_Startup()
@@ -1003,6 +1020,9 @@ static void LCD_Main( void *pvParameters )
 
 	ReadMenuFromFlash();
 
+	thisNicolaSettings.toneDetectSelected = 0 ;		// tone detect off FORCE OFF at start for duration
+
+
 #if 1
 	//vTaskDelay( pdMS_TO_TICKS(2000));			/* wait  */
 
@@ -1147,7 +1167,52 @@ static void LCD_Main( void *pvParameters )
     	if ( xQueueReceive( KeysReceivedQueue, &theMessage, portMAX_DELAY ) == pdPASS )
     	{
 
+			if ( KeypadDiagnostics == TRUE)
+			{
+				if ( (theMessage[0] >= KEY_NONE ) &&
+					 (theMessage[0] < 'Z' ) )
+				{
+					/* is a key press */
+					if ( theMessage[0] & 0x08 )	/* KEY UP */
+					{
+						LCD_Write_String( FIRST_LINE, 6, "UP");
+					}
+					else
+					{
+						LCD_Write_String( FIRST_LINE, 6, "  ");
+					}
 
+					if ( theMessage[0] & 0x04 )	/* KEY DOWN */
+					{
+						LCD_Write_String( SECOND_LINE, 6, "DOWN");
+					}
+					else
+					{
+						LCD_Write_String( SECOND_LINE, 6, "    ");
+					}
+
+					if ( theMessage[0] & 0x02 )	/* KEY RIGHT */
+					{
+						LCD_Write_String( SECOND_LINE, 11, "RIGHT");
+					}
+					else
+					{
+						LCD_Write_String( SECOND_LINE, 11, "     ");
+					}
+
+					if ( theMessage[0] & 0x01 )	/* KEY LEFT */
+					{
+						LCD_Write_String( SECOND_LINE, 0, "LEFT");
+					}
+					else
+					{
+						LCD_Write_String( SECOND_LINE, 0, "    ");
+					}
+
+				}
+
+			}
+			else
 			if ( theMessage[0] == KEY_FIFO_FAIL )		/* ARM to user FIFO has failed	*/
 			{
 											//    0123456789012345"
@@ -1301,9 +1366,20 @@ static void LCD_Main( void *pvParameters )
 			{
 				if ( theMessage[1] == '0' )		/* speaker detect off = nothing received */
 				{
+
 					xil_printf( "Implement Tone Detect off\n\r" );
 
 					DisplayAerialEarthing = FALSE;
+
+#if 0
+					static int tempFix = 1 ;
+
+					if ( tempFix )
+					{
+						tempFix = 0;
+						SetToneDetect( thisNicolaSettings.toneDetectSelected ) ; // tone detect setting
+					}
+#endif
 				}
 				else
 				if ( theMessage[1] == '1' )		/* speaker detect on = incoming message */
@@ -1370,6 +1446,170 @@ static void LCD_Main( void *pvParameters )
 
 			}
 
+			else
+
+
+			if ( theMessage[0] == KEY_PTT_ON )
+			{
+				if ( TransmitReceiveStatus == NO_TRANSMIT )
+				{
+					/* PTT is pressed as detected by KEYPAD pico 				*/
+					/* trigger or stop display									*/
+
+					TransmitReceiveStatus = HANDSET_TRANSMITTING ;
+
+					DisplayAerialEarthing = TRUE;
+
+					LCD_Clear();
+					LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName );
+
+					PLMessage[0] = '*' ;
+					PLMessage[1] = SEND_TRANSMIT_STATE;
+					PLMessage[2]  = (u32) '\r' ;		// c/r
+					PLMessage[3]  = (u32) '\n' ;		// load  pico
+
+					while ( xQueueSendToBack( PLTransmitQueue, PLMessage, 0 ) != pdPASS )
+					{
+							vTaskDelay( pdMS_TO_TICKS( 5 ));
+					}
+
+					LCD_BackLight( SEND_LCD_BACKLIGHT_ON );		/* light the LCD */
+
+					xTimerStop( LCDTimer3, pdMS_TO_TICKS(1 * 1000)  );		// stop the confidence beep timer
+				}
+				else
+				if (TransmitReceiveStatus == WAITING_WARBLE_COMPLETE )
+				{
+					xil_printf( "PTT waiting warble\r\n" ) ;
+				}
+				else
+				{
+					xil_printf( "PTT already running\r\n" ) ;
+				}
+			}
+			else
+			if ( theMessage[0] == KEY_PTT_OFF )
+			{
+				if ( TransmitReceiveStatus == HANDSET_TRANSMITTING )
+				{
+					/* PTT is released as detected by KEYPAD pico 				*/
+					/* trigger or stop display									*/
+
+					//TransmitReceiveStatus = NO_TRANSMIT ;
+					TransmitReceiveStatus = WAITING_WARBLE_COMPLETE ;
+
+					DisplayAerialEarthing = FALSE;
+
+					PLMessage[0] = '*' ;
+					PLMessage[1] = SEND_RECEIVE_STATE;
+					PLMessage[2]  = (u32) '\r' ;		// c/r
+					PLMessage[3]  = (u32) '\n' ;		// load  pico
+
+					while ( xQueueSendToBack( PLTransmitQueue, PLMessage, 0 ) != pdPASS )
+					{
+							vTaskDelay( pdMS_TO_TICKS( 5 ));
+					}
+
+					LCD_BackLight( SEND_LCD_BACKLIGHT_OFF );		/* extinguish the LCD */
+
+					if ( ConfidenceBeepTimer != 0 )
+					{
+						xTimerStart( LCDTimer3, pdMS_TO_TICKS(1 * 1000) );	// and start the confidence beep timer
+					}
+
+					xTimerStart( LCDTimer1, portMAX_DELAY );	// and start the backlight timer
+
+					LCD_Clear();		// tidy up LCD
+					LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName );
+				}
+			}
+
+			else
+			if ( theMessage[0] == KEY_BLUETOOTH_PTT )
+			{
+				if ( TransmitReceiveStatus == NO_TRANSMIT )
+				{
+					/* PTT is released as detected by KEYPAD pico 				*/
+					/* trigger or stop display									*/
+
+					TransmitReceiveStatus = BLUETOOTH_TRANSMITTING ;
+
+					DisplayAerialEarthing = TRUE;
+
+					LCD_Clear();
+					LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName );
+
+					PLMessage[0] = '*' ;
+					PLMessage[1] = SEND_TRANSMIT_STATE;
+					PLMessage[2]  = (u32) '\r' ;		// c/r
+					PLMessage[3]  = (u32) '\n' ;		// load  pico
+
+					while ( xQueueSendToBack( PLTransmitQueue, PLMessage, 0 ) != pdPASS )
+
+					{
+							vTaskDelay( pdMS_TO_TICKS( 5 ));
+					}
+
+					LCD_BackLight( SEND_LCD_BACKLIGHT_ON );		/* light the LCD */
+
+					if ( ConfidenceBeepTimer != 0 )
+					{
+						xTimerStart( LCDTimer3, pdMS_TO_TICKS(1 * 1000) );	// and start the confidence beep timer
+					}
+
+					// if there is a time out period for the Bluetooth transmit
+					// then set the timer going.
+
+					if ( BluetoothTimer!= 0 )
+					{
+						xTimerChangePeriod( LCDTimer4, pdMS_TO_TICKS(BluetoothTimer), portMAX_DELAY );
+						xTimerStart( LCDTimer4, portMAX_DELAY );	//
+					}
+
+				}
+				else
+				if ( TransmitReceiveStatus == BLUETOOTH_TRANSMITTING )
+				{
+					/* PTT is released as detected by KEYPAD pico 				*/
+					/* trigger or stop display									*/
+
+					//TransmitReceiveStatus = NO_TRANSMIT ;
+					TransmitReceiveStatus = WAITING_WARBLE_COMPLETE ;
+
+					DisplayAerialEarthing = FALSE;
+
+					PLMessage[0] = '*' ;
+					PLMessage[1] = SEND_RECEIVE_STATE;
+					PLMessage[2]  = (u32) '\r' ;		// c/r
+					PLMessage[3]  = (u32) '\n' ;		// load  pico
+
+					while ( xQueueSendToBack( PLTransmitQueue, PLMessage, 0 ) != pdPASS )
+					{
+							vTaskDelay( pdMS_TO_TICKS( 5 ));
+					}
+
+					LCD_BackLight( SEND_LCD_BACKLIGHT_OFF );		/* extinguish the LCD */
+
+					if ( ConfidenceBeepTimer != 0 )
+					{
+						xTimerStart( LCDTimer3, pdMS_TO_TICKS(1 * 1000) );	// and start the confidence beep timer
+					}
+
+					xTimerStart( LCDTimer1, portMAX_DELAY );	// and start the backlight timer
+
+					xTimerStop( LCDTimer4, portMAX_DELAY );		// stop the Bluetooth talk timer
+
+				}
+				else
+				if (TransmitReceiveStatus == WAITING_WARBLE_COMPLETE )
+				{
+					xil_printf( "Bluetooth waiting warble\r\n" ) ;
+				}
+				else
+				{
+					xil_printf( "Bluetooth PTT ignored\r\n" ) ;
+				}
+			}
 
 			else
 			if ( ( CurrentMenuPosition == TOP_LEVEL ) && ( theMessage[0] != KEY_UPLEFT ) && ( theMessage[0] != KEY_LEFTRIGHT ) )
@@ -1402,7 +1642,7 @@ static void LCD_Main( void *pvParameters )
 						if ( earthingValue < 80 ) blockCharacter = 'X' ;		// 0xD0;
 						else blockCharacter = 0xFF;
 
-						LCD_SecondLine( 0 ) ;
+						//LCD_SecondLine( 0 ) ;
 
 						for ( i=0; i< (int) earthingValue/8; i++ )
 						{
@@ -1412,6 +1652,16 @@ static void LCD_Main( void *pvParameters )
 						for ( ; i<16; i++ )
 						{
 							LCD_Write_Char( ' ' ) ;
+						}
+
+						/* simplify the number displayed */
+						if ( theMessage[2] > '8' )
+						{
+							theMessage[2] = '8' ;
+						}
+						else
+						{
+							theMessage[2] = '0' ;
 						}
 
 						LCD_SecondLine( 0 ) ;
@@ -1428,155 +1678,7 @@ static void LCD_Main( void *pvParameters )
 
 					//xil_printf( "WARBLE DONE\r\n" ) ;
 				}
-				else
-				if ( theMessage[0] == KEY_PTT_ON )
-				{
-					if ( TransmitReceiveStatus == NO_TRANSMIT )
-					{
-						/* PTT is pressed as detected by KEYPAD pico 				*/
-						/* trigger or stop display									*/
 
-						TransmitReceiveStatus = HANDSET_TRANSMITTING ;
-
-						DisplayAerialEarthing = TRUE;
-
-						LCD_Clear();
-						LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName );
-
-						PLMessage[0] = '*' ;
-						PLMessage[1] = SEND_TRANSMIT_STATE;
-						PLMessage[2]  = (u32) '\r' ;		// c/r
-						PLMessage[3]  = (u32) '\n' ;		// load  pico
-
-						while ( xQueueSendToBack( PLTransmitQueue, PLMessage, 0 ) != pdPASS )
-						{
-								vTaskDelay( pdMS_TO_TICKS( 5 ));
-						}
-
-						LCD_BackLight( SEND_LCD_BACKLIGHT_ON );		/* light the LCD */
-
-						xTimerStop( LCDTimer3, pdMS_TO_TICKS(1 * 1000)  );		// stop the confidence beep timer
-					}
-					else
-					if (TransmitReceiveStatus == WAITING_WARBLE_COMPLETE )
-					{
-						xil_printf( "PTT waiting warble\r\n" ) ;
-					}
-				}
-				else
-				if ( theMessage[0] == KEY_PTT_OFF )
-				{
-					if ( TransmitReceiveStatus == HANDSET_TRANSMITTING )
-					{
-						/* PTT is released as detected by KEYPAD pico 				*/
-						/* trigger or stop display									*/
-
-						//TransmitReceiveStatus = NO_TRANSMIT ;
-						TransmitReceiveStatus = WAITING_WARBLE_COMPLETE ;
-
-						DisplayAerialEarthing = FALSE;
-
-						PLMessage[0] = '*' ;
-						PLMessage[1] = SEND_RECEIVE_STATE;
-						PLMessage[2]  = (u32) '\r' ;		// c/r
-						PLMessage[3]  = (u32) '\n' ;		// load  pico
-
-						while ( xQueueSendToBack( PLTransmitQueue, PLMessage, 0 ) != pdPASS )
-						{
-								vTaskDelay( pdMS_TO_TICKS( 5 ));
-						}
-
-						LCD_BackLight( SEND_LCD_BACKLIGHT_OFF );		/* extinguish the LCD */
-
-						if ( ConfidenceBeepTimer != 0 )
-						{
-							xTimerStart( LCDTimer3, pdMS_TO_TICKS(1 * 1000) );	// and start the confidence beep timer
-						}
-
-						xTimerStart( LCDTimer1, portMAX_DELAY );	// and start the backlight timer
-
-						LCD_Clear();		// tidy up LCD
-						LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName );
-					}
-				}
-
-				else
-				if ( theMessage[0] == KEY_BLUETOOTH_PTT )
-				{
-					if ( TransmitReceiveStatus == NO_TRANSMIT )
-					{
-						/* PTT is released as detected by KEYPAD pico 				*/
-						/* trigger or stop display									*/
-
-						TransmitReceiveStatus = BLUETOOTH_TRANSMITTING ;
-
-						DisplayAerialEarthing = TRUE;
-
-						LCD_Clear();
-						LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName );
-
-						PLMessage[0] = '*' ;
-						PLMessage[1] = SEND_TRANSMIT_STATE;
-						PLMessage[2]  = (u32) '\r' ;		// c/r
-						PLMessage[3]  = (u32) '\n' ;		// load  pico
-
-						while ( xQueueSendToBack( PLTransmitQueue, PLMessage, 0 ) != pdPASS )
-
-						{
-								vTaskDelay( pdMS_TO_TICKS( 5 ));
-						}
-
-						LCD_BackLight( SEND_LCD_BACKLIGHT_ON );		/* light the LCD */
-
-						if ( ConfidenceBeepTimer != 0 )
-						{
-							xTimerStart( LCDTimer3, pdMS_TO_TICKS(1 * 1000) );	// and start the confidence beep timer
-						}
-
-						// if there is a time out period for the Bluetooth transmit
-						// then set the timer going.
-
-						if ( BluetoothTimer!= 0 )
-						{
-							xTimerChangePeriod( LCDTimer4, pdMS_TO_TICKS(BluetoothTimer), portMAX_DELAY );
-							xTimerStart( LCDTimer4, portMAX_DELAY );	//
-						}
-
-					}
-					else
-					if ( TransmitReceiveStatus == BLUETOOTH_TRANSMITTING )
-					{
-						/* PTT is released as detected by KEYPAD pico 				*/
-						/* trigger or stop display									*/
-
-						//TransmitReceiveStatus = NO_TRANSMIT ;
-						TransmitReceiveStatus = WAITING_WARBLE_COMPLETE ;
-
-						DisplayAerialEarthing = FALSE;
-
-						PLMessage[0] = '*' ;
-						PLMessage[1] = SEND_RECEIVE_STATE;
-						PLMessage[2]  = (u32) '\r' ;		// c/r
-						PLMessage[3]  = (u32) '\n' ;		// load  pico
-
-						while ( xQueueSendToBack( PLTransmitQueue, PLMessage, 0 ) != pdPASS )
-						{
-								vTaskDelay( pdMS_TO_TICKS( 5 ));
-						}
-
-						LCD_BackLight( SEND_LCD_BACKLIGHT_OFF );		/* extinguish the LCD */
-
-						if ( ConfidenceBeepTimer != 0 )
-						{
-							xTimerStart( LCDTimer3, pdMS_TO_TICKS(1 * 1000) );	// and start the confidence beep timer
-						}
-
-						xTimerStart( LCDTimer1, portMAX_DELAY );	// and start the backlight timer
-
-						xTimerStop( LCDTimer4, portMAX_DELAY );		// stop the Bluetooth talk timer
-
-					}
-				}
     		}
 
     		else
@@ -2518,6 +2620,7 @@ static void LCD_ControlWrite( int value )
 
 static void LCD_BackLight( char backLightSetting )
 {
+#if 0
 	if ( ToneDetectMode == TRUE )
 	{
 		if ( backLightSetting == SEND_LCD_BACKLIGHT_OFF )
@@ -2532,20 +2635,10 @@ static void LCD_BackLight( char backLightSetting )
 
 		}
 	}
-
-#if 0
-	char	PLMessage[4] ;
-
-	PLMessage[0] = '*' ;
-	PLMessage[1] = backLightSetting;
-	PLMessage[2]  = (u32) '\r' ;		// c/r
-	PLMessage[3]  = (u32) '\n' ;		// load  pico
-
-	while ( xQueueSendToBack( PLTransmitQueue, PLMessage, 0 ) != pdPASS )
-	{
-			vTaskDelay( pdMS_TO_TICKS( 5 ));
-	}
 #endif
+
+	// display always ON
+	LCD_ControlWriteStart( 0xE );				/* Display, on, cursor off, no blink cursor	*/
 
 }
 
@@ -2681,7 +2774,7 @@ void MenuMessageFromHostComputer( char *theMessage )
 	char parsedMenuType;
 	int i;
 	int copying;
-	int parsedIndex;
+	int parsedIndex=0;
 	static MAIN_MENU_ITEM 	*mainMenuItem ;
 	static SUB_MENU_ITEM	*subMenuItem ;
 	static MAIN_MENU_ITEM 	*mainMenuItemPrevious ;
@@ -3130,7 +3223,7 @@ static void ApplyDefaultSettings()
 
 	SetConfidenceBeepTime( thisNicolaSettings.confidenceBeepTime);
 
-	SetToneDetect( thisNicolaSettings.toneDetectSelected ) ; // tone detect off
+	SetToneDetect( thisNicolaSettings.toneDetectSelected ) ; // tone detect setting
 
 	//BluetoothBeginInquiry( thisNicolaSettings.);  		//	if RADIO STARTS IN INQUIRY MODE
 
@@ -3275,6 +3368,7 @@ static int ReadMenuFromFlash( void )
 	 */
 
 	extern int CDCardInit();
+
 
 	if ( CDCardInit() == FALSE )
 	{
@@ -3533,6 +3627,10 @@ static void LCD_LoadHandlerRoutine( MAIN_MENU_ITEM *mainMenuItem )
 		//mainMenuItem->SubMenuClass = SUB_MENU_TEXT;
 		mainMenuItem->menuItemChanged = &SetAerialFrequency;
 		break;
+	case MENU_ITEM_TYPE_TONE_DETECT:
+		//mainMenuItem->SubMenuClass = SUB_MENU_TEXT;
+		mainMenuItem->menuItemChanged = &SetToneDetect;
+		break;
 	case MENU_ITEM_TYPE_CONFIDENCE_BEEP:
 		mainMenuItem->SubMenuClass = SUB_MENU_INTEGER;
 		mainMenuItem->menuItemChanged = &SetConfidenceBeepTime;
@@ -3706,6 +3804,36 @@ void SetConfidenceBeepTime(int selected )
 
 		xil_printf( "Set confidence beep time %d seconds\r\n", selected ) ;
 
+	}
+
+}
+
+void SetKeypadCheckState(int selected )
+{
+	char	PLMessage[4] ;
+
+	if ( selected != 0 )
+	{
+		KeypadDiagnostics = TRUE;
+
+		LCD_Clear();
+
+		xil_printf( "Keypad Chk Mode\n" ) ;
+
+
+		PLMessage[0] = '*' ;
+		PLMessage[1] = SEND_KEYPAD_CHK_MODE ;
+		PLMessage[2]  = (u32) '\r' ;		// c/r
+		PLMessage[3]  = (u32) '\n' ;		// load  pico
+
+		while ( xQueueSendToBack( PLTransmitQueue, PLMessage, 0 ) != pdPASS )
+		{
+				vTaskDelay( pdMS_TO_TICKS( 5 ));
+		}
+	}
+	else
+	{
+		xil_printf( "Keypad Chk Mode??\n" ) ;
 	}
 
 }
