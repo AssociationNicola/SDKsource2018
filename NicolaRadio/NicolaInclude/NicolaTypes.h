@@ -182,6 +182,8 @@ typedef struct
 
 #define SEND_TURN_OFF_RADIO		('Z')
 
+#define SEND_KEYPAD_CHK_MODE	(0x7E)
+
 /*
  * Key event definitions
  *
