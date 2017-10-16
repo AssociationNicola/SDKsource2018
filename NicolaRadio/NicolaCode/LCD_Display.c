@@ -314,13 +314,17 @@ SUB_MENU_ITEM	ToneDetectSetting1 =
 		{ NULL, &ToneDetectSetting0, 1 , "Tone Detect On "};
 
 
-SUB_MENU_ITEM	confidenceBeepSetting[] = {
+SUB_MENU_ITEM	confidenceBeepSetting1 ;
 
-		{ NULL, NULL, 0 , "MIN"}, 		/* min is 0 	*/
-		{ NULL, NULL, 500, "MAX" }, 	/* max is 10 minutes	*/
+SUB_MENU_ITEM	confidenceBeepSetting2;
 
-		{0}
-};
+
+SUB_MENU_ITEM	confidenceBeepSetting1 =
+		{ &confidenceBeepSetting2, NULL, 0 , "MIN"}; 		/* min is 0 	*/
+
+SUB_MENU_ITEM	confidenceBeepSetting2 =
+		{ NULL, NULL, 600 , "MAX"}; 		/* max is 10 mins 	*/
+
 
 SUB_MENU_ITEM	BluetoothPairingSetting;
 SUB_MENU_ITEM	BluetoothPairingSetting1;
@@ -452,7 +456,7 @@ MAIN_MENU_ITEM	theMenu_6 =
 
 
 MAIN_MENU_ITEM	theMenu_5 =
-{ &theMenu_6, &theMenu_4, "CONFIDENCE BEEP", 	(void *) &confidenceBeepSetting, SetConfidenceBeepTime, 	SUB_MENU_INTEGER, MENU_ITEM_TYPE_CONFIDENCE_BEEP, 0, 0, 15, 15 };	/* 5 minutes */
+{ &theMenu_6, &theMenu_4, "CONFIDENCE BEEP", 	(void *) &confidenceBeepSetting1, SetConfidenceBeepTime, 	SUB_MENU_INTEGER, MENU_ITEM_TYPE_CONFIDENCE_BEEP, 0, 0, 0, 0 };	/* 5 minutes */
 
 
 
@@ -1410,7 +1414,8 @@ static void LCD_Main( void *pvParameters )
 			// Keyboard Messages
 
 			else
-			if ( theMessage[0] == KEY_DOWNLEFT )		/* special to reduce volume */
+			//if ( theMessage[0] == KEY_DOWNLEFT )		/* special to reduce volume */
+			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to reduce volume */
 			{
 				SetMicrophoneVolume( DECREMENT_VOLUME ) ;
 
@@ -1420,7 +1425,8 @@ static void LCD_Main( void *pvParameters )
 
 			}
 			else
-			if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
+			//if ( theMessage[0] == KEY_DOWNRIGHT )		/* special to increase volume */
+				if ( theMessage[0] == KEY_UPRIGHT )		/* special to increase volume */
 			{
 				SetMicrophoneVolume( INCREMENT_VOLUME ) ;
 
@@ -1612,7 +1618,7 @@ static void LCD_Main( void *pvParameters )
 			}
 
 			else
-			if ( ( CurrentMenuPosition == TOP_LEVEL ) && ( theMessage[0] != KEY_UPLEFT ) && ( theMessage[0] != KEY_LEFTRIGHT ) )
+			if ( ( CurrentMenuPosition == TOP_LEVEL ) && ( theMessage[0] != KEY_UPDOWN ) && ( theMessage[0] != KEY_LEFTRIGHT ) )
 			{
 
 				/* look for PTT pressed when the LCD is not enabled - so we will light LCD and 	*/
@@ -1717,10 +1723,11 @@ static void LCD_Main( void *pvParameters )
 				switch (theMessage[0])
 				{
 
-				/* to protect against accidental menu operations, we need the UP and LEFT to	*/
+				/* to protect against accidental menu operations, we need the UP and DOWN to	*/
 				/* be touched together to start; otherwise keys will be ignored.				*/
 
-				case KEY_UPLEFT:
+				//case KEY_UPLEFT:
+				case KEY_UPDOWN:
 					{
 						if ( ( thisMenuItem != NULL ) && ( thisMenuItem->SubMenuClass == SUB_MENU_SCROLL_TEXT) )
 						{
@@ -1966,7 +1973,15 @@ static void LCD_Main( void *pvParameters )
 							else
 							if ( thisMenuItem->SubMenuClass == SUB_MENU_INTEGER)
 							{
-								thisMenuItem->currentValue -= 1;
+								if ( thisMenuItem->SubMenuType == MENU_ITEM_TYPE_CONFIDENCE_BEEP )
+								{
+									thisMenuItem->currentValue -= 10;
+								}
+								else
+								{
+									thisMenuItem->currentValue -= 1;
+								}
+
 								if ( thisMenuItem->currentValue < thisMenuItem->firstSubMenu[0].value ) thisMenuItem->currentValue = thisMenuItem->firstSubMenu[0].value;
 
 								// depending on menu type convert to seconds or minutes and seconds
@@ -1982,6 +1997,9 @@ static void LCD_Main( void *pvParameters )
 									break;
 
 								}
+
+								xTimerStart( LCDTimer2, portMAX_DELAY );		// only start when we have a text emssage to scroll
+								xTimerStop( LCDTimer1, portMAX_DELAY );
 
 							}
 						}
@@ -2140,8 +2158,21 @@ static void LCD_Main( void *pvParameters )
 							else
 							if ( thisMenuItem->SubMenuClass == SUB_MENU_INTEGER)
 							{
-								thisMenuItem->currentValue += 1;
-								if ( thisMenuItem->currentValue > thisMenuItem->firstSubMenu[1].value ) thisMenuItem->currentValue = thisMenuItem->firstSubMenu[1].value;
+								if ( thisMenuItem->SubMenuType == MENU_ITEM_TYPE_CONFIDENCE_BEEP )
+								{
+									thisMenuItem->currentValue += 10;
+								}
+								else
+								{
+									thisMenuItem->currentValue += 1;
+								}
+
+								SUB_MENU_ITEM *MAXsubmenu = thisMenuItem->firstSubMenu->nextSubMenu ;
+
+								if ( ( MAXsubmenu != NULL) && ( thisMenuItem->currentValue > MAXsubmenu->value ) )
+								{
+									thisMenuItem->currentValue = MAXsubmenu->value;
+								}
 
 								// depending on menu type convert to seconds or minutes and seconds
 
@@ -2156,6 +2187,9 @@ static void LCD_Main( void *pvParameters )
 									break;
 
 								}
+
+								xTimerStart( LCDTimer2, portMAX_DELAY );		// only start when we have a text emssage to scroll
+								xTimerStop( LCDTimer1, portMAX_DELAY );
 
 							}
 						}
@@ -2379,6 +2413,7 @@ static void DisplayVolume()
 
 	DisplayVolumeCounter = 3 ;
 
+#if 0
 	if ( xTimerStart( LCDTimer1, portMAX_DELAY ) == pdPASS )	// and start the backlight timer
 	{
 		xil_printf( "Backlight Timer OK \r\n");
@@ -2387,6 +2422,8 @@ static void DisplayVolume()
 	{
 		xil_printf( "Backlight Timer Failed \r\n");
 	}
+#endif
+
 }
 
 static MAIN_MENU_ITEM *FindMainMenuItem( int MainMenuType )
@@ -3118,6 +3155,11 @@ void MenuMessageFromHostComputer( char *theMessage )
 
 		i += 2 ;		// skip '>' and space character
 		parsedMenuType = theMessage[i];
+
+		if ( strncmp( parsedString, "CONF" , 4 ) == 0 )
+		{
+			theMessage[0] = 'a' ;
+		}
 
 		if ( mainMenuItem->SubMenuClass == SUB_MENU_SCROLL_TEXT )
 		{

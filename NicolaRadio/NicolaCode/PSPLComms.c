@@ -162,10 +162,10 @@ void PSPLComms_Initialise()
 
     xil_printf("PSPLComms Init\n\r");
 
-    Buffer  = malloc(512 * sizeof(*Buffer));
+    Buffer  = pvPortMalloc(512 * sizeof(*Buffer));
 
 
-    ToneTestInstancePtr = malloc(sizeof (n3z_tonetest));
+    ToneTestInstancePtr = pvPortMalloc(sizeof (n3z_tonetest));
 
 
     Status=n3z_tonetest_Initialize(ToneTestInstancePtr, XPAR_N3Z_TONETEST_0_DEVICE_ID);
@@ -209,6 +209,8 @@ void PSPLComms_Initialise()
 
 
 #endif
+
+
 
 
     PLTransmitQueue = xQueueCreate( 4,					// max item count
@@ -433,6 +435,32 @@ static void PL_Receiver( void *pvParameters )
 #endif
 
 				break;
+
+			case KEY_UPRIGHT:
+				xil_printf( "KEY UP & RIGHT PRESSED\n\r" );
+#ifdef BT_DEBUG
+				AddMessageToBluetoothTransmit("  KEY Up&Right PRESSED\n\r");
+#endif
+
+#ifdef LCD_DEBUG
+				LCD_Write_String( 1, 0 , "KEY UP and RIGHT PRESSED");
+#endif
+
+				break;
+
+
+			case KEY_UPDOWN:
+				xil_printf( "KEY UP & DOWN PRESSED\n\r" );
+#ifdef BT_DEBUG
+				AddMessageToBluetoothTransmit("  KEY Up&Down PRESSED\n\r");
+#endif
+
+#ifdef LCD_DEBUG
+				LCD_Write_String( 1, 0 , "KEY UP and DOWN PRESSED");
+#endif
+
+				break;
+
 
 			case KEY_DOWNRIGHT:
 				xil_printf( "KEY DOWN & RIGHT PRESSED\n\r" );
