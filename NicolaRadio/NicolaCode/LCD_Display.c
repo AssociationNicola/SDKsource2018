@@ -1227,9 +1227,11 @@ static void LCD_Main( void *pvParameters )
 			else
 			if ( theMessage[0] == KEY_TIMEOUT1 )		/* if turn off backlight	*/
 			{
+				LCD_Clear();
 
 				LCD_Write_String( FIRST_LINE, 0, thisNicolaSettings.thisNicolaName);			// Nicola3Name);
-				LCD_Write_String( SECOND_LINE, 0, GetVersionString());
+				//LCD_Write_String( SECOND_LINE, 0, GetVersionString());
+				LCD_Write_String( SECOND_LINE, 0, " ");
 
 				LCD_BackLight( SEND_LCD_BACKLIGHT_OFF );		/* extinguish the LCD */
 				CurrentMenuPosition = TOP_LEVEL;
