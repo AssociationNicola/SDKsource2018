@@ -64,7 +64,6 @@ n3z_tonetest* InstancePtr = NULL;
 void RadioInterfaceInit( )
 {
 
-	//InstancePtr = (n3z_tonetest *)malloc(sizeof (n3z_tonetest));
 	if ( ( InstancePtr = (n3z_tonetest *) pvPortMalloc( sizeof(n3z_tonetest)) ) == NULL )
 	{
 		xil_printf( "FAILED TO ALLOCATE MEM RadioInterface\r\n" );
@@ -193,11 +192,15 @@ void SetToneDetect(int selected )
 
 void SetAerialFrequency(int selected )
 {
-	frequencyMask = selected ;
+	int	TXfrequency = selected &0xFFFF ;
+	int	RXfrequency = (selected>>16) &0xFFFF ;
 
-	xil_printf( "Frequency set to %x\r\n", thisNicolaSettings.aerialFrequency);
+	////frequencyMask = selected ;
 
-	n3z_tonetest_n3zconfig_write(InstancePtr, toneDetectMask | frequencyMask ) ;
+	xil_printf( "Frequency set to TX %x and RX %x\r\n", TXfrequency, RXfrequency );
+
+	n3z_tonetest_txfreq_write(InstancePtr, TXfrequency ) ;
+	n3z_tonetest_rxfreq_write(InstancePtr, RXfrequency ) ;
 
 }
 

@@ -60,11 +60,11 @@ typedef struct
 
 	char			microphoneVolume;
 	char			aerialType;
-	char			aerialFrequency;
 	char			toneDetectSelected;
 	char			confidenceBeepTime;
 	char			beaconBeepTime;
 
+	int				aerialFrequency;
 
 } NICOLA_SETTINGS_DATA;
 

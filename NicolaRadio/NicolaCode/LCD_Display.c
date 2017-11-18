@@ -295,6 +295,16 @@ SUB_MENU_ITEM	frequencySetting2;
 SUB_MENU_ITEM	frequencySetting3;
 
 SUB_MENU_ITEM	frequencySetting =
+		{ &frequencySetting2, NULL, (0x754F << 16) | 0x0e7F , "HEYPhone"};		/* low 16 bits is Tx freq; high 16 bits is Rx */
+
+SUB_MENU_ITEM	frequencySetting2 =
+		{ &frequencySetting3, &frequencySetting, (0x753E << 16) | 0x0e7d , "Nicola 2"};
+
+SUB_MENU_ITEM	frequencySetting3 =
+		{ NULL, &frequencySetting2, (0x2AA8 << 16) | 0x052a, "31 kh   " };
+
+#if 0
+SUB_MENU_ITEM	frequencySetting =
 		{ &frequencySetting2, NULL, 1 , "HEYPhone"};
 
 SUB_MENU_ITEM	frequencySetting2 =
@@ -302,7 +312,7 @@ SUB_MENU_ITEM	frequencySetting2 =
 
 SUB_MENU_ITEM	frequencySetting3 =
 		{ NULL, &frequencySetting2, 3, "31 kh   " };
-
+#endif
 
 SUB_MENU_ITEM	ToneDetectSetting0;
 SUB_MENU_ITEM	ToneDetectSetting1;

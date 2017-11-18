@@ -381,7 +381,7 @@ int main( void )
 
 	thisNicolaSettings.microphoneVolume = 50 ;		//
 	thisNicolaSettings.aerialType = 0 ;				// earthed
-	thisNicolaSettings.aerialFrequency = 1 ;		// HEYPhone
+	thisNicolaSettings.aerialFrequency = (0x754F << 16) | 0x0e7F ;		// HEYPhone
 	thisNicolaSettings.toneDetectSelected = 0 ;		// tone detect off
 	thisNicolaSettings.confidenceBeepTime = 0 ;		// no confidence beep
 
