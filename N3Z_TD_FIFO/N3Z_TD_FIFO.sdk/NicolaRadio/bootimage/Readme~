@@ -1,0 +1,8 @@
+From within the directory with the appropriate bin file eg:
+cd ~/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/bootimage
+To program the flash type (replacing BOOT.bin with correct filename:
+/opt/Xilinx/SDK/2016.2/bin/zynq_flash -f BOOT.bin -flash_type qspi_single -verify
+
+
+BOOTTD17.bin   Corrected hangup when pressing PTT repeatedly
+

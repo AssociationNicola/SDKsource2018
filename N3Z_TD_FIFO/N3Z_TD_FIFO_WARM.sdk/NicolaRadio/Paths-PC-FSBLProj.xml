@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdtprojectproperties>
+<section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.IncludePaths">
+<language name="s">
+
+</language>
+<language name="c,S">
+<includepath workspace_path="true">/PS_PL_wrapper_hw_platform_0</includepath>
+<includepath>../FSBL_bsp/ps7_cortexa9_0/include</includepath>
+
+</language>
+<language name="ld">
+
+</language>
+<language name="Object File">
+
+</language>
+</section>
+<section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.Macros">
+<language name="s">
+
+</language>
+<language name="c,S">
+<macro>
+<name>FSBL_DEBUG_INFO</name><value/>
+</macro>
+<macro>
+<name>DDRLESS_SYSTEM</name><value/>
+</macro>
+
+</language>
+<language name="ld">
+
+</language>
+<language name="Object File">
+
+</language>
+</section>
+</cdtprojectproperties>

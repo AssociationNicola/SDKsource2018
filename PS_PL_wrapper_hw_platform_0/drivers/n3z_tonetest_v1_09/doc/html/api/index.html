@@ -110,6 +110,52 @@ Initialize n3z_tonetest pointer with a specifc instance of the device based devi
   @return int XST_SUCCESS if initialization is successful
 <br/>
 </p>
+<h1>void n3z_tonetest_txfreq_write(n3z_tonetest *InstancePtr, u32 Data);</h1>
+<p>
+ Write to txfreq gateway of n3z_tonetest. Assignments are LSB-justified.<br/>
+<br/>
+ @param	InstancePtr is the txfreq instance to operate on.<br/>
+ @param	Data is value to be written to gateway txfreq.<br/>
+<br/>
+ @return	None.<br/>
+<br/>
+ @note    .<br/>
+<br/>
+</p>
+<h1>u32 n3z_tonetest_txfreq_read(n3z_tonetest *InstancePtr);</h1>
+<p>
+ Read from txfreq gateway of n3z_tonetest. Assignments are LSB-justified.<br/>
+<br/>
+ @param	InstancePtr is the txfreq instance to operate on.<br/>
+<br/>
+ @return	u32<br/>
+
+ @note    .<br/>
+<br/>
+</p>
+<h1>void n3z_tonetest_rxfreq_write(n3z_tonetest *InstancePtr, u32 Data);</h1>
+<p>
+ Write to rxfreq gateway of n3z_tonetest. Assignments are LSB-justified.<br/>
+<br/>
+ @param	InstancePtr is the rxfreq instance to operate on.<br/>
+ @param	Data is value to be written to gateway rxfreq.<br/>
+<br/>
+ @return	None.<br/>
+<br/>
+ @note    .<br/>
+<br/>
+</p>
+<h1>u32 n3z_tonetest_rxfreq_read(n3z_tonetest *InstancePtr);</h1>
+<p>
+ Read from rxfreq gateway of n3z_tonetest. Assignments are LSB-justified.<br/>
+<br/>
+ @param	InstancePtr is the rxfreq instance to operate on.<br/>
+<br/>
+ @return	u32<br/>
+
+ @note    .<br/>
+<br/>
+</p>
 <h1>void n3z_tonetest_values2recover_write(n3z_tonetest *InstancePtr, u32 Data);</h1>
 <p>
  Write to values2recover gateway of n3z_tonetest. Assignments are LSB-justified.<br/>

@@ -1,0 +1,1513 @@
+Archive member included because of file (symbol)
+
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo.o)
+                              ./NicolaCode/PSPLComms.o (XLlFifo_iRxOccupancy)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_sinit.o)
+                              ./NicolaCode/PSPLComms.o (XLlFfio_LookupConfig)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xstreamer.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo.o) (XStrm_RxInitialize)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest.o)
+                              ./NicolaCode/PSPLComms.o (n3z_tonetest_audiovolume_write)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_sinit.o)
+                              ./NicolaCode/PSPLComms.o (n3z_tonetest_Initialize)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic.o)
+                              ./src/FreeRTOS_tick_config.o (XScuGic_CfgInitialize)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic_g.o)
+                              ./src/FreeRTOS_tick_config.o (XScuGic_ConfigTable)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic_sinit.o)
+                              ./src/FreeRTOS_tick_config.o (XScuGic_LookupConfig)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer.o)
+                              ./src/FreeRTOS_tick_config.o (XScuTimer_CfgInitialize)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_sinit.o)
+                              ./src/FreeRTOS_tick_config.o (XScuTimer_LookupConfig)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt.o)
+                              ./src/main.o (XScuWdt_CfgInitialize)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_sinit.o)
+                              ./src/main.o (XScuWdt_LookupConfig)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_options.o)
+                              ./NicolaCode/xsdps.o (XSdPs_SetBlkSize)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_sinit.o)
+                              ./NicolaCode/Flash-SDCard.o (XSdPs_LookupConfig)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(asm_vectors.o)
+                              (_vector_table)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(boot.o)
+                              ./src/FreeRTOS_asm_vectors.o (_boot)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(sleep.o)
+                              ./NicolaCode/xsdps.o (sleep)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(translation_table.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(boot.o) (MMUTable)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(usleep.o)
+                              ./NicolaCode/xsdps.o (usleep)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(vectors.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(asm_vectors.o) (UndefinedException)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil-crt0.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(boot.o) (_start)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_assert.o)
+                              ./NicolaCode/xsdps.o (Xil_Assert)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_cache.o)
+                              ./NicolaCode/xsdps.o (Xil_DCacheFlushRange)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_exception.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(asm_vectors.o) (PrefetchAbortAddr)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_io.o)
+                              ./NicolaCode/xsdps.o (Xil_In8)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_printf.o)
+                              ./src/main.o (xil_printf)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xtime_l.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil-crt0.o) (XTime_SetTime)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_g.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_sinit.o) (XLlFifo_ConfigTable)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_g.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_sinit.o) (n3z_tonetest_ConfigTable)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_g.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_sinit.o) (XScuTimer_ConfigTable)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_g.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_sinit.o) (XScuWdt_ConfigTable)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_g.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_sinit.o) (XSdPs_ConfigTable)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(cpu_init.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil-crt0.o) (__cpu_init)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(outbyte.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_printf.o) (outbyte)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xuartps_hw.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(outbyte.o) (XUartPs_SendByte)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a(_udivsi3.o)
+                              ./src/printf-stdarg.o (__aeabi_uidiv)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a(_dvmd_tls.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atoi.o)
+                              ./NicolaCode/LCD_Display.o (atoi)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-ctype_.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_printf.o) (__ctype_ptr__)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-exit.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil-crt0.o) (exit)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-fini.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil-crt0.o) (__libc_fini_array)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-impure.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-exit.o) (_global_impure_ptr)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-init.o)
+                              ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil-crt0.o) (__libc_init_array)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-malloc.o)
+                              ./NicolaCode/PSPLComms.o (malloc)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mallocr.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-malloc.o) (_malloc_r)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memcmp.o)
+                              ./NicolaCode/Bluetooth.o (memcmp)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memcpy.o)
+                              ./src/queue.o (memcpy)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memset.o)
+                              ./src/tasks.o (memset)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mlock.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mallocr.o) (__malloc_lock)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-sbrkr.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mallocr.o) (_sbrk_r)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strcpy.o)
+                              ./src/tasks.o (strcpy)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strlen-armv7.o)
+                              ./src/tasks.o (strlen)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strncmp.o)
+                              ./NicolaCode/Bluetooth.o (strncmp)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strncpy.o)
+                              ./NicolaCode/Bluetooth.o (strncpy)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strtol.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atoi.o) (_strtol_r)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__call_atexit.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-exit.o) (__call_exitprocs)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atexit.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__call_atexit.o) (atexit)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-freer.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-malloc.o) (_free_r)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-reent.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-sbrkr.o) (errno)
+/opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__atexit.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atexit.o) (__register_exitproc)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(_exit.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-exit.o) (_exit)
+../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(_sbrk.o)
+                              /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-sbrkr.o) (_sbrk)
+
+Allocating common symbols
+Common symbol       size              file
+
+consoleReceiveQueue
+                    0x4               ./NicolaCode/ConsoleManager.o
+ZoneTestInstancePtr
+                    0x4               ./NicolaCode/PSPLComms.o
+BluetoothIOTask     0x4               ./NicolaCode/Bluetooth.o
+MessageFromAndriodQueue
+                    0x4               ./NicolaCode/RemoteProtocolHandler.o
+errno               0x4               /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-reent.o)
+DataFifo            0x64              ./NicolaCode/PSPLComms.o
+MessageFromRemoteNicolasQueue
+                    0x4               ./NicolaCode/RemoteProtocolHandler.o
+PLTransmitQueue     0x4               ./NicolaCode/PSPLComms.o
+UndefinedExceptionAddr
+                    0x4               ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_exception.o)
+xWatchDogInstance   0x10              ./src/main.o
+xQueueRegistry      0x40              ./src/queue.o
+Gpio                0x20              ./NicolaCode/LCD_Display.o
+consoleTransmitQueue
+                    0x4               ./NicolaCode/ConsoleManager.o
+PSPLFifo            0x64              ./NicolaCode/PSPLComms.o
+BluegigaTransmitQueue
+                    0x4               ./NicolaCode/Bluetooth.o
+PrefetchAbortAddr   0x4               ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_exception.o)
+consoleQueue        0x4               ./NicolaCode/Bluetooth.o
+thisNicolaSettings  0x2e              ./src/main.o
+pageData            0x4               ./NicolaCode/LCD_Display.o
+PLSendQueue         0x4               ./NicolaCode/RadioInterface.o
+DataAbortAddr       0x4               ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_exception.o)
+xInterruptController
+                    0xc               ./src/FreeRTOS_tick_config.o
+Xil_AssertStatus    0x4               ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_assert.o)
+Buffer              0x4               ./NicolaCode/PSPLComms.o
+BluegigaReceiveQueue
+                    0x4               ./NicolaCode/Bluetooth.o
+KeysReceivedQueue   0x4               ./NicolaCode/LCD_Display.o
+theMenu_2           0x3c              ./NicolaCode/LCD_Display.o
+TextMessageTransmitQueue
+                    0x4               ./NicolaCode/PSPLComms.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+ps7_qspi_linear_0_S_AXI_BASEADDR 0xfc000000         0x00800000
+FLASH            0xfc800000         0x00800000
+ps7_ram_0_S_AXI_BASEADDR 0x00000000         0x00030000
+ps7_ram_1_S_AXI_BASEADDR 0xffff0000         0x0000fe00
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crti.o
+LOAD /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+                0x00002000                _STACK_SIZE = DEFINED (_STACK_SIZE)?_STACK_SIZE:0x2000
+                0x00002000                _HEAP_SIZE = DEFINED (_HEAP_SIZE)?_HEAP_SIZE:0x2000
+                0x00000400                _ABORT_STACK_SIZE = DEFINED (_ABORT_STACK_SIZE)?_ABORT_STACK_SIZE:0x400
+                0x00000800                _SUPERVISOR_STACK_SIZE = DEFINED (_SUPERVISOR_STACK_SIZE)?_SUPERVISOR_STACK_SIZE:0x800
+                0x00000400                _IRQ_STACK_SIZE = DEFINED (_IRQ_STACK_SIZE)?_IRQ_STACK_SIZE:0x400
+                0x00000400                _FIQ_STACK_SIZE = DEFINED (_FIQ_STACK_SIZE)?_FIQ_STACK_SIZE:0x400
+                0x00000400                _UNDEF_STACK_SIZE = DEFINED (_UNDEF_STACK_SIZE)?_UNDEF_STACK_SIZE:0x400
+
+.text           0xfc800000    0x1a5e0
+ *(.freertos_vectors)
+ .freertos_vectors
+                0xfc800000       0xb0 ./src/FreeRTOS_asm_vectors.o
+                0xfc800000                _freertos_vector_table
+                0xfc800090                vPortInstallFreeRTOSVectorTable
+ *(.vectors)
+ .vectors       0xfc8000b0      0x12c ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(asm_vectors.o)
+                0xfc8000b0                _vector_table
+ *(.boot)
+ .boot          0xfc8001dc      0x370 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(boot.o)
+                0xfc8001dc                _boot
+                0xfc8001dc                _prestart
+ *(.text)
+ .text          0xfc80054c        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crti.o
+ .text          0xfc80054c      0x108 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+ .text          0xfc800654      0x714 ./src/portable/port.o
+                0xfc800654                pxPortInitialiseStack
+                0xfc8008f4                xPortStartScheduler
+                0xfc800a34                vPortEndScheduler
+                0xfc800a64                vPortEnterCritical
+                0xfc800ac8                vPortExitCritical
+                0xfc800b50                FreeRTOS_Tick_Handler
+                0xfc800be0                vPortTaskUsesFPU
+                0xfc800c18                vPortClearInterruptMask
+                0xfc800c70                ulPortSetInterruptMask
+                0xfc800ce8                vPortValidateInterruptPriority
+ *fill*         0xfc800d68        0x8 
+ .text          0xfc800d70      0x2e0 ./src/portable/portASM.o
+                0xfc800d70                FreeRTOS_SWI_Handler
+                0xfc800e18                vPortRestoreTaskContext
+                0xfc800e80                FreeRTOS_IRQ_Handler
+                0xfc800ff0                vApplicationIRQHandler
+ .text          0xfc801050        0x0 ./src/FreeRTOS_asm_vectors.o
+ .text          0xfc801050      0x278 ./src/FreeRTOS_tick_config.o
+                0xfc801050                vConfigureTickInterrupt
+                0xfc801218                vClearTickInterrupt
+                0xfc801240                vApplicationFPUSafeIRQHandler
+ .text          0xfc8012c8        0x0 ./src/event_groups.o
+ .text          0xfc8012c8      0x6f4 ./src/heap_4.o
+                0xfc8012c8                pvPortMalloc
+                0xfc801588                vPortFree
+                0xfc8016a8                xPortGetFreeHeapSize
+                0xfc8016cc                xPortGetMinimumEverFreeHeapSize
+                0xfc8016f0                vPortInitialiseBlocks
+ .text          0xfc8019bc      0x284 ./src/list.o
+                0xfc8019bc                vListInitialise
+                0xfc801a20                vListInitialiseItem
+                0xfc801a48                vListInsertEnd
+                0xfc801acc                vListInsert
+                0xfc801ba0                uxListRemove
+ .text          0xfc801c40      0x4bc ./src/main.o
+                0xfc801c9c                main
+                0xfc801da0                tempFSBLCode
+                0xfc801db4                GetVersionString
+                0xfc801ea8                vApplicationMallocFailedHook
+                0xfc801eb8                vApplicationStackOverflowHook
+                0xfc801ed4                vApplicationIdleHook
+                0xfc801f08                vAssertCalled
+                0xfc801f48                vApplicationTickHook
+                0xfc801f5c                vInitialiseTimerForRunTimeStats
+                0xfc80205c                vApplicationGetIdleTaskMemory
+                0xfc8020ac                vApplicationGetTimerTaskMemory
+ .text          0xfc8020fc       0x9c ./src/platform.o
+                0xfc8020fc                enable_caches
+                0xfc802110                disable_caches
+                0xfc802124                init_uart
+                0xfc802138                init_platform
+                0xfc802188                cleanup_platform
+ .text          0xfc802198      0x718 ./src/printf-stdarg.o
+                0xfc8027dc                printf
+                0xfc80281c                sprintf
+                0xfc802864                snprintf
+ .text          0xfc8028b0      0x8d8 ./src/ps7_init_Nicola.o
+                0xfc8028b0                getPS7MessageInfo
+                0xfc802978                ps7GetSiliconVersion
+                0xfc8029c4                mask_write
+                0xfc802a1c                mask_poll
+                0xfc802a98                mask_read
+                0xfc802adc                ps7_config
+                0xfc802d10                ps7_post_config
+                0xfc802dc0                ps7_debug
+                0xfc802e70                ps7_init
+                0xfc8030bc                perf_start_clock
+                0xfc8030e0                perf_reset_clock
+                0xfc803110                get_number_of_cycles_for_delay
+                0xfc803150                perf_disable_clock
+                0xfc803174                perf_reset_and_start_timer
+ .text          0xfc803188     0x1f38 ./src/queue.o
+                0xfc803188                xQueueGenericReset
+                0xfc8032c0                xQueueGenericCreateStatic
+                0xfc803400                xQueueGenericCreate
+                0xfc8035ac                xQueueCreateMutex
+                0xfc803600                xQueueCreateMutexStatic
+                0xfc803660                xQueueGiveMutexRecursive
+                0xfc803708                xQueueTakeMutexRecursive
+                0xfc8037c0                xQueueCreateCountingSemaphoreStatic
+                0xfc80385c                xQueueCreateCountingSemaphore
+                0xfc8038e8                xQueueGenericSend
+                0xfc803bdc                xQueueGenericSendFromISR
+                0xfc803dc4                xQueueGiveFromISR
+                0xfc803f84                xQueueGenericReceive
+                0xfc8042a4                xQueueReceiveFromISR
+                0xfc804404                xQueuePeekFromISR
+                0xfc804508                uxQueueMessagesWaiting
+                0xfc804558                uxQueueSpacesAvailable
+                0xfc8045bc                uxQueueMessagesWaitingFromISR
+                0xfc804604                vQueueDelete
+                0xfc804660                uxQueueGetQueueNumber
+                0xfc804688                vQueueSetQueueNumber
+                0xfc8046b4                ucQueueGetQueueType
+                0xfc804a84                xQueueIsQueueEmptyFromISR
+                0xfc804b38                xQueueIsQueueFullFromISR
+                0xfc804ba0                vQueueAddToRegistry
+                0xfc804c30                pcQueueGetName
+                0xfc804cbc                vQueueUnregisterQueue
+                0xfc804d54                vQueueWaitForMessageRestricted
+                0xfc804dfc                xQueueCreateSet
+                0xfc804e30                xQueueAddToSet
+                0xfc804ea8                xQueueRemoveFromSet
+                0xfc804f2c                xQueueSelectFromSet
+                0xfc804f6c                xQueueSelectFromSetFromISR
+ .text          0xfc8050c0     0x3e24 ./src/tasks.o
+                0xfc8050c0                xTaskCreateStatic
+                0xfc8051a4                xTaskCreate
+                0xfc8055f4                vTaskDelete
+                0xfc8057bc                vTaskDelayUntil
+                0xfc80591c                vTaskDelay
+                0xfc805994                eTaskGetState
+                0xfc805abc                uxTaskPriorityGet
+                0xfc805b14                uxTaskPriorityGetFromISR
+                0xfc805b78                vTaskPrioritySet
+                0xfc805ddc                vTaskSuspend
+                0xfc806040                vTaskResume
+                0xfc806154                xTaskResumeFromISR
+                0xfc806294                vTaskStartScheduler
+                0xfc8063b8                vTaskEndScheduler
+                0xfc8063dc                vTaskSuspendAll
+                0xfc80640c                xTaskResumeAll
+                0xfc80661c                xTaskGetTickCount
+                0xfc80664c                xTaskGetTickCountFromISR
+                0xfc806684                uxTaskGetNumberOfTasks
+                0xfc8066a8                pcTaskGetName
+                0xfc806894                xTaskGetHandle
+                0xfc8069cc                uxTaskGetSystemState
+                0xfc806b9c                xTaskAbortDelay
+                0xfc806cdc                xTaskIncrementTick
+                0xfc806fb8                vTaskSwitchContext
+                0xfc807170                vTaskPlaceOnEventList
+                0xfc8071d0                vTaskPlaceOnUnorderedEventList
+                0xfc807270                vTaskPlaceOnEventListRestricted
+                0xfc8072e8                xTaskRemoveFromEventList
+                0xfc80742c                xTaskRemoveFromUnorderedEventList
+                0xfc80756c                vTaskSetTimeOutState
+                0xfc8075c8                xTaskCheckForTimeOut
+                0xfc80772c                vTaskMissedYield
+                0xfc807750                uxTaskGetTaskNumber
+                0xfc8077a0                vTaskSetTaskNumber
+                0xfc8079a0                vTaskGetInfo
+                0xfc807d98                xTaskGetCurrentTaskHandle
+                0xfc807dc8                xTaskGetSchedulerState
+                0xfc807e30                vTaskPriorityInherit
+                0xfc808000                xTaskPriorityDisinherit
+                0xfc808254                vTaskList
+                0xfc80843c                uxTaskResetEventItemValue
+                0xfc808494                pvTaskIncrementMutexHeldCount
+                0xfc8084e4                ulTaskNotifyTake
+                0xfc8085d0                xTaskNotifyWait
+                0xfc808700                xTaskGenericNotify
+                0xfc8088ec                xTaskGenericNotifyFromISR
+                0xfc808b3c                vTaskNotifyGiveFromISR
+                0xfc808cd8                xTaskNotifyStateClear
+ .text          0xfc808ee4      0xeec ./src/timers.o
+                0xfc808ee4                xTimerCreateTimerTask
+                0xfc808fc8                xTimerCreate
+                0xfc80903c                xTimerCreateStatic
+                0xfc809188                xTimerGenericCommand
+                0xfc809288                xTimerGetTimerDaemonTaskHandle
+                0xfc8092c8                xTimerGetPeriod
+                0xfc809310                xTimerGetExpiryTime
+                0xfc809360                pcTimerGetName
+                0xfc809bc0                xTimerIsTimerActive
+                0xfc809c28                pvTimerGetTimerID
+                0xfc809c80                vTimerSetTimerID
+                0xfc809cd4                xTimerPendFunctionCallFromISR
+                0xfc809d40                xTimerPendFunctionCall
+ .text          0xfc809dd0     0x1de0 ./NicolaCode/Bluetooth.o
+                0xfc809dd0                BluetoothStartup
+                0xfc80b064                BluetoothBeginInquiry
+                0xfc80b448                AllocateChannelTable
+                0xfc80b688                DetermineChannelType
+                0xfc80b760                FindChannelTableFromMAC
+                0xfc80b840                FindChannelTableFromLinkID
+                0xfc80b91c                FindChannelTableFromSCOChannel
+                0xfc80b9f8                FindChannelTableFromRFCommChannel
+                0xfc80bad4                FindChannelTableForTablet
+ .text          0xfc80bbb0      0x600 ./NicolaCode/ConsoleManager.o
+                0xfc80bbb0                ConsoleStartup
+                0xfc80beec                transmitToConsole
+                0xfc80c098                uart_ReceiveByteCheck
+                0xfc80c0e0                uart_ReceiveByte
+                0xfc80c14c                uart_SendByte
+ .text          0xfc80c1b0      0x23c ./NicolaCode/Flash-SDCard.o
+                0xfc80c1b0                CDCardInit
+                0xfc80c278                CDFlashRead
+                0xfc80c2e0                CDFlashWrite
+ .text          0xfc80c3ec     0x4a84 ./NicolaCode/LCD_Display.o
+                0xfc80c3ec                LCD_Startup
+                0xfc80c4ec                hexToInt
+                0xfc80e9b0                LCD_Write_String
+                0xfc80ef68                MenuMessageFromHostComputer
+                0xfc8108b4                AddReceivedTextToMenu
+                0xfc810a74                SetConfidenceBeepTime
+                0xfc810bfc                SetBeaconBeepTime
+                0xfc810d84                EffectTurnRadioOff
+ .text          0xfc810e70      0xb64 ./NicolaCode/PSPLComms.o
+                0xfc810e70                PSPLComms_Initialise
+                0xfc8110bc                intToHexChars
+                0xfc811544                xsleep
+                0xfc8115b8                LoadPicoFast
+                0xfc8116a8                ReadResponse
+                0xfc8117e0                TxSend
+                0xfc8118a8                RxReceive
+ .text          0xfc8119d4      0x3ec ./NicolaCode/RadioInterface.o
+                0xfc8119d4                RadioInterfaceInit
+                0xfc811a98                SetMicrophoneVolume
+                0xfc811c9c                SetAerialType
+                0xfc811cec                SetAerialFrequency
+                0xfc811d3c                SendPresetMessage
+ .text          0xfc811dc0      0x5ec ./NicolaCode/RemoteProtocolHandler.o
+                0xfc811dc0                TextMessageStartup
+ .text          0xfc8123ac     0x21b4 ./NicolaCode/xsdps.o
+                0xfc8123ac                XSdPs_CfgInitialize
+                0xfc812708                XSdPs_SdCardInitialize
+                0xfc812bf4                XSdPs_CardInitialize
+                0xfc8135bc                XSdPs_CmdTransfer
+                0xfc8138dc                XSdPs_FrameCmd
+                0xfc813bbc                XSdPs_ReadPolled
+                0xfc813da4                XSdPs_WritePolled
+                0xfc813f70                XSdPs_Select_Card
+                0xfc813fcc                XSdPs_SetupADMA2DescTbl
+                0xfc8141c4                XSdPs_MmcCardInitialize
+ .text          0xfc814560      0x540 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo.o)
+                0xfc814560                XLlFifo_iRxOccupancy
+                0xfc8145b4                XLlFifo_iRxGetLen
+                0xfc814608                XLlFifo_iTxVacancy
+                0xfc81465c                XLlFifo_iTxSetLen
+                0xfc8146a8                XLlFifo_CfgInitialize
+                0xfc8147d8                XLlFifo_RxGetWord
+                0xfc8147f8                XLlFifo_iRead_Aligned
+                0xfc8148b0                XLlFifo_TxPutWord
+                0xfc8148c4                XLlFifo_iWrite_Aligned
+                0xfc81497c                XLlFifo_Initialize
+ .text          0xfc814aa0       0x38 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_sinit.o)
+                0xfc814aa0                XLlFfio_LookupConfig
+ .text          0xfc814ad8      0x350 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xstreamer.o)
+                0xfc814ad8                XStrm_RxInitialize
+                0xfc814b3c                XStrm_TxInitialize
+                0xfc814ba0                XStrm_RxGetLen
+                0xfc814bc4                XStrm_Read
+                0xfc814cf4                XStrm_TxSetLen
+                0xfc814d3c                XStrm_Write
+ .text          0xfc814e28      0x290 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest.o)
+                0xfc814e28                n3z_tonetest_CfgInitialize
+                0xfc814ea4                n3z_tonetest_values2recover_write
+                0xfc814eec                n3z_tonetest_values2recover_read
+                0xfc814f34                n3z_tonetest_audiovolume_write
+                0xfc814f80                n3z_tonetest_audiovolume_read
+                0xfc814fd4                n3z_tonetest_adcgain_ave_peak_read
+                0xfc815020                n3z_tonetest_demodsignallevel_read
+                0xfc81506c                n3z_tonetest_txaudiolevel_read
+ .text          0xfc8150b8       0x90 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_sinit.o)
+                0xfc8150b8                n3z_tonetest_LookupConfig
+                0xfc8150d4                n3z_tonetest_Initialize
+ .text          0xfc815148      0x930 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic.o)
+                0xfc815198                XScuGic_CfgInitialize
+                0xfc815350                XScuGic_Connect
+                0xfc815428                XScuGic_Disconnect
+                0xfc815500                XScuGic_Enable
+                0xfc8155bc                XScuGic_Disable
+                0xfc815678                XScuGic_SoftwareIntr
+                0xfc815764                XScuGic_SetPriorityTriggerType
+                0xfc8158e8                XScuGic_GetPriorityTriggerType
+                0xfc815a28                XScuGic_InterruptMaptoCpu
+ .text          0xfc815a78        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic_g.o)
+ .text          0xfc815a78       0x1c ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic_sinit.o)
+                0xfc815a78                XScuGic_LookupConfig
+ .text          0xfc815a94      0x314 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer.o)
+                0xfc815a94                XScuTimer_CfgInitialize
+                0xfc815b44                XScuTimer_Start
+                0xfc815be0                XScuTimer_Stop
+                0xfc815c74                XScuTimer_SetPrescaler
+                0xfc815d1c                XScuTimer_GetPrescaler
+ .text          0xfc815da8       0x1c ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_sinit.o)
+                0xfc815da8                XScuTimer_LookupConfig
+ .text          0xfc815dc4      0x238 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt.o)
+                0xfc815dc4                XScuWdt_CfgInitialize
+                0xfc815ecc                XScuWdt_Start
+                0xfc815f68                XScuWdt_Stop
+ .text          0xfc815ffc       0x1c ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_sinit.o)
+                0xfc815ffc                XScuWdt_LookupConfig
+ .text          0xfc816018     0x10b8 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_options.o)
+                0xfc8162fc                XSdPs_SetBlkSize
+                0xfc8163d8                XSdPs_Get_BusWidth
+                0xfc81654c                XSdPs_Change_BusWidth
+                0xfc8166ec                XSdPs_Get_BusSpeed
+                0xfc816848                XSdPs_Change_ClkFreq
+                0xfc816a00                XSdPs_Change_BusSpeed
+                0xfc816c9c                XSdPs_Pullup
+                0xfc816d50                XSdPs_Get_Mmc_ExtCsd
+                0xfc816eac                XSdPs_Uhs_ModeInit
+                0xfc8170c0                XSdPs_SetTapDelay
+ .text          0xfc8170d0       0x1c ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_sinit.o)
+                0xfc8170d0                XSdPs_LookupConfig
+ .text          0xfc8170ec        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(asm_vectors.o)
+ .text          0xfc8170ec        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(boot.o)
+ .text          0xfc8170ec       0x48 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(sleep.o)
+                0xfc8170ec                sleep
+ .text          0xfc817134        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(translation_table.o)
+ .text          0xfc817134       0x44 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(usleep.o)
+                0xfc817134                usleep
+ .text          0xfc817178       0x78 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(vectors.o)
+                0xfc817178                UndefinedException
+                0xfc81718c                FIQInterrupt
+                0xfc8171a0                IRQInterrupt
+                0xfc8171b4                SWInterrupt
+                0xfc8171c8                DataAbortInterrupt
+                0xfc8171dc                PrefetchAbortInterrupt
+ .text          0xfc8171f0       0x78 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil-crt0.o)
+                0xfc817204                _start
+ .text          0xfc817268       0x34 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_assert.o)
+                0xfc817268                Xil_Assert
+                0xfc817288                Xil_AssertSetCallback
+                0xfc817298                XNullHandler
+ .text          0xfc81729c      0x9fc ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_cache.o)
+                0xfc81729c                Xil_DCacheInvalidateLine
+                0xfc8172e0                Xil_DCacheFlushRange
+                0xfc817340                Xil_DCacheStoreLine
+                0xfc817380                Xil_ICacheInvalidateLine
+                0xfc8173c4                Xil_ICacheInvalidateRange
+                0xfc81741c                Xil_L1DCacheInvalidate
+                0xfc8174c4                Xil_L1DCacheEnable
+                0xfc8174e4                Xil_L1DCacheInvalidateLine
+                0xfc8174fc                Xil_L1DCacheInvalidateRange
+                0xfc817544                Xil_L1DCacheFlush
+                0xfc8175d4                Xil_L1DCacheDisable
+                0xfc8175ec                Xil_L1DCacheFlushLine
+                0xfc817604                Xil_L1DCacheFlushRange
+                0xfc81764c                Xil_L1DCacheStoreLine
+                0xfc817664                Xil_L1ICacheEnable
+                0xfc817680                Xil_L1ICacheDisable
+                0xfc81769c                Xil_L1ICacheInvalidate
+                0xfc8176b4                Xil_L1ICacheInvalidateLine
+                0xfc8176cc                Xil_L1ICacheInvalidateRange
+                0xfc817714                Xil_L2CacheInvalidate
+                0xfc817770                Xil_DCacheInvalidate
+                0xfc817790                Xil_ICacheInvalidate
+                0xfc8177c0                Xil_L2CacheEnable
+                0xfc817870                Xil_DCacheEnable
+                0xfc817880                Xil_ICacheEnable
+                0xfc81789c                Xil_L2CacheInvalidateLine
+                0xfc8178b8                Xil_L2CacheInvalidateRange
+                0xfc81793c                Xil_L2CacheFlush
+                0xfc8179a0                Xil_DCacheFlush
+                0xfc8179c0                Xil_L2CacheDisable
+                0xfc817a00                Xil_DCacheDisable
+                0xfc817a1c                Xil_ICacheDisable
+                0xfc817a40                Xil_L2CacheFlushLine
+                0xfc817a70                Xil_DCacheInvalidateRange
+                0xfc817b90                Xil_DCacheFlushLine
+                0xfc817bf8                Xil_L2CacheFlushRange
+                0xfc817c7c                Xil_L2CacheStoreLine
+ .text          0xfc817c98       0x58 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_exception.o)
+                0xfc817c9c                Xil_DataAbortHandler
+                0xfc817ca4                Xil_PrefetchAbortHandler
+                0xfc817cac                Xil_UndefinedExceptionHandler
+                0xfc817cb0                Xil_ExceptionInit
+                0xfc817cb4                Xil_ExceptionRegisterHandler
+                0xfc817ccc                Xil_ExceptionRemoveHandler
+ .text          0xfc817cf0       0x88 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_io.o)
+                0xfc817cf0                Xil_In8
+                0xfc817cf8                Xil_In16
+                0xfc817d00                Xil_In32
+                0xfc817d08                Xil_Out8
+                0xfc817d10                Xil_Out16
+                0xfc817d18                Xil_Out32
+                0xfc817d20                Xil_In16BE
+                0xfc817d34                Xil_In32BE
+                0xfc817d40                Xil_Out16BE
+                0xfc817d54                Xil_Out32BE
+                0xfc817d60                Xil_EndianSwap16
+                0xfc817d70                Xil_EndianSwap32
+ .text          0xfc817d78      0x690 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_printf.o)
+                0xfc817f88                xil_printf
+ .text          0xfc818408       0xa0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xtime_l.o)
+                0xfc818408                XTime_SetTime
+                0xfc818458                XTime_GetTime
+ .text          0xfc8184a8        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_g.o)
+ .text          0xfc8184a8        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_g.o)
+ .text          0xfc8184a8        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_g.o)
+ .text          0xfc8184a8        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_g.o)
+ .text          0xfc8184a8        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_g.o)
+ .text          0xfc8184a8       0x3c ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(cpu_init.o)
+                0xfc8184a8                __cpu_init
+ .text          0xfc8184e4        0xc ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(outbyte.o)
+                0xfc8184e4                outbyte
+ .text          0xfc8184f0       0xec ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xuartps_hw.o)
+                0xfc8184f0                XUartPs_SendByte
+                0xfc818520                XUartPs_RecvByte
+                0xfc81854c                XUartPs_ResetHw
+ .text          0xfc8185dc      0x20c /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a(_udivsi3.o)
+                0xfc8185dc                __udivsi3
+                0xfc8185dc                __aeabi_uidiv
+                0xfc8187c8                __aeabi_uidivmod
+ .text          0xfc8187e8        0x4 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a(_dvmd_tls.o)
+                0xfc8187e8                __aeabi_ldiv0
+                0xfc8187e8                __aeabi_idiv0
+ .text          0xfc8187ec       0x18 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atoi.o)
+                0xfc8187ec                atoi
+                0xfc8187f8                _atoi_r
+ .text          0xfc818804       0x18 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-ctype_.o)
+                0xfc818804                __set_ctype
+ .text          0xfc81881c       0x34 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-exit.o)
+                0xfc81881c                exit
+ .text          0xfc818850       0x40 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-fini.o)
+                0xfc818850                __libc_fini_array
+ .text          0xfc818890        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-impure.o)
+ .text          0xfc818890       0x78 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-init.o)
+                0xfc818890                __libc_init_array
+ .text          0xfc818908       0x28 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-malloc.o)
+                0xfc818908                malloc
+                0xfc81891c                free
+ .text          0xfc818930      0x768 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mallocr.o)
+                0xfc818930                _malloc_r
+ .text          0xfc819098       0xa8 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memcmp.o)
+                0xfc819098                memcmp
+ .text          0xfc819140      0x600 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memcpy.o)
+                0xfc819140                memcpy
+ .text          0xfc819740       0xf8 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memset.o)
+                0xfc819740                memset
+ .text          0xfc819838        0x8 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mlock.o)
+                0xfc819838                __malloc_lock
+                0xfc81983c                __malloc_unlock
+ .text          0xfc819840       0x38 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-sbrkr.o)
+                0xfc819840                _sbrk_r
+ .text          0xfc819878       0xf8 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strcpy.o)
+                0xfc819878                strcpy
+ *fill*         0xfc819970       0x10 
+ .text          0xfc819980      0x100 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strlen-armv7.o)
+                0xfc819980                strlen
+ .text          0xfc819a80      0x110 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strncmp.o)
+                0xfc819a80                strncmp
+ .text          0xfc819b90       0xdc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strncpy.o)
+                0xfc819b90                strncpy
+ .text          0xfc819c6c      0x1fc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strtol.o)
+                0xfc819c6c                _strtol_r
+                0xfc819e4c                strtol
+ .text          0xfc819e68      0x168 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__call_atexit.o)
+                0xfc819e68                __call_exitprocs
+ .text          0xfc819fd0       0x14 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atexit.o)
+                0xfc819fd0                atexit
+ .text          0xfc819fe4      0x3ac /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-freer.o)
+                0xfc819fe4                _malloc_trim_r
+                0xfc81a0e0                _free_r
+ .text          0xfc81a390      0x11c /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-reent.o)
+                0xfc81a390                cleanup_glue
+                0xfc81a3bc                _reclaim_reent
+ .text          0xfc81a4ac       0xd8 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__atexit.o)
+                0xfc81a4ac                __register_exitproc
+ .text          0xfc81a584        0x4 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(_exit.o)
+                0xfc81a584                _exit
+ .text          0xfc81a588       0x3c ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(_sbrk.o)
+                0xfc81a588                _sbrk
+ .text          0xfc81a5c4        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtend.o
+ .text          0xfc81a5c4        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtn.o
+ *(.text.*)
+ .text.startup  0xfc81a5c4       0x1c /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__call_atexit.o)
+ *(.gnu.linkonce.t.*)
+ *(.plt)
+ *(.gnu_warning)
+ *(.gcc_execpt_table)
+ *(.glue_7)
+ .glue_7        0x00000000        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x00000000        0x0 linker stubs
+ *(.vfp11_veneer)
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+ *(.ARM.extab)
+ *(.gnu.linkonce.armextab.*)
+
+.v4_bx          0xfc81a5e0        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.init           0xfc81a5e0       0x18
+ .init          0xfc81a5e0        0xc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crti.o
+                0xfc81a5e0                _init
+ .init          0xfc81a5ec        0xc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtn.o
+
+.fini           0xfc81a5f8       0x18
+ .fini          0xfc81a5f8        0xc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crti.o
+                0xfc81a5f8                _fini
+ .fini          0xfc81a604        0xc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtn.o
+
+.iplt           0xfc81a610        0x0
+ .iplt          0x00000000        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+
+.mmu_tbl        0xfc81c000     0x4000
+                0xfc81c000                __mmu_tbl_start = .
+ *(.mmu_tbl)
+ .mmu_tbl       0xfc81c000     0x4000 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(translation_table.o)
+                0xfc81c000                MMUTable
+                0xfc820000                __mmu_tbl_end = .
+
+.eh_frame       0xfc820000        0x4
+ .eh_frame      0xfc820000        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+ .eh_frame      0xfc820000        0x4 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtend.o
+
+.rodata         0xfc820004      0xb4c
+ .rodata        0xfc820004       0x28 ./src/portable/port.o
+                0xfc820004                ulICCIAR
+                0xfc820008                ulICCEOIR
+                0xfc82000c                ulICCPMR
+                0xfc820010                ulMaxAPIPriorityMask
+ .rodata        0xfc82002c       0x20 ./src/FreeRTOS_tick_config.o
+ .rodata        0xfc82004c       0x14 ./src/heap_4.o
+ .rodata        0xfc820060       0x54 ./src/main.o
+ .rodata        0xfc8200b4        0x8 ./src/printf-stdarg.o
+ .rodata        0xfc8200bc       0xd4 ./src/ps7_init_Nicola.o
+ .rodata        0xfc820190       0x10 ./src/queue.o
+ .rodata        0xfc8201a0       0x28 ./src/tasks.o
+ .rodata        0xfc8201c8       0x20 ./src/timers.o
+ .rodata        0xfc8201e8      0x380 ./NicolaCode/Bluetooth.o
+ .rodata        0xfc820568       0x2c ./NicolaCode/ConsoleManager.o
+ .rodata        0xfc820594      0x1a0 ./NicolaCode/LCD_Display.o
+ .rodata        0xfc820734      0x190 ./NicolaCode/PSPLComms.o
+ .rodata        0xfc8208c4      0x100 ./NicolaCode/RadioInterface.o
+ .rodata        0xfc8209c4       0x6c ./NicolaCode/RemoteProtocolHandler.o
+ .rodata        0xfc820a30       0x18 ./NicolaCode/xsdps.o
+ .rodata        0xfc820a48      0x104 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-ctype_.o)
+                0xfc820a48                _ctype_
+ .rodata        0xfc820b4c        0x4 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-impure.o)
+                0xfc820b4c                _global_impure_ptr
+
+.rodata.str1.4  0xfc820b50       0x8c
+ .rodata.str1.4
+                0xfc820b50        0xa ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo.o)
+                                  0xc (size before relaxing)
+ *fill*         0xfc820b5a        0x2 
+ .rodata.str1.4
+                0xfc820b5c        0xc ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xstreamer.o)
+ .rodata.str1.4
+                0xfc820b68        0xf ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest.o)
+                                 0x10 (size before relaxing)
+ *fill*         0xfc820b77        0x1 
+ .rodata.str1.4
+                0xfc820b78       0x15 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_sinit.o)
+                                 0x18 (size before relaxing)
+ *fill*         0xfc820b8d        0x3 
+ .rodata.str1.4
+                0xfc820b90        0xa ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic.o)
+                                  0xc (size before relaxing)
+ *fill*         0xfc820b9a        0x2 
+ .rodata.str1.4
+                0xfc820b9c        0xc ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer.o)
+ .rodata.str1.4
+                0xfc820ba8        0xa ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt.o)
+                                  0xc (size before relaxing)
+ *fill*         0xfc820bb2        0x2 
+ .rodata.str1.4
+                0xfc820bb4       0x10 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_options.o)
+ .rodata.str1.4
+                0xfc820bc4       0x11 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_printf.o)
+                                 0x14 (size before relaxing)
+ *fill*         0xfc820bd5        0x3 
+ .rodata.str1.4
+                0xfc820bd8        0x4 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-impure.o)
+
+.rel.dyn        0xfc820bdc        0x0
+ .rel.iplt      0x00000000        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+
+.sdata2         0x00000000        0x0
+                0x00000000                __sdata2_start = .
+ *(.sdata2)
+ *(.sdata2.*)
+ *(.gnu.linkonce.s2.*)
+                0x00000000                __sdata2_end = .
+
+.sbss2          0x00000000        0x0
+                0x00000000                __sbss2_start = .
+ *(.sbss2)
+ *(.sbss2.*)
+ *(.gnu.linkonce.sb2.*)
+                0x00000000                __sbss2_end = .
+
+.data           0x00000000     0x34b4 load address 0xfc820bdc
+                0x00000000                __data_start = .
+                0x00000000                _dataVMA_start = .
+ *(.data)
+ .data          0x00000000        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crti.o
+ .data          0x00000000        0x4 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+                0x00000000                __dso_handle
+ .data          0x00000004        0x4 ./src/portable/port.o
+                0x00000004                ulCriticalNesting
+ .data          0x00000008        0x0 ./src/portable/portASM.o
+ .data          0x00000008        0x0 ./src/FreeRTOS_asm_vectors.o
+ .data          0x00000008        0x4 ./src/FreeRTOS_tick_config.o
+ .data          0x0000000c        0x0 ./src/event_groups.o
+ .data          0x0000000c        0x0 ./src/heap_4.o
+ .data          0x0000000c        0x0 ./src/list.o
+ .data          0x0000000c        0x4 ./src/main.o
+ .data          0x00000010        0x0 ./src/platform.o
+ .data          0x00000010        0x0 ./src/printf-stdarg.o
+ .data          0x00000010      0xe00 ./src/ps7_init_Nicola.o
+                0x00000010                ps7_pll_init_data_3_0
+                0x00000198                ps7_clock_init_data_3_0
+                0x0000023c                ps7_mio_init_data_3_0
+                0x00000330                ps7_peripherals_init_data_3_0
+                0x0000043c                ps7_post_config_3_0
+                0x00000480                ps7_debug_3_0
+                0x000004b4                ps7_pll_init_data_2_0
+                0x0000063c                ps7_clock_init_data_2_0
+                0x000006e0                ps7_mio_init_data_2_0
+                0x000007d4                ps7_peripherals_init_data_2_0
+                0x000008e0                ps7_post_config_2_0
+                0x00000924                ps7_debug_2_0
+                0x00000958                ps7_pll_init_data_1_0
+                0x00000ae0                ps7_clock_init_data_1_0
+                0x00000b84                ps7_mio_init_data_1_0
+                0x00000c78                ps7_peripherals_init_data_1_0
+                0x00000d84                ps7_post_config_1_0
+                0x00000dc8                ps7_debug_1_0
+                0x00000dfc                ps7_mio_init_data
+                0x00000e00                ps7_pll_init_data
+                0x00000e04                ps7_clock_init_data
+                0x00000e08                ps7_ddr_init_data
+                0x00000e0c                ps7_peripherals_init_data
+ .data          0x00000e10        0x0 ./src/queue.o
+ .data          0x00000e10        0x0 ./src/tasks.o
+ .data          0x00000e10        0x0 ./src/timers.o
+ .data          0x00000e10       0x40 ./NicolaCode/Bluetooth.o
+                0x00000e10                StartupMessages
+                0x00000e44                PinCodes
+                0x00000e4c                BluetoothCommandEcho
+ .data          0x00000e50        0x0 ./NicolaCode/ConsoleManager.o
+ .data          0x00000e50        0x8 ./NicolaCode/Flash-SDCard.o
+ .data          0x00000e58      0x4ec ./NicolaCode/LCD_Display.o
+                0x00000e58                microphoneVolume1
+                0x00000e78                microphoneVolume2
+                0x00000e98                microphoneVolume3
+                0x00000eb8                microphoneVolume4
+                0x00000ed8                microphoneVolume5
+                0x00000ef8                aerialTypeSetting
+                0x00000f18                aerialTypeSetting1
+                0x00000f38                frequencySetting
+                0x00000f58                frequencySetting2
+                0x00000f78                frequencySetting3
+                0x00000f98                confidenceBeepSetting
+                0x00000ff8                BluetoothPairingSetting
+                0x00001018                BluetoothPairingSetting1
+                0x00001038                TextMessageReceived
+                0x0000104c                TextMessageReceived2
+                0x00001060                TextMessageReceived3
+                0x00001074                TextMessageReceived4
+                0x00001088                TextMessageTestSetting
+                0x0000109c                TextMessageTestSetting2
+                0x000010b0                TextMessageTestSetting3
+                0x000010c4                TextMessageTestSetting4
+                0x000010d8                turnRadioOffSetting
+                0x000010f8                turnRadioOffSetting1
+                0x00001118                theMenu_8
+                0x00001154                theMenu_7a
+                0x00001190                theMenu_7
+                0x000011cc                theMenu_6
+                0x00001208                theMenu_5a
+                0x00001244                theMenu_5
+                0x00001280                theMenu_4
+                0x000012bc                theMenu_3
+                0x000012f8                theMenu_1
+                0x00001334                Nicola3Name
+                0x00001338                CurrentMenuPosition
+                0x0000133c                CurrentSubMenuPosition
+ .data          0x00001344     0x127c ./NicolaCode/PSPLComms.o
+                0x00001344                KeypadPico
+                0x000017e8                UserPico
+ .data          0x000025c0        0x0 ./NicolaCode/RadioInterface.o
+ .data          0x000025c0        0x0 ./NicolaCode/RemoteProtocolHandler.o
+ .data          0x000025c0        0x0 ./NicolaCode/xsdps.o
+ .data          0x000025c0        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo.o)
+ .data          0x000025c0        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_sinit.o)
+ .data          0x000025c0        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xstreamer.o)
+ .data          0x000025c0        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest.o)
+ .data          0x000025c0        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_sinit.o)
+ .data          0x000025c0        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic.o)
+ .data          0x000025c0      0x624 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic_g.o)
+                0x000025c0                XScuGic_ConfigTable
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic_sinit.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_sinit.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_sinit.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_options.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_sinit.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(asm_vectors.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(boot.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(sleep.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(translation_table.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(usleep.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(vectors.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil-crt0.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_assert.o)
+ .data          0x00002be4        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_cache.o)
+ .data          0x00002be4       0x38 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_exception.o)
+                0x00002be4                XExc_VectorTable
+ .data          0x00002c1c        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_io.o)
+ .data          0x00002c1c        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_printf.o)
+ .data          0x00002c1c        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xtime_l.o)
+ .data          0x00002c1c       0x20 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_g.o)
+                0x00002c1c                XLlFifo_ConfigTable
+ .data          0x00002c3c        0x8 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_g.o)
+                0x00002c3c                n3z_tonetest_ConfigTable
+ .data          0x00002c44        0x8 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_g.o)
+                0x00002c44                XScuTimer_ConfigTable
+ .data          0x00002c4c        0x8 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_g.o)
+                0x00002c4c                XScuWdt_ConfigTable
+ .data          0x00002c54       0x14 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_g.o)
+                0x00002c54                XSdPs_ConfigTable
+ .data          0x00002c68        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(cpu_init.o)
+ .data          0x00002c68        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(outbyte.o)
+ .data          0x00002c68        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xuartps_hw.o)
+ .data          0x00002c68        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a(_udivsi3.o)
+ .data          0x00002c68        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a(_dvmd_tls.o)
+ .data          0x00002c68        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atoi.o)
+ .data          0x00002c68        0x4 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-ctype_.o)
+                0x00002c68                __ctype_ptr__
+ .data          0x00002c6c        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-exit.o)
+ .data          0x00002c6c        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-fini.o)
+ *fill*         0x00002c6c        0x4 
+ .data          0x00002c70      0x430 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-impure.o)
+                0x00002c70                _impure_ptr
+ .data          0x000030a0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-init.o)
+ .data          0x000030a0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-malloc.o)
+ .data          0x000030a0      0x410 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mallocr.o)
+                0x000030a0                __malloc_av_
+                0x000034a8                __malloc_sbrk_base
+                0x000034ac                __malloc_trim_threshold
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memcmp.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memcpy.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memset.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mlock.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-sbrkr.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strcpy.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strlen-armv7.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strncmp.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strncpy.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strtol.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__call_atexit.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atexit.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-freer.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-reent.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__atexit.o)
+ .data          0x000034b0        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(_exit.o)
+ .data          0x000034b0        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(_sbrk.o)
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtend.o
+ .data          0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtn.o
+ *(.data.*)
+ *(.gnu.linkonce.d.*)
+ *(.jcr)
+ .jcr           0x000034b0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+ .jcr           0x000034b0        0x4 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtend.o
+ *(.got)
+ *(.got.plt)
+                0x000034b4                __data_end = .
+                0x000034b4                _dataVMA_end = .
+                0xfc820bdc                _dataLMA = LOADADDR (.data)
+
+.init_array     0x000034b4        0x4 load address 0xfc824090
+ .init_array    0x000034b4        0x4 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+
+.fini_array     0x000034b8        0x4 load address 0xfc824094
+ .fini_array    0x000034b8        0x4 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+
+.tm_clone_table
+                0x000034bc        0x0 load address 0xfc824098
+ .tm_clone_table
+                0x000034bc        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+ .tm_clone_table
+                0x000034bc        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtend.o
+
+.igot.plt       0x000034bc        0x0 load address 0xfc824098
+ .igot.plt      0x00000000        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+
+.got2           0x000034bc        0x0 load address 0xfc824098
+ .got2          0x000034bc        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil-crt0.o)
+
+.init_array.00000
+                0x000034bc        0x4 load address 0xfc824098
+ .init_array.00000
+                0x000034bc        0x4 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__call_atexit.o)
+
+.data1          0x000034c0        0x0 load address 0xfc82409c
+                0x000034c0                __data1_start = .
+ *(.data1)
+ *(.data1.*)
+                0x000034c0                __data1_end = .
+
+.sdata          0x000034c0        0x0 load address 0xfc82409c
+                0x000034c0                __sdata_start = .
+ *(.sdata)
+ *(.sdata.*)
+ *(.gnu.linkonce.s.*)
+                0x000034c0                __sdata_end = .
+
+.sbss           0x000034c0        0x0 load address 0xfc82409c
+                0x000034c0                __sbss_start = .
+ *(.sbss)
+ *(.sbss.*)
+ *(.gnu.linkonce.sb.*)
+                0x000034c0                __sbss_end = .
+
+.tdata          0x000034c0        0x0 load address 0xfc82409c
+                0x000034c0                __tdata_start = .
+ *(.tdata)
+ *(.tdata.*)
+ *(.gnu.linkonce.td.*)
+                0x000034c0                __tdata_end = .
+
+.tbss           0x000034c0        0x0 load address 0xfc82409c
+                0x000034c0                __tbss_start = .
+ *(.tbss)
+ *(.tbss.*)
+ *(.gnu.linkonce.tb.*)
+                0x000034c0                __tbss_end = .
+
+.bss            0x000034c0     0x947c load address 0xfc82409c
+                0x000034c0                __bss_start = .
+ *(.bss)
+ .bss           0x000034c0        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crti.o
+ .bss           0x000034c0       0x1c /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+ .bss           0x000034dc        0xc ./src/portable/port.o
+                0x000034dc                ulPortTaskHasFPUContext
+                0x000034e0                ulPortYieldRequired
+                0x000034e4                ulPortInterruptNesting
+ .bss           0x000034e8        0x0 ./src/portable/portASM.o
+ .bss           0x000034e8        0x0 ./src/FreeRTOS_asm_vectors.o
+ .bss           0x000034e8       0x10 ./src/FreeRTOS_tick_config.o
+ .bss           0x000034f8        0x0 ./src/event_groups.o
+ .bss           0x000034f8     0x7818 ./src/heap_4.o
+ .bss           0x0000ad10        0x0 ./src/list.o
+ .bss           0x0000ad10      0xcb0 ./src/main.o
+ .bss           0x0000b9c0        0x0 ./src/platform.o
+ .bss           0x0000b9c0        0x0 ./src/printf-stdarg.o
+ .bss           0x0000b9c0        0xc ./src/ps7_init_Nicola.o
+                0x0000b9c0                ps7_ddr_init_data_1_0
+                0x0000b9c4                ps7_ddr_init_data_2_0
+                0x0000b9c8                ps7_ddr_init_data_3_0
+ .bss           0x0000b9cc        0x0 ./src/queue.o
+ .bss           0x0000b9cc      0x12c ./src/tasks.o
+                0x0000b9cc                pxCurrentTCB
+ .bss           0x0000baf8       0xe0 ./src/timers.o
+ .bss           0x0000bbd8       0x7c ./NicolaCode/Bluetooth.o
+                0x0000bc50                RfcommIsOpen
+ .bss           0x0000bc54        0x0 ./NicolaCode/ConsoleManager.o
+ *fill*         0x0000bc54        0xc 
+ .bss           0x0000bc60      0x160 ./NicolaCode/Flash-SDCard.o
+ .bss           0x0000bdc0      0x714 ./NicolaCode/LCD_Display.o
+                0x0000bdc0                DisplayAerialEarthing
+                0x0000bdc4                firstMenuItem
+                0x0000bdd8                CDCardRunning
+                0x0000c2b4                flashOffset
+ .bss           0x0000c4d4        0x8 ./NicolaCode/PSPLComms.o
+ .bss           0x0000c4dc        0x4 ./NicolaCode/RadioInterface.o
+                0x0000c4dc                InstancePtr
+ .bss           0x0000c4e0        0x8 ./NicolaCode/RemoteProtocolHandler.o
+ *fill*         0x0000c4e8       0x18 
+ .bss           0x0000c500      0x200 ./NicolaCode/xsdps.o
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_sinit.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xstreamer.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_sinit.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic_g.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic_sinit.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_sinit.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_sinit.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_options.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_sinit.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(asm_vectors.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(boot.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(sleep.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(translation_table.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(usleep.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(vectors.o)
+ .bss           0x0000c700        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil-crt0.o)
+ .bss           0x0000c700        0x4 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_assert.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_cache.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_exception.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_io.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_printf.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xtime_l.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_g.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_g.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_g.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_g.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_g.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(cpu_init.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(outbyte.o)
+ .bss           0x0000c704        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xuartps_hw.o)
+ .bss           0x0000c704        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a(_udivsi3.o)
+ .bss           0x0000c704        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a(_dvmd_tls.o)
+ .bss           0x0000c704        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atoi.o)
+ .bss           0x0000c704        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-ctype_.o)
+ .bss           0x0000c704        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-exit.o)
+ .bss           0x0000c704        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-fini.o)
+ .bss           0x0000c704        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-impure.o)
+ .bss           0x0000c704        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-init.o)
+ .bss           0x0000c704        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-malloc.o)
+ .bss           0x0000c704       0x34 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mallocr.o)
+                0x0000c704                __malloc_top_pad
+                0x0000c708                __malloc_current_mallinfo
+                0x0000c730                __malloc_max_sbrked_mem
+                0x0000c734                __malloc_max_total_mem
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memcmp.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memcpy.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memset.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mlock.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-sbrkr.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strcpy.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strlen-armv7.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strncmp.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strncpy.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strtol.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__call_atexit.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atexit.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-freer.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-reent.o)
+ .bss           0x0000c738        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__atexit.o)
+ .bss           0x0000c738        0x0 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(_exit.o)
+ .bss           0x0000c738        0x4 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(_sbrk.o)
+ .bss           0x0000c73c        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtend.o
+ .bss           0x0000c73c        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtn.o
+ *(.bss.*)
+ *(.gnu.linkonce.b.*)
+ *(COMMON)
+ COMMON         0x0000c73c        0xc ./src/FreeRTOS_tick_config.o
+                0x0000c73c                xInterruptController
+ COMMON         0x0000c748       0x3e ./src/main.o
+                0x0000c748                xWatchDogInstance
+                0x0000c758                thisNicolaSettings
+ *fill*         0x0000c786        0x2 
+ COMMON         0x0000c788       0x40 ./src/queue.o
+                0x0000c788                xQueueRegistry
+ COMMON         0x0000c7c8       0x10 ./NicolaCode/Bluetooth.o
+                0x0000c7c8                BluetoothIOTask
+                0x0000c7cc                BluegigaTransmitQueue
+                0x0000c7d0                consoleQueue
+                0x0000c7d4                BluegigaReceiveQueue
+ COMMON         0x0000c7d8        0x8 ./NicolaCode/ConsoleManager.o
+                0x0000c7d8                consoleReceiveQueue
+                0x0000c7dc                consoleTransmitQueue
+ COMMON         0x0000c7e0       0x64 ./NicolaCode/LCD_Display.o
+                0x0000c7e0                Gpio
+                0x0000c800                pageData
+                0x0000c804                KeysReceivedQueue
+                0x0000c808                theMenu_2
+ COMMON         0x0000c844       0xd8 ./NicolaCode/PSPLComms.o
+                0x0000c844                ZoneTestInstancePtr
+                0x0000c848                DataFifo
+                0x0000c8ac                PLTransmitQueue
+                0x0000c8b0                PSPLFifo
+                0x0000c914                Buffer
+                0x0000c918                TextMessageTransmitQueue
+ COMMON         0x0000c91c        0x4 ./NicolaCode/RadioInterface.o
+                0x0000c91c                PLSendQueue
+ COMMON         0x0000c920        0x8 ./NicolaCode/RemoteProtocolHandler.o
+                0x0000c920                MessageFromAndriodQueue
+                0x0000c924                MessageFromRemoteNicolasQueue
+ COMMON         0x0000c928        0x4 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_assert.o)
+                0x0000c928                Xil_AssertStatus
+ COMMON         0x0000c92c        0xc ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_exception.o)
+                0x0000c92c                UndefinedExceptionAddr
+                0x0000c930                PrefetchAbortAddr
+                0x0000c934                DataAbortAddr
+ COMMON         0x0000c938        0x4 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-reent.o)
+                0x0000c938                errno
+                0x0000c93c                __bss_end = .
+
+.heap           0xffff0000     0x2000
+                0xffff0000                . = ALIGN (0x10)
+                0xffff0000                _heap = .
+                0xffff0000                HeapBase = .
+                0xffff0000                _heap_start = .
+                0xffff2000                . = (. + _HEAP_SIZE)
+ *fill*         0xffff0000     0x2000 
+                0xffff2000                _heap_end = .
+                0xffff2000                HeapLimit = .
+
+.stack          0xffff2000     0x3800
+                0xffff2000                . = ALIGN (0x10)
+                0xffff2000                _stack_end = .
+                0xffff4000                . = (. + _STACK_SIZE)
+ *fill*         0xffff2000     0x2000 
+                0xffff4000                _stack = .
+                0xffff4000                __stack = _stack
+                0xffff4000                . = ALIGN (0x10)
+                0xffff4000                _irq_stack_end = .
+                0xffff4400                . = (. + _IRQ_STACK_SIZE)
+ *fill*         0xffff4000      0x400 
+                0xffff4400                __irq_stack = .
+                0xffff4400                _supervisor_stack_end = .
+                0xffff4c00                . = (. + _SUPERVISOR_STACK_SIZE)
+ *fill*         0xffff4400      0x800 
+                0xffff4c00                . = ALIGN (0x10)
+                0xffff4c00                __supervisor_stack = .
+                0xffff4c00                _abort_stack_end = .
+                0xffff5000                . = (. + _ABORT_STACK_SIZE)
+ *fill*         0xffff4c00      0x400 
+                0xffff5000                . = ALIGN (0x10)
+                0xffff5000                __abort_stack = .
+                0xffff5000                _fiq_stack_end = .
+                0xffff5400                . = (. + _FIQ_STACK_SIZE)
+ *fill*         0xffff5000      0x400 
+                0xffff5400                . = ALIGN (0x10)
+                0xffff5400                __fiq_stack = .
+                0xffff5400                _undef_stack_end = .
+                0xffff5800                . = (. + _UNDEF_STACK_SIZE)
+ *fill*         0xffff5400      0x400 
+                0xffff5800                . = ALIGN (0x10)
+                0xffff5800                __undef_stack = .
+                0xffff5800                _end = .
+LOAD ./src/portable/port.o
+LOAD ./src/portable/portASM.o
+LOAD ./src/FreeRTOS_asm_vectors.o
+LOAD ./src/FreeRTOS_tick_config.o
+LOAD ./src/event_groups.o
+LOAD ./src/heap_4.o
+LOAD ./src/list.o
+LOAD ./src/main.o
+LOAD ./src/platform.o
+LOAD ./src/printf-stdarg.o
+LOAD ./src/ps7_init_Nicola.o
+LOAD ./src/queue.o
+LOAD ./src/tasks.o
+LOAD ./src/timers.o
+LOAD ./NicolaCode/Bluetooth.o
+LOAD ./NicolaCode/ConsoleManager.o
+LOAD ./NicolaCode/Flash-SDCard.o
+LOAD ./NicolaCode/LCD_Display.o
+LOAD ./NicolaCode/PSPLComms.o
+LOAD ./NicolaCode/RadioInterface.o
+LOAD ./NicolaCode/RemoteProtocolHandler.o
+LOAD ./NicolaCode/xsdps.o
+START GROUP
+LOAD ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a
+LOAD /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a
+LOAD /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a
+END GROUP
+START GROUP
+LOAD /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a
+LOAD /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a
+END GROUP
+LOAD /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtend.o
+LOAD /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtn.o
+OUTPUT(NicolaRadio.elf elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x35
+ .ARM.attributes
+                0x00000000       0x21 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crti.o
+ .ARM.attributes
+                0x00000021       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
+ .ARM.attributes
+                0x00000056       0x3f ./src/portable/port.o
+ .ARM.attributes
+                0x00000095       0x29 ./src/portable/portASM.o
+ .ARM.attributes
+                0x000000be       0x29 ./src/FreeRTOS_asm_vectors.o
+ .ARM.attributes
+                0x000000e7       0x3f ./src/FreeRTOS_tick_config.o
+ .ARM.attributes
+                0x00000126       0x3f ./src/event_groups.o
+ .ARM.attributes
+                0x00000165       0x3f ./src/heap_4.o
+ .ARM.attributes
+                0x000001a4       0x3f ./src/list.o
+ .ARM.attributes
+                0x000001e3       0x3f ./src/main.o
+ .ARM.attributes
+                0x00000222       0x3f ./src/platform.o
+ .ARM.attributes
+                0x00000261       0x3f ./src/printf-stdarg.o
+ .ARM.attributes
+                0x000002a0       0x3f ./src/ps7_init_Nicola.o
+ .ARM.attributes
+                0x000002df       0x3f ./src/queue.o
+ .ARM.attributes
+                0x0000031e       0x3f ./src/tasks.o
+ .ARM.attributes
+                0x0000035d       0x3f ./src/timers.o
+ .ARM.attributes
+                0x0000039c       0x3f ./NicolaCode/Bluetooth.o
+ .ARM.attributes
+                0x000003db       0x3f ./NicolaCode/ConsoleManager.o
+ .ARM.attributes
+                0x0000041a       0x3f ./NicolaCode/Flash-SDCard.o
+ .ARM.attributes
+                0x00000459       0x3f ./NicolaCode/LCD_Display.o
+ .ARM.attributes
+                0x00000498       0x3f ./NicolaCode/PSPLComms.o
+ .ARM.attributes
+                0x000004d7       0x3f ./NicolaCode/RadioInterface.o
+ .ARM.attributes
+                0x00000516       0x3f ./NicolaCode/RemoteProtocolHandler.o
+ .ARM.attributes
+                0x00000555       0x3f ./NicolaCode/xsdps.o
+ .ARM.attributes
+                0x00000594       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo.o)
+ .ARM.attributes
+                0x000005d3       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_sinit.o)
+ .ARM.attributes
+                0x00000612       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xstreamer.o)
+ .ARM.attributes
+                0x00000651       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest.o)
+ .ARM.attributes
+                0x00000690       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_sinit.o)
+ .ARM.attributes
+                0x000006cf       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic.o)
+ .ARM.attributes
+                0x0000070e       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic_g.o)
+ .ARM.attributes
+                0x0000074d       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic_sinit.o)
+ .ARM.attributes
+                0x0000078c       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer.o)
+ .ARM.attributes
+                0x000007cb       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_sinit.o)
+ .ARM.attributes
+                0x0000080a       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt.o)
+ .ARM.attributes
+                0x00000849       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_sinit.o)
+ .ARM.attributes
+                0x00000888       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_options.o)
+ .ARM.attributes
+                0x000008c7       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_sinit.o)
+ .ARM.attributes
+                0x00000906       0x29 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(asm_vectors.o)
+ .ARM.attributes
+                0x0000092f       0x29 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(boot.o)
+ .ARM.attributes
+                0x00000958       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(sleep.o)
+ .ARM.attributes
+                0x00000997       0x29 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(translation_table.o)
+ .ARM.attributes
+                0x000009c0       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(usleep.o)
+ .ARM.attributes
+                0x000009ff       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(vectors.o)
+ .ARM.attributes
+                0x00000a3e       0x29 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil-crt0.o)
+ .ARM.attributes
+                0x00000a67       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_assert.o)
+ .ARM.attributes
+                0x00000aa6       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_cache.o)
+ .ARM.attributes
+                0x00000ae5       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_exception.o)
+ .ARM.attributes
+                0x00000b24       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_io.o)
+ .ARM.attributes
+                0x00000b63       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_printf.o)
+ .ARM.attributes
+                0x00000ba2       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xtime_l.o)
+ .ARM.attributes
+                0x00000be1       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_g.o)
+ .ARM.attributes
+                0x00000c20       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_g.o)
+ .ARM.attributes
+                0x00000c5f       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_g.o)
+ .ARM.attributes
+                0x00000c9e       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_g.o)
+ .ARM.attributes
+                0x00000cdd       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_g.o)
+ .ARM.attributes
+                0x00000d1c       0x29 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(cpu_init.o)
+ .ARM.attributes
+                0x00000d45       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(outbyte.o)
+ .ARM.attributes
+                0x00000d84       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xuartps_hw.o)
+ .ARM.attributes
+                0x00000dc3       0x21 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x00000de4       0x21 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x00000e05       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atoi.o)
+ .ARM.attributes
+                0x00000e3a       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-ctype_.o)
+ .ARM.attributes
+                0x00000e6f       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-exit.o)
+ .ARM.attributes
+                0x00000ea4       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-fini.o)
+ .ARM.attributes
+                0x00000ed9       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000f0e       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-init.o)
+ .ARM.attributes
+                0x00000f43       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-malloc.o)
+ .ARM.attributes
+                0x00000f78       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mallocr.o)
+ .ARM.attributes
+                0x00000fad       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memcmp.o)
+ .ARM.attributes
+                0x00000fe2       0x1b /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memcpy.o)
+ .ARM.attributes
+                0x00000ffd       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memset.o)
+ .ARM.attributes
+                0x00001032       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mlock.o)
+ .ARM.attributes
+                0x00001067       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-sbrkr.o)
+ .ARM.attributes
+                0x0000109c       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strcpy.o)
+ .ARM.attributes
+                0x000010d1       0x1f /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strlen-armv7.o)
+ .ARM.attributes
+                0x000010f0       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strncmp.o)
+ .ARM.attributes
+                0x00001125       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strncpy.o)
+ .ARM.attributes
+                0x0000115a       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strtol.o)
+ .ARM.attributes
+                0x0000118f       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__call_atexit.o)
+ .ARM.attributes
+                0x000011c4       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atexit.o)
+ .ARM.attributes
+                0x000011f9       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-freer.o)
+ .ARM.attributes
+                0x0000122e       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-reent.o)
+ .ARM.attributes
+                0x00001263       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__atexit.o)
+ .ARM.attributes
+                0x00001298       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(_exit.o)
+ .ARM.attributes
+                0x000012d7       0x3f ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(_sbrk.o)
+ .ARM.attributes
+                0x00001316       0x35 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtend.o
+ .ARM.attributes
+                0x0000134b       0x21 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtn.o
+
+.comment        0x00000000       0x63
+ .comment       0x00000000       0x63 ./src/portable/port.o
+                                 0x64 (size before relaxing)
+ .comment       0x00000000       0x64 ./src/FreeRTOS_tick_config.o
+ .comment       0x00000000       0x64 ./src/event_groups.o
+ .comment       0x00000000       0x64 ./src/heap_4.o
+ .comment       0x00000000       0x64 ./src/list.o
+ .comment       0x00000000       0x64 ./src/main.o
+ .comment       0x00000000       0x64 ./src/platform.o
+ .comment       0x00000000       0x64 ./src/printf-stdarg.o
+ .comment       0x00000000       0x64 ./src/ps7_init_Nicola.o
+ .comment       0x00000000       0x64 ./src/queue.o
+ .comment       0x00000000       0x64 ./src/tasks.o
+ .comment       0x00000000       0x64 ./src/timers.o
+ .comment       0x00000000       0x64 ./NicolaCode/Bluetooth.o
+ .comment       0x00000000       0x64 ./NicolaCode/ConsoleManager.o
+ .comment       0x00000000       0x64 ./NicolaCode/Flash-SDCard.o
+ .comment       0x00000000       0x64 ./NicolaCode/LCD_Display.o
+ .comment       0x00000000       0x64 ./NicolaCode/PSPLComms.o
+ .comment       0x00000000       0x64 ./NicolaCode/RadioInterface.o
+ .comment       0x00000000       0x64 ./NicolaCode/RemoteProtocolHandler.o
+ .comment       0x00000000       0x64 ./NicolaCode/xsdps.o
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_sinit.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xstreamer.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_sinit.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic_g.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscugic_sinit.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_sinit.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_sinit.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_options.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_sinit.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(sleep.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(usleep.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(vectors.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_assert.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_cache.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_exception.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_io.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xil_printf.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xtime_l.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xllfifo_g.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(n3z_tonetest_g.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscutimer_g.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xscuwdt_g.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xsdps_g.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(outbyte.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(xuartps_hw.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(_exit.o)
+ .comment       0x00000000       0x64 ../../NicolaRadio_bsp/ps7_cortexa9_0/lib/libxil.a(_sbrk.o)
+
+.debug_frame    0x00000000      0x46c
+ .debug_frame   0x00000000       0x20 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/libgcc.a(_udivsi3.o)
+ .debug_frame   0x00000020       0x30 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atoi.o)
+ .debug_frame   0x00000050       0x20 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-ctype_.o)
+ .debug_frame   0x00000070       0x28 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-exit.o)
+ .debug_frame   0x00000098       0x34 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-fini.o)
+ .debug_frame   0x000000cc       0x2c /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-init.o)
+ .debug_frame   0x000000f8       0x30 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-malloc.o)
+ .debug_frame   0x00000128       0x60 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mallocr.o)
+ .debug_frame   0x00000188       0x28 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memcmp.o)
+ .debug_frame   0x000001b0       0x2c /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-memset.o)
+ .debug_frame   0x000001dc       0x30 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-mlock.o)
+ .debug_frame   0x0000020c       0x2c /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-sbrkr.o)
+ .debug_frame   0x00000238       0x20 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strcpy.o)
+ .debug_frame   0x00000258       0x40 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strncmp.o)
+ .debug_frame   0x00000298       0x2c /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strncpy.o)
+ .debug_frame   0x000002c4       0x50 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-strtol.o)
+ .debug_frame   0x00000314       0x50 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x00000364       0x20 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-atexit.o)
+ .debug_frame   0x00000384       0x60 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-freer.o)
+ .debug_frame   0x000003e4       0x58 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-reent.o)
+ .debug_frame   0x0000043c       0x30 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__atexit.o)

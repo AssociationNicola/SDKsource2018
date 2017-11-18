@@ -1,0 +1,7 @@
+Running: xsim.dir/PS_PL_wrapper_func_synth/xsimk -simmode gui -wdb PS_PL_wrapper_func_synth.wdb -simrunnum 0 -socket 58623
+Design successfully loaded
+Design Loading Memory Usage: 145868 KB (Peak: 159576 KB)
+Design Loading CPU Usage: 430 ms
+Simulation completed
+Simulation Memory Usage: 228296 KB (Peak: 293140 KB)
+Simulation CPU Usage: 1230 ms

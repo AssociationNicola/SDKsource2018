@@ -1,0 +1,8 @@
+OPTION psf_version = 2.1;
+BEGIN driver n3z_tonetest
+ OPTION supported_peripherals = (n3z_tonetest_v1_09);
+ OPTION driver_state = ACTIVE;
+ OPTION copyfiles = all;
+ OPTION name = n3z_tonetest;
+ OPTION version = 1.09;
+END driver

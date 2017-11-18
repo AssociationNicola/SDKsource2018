@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# Vivado v2014.4 (64-bit)
+# SW Build 1071353 on Tue Nov 18 16:47:07 MST 2014
+# IP Build 1070531 on Tue Nov 18 01:10:18 MST 2014
+# Start of session at: Fri Jan 15 13:53:37 2016
+# Process ID: 15646
+# Log file: /home/graham/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/TE0722/TE0722.runs/impl_1/PS_PL_wrapper.vdi
+# Journal file: /home/graham/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/TE0722/TE0722.runs/impl_1/vivado.jou
+#-----------------------------------------------------------
+source PS_PL_wrapper.tcl -notrace

@@ -1,0 +1,7 @@
+//arch = zynq; split = false; format = BIN
+the_ROM_image:
+{
+	[bootloader]C:\Users\Pete\Documents\Nicola-Zynq\2017-TD-FIFO\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\FSBL\Debug\FSBL.elf
+	C:\Users\Pete\Documents\Nicola-Zynq\2017-TD-FIFO\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\PS_PL_wrapper_hw_platform_0\PS_PL_wrapper.bit
+	[offset = 0x800000]C:\Users\Pete\Documents\Nicola-Zynq\2017-TD-FIFO\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\Release\NicolaRadio.elf
+}

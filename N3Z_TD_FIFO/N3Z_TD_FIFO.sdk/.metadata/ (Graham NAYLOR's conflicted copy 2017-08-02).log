@@ -1,0 +1,1095 @@
+!SESSION 2017-03-04 10:49:10.365 -----------------------------------------------
+eclipse.buildId=2016.2
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_GB
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -data /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk
+
+This is a continuation of log file /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/.metadata/.bak_0.log
+Created Time: 2017-03-05 10:49:42.591
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.591
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.591
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.617
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.617
+!MESSAGE XSDB Command: [targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.651
+!MESSAGE XSDB command with result: [targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.651
+!MESSAGE XSDB Command: [fpga -state], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.657
+!MESSAGE XSDB command with result: [fpga -state], Result: [null, FPGA is configured]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.658
+!MESSAGE XSDB Command: [connect -url tcp:127.0.0.1:3121], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.660
+!MESSAGE XSDB command with result: [connect -url tcp:127.0.0.1:3121], Result: [null, tcfchan#33]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.661
+!MESSAGE XSDB Command: [version -server], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.663
+!MESSAGE XSDB command with result: [version -server], Result: [null, 2016.2]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.663
+!MESSAGE XSDB Command: [version], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.664
+!MESSAGE XSDB command with result: [version], Result: [null, 2016.2]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.664
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.671
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.671
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.694
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.695
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.701
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.701
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.723
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.723
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.729
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.730
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.758
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.758
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.766
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.771
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.800
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.801
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.809
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.809
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.836
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.839
+!MESSAGE XSDB Command: [jtag targets -set -filter {name =~ "Digilent JTAG-HS2 210249A0CF17" && level == 0}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.860
+!MESSAGE XSDB command with result: [jtag targets -set -filter {name =~ "Digilent JTAG-HS2 210249A0CF17" && level == 0}], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.861
+!MESSAGE XSDB Command: [jtag frequency], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.865
+!MESSAGE XSDB command with result: [jtag frequency], Result: [null, 10000000]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.865
+!MESSAGE XSDB Command: [source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.869
+!MESSAGE XSDB command with result: [source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.869
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.890
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.890
+!MESSAGE XSDB Command: [loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.900
+!MESSAGE XSDB command with result: [loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf], Result: [null, PS_PL_wrapper_17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.900
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.926
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.926
+!MESSAGE XSDB Command: [stop], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.934
+!MESSAGE XSDB command with result: [stop], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:42.934
+!MESSAGE XSDB Command: [ps7_init], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.196
+!MESSAGE XSDB command with result: [ps7_init], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.196
+!MESSAGE XSDB Command: [ps7_post_config], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.206
+!MESSAGE XSDB command with result: [ps7_post_config], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.206
+!MESSAGE XSDB Command: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.236
+!MESSAGE XSDB command with result: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.236
+!MESSAGE XSDB Command: [rst -processor], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.255
+!MESSAGE XSDB command with result: [rst -processor], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.256
+!MESSAGE XSDB Command: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.289
+!MESSAGE XSDB command with result: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.289
+!MESSAGE XSDB Command: [dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.599
+!MESSAGE XSDB command with result: [dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.624
+!MESSAGE XSDB Command: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.663
+!MESSAGE XSDB command with result: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.663
+!MESSAGE XSDB Command: [con], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:49:43.688
+!MESSAGE XSDB command with result: [con], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:50:54.532
+!MESSAGE XSDB Command: [disconnect tcfchan#33], Thread: Thread-2437
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:50:54.548
+!MESSAGE XSDB command with result: [disconnect tcfchan#33], Result: [null, ]. Thread: Thread-2437
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.856
+!MESSAGE XSDB Command: [connect -url tcp:127.0.0.1:3121], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.862
+!MESSAGE XSDB command with result: [connect -url tcp:127.0.0.1:3121], Result: [null, tcfchan#34]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.862
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.884
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.885
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.907
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.907
+!MESSAGE XSDB Command: [targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.926
+!MESSAGE XSDB command with result: [targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.928
+!MESSAGE XSDB Command: [fpga -state], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.929
+!MESSAGE XSDB command with result: [fpga -state], Result: [null, FPGA is configured]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.930
+!MESSAGE XSDB Command: [connect -url tcp:127.0.0.1:3121], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.930
+!MESSAGE XSDB command with result: [connect -url tcp:127.0.0.1:3121], Result: [null, tcfchan#34]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.930
+!MESSAGE XSDB Command: [version -server], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.931
+!MESSAGE XSDB command with result: [version -server], Result: [null, 2016.2]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.931
+!MESSAGE XSDB Command: [version], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.932
+!MESSAGE XSDB command with result: [version], Result: [null, 2016.2]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.932
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.939
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.939
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.958
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.959
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.972
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.973
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.996
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:18.996
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.008
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.009
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.038
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.038
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.045
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.047
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.073
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.073
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.080
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.080
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.106
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.106
+!MESSAGE XSDB Command: [jtag targets -set -filter {name =~ "Digilent JTAG-HS2 210249A0CF17" && level == 0}], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.142
+!MESSAGE XSDB command with result: [jtag targets -set -filter {name =~ "Digilent JTAG-HS2 210249A0CF17" && level == 0}], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.142
+!MESSAGE XSDB Command: [jtag frequency], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.143
+!MESSAGE XSDB command with result: [jtag frequency], Result: [null, 10000000]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.143
+!MESSAGE XSDB Command: [source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.144
+!MESSAGE XSDB command with result: [source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.146
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.171
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.171
+!MESSAGE XSDB Command: [loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.176
+!MESSAGE XSDB command with result: [loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf], Result: [null, PS_PL_wrapper_17]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.176
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.202
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.202
+!MESSAGE XSDB Command: [stop], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.214
+!MESSAGE XSDB command with result: [stop], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.215
+!MESSAGE XSDB Command: [ps7_init], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.453
+!MESSAGE XSDB command with result: [ps7_init], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.454
+!MESSAGE XSDB Command: [ps7_post_config], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.468
+!MESSAGE XSDB command with result: [ps7_post_config], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.469
+!MESSAGE XSDB Command: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.501
+!MESSAGE XSDB command with result: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.501
+!MESSAGE XSDB Command: [rst -processor], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.525
+!MESSAGE XSDB command with result: [rst -processor], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.525
+!MESSAGE XSDB Command: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.555
+!MESSAGE XSDB command with result: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.555
+!MESSAGE XSDB Command: [dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.864
+!MESSAGE XSDB command with result: [dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.898
+!MESSAGE XSDB Command: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.957
+!MESSAGE XSDB command with result: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.958
+!MESSAGE XSDB Command: [con], Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:19.968
+!MESSAGE XSDB command with result: [con], Result: [null, ]. Thread: Worker-72
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:28.602
+!MESSAGE XSDB Command: [disconnect tcfchan#34], Thread: Thread-2488
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:28.642
+!MESSAGE XSDB command with result: [disconnect tcfchan#34], Result: [null, ]. Thread: Thread-2488
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.571
+!MESSAGE XSDB Command: [connect -url tcp:127.0.0.1:3121], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.586
+!MESSAGE XSDB command with result: [connect -url tcp:127.0.0.1:3121], Result: [null, tcfchan#35]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.587
+!MESSAGE XSDB Command: [version -server], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.591
+!MESSAGE XSDB command with result: [version -server], Result: [null, 2016.2]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.592
+!MESSAGE XSDB Command: [version], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.592
+!MESSAGE XSDB command with result: [version], Result: [null, 2016.2]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.602
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.614
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.615
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.647
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.647
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.654
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.654
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.683
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.684
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.692
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.692
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.713
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.714
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.722
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.722
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.750
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.751
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.758
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.758
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.779
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.779
+!MESSAGE XSDB Command: [jtag targets -set -filter {name =~ "Digilent JTAG-HS2 210249A0CF17" && level == 0}], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.809
+!MESSAGE XSDB command with result: [jtag targets -set -filter {name =~ "Digilent JTAG-HS2 210249A0CF17" && level == 0}], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.809
+!MESSAGE XSDB Command: [jtag frequency], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.812
+!MESSAGE XSDB command with result: [jtag frequency], Result: [null, 10000000]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.812
+!MESSAGE XSDB Command: [source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.816
+!MESSAGE XSDB command with result: [source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.824
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.882
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:51:59.882
+!MESSAGE XSDB Command: [rst -system], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:00.014
+!MESSAGE XSDB command with result: [rst -system], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:00.014
+!MESSAGE XSDB Command: [after 3000], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:03.015
+!MESSAGE XSDB command with result: [after 3000], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:03.043
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:03.054
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:03.054
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:03.078
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:03.078
+!MESSAGE XSDB Command: [targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:03.102
+!MESSAGE XSDB command with result: [targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1], Result: [null, ]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:03.102
+!MESSAGE XSDB Command: [fpga -file /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:04.881
+!MESSAGE XSDB command with result: [fpga -file /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit], Result: [null, ]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:04.930
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:04.979
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:04.980
+!MESSAGE XSDB Command: [loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:04.994
+!MESSAGE XSDB command with result: [loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf], Result: [null, PS_PL_wrapper_17]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:04.994
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.038
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.038
+!MESSAGE XSDB Command: [ps7_init], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.245
+!MESSAGE XSDB command with result: [ps7_init], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.245
+!MESSAGE XSDB Command: [ps7_post_config], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.265
+!MESSAGE XSDB command with result: [ps7_post_config], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.267
+!MESSAGE XSDB Command: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.295
+!MESSAGE XSDB command with result: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.295
+!MESSAGE XSDB Command: [dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.609
+!MESSAGE XSDB command with result: [dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.622
+!MESSAGE XSDB Command: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.682
+!MESSAGE XSDB command with result: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.682
+!MESSAGE XSDB Command: [con], Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:52:05.712
+!MESSAGE XSDB command with result: [con], Result: [null, ]. Thread: Worker-56
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:08.608
+!MESSAGE XSDB Command: [disconnect tcfchan#35], Thread: Thread-2562
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:08.632
+!MESSAGE XSDB command with result: [disconnect tcfchan#35], Result: [null, ]. Thread: Thread-2562
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.853
+!MESSAGE XSDB Command: [connect -url tcp:127.0.0.1:3121], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.861
+!MESSAGE XSDB command with result: [connect -url tcp:127.0.0.1:3121], Result: [null, tcfchan#36]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.861
+!MESSAGE XSDB Command: [version -server], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.869
+!MESSAGE XSDB command with result: [version -server], Result: [null, 2016.2]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.872
+!MESSAGE XSDB Command: [version], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.877
+!MESSAGE XSDB command with result: [version], Result: [null, 2016.2]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.884
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.897
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.898
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.920
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.920
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.929
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.929
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.952
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.953
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.961
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.961
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.980
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.980
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.987
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:11.987
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.003
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.003
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.010
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.010
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.026
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.026
+!MESSAGE XSDB Command: [jtag targets -set -filter {name =~ "Digilent JTAG-HS2 210249A0CF17" && level == 0}], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.053
+!MESSAGE XSDB command with result: [jtag targets -set -filter {name =~ "Digilent JTAG-HS2 210249A0CF17" && level == 0}], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.053
+!MESSAGE XSDB Command: [jtag frequency], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.062
+!MESSAGE XSDB command with result: [jtag frequency], Result: [null, 10000000]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.062
+!MESSAGE XSDB Command: [source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.063
+!MESSAGE XSDB command with result: [source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.064
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.091
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.091
+!MESSAGE XSDB Command: [rst -system], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.218
+!MESSAGE XSDB command with result: [rst -system], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:12.218
+!MESSAGE XSDB Command: [after 3000], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:15.219
+!MESSAGE XSDB command with result: [after 3000], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:15.251
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:15.259
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:15.259
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:15.282
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:15.282
+!MESSAGE XSDB Command: [targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:15.308
+!MESSAGE XSDB command with result: [targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1], Result: [null, ]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:15.308
+!MESSAGE XSDB Command: [fpga -file /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.083
+!MESSAGE XSDB command with result: [fpga -file /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit], Result: [null, ]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.132
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.163
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.163
+!MESSAGE XSDB Command: [loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.188
+!MESSAGE XSDB command with result: [loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf], Result: [null, PS_PL_wrapper_17]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.188
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.236
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.236
+!MESSAGE XSDB Command: [ps7_init], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.444
+!MESSAGE XSDB command with result: [ps7_init], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.444
+!MESSAGE XSDB Command: [ps7_post_config], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.456
+!MESSAGE XSDB command with result: [ps7_post_config], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.456
+!MESSAGE XSDB Command: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.483
+!MESSAGE XSDB command with result: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.483
+!MESSAGE XSDB Command: [dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.796
+!MESSAGE XSDB command with result: [dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.807
+!MESSAGE XSDB Command: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.892
+!MESSAGE XSDB command with result: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.898
+!MESSAGE XSDB Command: [con], Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:53:17.935
+!MESSAGE XSDB command with result: [con], Result: [null, ]. Thread: Worker-66
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:54:22.008
+!MESSAGE XSDB Command: [disconnect tcfchan#36], Thread: Thread-2612
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:54:22.046
+!MESSAGE XSDB command with result: [disconnect tcfchan#36], Result: [null, ]. Thread: Thread-2612
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.851
+!MESSAGE XSDB Command: [connect -url tcp:127.0.0.1:3121], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.859
+!MESSAGE XSDB command with result: [connect -url tcp:127.0.0.1:3121], Result: [null, tcfchan#37]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.860
+!MESSAGE XSDB Command: [version -server], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.861
+!MESSAGE XSDB command with result: [version -server], Result: [null, 2016.2]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.864
+!MESSAGE XSDB Command: [version], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.867
+!MESSAGE XSDB command with result: [version], Result: [null, 2016.2]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.868
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.903
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.903
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.925
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.925
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.932
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.933
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.956
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.958
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.965
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.965
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.991
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.991
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.996
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:24.996
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.010
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.010
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.015
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.015
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.029
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.029
+!MESSAGE XSDB Command: [jtag targets -set -filter {name =~ "Digilent JTAG-HS2 210249A0CF17" && level == 0}], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.042
+!MESSAGE XSDB command with result: [jtag targets -set -filter {name =~ "Digilent JTAG-HS2 210249A0CF17" && level == 0}], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.042
+!MESSAGE XSDB Command: [jtag frequency], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.043
+!MESSAGE XSDB command with result: [jtag frequency], Result: [null, 10000000]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.043
+!MESSAGE XSDB Command: [source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.043
+!MESSAGE XSDB command with result: [source /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/ps7_init.tcl], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.044
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.096
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.096
+!MESSAGE XSDB Command: [rst -system], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.236
+!MESSAGE XSDB command with result: [rst -system], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:25.237
+!MESSAGE XSDB Command: [after 3000], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:28.240
+!MESSAGE XSDB command with result: [after 3000], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:28.267
+!MESSAGE XSDB Command: [jtag targets -filter {level == 0}], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:28.278
+!MESSAGE XSDB command with result: [jtag targets -filter {level == 0}], Result: [null,   1* Digilent JTAG-HS2 210249A0CF17]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:28.282
+!MESSAGE XSDB Command: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:28.297
+!MESSAGE XSDB command with result: [jtag targets -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==1}], Result: [null,      2  arm_dap (idcode 4ba00477 irlen 4)
+     3  xc7z010 (idcode 13722093 irlen 6 fpga)]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:28.297
+!MESSAGE XSDB Command: [targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:28.325
+!MESSAGE XSDB command with result: [targets -set -filter {jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17" && level==0} -index 1], Result: [null, ]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:28.325
+!MESSAGE XSDB Command: [fpga -file /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.105
+!MESSAGE XSDB command with result: [fpga -file /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit], Result: [null, ]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.145
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.178
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.180
+!MESSAGE XSDB Command: [loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.198
+!MESSAGE XSDB command with result: [loadhw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf], Result: [null, PS_PL_wrapper_17]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.199
+!MESSAGE XSDB Command: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.228
+!MESSAGE XSDB command with result: [targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.229
+!MESSAGE XSDB Command: [ps7_init], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.446
+!MESSAGE XSDB command with result: [ps7_init], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.446
+!MESSAGE XSDB Command: [ps7_post_config], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.457
+!MESSAGE XSDB command with result: [ps7_post_config], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.457
+!MESSAGE XSDB Command: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.478
+!MESSAGE XSDB command with result: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.478
+!MESSAGE XSDB Command: [dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.779
+!MESSAGE XSDB command with result: [dow /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/Debug/NicolaRadio.elf], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.795
+!MESSAGE XSDB Command: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.853
+!MESSAGE XSDB command with result: [targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent JTAG-HS2 210249A0CF17"} -index 0], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.859
+!MESSAGE XSDB Command: [con], Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 10:55:30.880
+!MESSAGE XSDB command with result: [con], Result: [null, ]. Thread: Worker-69
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:18:45.992
+!MESSAGE XSDB Command: [disconnect tcfchan#37], Thread: Thread-2660
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:18:46.002
+!MESSAGE XSDB command with result: [disconnect tcfchan#37], Result: [null, ]. Thread: Thread-2660
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:15.254
+!MESSAGE XSDB Command: [ ::hsi::utils::set_current_hw_sw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss ], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:15.257
+!MESSAGE XSDB command with result: [ ::hsi::utils::set_current_hw_sw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss ], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:15.258
+!MESSAGE XSDB Command: [::hsi::utils::get_hw_sw_details -json /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:15.259
+!MESSAGE XSDB command with result: [::hsi::utils::get_hw_sw_details -json /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss], Result: [null, {"procname": "ps7_cortexa9_0",
+"osname": "standalone",
+"osver": "5.5",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:15.260
+!MESSAGE XSDB Command: [::hsi::utils::closesw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:15.261
+!MESSAGE XSDB command with result: [::hsi::utils::closesw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:31.792
+!MESSAGE XSDB Command: [ ::hsi::utils::set_current_hw_sw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss ], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:31.794
+!MESSAGE XSDB command with result: [ ::hsi::utils::set_current_hw_sw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss ], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:31.794
+!MESSAGE XSDB Command: [::hsi::utils::get_hw_sw_details -json /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:31.804
+!MESSAGE XSDB command with result: [::hsi::utils::get_hw_sw_details -json /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss], Result: [null, {"procname": "ps7_cortexa9_0",
+"osname": "standalone",
+"osver": "5.5",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:31.807
+!MESSAGE XSDB Command: [::hsi::utils::closesw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:31.809
+!MESSAGE XSDB command with result: [::hsi::utils::closesw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:35.819
+!MESSAGE XSDB Command: [ ::hsi::utils::set_current_hw_sw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss ], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:35.823
+!MESSAGE XSDB command with result: [ ::hsi::utils::set_current_hw_sw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss ], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:35.823
+!MESSAGE XSDB Command: [::hsi::utils::get_hw_sw_details -json /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:35.825
+!MESSAGE XSDB command with result: [::hsi::utils::get_hw_sw_details -json /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/system.hdf /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss], Result: [null, {"procname": "ps7_cortexa9_0",
+"osname": "standalone",
+"osver": "5.5",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:35.826
+!MESSAGE XSDB Command: [::hsi::utils::closesw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2017-03-05 21:19:35.828
+!MESSAGE XSDB command with result: [::hsi::utils::closesw /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio_bsp/system.mss], Result: [null, ]. Thread: main
