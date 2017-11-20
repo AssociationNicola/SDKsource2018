@@ -6,11 +6,14 @@
 * macros) that can be used to access the device.  The user should refer to the
 * hardware device specification for more details of the device operation.
 */ 
-#define N3Z_TONETEST_VALUES2RECOVER 0x0/**< values2recover */
-#define N3Z_TONETEST_N3ZCONFIG 0x4/**< n3zconfig */
-#define N3Z_TONETEST_AUDIOVOLUME 0x8/**< audiovolume */
-#define N3Z_TONETEST_ADCGAIN_AVE_PEAK 0xc/**< adcgain_ave_peak */
-#define N3Z_TONETEST_PLSTATUS 0x10/**< plstatus */
-#define N3Z_TONETEST_STARTTONEAMP 0x14/**< starttoneamp */
-#define N3Z_TONETEST_DEMODSIGNALLEVEL 0x18/**< demodsignallevel */
-#define N3Z_TONETEST_TXAUDIOLEVEL 0x1c/**< txaudiolevel */
+#define N3Z_TONETEST_TXFREQ 0x0/**< txfreq */
+#define N3Z_TONETEST_RXFREQ 0x4/**< rxfreq */
+#define N3Z_TONETEST_VALUES2RECOVER 0x8/**< values2recover */
+#define N3Z_TONETEST_N3ZCONFIG 0xc/**< n3zconfig */
+#define N3Z_TONETEST_AUDIOVOLUME 0x10/**< audiovolume */
+#define N3Z_TONETEST_ADCGAIN_AVE_PEAK 0x14/**< adcgain_ave_peak */
+#define N3Z_TONETEST_PLSTATUS 0x18/**< plstatus */
+#define N3Z_TONETEST_RADIOSTATUS 0x1c/**< radiostatus */
+#define N3Z_TONETEST_STARTTONEAMP 0x20/**< starttoneamp */
+#define N3Z_TONETEST_DEMODSIGNALLEVEL 0x24/**< demodsignallevel */
+#define N3Z_TONETEST_TXAUDIOLEVEL 0x28/**< txaudiolevel */

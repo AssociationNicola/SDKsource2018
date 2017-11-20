@@ -73,6 +73,52 @@ int n3z_tonetest_Initialize(n3z_tonetest *InstancePtr, const char* InstanceName)
 int n3z_tonetest_Release(n3z_tonetest *InstancePtr);
 #endif
 /**
+* Write to txfreq gateway of n3z_tonetest. Assignments are LSB-justified.
+*
+* @param	InstancePtr is the txfreq instance to operate on.
+* @param	Data is value to be written to gateway txfreq.
+*
+* @return	None.
+*
+* @note    .
+*
+*/
+void n3z_tonetest_txfreq_write(n3z_tonetest *InstancePtr, u32 Data);
+/**
+* Read from txfreq gateway of n3z_tonetest. Assignments are LSB-justified.
+*
+* @param	InstancePtr is the txfreq instance to operate on.
+*
+* @return	u32
+*
+* @note    .
+*
+*/
+u32 n3z_tonetest_txfreq_read(n3z_tonetest *InstancePtr);
+/**
+* Write to rxfreq gateway of n3z_tonetest. Assignments are LSB-justified.
+*
+* @param	InstancePtr is the rxfreq instance to operate on.
+* @param	Data is value to be written to gateway rxfreq.
+*
+* @return	None.
+*
+* @note    .
+*
+*/
+void n3z_tonetest_rxfreq_write(n3z_tonetest *InstancePtr, u32 Data);
+/**
+* Read from rxfreq gateway of n3z_tonetest. Assignments are LSB-justified.
+*
+* @param	InstancePtr is the rxfreq instance to operate on.
+*
+* @return	u32
+*
+* @note    .
+*
+*/
+u32 n3z_tonetest_rxfreq_read(n3z_tonetest *InstancePtr);
+/**
 * Write to values2recover gateway of n3z_tonetest. Assignments are LSB-justified.
 *
 * @param	InstancePtr is the values2recover instance to operate on.
@@ -163,6 +209,17 @@ u32 n3z_tonetest_adcgain_ave_peak_read(n3z_tonetest *InstancePtr);
 *
 */
 u32 n3z_tonetest_plstatus_read(n3z_tonetest *InstancePtr);
+/**
+* Read from radiostatus gateway of n3z_tonetest. Assignments are LSB-justified.
+*
+* @param	InstancePtr is the radiostatus instance to operate on.
+*
+* @return	u32
+*
+* @note    .
+*
+*/
+u32 n3z_tonetest_radiostatus_read(n3z_tonetest *InstancePtr);
 /**
 * Read from starttoneamp gateway of n3z_tonetest. Assignments are LSB-justified.
 *
