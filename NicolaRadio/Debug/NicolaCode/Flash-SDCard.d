@@ -15,19 +15,19 @@ NicolaCode/Flash-SDCard.o NicolaCode/Flash-SDCard.o: \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xpseudo_asm.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xreg_cortexa9.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xpseudo_asm_gcc.h \
- /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/FreeRTOS.h \
- /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/FreeRTOSConfig.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/FreeRTOS.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/FreeRTOSConfig.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xscuwdt.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xscuwdt_hw.h \
- /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/projdefs.h \
- /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/portable.h \
- /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/deprecated_definitions.h \
- /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable/portmacro.h \
- /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/mpu_wrappers.h \
- /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/task.h \
- /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/list.h \
- /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/semphr.h \
- /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/queue.h
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/projdefs.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/portable.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/deprecated_definitions.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable/portmacro.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/mpu_wrappers.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/task.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/list.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/semphr.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/queue.h
 
 ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xparameters.h:
 
@@ -59,28 +59,28 @@ NicolaCode/Flash-SDCard.o NicolaCode/Flash-SDCard.o: \
 
 ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xpseudo_asm_gcc.h:
 
-/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/FreeRTOS.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/FreeRTOS.h:
 
-/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/FreeRTOSConfig.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/FreeRTOSConfig.h:
 
 ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xscuwdt.h:
 
 ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xscuwdt_hw.h:
 
-/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/projdefs.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/projdefs.h:
 
-/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/portable.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/portable.h:
 
-/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/deprecated_definitions.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/deprecated_definitions.h:
 
-/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable/portmacro.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable/portmacro.h:
 
-/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/mpu_wrappers.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/mpu_wrappers.h:
 
-/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/task.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/task.h:
 
-/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/list.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/list.h:
 
-/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/semphr.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/semphr.h:
 
-/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/queue.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/queue.h:

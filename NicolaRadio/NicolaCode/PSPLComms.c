@@ -210,8 +210,16 @@ void PSPLComms_Initialise()
 
 #endif
 
+#if 0
+   	xil_printf("Send TD Pico\n\r");
+   	LoadPicoFast(TDPico, sizeof(TDPico)/4, 3);
 
+    xil_printf("Send Keypad\n\r");
+   	LoadPicoFast(KeypadPico, sizeof(KeypadPico)/4, 2);
 
+   	xil_printf("Send User Pico\n\r");
+   	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
+#endif
 
     PLTransmitQueue = xQueueCreate( 4,					// max item count
     								PL_MESSAGE_MAX ) ;				// size of each item (max) ) ;
@@ -224,7 +232,7 @@ void PSPLComms_Initialise()
 				"PL_Rx", 							/* The text name assigned to the task - for debug only as it is not used by the kernel. */
 				configMINIMAL_STACK_SIZE, 			/* The size of the stack to allocate to the task. */
 				NULL, 								/* The parameter passed to the task - not used in this case. */
-				tskIDLE_PRIORITY + 2, 				/* The priority assigned to the task. Small number low priority */
+				tskIDLE_PRIORITY + 4, 				/* The priority assigned to the task. Small number low priority */
 				NULL );								/* The task handle is not required, so NULL is passed. */
 
 
@@ -232,7 +240,7 @@ void PSPLComms_Initialise()
 				"PL_Tx", 							/* The text name assigned to the task - for debug only as it is not used by the kernel. */
 				configMINIMAL_STACK_SIZE, 			/* The size of the stack to allocate to the task. */
 				NULL, 								/* The parameter passed to the task - not used in this case. */
-				tskIDLE_PRIORITY + 2, 				/* The priority assigned to the task. Small number low priority */
+				tskIDLE_PRIORITY + 3, 				/* The priority assigned to the task. Small number low priority */
 				NULL );								/* The task handle is not required, so NULL is passed. */
 
 
@@ -667,7 +675,13 @@ int ReadResponse()
 
 
 
-#ifdef RECEIVE_MESSAGE_DEBUG
+//#ifdef RECEIVE_MESSAGE_DEBUG
+#if 0
+ 	//if ( Buffer[i] == 0x0D )
+ 	{
+ 		//xil_printf( "EMPTY\r\n", Buffer[i]);
+ 	}
+ 	//else
 	for ( i=0; i<frame_len/4; i+=1)	// * Buffer is a u32 !
 	{
 		//if ( Buffer[i] > 0x20 )
@@ -677,7 +691,11 @@ int ReadResponse()
 
 	}
 
-	xil_printf( "\r\n");
+ 	//if ( Buffer[i] != 0x0D )
+ 	{
+ 		xil_printf( "ab\r\n");
+ 	}
+
 #endif
 
 
@@ -715,7 +733,11 @@ int TxSend(XLlFifo *InstancePtr, u32  *SourceAddr, int no_word)
 	for (i=0;i<no_word;i++)
 	{
 		while ( XLlFifo_iTxVacancy(InstancePtr) == 0){
-			vTaskDelay( pdMS_TO_TICKS( 50 ));
+		//if ( XLlFifo_iTxVacancy(InstancePtr) < 32){
+			//do
+			//{
+				vTaskDelay( pdMS_TO_TICKS( 25 ));			// 8 words per millisecond so 25 msecs = 200 samples
+			//} while ( XLlFifo_iTxVacancy(InstancePtr) < 512);
 		}
 
 		XLlFifo_TxPutWord(InstancePtr,
@@ -732,13 +754,13 @@ int TxSend(XLlFifo *InstancePtr, u32  *SourceAddr, int no_word)
 
 	/* Check for Transmission completion */
 	while( !(XLlFifo_IsTxDone(InstancePtr)) ){
-		if (errorCount++ == 4 )
+		//if (errorCount++ == 4 )
 		{
-			xil_printf( "try send to user again %X\r\n", (u32) *baseAddress );
+			xil_printf( "try send to user again %X occ=%d\r\n", (u32) *baseAddress, XLlFifo_iTxVacancy(InstancePtr) );
 
 			errorCount = 0;
 		}
-		vTaskDelay( pdMS_TO_TICKS( 500 ));
+		vTaskDelay( pdMS_TO_TICKS( 5));
 
 		//xil_printf( "TX %X status=%X\r\n", *dataCount, (u32) *baseAddress);
 

@@ -55,7 +55,10 @@ extern void SetMicrophoneVolume(int selected );		/* in RadioInterface.c		*/
 extern void SetAerialType(int selected );			/* in RadioInterface.c		*/
 extern void SetAerialFrequency(int selected );		/* in RadioInterface.c		*/
 extern void SetToneDetect(int selected ) ;			/* in RadioInterface.c		*/
+extern void SetForwardMode(int selected ) ;			/* in RadioInterface.c		*/
 extern void SendWatchdogMessage( void ) ;			/* in RadioInterface.c		*/
+
+extern int atoi( char * );
 
 void SetConfidenceBeepTime(int selected );			/* in this module			*/
 void SetBeaconBeepTime(int selected );				/* in this module			*/
@@ -169,14 +172,15 @@ typedef enum
 	MENU_ITEM_TYPE_AERIAL_TYPE,				/* B  1 */
 	MENU_ITEM_TYPE_FREQUENCY,				/* C  2 */
 	MENU_ITEM_TYPE_TONE_DETECT,				/* D  3 */
-	MENU_ITEM_TYPE_CONFIDENCE_BEEP,			/* E  4 */
-	MENU_ITEM_TYPE_BEACON_BEEP,				/* F  5 */
-	MENU_ITEM_TYPE_BLUETOOTH_PAIRING,		/* G  6 */
-	MENU_ITEM_TYPE_PRESET_TEXT_MSGS,		/* H  7 */
-	MENU_ITEM_TYPE_RECVD_TEXT_MSGS,			/* I  8 */
-	MENU_ITEM_TYPE_DEBUGGING,				/* J  9 */
-	MENU_ITEM_TYPE_VERSION_NUMBER,			/* L  10 */
-	MENU_ITEM_TYPE_KEYPAD_CHECK,			/* K 11 */
+	MENU_ITEM_TYPE_AUDIO_FORWARDING,		/* E  4 */
+	MENU_ITEM_TYPE_CONFIDENCE_BEEP,			/* F  5 */
+	MENU_ITEM_TYPE_BEACON_BEEP,				/* G  6 */
+	MENU_ITEM_TYPE_BLUETOOTH_PAIRING,		/* H  7 */
+	MENU_ITEM_TYPE_PRESET_TEXT_MSGS,		/* I  8 */
+	MENU_ITEM_TYPE_RECVD_TEXT_MSGS,			/* J  9 */
+	MENU_ITEM_TYPE_DEBUGGING,				/* K 10 */
+	MENU_ITEM_TYPE_VERSION_NUMBER,			/* L 11 */
+	MENU_ITEM_TYPE_KEYPAD_CHECK,			/* M 12 */
 
 	MENU_ITEM_TYPE_TURN_OFF = 'Z'
 
@@ -239,44 +243,13 @@ extern void SetMicrophoneVolumeAbs( int );		// in RadioInterface.c
 extern void SetMicrophoneVolume(int  );			// in RadioInterface.c
 
 int 	MicrophoneVolume = DEFAULT_VOLUME ;
+int 	StoreAndForwardMode = DEFAULT_STOREANDFORWARD;
 int		DisplayVolumeCounter = 0 ;
 
-int ToneDetectSetting = 0;		// tone detect selected ON by default
-int FrequencySetting = 1;		// HEYPhone frequency selected by default
-
-#ifdef TEST_DEFAULT_MENU
+int 	StoreAndFowardGo = FALSE;
 
 
 /* test harness for the menu system - September 2016 */
-
-
-
-#if 0
-
-// now uses LEFT and DOWN or RIGHT and DOWN to decrease or increase volume
-
-SUB_MENU_ITEM	microphoneVolume1;
-SUB_MENU_ITEM	microphoneVolume2;
-SUB_MENU_ITEM	microphoneVolume3;
-SUB_MENU_ITEM	microphoneVolume4;
-SUB_MENU_ITEM	microphoneVolume5;
-
-
-SUB_MENU_ITEM	microphoneVolume1 =
-		{ &microphoneVolume2, &microphoneVolume5, 4, "HIGH" };
-
-SUB_MENU_ITEM	microphoneVolume2 =
-		{ &microphoneVolume3, &microphoneVolume1, 3,  "3/4 " };
-
-SUB_MENU_ITEM	microphoneVolume3 =
-		{ &microphoneVolume4, &microphoneVolume2, 2 , "1/2 "};
-
-SUB_MENU_ITEM	microphoneVolume4 =
-		{ &microphoneVolume5, &microphoneVolume3, 1, "1/4 " };
-
-SUB_MENU_ITEM	microphoneVolume5 =
-		{ NULL, &microphoneVolume4, 0, "OFF " };
-#endif
 
 
 SUB_MENU_ITEM	aerialTypeSetting;
@@ -303,16 +276,15 @@ SUB_MENU_ITEM	frequencySetting2 =
 SUB_MENU_ITEM	frequencySetting3 =
 		{ NULL, &frequencySetting2, (0x2AA8 << 16) | 0x052a, "31 kh   " };
 
-#if 0
-SUB_MENU_ITEM	frequencySetting =
-		{ &frequencySetting2, NULL, 1 , "HEYPhone"};
+SUB_MENU_ITEM	ForwardingMode0;
+SUB_MENU_ITEM	ForwardingMode1;
 
-SUB_MENU_ITEM	frequencySetting2 =
-		{ &frequencySetting3, &frequencySetting, 2 , "Nicola 2"};
+SUB_MENU_ITEM	ForwardingMode0 =   // 0123456789012345
+		{ &ForwardingMode1, NULL, 1, "Audio Fwd On" };
 
-SUB_MENU_ITEM	frequencySetting3 =
-		{ NULL, &frequencySetting2, 3, "31 kh   " };
-#endif
+SUB_MENU_ITEM	ForwardingMode1 =
+		{ NULL, &ForwardingMode0, 1 , "Audio FWD Off"};
+
 
 SUB_MENU_ITEM	ToneDetectSetting0;
 SUB_MENU_ITEM	ToneDetectSetting1;
@@ -424,6 +396,8 @@ MAIN_MENU_ITEM	theMenu_7;
 MAIN_MENU_ITEM	theMenu_6;
 MAIN_MENU_ITEM	theMenu_5a;
 MAIN_MENU_ITEM	theMenu_5;
+MAIN_MENU_ITEM	theMenu_4b;
+MAIN_MENU_ITEM	theMenu_4a;
 MAIN_MENU_ITEM	theMenu_4;
 MAIN_MENU_ITEM	theMenu_3;
 //MAIN_MENU_ITEM	theMenu_2;
@@ -469,10 +443,11 @@ MAIN_MENU_ITEM	theMenu_5 =
 { &theMenu_6, &theMenu_4, "CONFIDENCE BEEP", 	(void *) &confidenceBeepSetting1, SetConfidenceBeepTime, 	SUB_MENU_INTEGER, MENU_ITEM_TYPE_CONFIDENCE_BEEP, 0, 0, 0, 0 };	/* 5 minutes */
 
 
-
+MAIN_MENU_ITEM	theMenu_4b =
+{ &theMenu_5, &theMenu_4a, "FORWARDING MODE", 			(void *) &ForwardingMode0, 	SetForwardMode,  	SUB_MENU_TEXT, MENU_ITEM_TYPE_AUDIO_FORWARDING,		0, 0, 0, 0 };
 
 MAIN_MENU_ITEM	theMenu_4a =
-{ &theMenu_5, &theMenu_4, "TONE DETECT", 			(void *) &ToneDetectSetting0, 	SetToneDetect,  	SUB_MENU_TEXT, MENU_ITEM_TYPE_TONE_DETECT,		0, 0, 0, 0 };
+{ &theMenu_4b, &theMenu_4, "TONE DETECT", 			(void *) &ToneDetectSetting0, 	SetToneDetect,  	SUB_MENU_TEXT, MENU_ITEM_TYPE_TONE_DETECT,		0, 0, 0, 0 };
 
 
 MAIN_MENU_ITEM	theMenu_4 =
@@ -486,31 +461,6 @@ MAIN_MENU_ITEM	theMenu_3 =
 //MAIN_MENU_ITEM	theMenu_2 =
 //{ &theMenu_3, &theMenu_1, "BLOCKED", 			(void *) &frequencySetting, 	NULL, 	SUB_MENU_TEXT, MENU_ITEM_TYPE_AERIAL_TYPE,		0, 0, 0, 0 };	/* to test the mechanism only */
 
-
-#if 0
-MAIN_MENU_ITEM	theMenu_1 =
-{ &theMenu_3, &theMenu_99, "M-PHONE VOLUME", 		(void *) &microphoneVolume1, 	SetMicrophoneVolume, 	SUB_MENU_TEXT, MENU_ITEM_TYPE_MICROPHONE_VOLUME,		0, 0, 0, 0 };
-#endif
-
-#else
-
-/* if not the test harness then provide a basic and minimal menu	*/
-/* to be decided - do we provide any menu at all ?					*/
-
-SUB_MENU_ITEM	turnRadioOffSetting;
-SUB_MENU_ITEM	turnRadioOffSetting1;
-
-SUB_MENU_ITEM	turnRadioOffSetting =
-		{ &turnRadioOffSetting1, NULL, 0, "Keep on"};
-
-SUB_MENU_ITEM	turnRadioOffSetting1 =
-		{ NULL, &turnRadioOffSetting, 0, "turn off" };
-
-
-MAIN_MENU_ITEM	theMenu_1 =
-{ NULL, NULL, "TURN RADIO OFF", 		(void *) &turnRadioOffSetting, 	NULL, SUB_MENU_TEXT, MENU_ITEM_TYPE_TURN_OFF,	  	0, 	0, 0, 0 };
-
-#endif
 
 
 /* external references			*/
@@ -536,8 +486,8 @@ MAIN_MENU_ITEM *firstMenuItem = NULL;
 
 
 static void LCD_Main( void *pvParameters );
-static void LED_Temp( void *pvParameters );
-static void KEYPAD_Temp( void *pvParameters );
+//static void LED_Temp( void *pvParameters );
+//static void KEYPAD_Temp( void *pvParameters );
 
 static void DisplaySubmenuItem( MAIN_MENU_ITEM *thisMenuItem );
 static void DisplayVolume() ;
@@ -568,7 +518,9 @@ static void LCDTimer3Callback( TimerHandle_t theHandle);
 
 static void LCDTimer4Callback( TimerHandle_t theHandle);
 
+#ifdef USER_WATCHDOG
 static void LCDTimer5Callback( TimerHandle_t theHandle);		// watchdog timer to user and keypad picos
+#endif
 
 static char *ConvertToMinutes( int value, char *buffer );
 static char *ConvertToSeconds( int value, char *buffer );
@@ -579,7 +531,8 @@ static void ApplyDefaultSettings();
 
 static TimerHandle_t LCDTimer1 ;		/* Start backlight timer */
 static TimerHandle_t LCDTimer2 ;		/* LCD message scrolling timer */
-static TimerHandle_t LCDTimer3 ;		/* confidence beep timer */
+static TimerHandle_t LCDTimer3 ;	/* confidence beep timer */
+//static TimerHandle_t LCDTimer3_modified ;	/* flash '<' when 2nd line changed */
 
 static TimerHandle_t LCDTimer4 ;		/* Bluetooth Transmit timer */
 
@@ -621,7 +574,7 @@ static int BluetoothTimer = (30 * 1000) ;		// temp - set to 30 seconds
 
 
 static int TransmitReceiveStatus = NO_TRANSMIT ;
-static int ToneDetectStatus = RECEIVE_LEGACY ;
+//static int ToneDetectStatus = RECEIVE_LEGACY ;
 
 
 #define NO_BEEP_MODE	0
@@ -634,6 +587,18 @@ static int ToneDetectMode = FALSE;
 static int KeypadDiagnostics = FALSE ;		/* display incoming keys to check keypad */
 
 
+/*****************************************************************************/
+/*
+*
+* LCD_Startup(): Start the LCD handler and the incoming Keyboard manager
+*
+* @param	none
+*
+* @return	void return
+*
+* @note		Starts the LCD main routine
+*
+******************************************************************************/
 void LCD_Startup()
 {
 	KeysReceivedQueue = xQueueCreate( 8,					// max item count
@@ -652,7 +617,7 @@ void LCD_Startup()
 				NULL );								/* The task handle is not required, so NULL is passed. */
 #endif
 
-#if 1
+#if 0
 	xTaskCreate( LED_Temp,							/* The function that implements the task. */
 				"LED Temp", 						/* The text name assigned to the task - for debug only as it is not used by the kernel. */
 				configMINIMAL_STACK_SIZE, 			/* The size of the stack to allocate to the task. */
@@ -673,7 +638,7 @@ void LCD_Startup()
 
 }
 
-
+#if 0
 static void LED_Temp( void *pvParameters )
 {
 	//vTaskDelay( pdMS_TO_TICKS(2000));
@@ -791,7 +756,7 @@ static void LED_Temp( void *pvParameters )
 
 
 }
-
+#endif
 
 #if 0
 /* KEYPAD_Temp() will be replaced when the KEYPAD pico is updated for this system */
@@ -980,6 +945,21 @@ int  hexToInt( char *inChars )
 
 }
 
+
+void SendMessageToPL( char MsgType )
+{
+	char	PLMessage[6];
+
+	PLMessage[0] = '*' ;
+	PLMessage[1] = MsgType ;
+	PLMessage[2]  = (u32) '\r' ;		// c/r
+	PLMessage[3]  = (u32) '\n' ;		// load  pico
+
+	while ( xQueueSendToBack( PLTransmitQueue, PLMessage, 0 ) != pdPASS )
+	{
+			vTaskDelay( pdMS_TO_TICKS( 5 ));
+	}
+}
 
 static void LCD_Main( void *pvParameters )
 {
@@ -1272,6 +1252,21 @@ static void LCD_Main( void *pvParameters )
 
 					}
 				}
+				else
+				{
+					static int Pete1 = 0 ;
+
+					if ( Pete1 )
+					{
+						Pete1 = 0;
+						LCD_Write_String( SECOND_LINE, 15, "<" );
+					}
+					else
+					{
+						Pete1 = 1;
+						LCD_Write_String( SECOND_LINE, 15, " " );
+					}
+				}
 
 			}
 			else
@@ -1387,6 +1382,13 @@ static void LCD_Main( void *pvParameters )
 
 					DisplayAerialEarthing = FALSE;
 
+#ifdef STORE_AND_FORWARD
+					if ( StoreAndForwardMode )
+					{
+						StoreAndFowardGo = FALSE ;
+					}
+#endif
+
 #if 0
 					static int tempFix = 1 ;
 
@@ -1407,6 +1409,14 @@ static void LCD_Main( void *pvParameters )
 					ToneDetectMode = TRUE ;
 
 					LCD_BackLight( SEND_LCD_BACKLIGHT_ON );		/* light the LCD */
+
+#ifdef STORE_AND_FORWARD
+					// trigger audio to flash if in store and forward mode
+					if ( StoreAndForwardMode )
+					{
+						StoreAndFowardGo = TRUE ;
+					}
+#endif
 				}
 				else
 				if ( theMessage[1] == '2' )		/* tone detect mode off */
@@ -1719,7 +1729,7 @@ static void LCD_Main( void *pvParameters )
 
 						CurrentMenuPosition = 0;
 
-						CurrentSubMenuPosition = &turnRadioOffSetting1 ;
+						CurrentSubMenuPosition = (int) &turnRadioOffSetting1 ;
 
 						LCD_Clear();
 						LCD_Home();
@@ -1741,11 +1751,8 @@ static void LCD_Main( void *pvParameters )
 				//case KEY_UPLEFT:
 				case KEY_UPDOWN:
 					{
-						if ( ( thisMenuItem != NULL ) && ( thisMenuItem->SubMenuClass == SUB_MENU_SCROLL_TEXT) )
-						{
-							xTimerStop( LCDTimer2, portMAX_DELAY );		// stop the scrolling timer
-						}
 
+						xTimerStop( LCDTimer2, portMAX_DELAY );		// always stop the scrolling timer
 
 						if ( ( thisMenuItem = firstMenuItem ) == NULL )
 						{
@@ -1764,6 +1771,7 @@ static void LCD_Main( void *pvParameters )
 						LCD_Home();
 
 						LCD_Write_String( FIRST_LINE, 0, thisMenuItem->heading );
+						LCD_Write_String( FIRST_LINE, 15, "<" );
 						//LCD_Write_String( SECOND_LINE, 0, thisMenuItem->subHeading );
 
 						DisplaySubmenuItem( thisMenuItem );
@@ -1887,6 +1895,10 @@ static void LCD_Main( void *pvParameters )
 						thisMenuItem->currentValue = thisMenuItem->lastValue ;
 
 						DisplaySubmenuItem( thisMenuItem );
+
+						LCD_Write_String( FIRST_LINE, 15, " " );
+						LCD_Write_String( SECOND_LINE, 15, "<" );
+
 					}
 
 					break;
@@ -1924,7 +1936,8 @@ static void LCD_Main( void *pvParameters )
 							{
 								(thisMenuItem->menuItemChanged)(thisMenuItem->currentValue);
 							}
-
+							LCD_Write_String( FIRST_LINE, 15, "<" );
+							LCD_Write_String( SECOND_LINE, 15, " " );
 						}
 
 
@@ -1978,7 +1991,7 @@ static void LCD_Main( void *pvParameters )
 
 								LCD_Write_String( SECOND_LINE, 0, subScrollMenuItem->subMenuHeading );
 
-								xTimerStart( LCDTimer2, portMAX_DELAY );		// only start when we have a text emssage to scroll
+								xTimerStart( LCDTimer2, portMAX_DELAY );		// start when we have a text emssage to scroll
 								xTimerStop( LCDTimer1, portMAX_DELAY );
 
 							}
@@ -2010,10 +2023,15 @@ static void LCD_Main( void *pvParameters )
 
 								}
 
-								xTimerStart( LCDTimer2, portMAX_DELAY );		// only start when we have a text emssage to scroll
+								xTimerStart( LCDTimer2, portMAX_DELAY );		// start when we have a text message to scroll
 								xTimerStop( LCDTimer1, portMAX_DELAY );
 
 							}
+							LCD_Write_String( FIRST_LINE, 15, " " );
+							LCD_Write_String( SECOND_LINE, 15, "<" );
+
+							xTimerStart( LCDTimer2, portMAX_DELAY );		// start when we have a text message to scroll or bottom line scrolled
+
 						}
 						else
 						{
@@ -2080,6 +2098,9 @@ static void LCD_Main( void *pvParameters )
 
 								}
 							}
+							//LCD_Write_String( SECOND_LINE, 15, "<" );
+							LCD_Write_String( FIRST_LINE, 15, "<" );
+							LCD_Write_String( SECOND_LINE, 15, " " );
 						}
 					}
 					break;
@@ -2104,6 +2125,9 @@ static void LCD_Main( void *pvParameters )
 							thisMenuItem->currentSubMenu = thisMenuItem->lastSubMenu;
 							DisplaySubmenuItem( thisMenuItem );
 						}
+
+						LCD_Write_String( FIRST_LINE, 15, "<" );
+						LCD_Write_String( SECOND_LINE, 15, " " );
 					}
 					else
 					/* only proceed if the LCD and Keypad are enabled by UP and LEFT together */
@@ -2132,7 +2156,8 @@ static void LCD_Main( void *pvParameters )
 								}
 
 								LCD_Write_String( SECOND_LINE, 0, subMenuItem->subMenuHeading );
-
+								LCD_Write_String( FIRST_LINE, 15, " " );
+								LCD_Write_String( SECOND_LINE, 15, "<" );
 							}
 							else
 							if ( thisMenuItem->SubMenuClass == SUB_MENU_SCROLL_TEXT )
@@ -2199,11 +2224,16 @@ static void LCD_Main( void *pvParameters )
 									break;
 
 								}
+								LCD_Write_String( FIRST_LINE, 15, " " );
+								LCD_Write_String( SECOND_LINE, 15, "<" );
 
-								xTimerStart( LCDTimer2, portMAX_DELAY );		// only start when we have a text emssage to scroll
+								xTimerStart( LCDTimer2, portMAX_DELAY );		// only start when we have a text message to scroll
 								xTimerStop( LCDTimer1, portMAX_DELAY );
 
 							}
+
+							xTimerStart( LCDTimer2, portMAX_DELAY );		// start when we have a text message to scroll or bottom line scrolled
+
 						}
 						else
 						{
@@ -2226,6 +2256,9 @@ static void LCD_Main( void *pvParameters )
 							LCD_Home();
 
 							LCD_Write_String( FIRST_LINE, 0, thisMenuItem->heading );
+
+							LCD_Write_String( FIRST_LINE, 15, "<" );
+							LCD_Write_String( SECOND_LINE, 15, " " );
 							//LCD_Write_String(thisMenuItem->currentSubMenu SECOND_LINE, 0, thisMenuItem->subHeading );
 
 #if 0
@@ -2308,6 +2341,8 @@ static void LCD_Main( void *pvParameters )
 								}
 
 							}
+							//LCD_Write_String( FIRST_LINE, 15, " " );
+							//LCD_Write_String( SECOND_LINE, 15, "<" );
 						}
 					}
 
@@ -2384,7 +2419,6 @@ static void DisplaySubmenuItem( MAIN_MENU_ITEM *thisMenuItem )
 			break;
 
 		}
-
 	}
 
 }
@@ -2532,8 +2566,8 @@ static void LCD_Write_Char( char DisplayCharacter)
 
 static void LCD_FirstLine( int position )
 {
-	int i;
-	int enable = 0;
+	//int i;
+	//int enable = 0;
 	u32 regValue;
 
 
@@ -2553,8 +2587,8 @@ static void LCD_FirstLine( int position )
 
 static void LCD_SecondLine( int position )
 {
-	int i;
-	int enable = 0;
+	//int i;
+	//int enable = 0;
 	u32 regValue;
 
 
@@ -2635,8 +2669,8 @@ static void LCD_ControlWriteStart( int value )
 static void LCD_ControlWrite( int value )
 {
 
-	int i;
-	int enable ;
+	//int i;
+	//int enable ;
 
 	u32  regValue ;
 
@@ -2767,6 +2801,7 @@ static void LCDTimer4Callback( TimerHandle_t theHandle)
 	//xTimerStart( LCDTimer4, pdMS_TO_TICKS(1)* 1000 );
 }
 
+#ifdef USER_WATCHDOG
 /*
  * watchdog timer
  */
@@ -2782,7 +2817,7 @@ static void LCDTimer5Callback( TimerHandle_t theHandle)
 	}
 
 }
-
+#endif
 
 
 
@@ -3279,6 +3314,8 @@ static void ApplyDefaultSettings()
 
 	SetToneDetect( thisNicolaSettings.toneDetectSelected ) ; // tone detect setting
 
+	SetForwardMode( thisNicolaSettings.audioForwardSelected ) ; // audio forward mode
+
 	//BluetoothBeginInquiry( thisNicolaSettings.);  		//	if RADIO STARTS IN INQUIRY MODE
 
 	//thisNicolaSettiBeaconBeep to be done .
@@ -3435,10 +3472,24 @@ static int ReadMenuFromFlash( void )
 
 		firstMenuItem = &theMenu_3;
 
+		StoreAndForwardMode = FALSE;
+
 		return pdFAIL;
 	}
 
 	CDCardRunning = 1;
+
+#if 1
+	firstMenuItem = &theMenu_3;
+
+#ifdef STORE_AND_FORWARD
+	StoreAndForwardMode = TRUE;
+#endif
+
+	xil_printf( "CD OK- Default Menu\n\r" );
+
+	return pdFAIL;
+#endif
 
 	// enable if need to clean flash to write test menu
 
@@ -3684,6 +3735,10 @@ static void LCD_LoadHandlerRoutine( MAIN_MENU_ITEM *mainMenuItem )
 	case MENU_ITEM_TYPE_TONE_DETECT:
 		//mainMenuItem->SubMenuClass = SUB_MENU_TEXT;
 		mainMenuItem->menuItemChanged = &SetToneDetect;
+		break;
+	case MENU_ITEM_TYPE_AUDIO_FORWARDING:
+		//mainMenuItem->SubMenuClass = SUB_MENU_TEXT;
+		mainMenuItem->menuItemChanged = &SetForwardMode;
 		break;
 	case MENU_ITEM_TYPE_CONFIDENCE_BEEP:
 		mainMenuItem->SubMenuClass = SUB_MENU_INTEGER;

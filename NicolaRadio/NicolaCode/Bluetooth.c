@@ -101,8 +101,10 @@ BLUETOOTH_CHANNELS *FindChannelTableFromRFCommChannel( char theRFCommChannel );
 BLUETOOTH_CHANNELS *FindChannelTableForTablet( char theType );
 
 static void SetCommandMode();
-static void SetDataMode();
 
+#if 0
+static void SetDataMode();
+#endif
 
 static void AddMessageToTransmit( char *theMessage  );
 
@@ -1469,6 +1471,7 @@ static void SetCommandMode()
 
 }
 
+#if 0
 /* Set Bluegiga into Data Mode using DTR signal */
 static void SetDataMode()
 {
@@ -1476,3 +1479,5 @@ static void SetDataMode()
 	// certainly will need to transition so we can revert to command mode.
 	//*GPIO2dataMasked = 0xEFFF0000 ;		/* high to low changes to data mode (I presume)*/
 }
+#endif
+

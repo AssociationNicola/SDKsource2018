@@ -11,8 +11,7 @@ C_SRCS += \
 ../NicolaCode/LCD_Display.c \
 ../NicolaCode/PSPLComms.c \
 ../NicolaCode/RadioInterface.c \
-../NicolaCode/RemoteProtocolHandler.c \
-../NicolaCode/xsdps.c 
+../NicolaCode/RemoteProtocolHandler.c 
 
 OBJS += \
 ./NicolaCode/Bluetooth.o \
@@ -22,8 +21,7 @@ OBJS += \
 ./NicolaCode/LCD_Display.o \
 ./NicolaCode/PSPLComms.o \
 ./NicolaCode/RadioInterface.o \
-./NicolaCode/RemoteProtocolHandler.o \
-./NicolaCode/xsdps.o 
+./NicolaCode/RemoteProtocolHandler.o 
 
 C_DEPS += \
 ./NicolaCode/Bluetooth.d \
@@ -33,15 +31,14 @@ C_DEPS += \
 ./NicolaCode/LCD_Display.d \
 ./NicolaCode/PSPLComms.d \
 ./NicolaCode/RadioInterface.d \
-./NicolaCode/RemoteProtocolHandler.d \
-./NicolaCode/xsdps.d 
+./NicolaCode/RemoteProtocolHandler.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
 NicolaCode/%.o: ../NicolaCode/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM v7 gcc compiler'
-	arm-none-eabi-gcc -Wall -Os -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"$@" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	arm-none-eabi-gcc -Wall -Os -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src" -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include" -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\portable" -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\NicolaInclude" -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"$@" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

@@ -98,7 +98,7 @@ static void HandleRemoteNicolaMessage( void *pvParameters )
 {
 	u8 				*sendMessage;
 	TEXT_MESSAGE	theReceivedMessage;
-	TEXT_MESSAGE    *theSendMessage = &theReceivedMessage ;		//so the code reads OK
+	//TEXT_MESSAGE    *theSendMessage = &theReceivedMessage ;		//so the code reads OK
 	IDENTITY_MESSAGE *IdentityMessage = (IDENTITY_MESSAGE *) &theReceivedMessage;
 	int				characterCount;
 	int				i;

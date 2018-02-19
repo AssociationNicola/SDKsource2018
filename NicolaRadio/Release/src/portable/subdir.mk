@@ -24,14 +24,14 @@ C_DEPS += \
 src/portable/%.o: ../src/portable/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM v7 gcc compiler'
-	arm-none-eabi-gcc -Wall -Os -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"$@" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	arm-none-eabi-gcc -Wall -Os -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src" -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include" -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\portable" -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\NicolaInclude" -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"$@" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
 src/portable/%.o: ../src/portable/%.S
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM v7 gcc compiler'
-	arm-none-eabi-gcc -Wall -Os -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/include" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude" -I"/home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"$@" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	arm-none-eabi-gcc -Wall -Os -I../../NicolaRadio_bsp/ps7_cortexa9_0/include -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src" -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include" -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\portable" -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\NicolaInclude" -I"D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\PS_PL_wrapper_hw_platform_0" -c -fmessage-length=0 -MT"$@" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

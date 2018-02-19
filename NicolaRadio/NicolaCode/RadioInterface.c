@@ -38,28 +38,65 @@
 #include "semphr.h"
 #include "timers.h"
 
+#include "xil_exception.h"
+#include "xstreamer.h"
+#include "xil_cache.h"
+#include "xllfifo.h"
 
 #include "NicolaTypes.h"
 
 
-/* global references for other source modules */
-
-extern QueueHandle_t	consoleTransmitQueue ;			// in ConsoleManager.c
-extern QueueHandle_t	PLTransmitQueue ;				// in PSPLComms.c
+#define  DEVELOP_TEST_AUDIO
 
 extern int 	MicrophoneVolume ;
-
 
 void SetMicrophoneVolume(int selected );
 void SetAerialType(int selected );
 void SetAerialFrequency(int selected );
 
-void SendPresetMessage(int selected);
+extern QueueHandle_t	consoleTransmitQueue ;			// in ConsoleManager.c
+extern QueueHandle_t	PLTransmitQueue ;				// in PSPLComms.c
+
 
 n3z_tonetest* InstancePtr = NULL;
 
-//static void Radio_Main( void *pvParameters );
+extern n3z_tonetest		*ToneTestInstancePtr;
 
+
+int		configMask = 0x80;			// config write status = No Tone detect by default
+
+#ifdef STORE_AND_FORWARD
+
+
+/* global references for other source modules */
+extern void SendMessageToPL( char MsgType );			// in LCD_Display.c
+extern int TxSend(XLlFifo *, u32  *SourceAddr, int );	// in PSPLComms.c
+
+
+
+extern XLlFifo DataFifo;
+
+
+extern int 	StoreAndForwardMode ;
+extern int 	StoreAndFowardGo ;
+
+void SetBluetoothMode(int);
+void SendPresetMessage(int);
+
+
+static void Radio_Main( void *pvParameters );
+
+
+/* we will read 2046 audio samples then write the lower 16 bits of each sample to flash */
+/* to transmit we will read back the samples and rebuild the 32-bit audio word and write */
+/* back to the audio stream FIFO */
+
+#define AUDIO_PAGE_SIZE  256
+
+u16	 	*audioFlashBuffer;			// pointer to Flash I/O buffer
+u32		*audioStreamBuffer ;		// pointer to audio I/O buffer
+
+#endif
 
 void RadioInterfaceInit( )
 {
@@ -76,31 +113,466 @@ void RadioInterfaceInit( )
 #if 0
 	PLSendQueue = xQueueCreate( 8,					// max item count
 								4 ) ;					// size of each item (max) ) ;
+#endif
 
 	/* Start the tasks as described in the comments at the top of this file. */
 						/* The task handle is not required, so NULL is passed. */
-
+#ifdef STORE_AND_FORWARD
 	xTaskCreate( Radio_Main,							/* The function that implements the task. */
 				"Radio Main", 						/* The text name assigned to the task - for debug only as it is not used by the kernel. */
 				configMINIMAL_STACK_SIZE, 			/* The size of the stack to allocate to the task. */
 				NULL, 								/* The parameter passed to the task - not used in this case. */
-				tskIDLE_PRIORITY + 2, 				/* The priority assigned to the task. Small number low priority */
+				tskIDLE_PRIORITY + 10, 				/* The priority assigned to the task. Small number low priority */
 				NULL );								/* The task handle is not required, so NULL is passed. */
 #endif
 
 }
 
-#if 0
-static void Radio_Main( void *pvParameters )
+#ifdef STORE_AND_FORWARD
+
+#ifdef DEVELOP_TEST_AUDIO
+
+#define TEST_SEND_SIZE 256
+
+
+/*  routine to receive audio (and store in flash) during store and forward development */
+void ReceiveAudioTest()
 {
-	char theMessage;
+	int	i;
+	int	j;
+	int	flashOffset;
+	int	audioBytesReceived;
+	int	audioValueCount ;
+	u32 AudioValue ;
+	u16 	*audioBufferPtr ;
+
     while ( 1 )
     {
-    	if ( xQueueReceive( PLSendQueue, &theMessage, portMAX_DELAY ) == pdPASS )
+    	// if we are receiving then store to flash
+    	if ( StoreAndForwardMode && StoreAndFowardGo )
+    	//if ( 1 )
     	{
 
+    		audioBytesReceived = flashOffset = 0 ;
+
+			//SetBluetoothMode( 0x400 ) ;
+
+    		/* set the FIFO to stream audio to the ARM */
+    		n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* reset FIFO */
+
+    		//   1098 7654 3210 9876 5432 1098 7654 3210
+    		//   0000 0000 1000 0001 0000 0000 0000 0000
+
+    		n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x001010100);	/* bit 16, 17, 18 is channel and 16 = audio stream */
+    																			/* bit 24 tells FPGA to stream until told to stop */
+
+    		// while there is incoming audio data
+
+			audioBufferPtr = audioFlashBuffer ;
+
+			xil_printf( "\r\n\nRead Audio Data\r\n\n");
+
+			// read the audio FIFO into the buffer
+			do
+			{
+
+				audioValueCount = XLlFifo_RxOccupancy(&DataFifo) ;	/* how many values read? */
+
+				if ( audioValueCount == 0 )
+				{
+					vTaskDelay( pdMS_TO_TICKS(5)); // wait for audio data to appear */
+				}
+				else
+				for ( i=0; i<audioValueCount; i++ )
+				{
+
+					AudioValue = XLlFifo_RxGetWord(&DataFifo);	/* read next audio value */
+
+					if ( audioBytesReceived < 256 )
+					{
+						xil_printf("Read %X\r\n", AudioValue );
+					}
+
+					*audioBufferPtr++ = (u16) AudioValue ;
+
+					audioBytesReceived += 2;  // actual count of bytes received
+
+					if ( (audioBytesReceived % (AUDIO_PAGE_SIZE*2) ) == 0 )
+					{
+
+						CDFlashWrite( (u8 *) audioFlashBuffer, AUDIO_MESSAGE_FLASH_ADDRESS + flashOffset, AUDIO_PAGE_SIZE*2);
+
+						flashOffset += AUDIO_PAGE_SIZE*2 ;
+
+						audioBufferPtr = audioFlashBuffer ;		/* beginning of buffer */
+
+					}
+				}
+
+			} while ( StoreAndFowardGo );
+
+
+			// write rest of audio to flash
+			//CDFlashWrite( (u8 *) audioFlashBuffer, AUDIO_MESSAGE_FLASH_ADDRESS + flashOffset, AUDIO_PAGE_SIZE*2);
+
+			/* stop the FIFO to stream audio to the ARM */
+    		n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* reset FIFO */
+
     	}
-    	//vTaskDelay( pdMS_TO_TICKS( 1000 ));
+
+    	vTaskDelay( pdMS_TO_TICKS(1000));
+    }
+
+
+}
+
+
+/*  routine to send audio to PL during store and forward development */
+void SendAudioFromFlashTest()
+{
+	unsigned int i;
+	unsigned int j;
+	int k;
+	int configmask_in ;
+
+	vTaskDelay( pdMS_TO_TICKS( 5000 ));		// initial wait
+
+	xil_printf( "\n\nTransmit Audio TESTING\r\n");
+
+	//SetBluetoothMode( 0x200 ) ;// send to Bluetooth = 0x200
+
+	//n3z_tonetest_n3zconfig_write(InstancePtr, configMask + 0x10 ) ;		// temp debug set Text Flag
+	//n3z_tonetest_n3zconfig_write(InstancePtr, configMask + 0x0 ) ;		// temp debug set Text Flag
+
+
+	n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* stop streaming */
+	n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x001010100);	/* bit 16, 17, 18 is channel and 16 = audio stream */
+																		/* bit 24 tells FPGA to stream until told to stop */
+	n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* stop streaming */
+
+
+	while ( 1 )
+	{
+		j=0;
+		k=0;
+
+		SendMessageToPL( SEND_TRANSMIT_STATE );
+
+		vTaskDelay( pdMS_TO_TICKS( 2000 ));		// wait for the leading warble to finish
+
+
+
+		for ( i=0; i<64; i++ )		// since PL reads 64*512 samples per second should be 8 secs worth !
+		{
+
+			CDFlashRead( (u8 *) audioFlashBuffer, AUDIO_MESSAGE_FLASH_ADDRESS + (i * (AUDIO_PAGE_SIZE*2)), AUDIO_PAGE_SIZE*2);
+
+			for ( j=0; j<AUDIO_PAGE_SIZE; j++ )
+			{
+
+				audioStreamBuffer[j] = audioFlashBuffer[j] | 0xE0000000 ;
+
+			}
+
+				TxSend(&DataFifo, audioStreamBuffer, AUDIO_PAGE_SIZE);
+
+				//xil_printf( "*" ) ;
+		}
+
+
+		//reset stream direction to normal
+//		audioStreamBuffer[0] = 0x8000000 ;
+//		TxSend(&DataFifo, audioStreamBuffer, 1);
+
+		SendMessageToPL( SEND_RECEIVE_STATE );
+
+		configmask_in = n3z_tonetest_n3zconfig_read(InstancePtr ) ;
+
+		xil_printf( "Transmit Audio TESTING C %x\r\n\n", configmask_in);
+
+		vTaskDelay( pdMS_TO_TICKS( 5000 ));		// pause
+
+	}
+}
+
+
+
+/*  routine to send audio to PL during store and forward development */
+void SendAudioTest()
+{
+	unsigned int i;
+	unsigned int j;
+	int k;
+	int configmask_in ;
+
+	vTaskDelay( pdMS_TO_TICKS( 10000 ));		// initial wait
+
+	xil_printf( "\n\nTransmit Audio TESTING\r\n");
+
+	//SetBluetoothMode( 0x200 ) ;// send to Bluetooth = 0x200
+
+	//n3z_tonetest_n3zconfig_write(InstancePtr, configMask + 0x10 ) ;		// temp debug set Text Flag
+	//n3z_tonetest_n3zconfig_write(InstancePtr, configMask + 0x0 ) ;		// temp debug set Text Flag
+
+
+	n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* stop streaming */
+	n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x001010100);	/* bit 16, 17, 18 is channel and 16 = audio stream */
+																		/* bit 24 tells FPGA to stream until told to stop */
+	n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* stop streaming */
+
+
+	while ( 1 )
+	{
+		j=0;
+		k=0;
+
+		for (k=0; k<TEST_SEND_SIZE; k++)
+		{
+			j =  ((k & 0x0000000f) << 11) & 0x0000FFFF ;
+
+			//j =  ((i & 0xFFF) << 4) & 0xFFFF ;
+
+			audioStreamBuffer[k] = j  + 0xE0000000;
+
+		}
+
+		SendMessageToPL( SEND_TRANSMIT_STATE );
+
+		vTaskDelay( pdMS_TO_TICKS( 2000 ));		// wait for the leading warble to finish
+
+
+		for ( i=0; i<64; i++ )		// since PL reads 64*512 samples per second should be 8 secs worth !
+		{
+
+
+				//xil_printf( "%d - ", XLlFifo_iTxVacancy(&DataFifo));
+
+				//TxSend(&DataFifo, audioOutBuffer, 256);
+				TxSend(&DataFifo, audioStreamBuffer, TEST_SEND_SIZE);
+
+		}
+
+
+		//reset stream direction to normal
+		audioStreamBuffer[0] = 0x8000000 ;
+		TxSend(&DataFifo, audioStreamBuffer, 1);
+
+		SendMessageToPL( SEND_RECEIVE_STATE );
+
+
+		configmask_in = n3z_tonetest_n3zconfig_read(InstancePtr ) ;
+
+		xil_printf( "Transmit Audio TESTING C %x\r\n\n", configmask_in);
+
+		vTaskDelay( pdMS_TO_TICKS( 5000 ));		// pause
+
+	}
+}
+
+
+#endif
+
+
+
+
+static void Radio_Main( void *pvParameters )
+{
+	//char theMessage;
+	int	i;
+	int	j;
+	int	flashOffset;
+	int	audioBytesReceived;
+	int	audioValueCount ;
+	u32 AudioValue ;
+	u16 	*audioBufferPtr ;
+	//u32 	*audioBufferOutPtr ;
+
+
+	if ( ( audioFlashBuffer = pvPortMalloc( AUDIO_PAGE_SIZE*2 ) ) == NULL )
+	{
+		xil_printf( "MEMALLOC Failed\r\n");
+		while (1);
+	}
+
+	if ( ( audioStreamBuffer = pvPortMalloc( AUDIO_PAGE_SIZE*4 ) ) == NULL )
+	{
+		xil_printf( "MEMALLOC Failed\r\n");
+		while (1);
+	}
+
+
+
+
+
+#ifdef DEVELOP_TEST_AUDIO
+
+	//SendAudioTest() ;
+
+	SendAudioFromFlashTest() ;
+
+	//ReceiveAudioTest() ;
+
+#endif
+
+
+	char debMsg[16] ;
+	sprintf( debMsg, "                " );
+
+    while ( 1 )
+    {
+    	// if we are receiving then store to flash
+    	if ( StoreAndForwardMode && StoreAndFowardGo )
+    	{
+    		audioBytesReceived = flashOffset = 0 ;
+
+			//SetBluetoothMode( 0x400 ) ;
+
+    		/* set the FIFO to stream audio to the ARM */
+    		n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* reset FIFO */
+
+    		//   1098 7654 3210 9876 5432 1098 7654 3210
+    		//   0000 0000 1000 0001 0000 0000 0000 0000
+
+    		n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x001010100);	/* bit 16, 17, 18 is channel and 16 = audio stream */
+    																			/* bit 24 tells FPGA to stream until told to stop */
+
+    		// while there is incoming audio data
+
+			audioBufferPtr = audioFlashBuffer ;
+
+			xil_printf( "\r\n\nRead Audio Data\r\n\n");
+
+			// read the audio FIFO into the buffer
+			do
+			{
+
+				audioValueCount = XLlFifo_RxOccupancy(&DataFifo) ;	/* how many values read? */
+
+				if ( audioValueCount == 0 )
+				{
+					vTaskDelay( pdMS_TO_TICKS(5)); // wait for audio data to appear */
+				}
+				else
+				for ( i=0; i<audioValueCount; i++ )
+				{
+
+					AudioValue = XLlFifo_RxGetWord(&DataFifo);	/* read next audio value */
+
+					//if ( audioBytesReceived < 256 )
+					//{
+					//	xil_printf("Read %X\r\n", AudioValue );
+					//}
+
+					*audioBufferPtr++ = (u16) AudioValue ;
+
+					audioBytesReceived += 2;  // actual count of bytes received
+
+					if ( (audioBytesReceived % (AUDIO_PAGE_SIZE*2) ) == 0 )
+					{
+
+						CDFlashWrite( (u8 *) audioFlashBuffer, AUDIO_MESSAGE_FLASH_ADDRESS + flashOffset, AUDIO_PAGE_SIZE*2);
+
+						flashOffset += AUDIO_PAGE_SIZE*2 ;
+
+						audioBufferPtr = audioFlashBuffer ;		/* beginning of buffer */
+
+						sprintf( debMsg, "write %d....", audioBytesReceived );
+
+						LCD_Write_String( 0, 0, debMsg);
+
+					}
+				}
+
+			} while ( StoreAndFowardGo );
+
+
+			// write rest of audio to flash
+			CDFlashWrite( (u8 *) audioFlashBuffer, AUDIO_MESSAGE_FLASH_ADDRESS + flashOffset, AUDIO_PAGE_SIZE*2);
+
+			//SetBluetoothMode( 0x200 ) ;			// send audio to Bluetooth for debug
+
+       		n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* stop streaming */
+
+       		//reset stream direction to normal
+    		audioStreamBuffer[0] = 0x8000000 ;
+    		TxSend(&DataFifo, audioStreamBuffer, 1);
+
+
+    		// if we have message stored in flash then transmit said message
+    		// transmit all the audio data in flash
+
+			xil_printf( "\n\nTransmit Audio Data %d\r\n", audioBytesReceived);
+
+			//n3z_tonetest_n3zconfig_write(InstancePtr, configMask + 0x10 ) ;		// temp debug set Text Flag
+
+																				/* bit 24 tells FPGA to stream until told to stop */
+			//n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* stop streaming */
+
+			//audioBytesReceived = 32000;
+
+    		if ( audioBytesReceived )
+    		{
+
+        		SendMessageToPL( SEND_TRANSMIT_STATE );
+
+        		vTaskDelay( pdMS_TO_TICKS( 3000 ));		// wait for the leading warble to finish
+
+
+				for ( i=0; i<audioBytesReceived; i+= AUDIO_PAGE_SIZE )
+				{
+
+					CDFlashRead( (u8 *) audioFlashBuffer, AUDIO_MESSAGE_FLASH_ADDRESS + i, AUDIO_PAGE_SIZE*2);
+
+					// copy from flash buffer to the audio buffer adding audio flags
+
+					if ( (audioBytesReceived - i) < AUDIO_PAGE_SIZE )
+					{
+						xil_printf( "\r\nLASTBLOCK\r\n" ) ;
+					}
+					else
+					{
+						for ( j=0; j<AUDIO_PAGE_SIZE; j++ )
+						{
+							*(audioStreamBuffer+j) = *(audioFlashBuffer+j) | 0xE0000000 ;
+						}
+					}
+
+					//for ( j=0; j<AUDIO_PAGE_SIZE ; j++ )
+					//{
+					//	*(audioStreamBuffer+j) =  (((j & 0x1f) << 11) & 0x7FFF) | 0xE0000000 ;
+					//}
+
+					// The FIFO is read at 8kHz to transmit the audio
+
+					//xil_printf( "%d - ", XLlFifo_iTxVacancy(&DataFifo));
+
+					TxSend(&DataFifo, audioStreamBuffer, AUDIO_PAGE_SIZE );
+					//TxSend(&DataFifo, audioStreamBuffer, TEST_SEND_SIZE);
+
+
+					//sprintf( debMsg, "Send %d....", i );
+					//LCD_Write_String( 1, 0, debMsg);
+					//xil_printf( "*" ) ;
+
+				}
+
+				// need to send last block....
+
+
+
+        		vTaskDelay( pdMS_TO_TICKS( 10 ));
+
+				xil_printf( "Done Transmit Audio Data\r\n");
+
+    			SendMessageToPL( SEND_RECEIVE_STATE );
+
+    		}
+    	}
+    	else
+    	{
+    		vTaskDelay( pdMS_TO_TICKS( 50 ));
+    	}
+
     }
 }
 #endif
@@ -160,35 +632,72 @@ void SetAerialType(int selected )
 	//}
 }
 
+void SetForwardMode(int selected)
+{
+	extern int StoreAndForwardMode;
+
+	if ( selected == 0 )
+	{
+		StoreAndForwardMode = FALSE;
+
+		xil_printf( "Audio Forward disabled\r\n");
+	}
+	else
+	{
+		StoreAndForwardMode = TRUE;
+
+		xil_printf( "Audio forward enabled\r\n");
+	}
+
+}
+
+
 // The N3Z config bits:
-// 0:2		N3Z frequency (1=Heyphone; 2=N2; 3=31kHz ...)
+// 0:2		not used for frequency now - N3Z frequency (1=Heyphone; 2=N2; 3=31kHz ...)
 // 3		If 1 force ARM_ADC channel to 1 (ie not 0) which is the one used by the microphone or loop aerial (note this is heavy handed as the user pico normally controlls this)
 // 4		Switch to text mode (currently doesn't go anywhere)
 // 5,6		Beacon Select  (currently doesn't go anywhere) - for location beacon modes
 // 7		Turn tone detect off - 1 = tone off; 0 = tone on
 
-int		toneDetectMask = 0x80 ;
-int		frequencyMask = 0x01;
+// The bits 9-11 are by default 0 which gives the normal signal that goes to the handset speaker. Other options are:
+// 	1 Data streamed from ARM to PL over the DataFifo
+// 	2 Data being streamed from PL to ARM over DataFifo to be stored in flash for recovery later.
+// 	3 and higher currently as 2
+
 
 void SetToneDetect(int selected )
 {
 
 	if ( selected == 0 )
 	{
-		toneDetectMask = 0x80;
+		//toneDetectMask = 0x80;
+		configMask |= 0x80;
 
 		xil_printf( "SET Tone det off\r\n");
 	}
 	else
 	{
-		toneDetectMask = 0x00;
+		configMask &= (~0x80) ;
 
 		xil_printf( "SET Tone det on\r\n");
 	}
 
-	n3z_tonetest_n3zconfig_write(InstancePtr, toneDetectMask | frequencyMask ) ;
+	n3z_tonetest_n3zconfig_write(InstancePtr, configMask ) ;
 
 }
+
+
+void SetBluetoothMode(int BT_Debug )
+{
+	// The bits 9-11 are by default 0 which gives the normal signal that goes to the handset speaker. Other options are:
+	// 1 Data streamed from ARM to PL over the DataFifo
+	// 2 Data being streamed from PL to ARM over DataFifo to be stored in flash for recovery later.
+	// 3 and higher currently as 2
+
+	n3z_tonetest_n3zconfig_write(InstancePtr, configMask | BT_Debug ) ;
+
+}
+
 
 void SetAerialFrequency(int selected )
 {

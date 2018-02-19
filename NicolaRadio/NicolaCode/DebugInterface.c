@@ -263,6 +263,9 @@ static void Debuging_Main( void *pvParameters )
         GetMsgFromUART( inBuffer, 3);	/* read only 2 characters */
 
          /* Set sample message input (bits 20:23 */
+		//   1098 7654 3210 9876 5432 1098 7654 3210
+		//   0000 0000 1000 0001 0000 0000 0000 0000
+
 
           Input2DSPpico2  = (u32) (inBuffer[0]&0x03) << 22 ;
 
@@ -274,7 +277,7 @@ static void Debuging_Main( void *pvParameters )
 
 		/* get channel and number of samples */
 
-		xil_printf( "ENTER CHANNEL NUMBER (0 - 3): ");
+		xil_printf( "ENTER CHANNEL NUMBER (0 - 7) 1=Spkr+FIFOaudio, 7=Several Audio Path signals: ");
 
 		GetMsgFromUART( inBuffer, 3);	/* read character */
 

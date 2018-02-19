@@ -18,7 +18,9 @@
 #include "xqspips.h"		/* QSPI device driver */
 
 
-/* LED defitions */
+#define STORE_AND_FORWARD 1
+
+/* LED definitions */
 
 
 #define GPIO_BANK2 (54)
@@ -61,6 +63,7 @@ typedef struct
 	char			microphoneVolume;
 	char			aerialType;
 	char			toneDetectSelected;
+	char			audioForwardSelected;
 	char			confidenceBeepTime;
 	char			beaconBeepTime;
 
@@ -220,7 +223,7 @@ typedef struct
 #define KEY_TIMEOUT1			'a'		/* to turn off backlight */
 #define KEY_TIMEOUT2			'b'		/* for text scrolling */
 #define KEY_TIMEOUT3			'c'		/* confidence beep */
-#define KEY_TIMEOUT4			'd'		/* confidence beep */
+#define KEY_TIMEOUT4			'd'		/* Bluetooth transmit timer */
 #define KEY_TIMEOUT5			'e'		/* watchdog timer */
 
 #define KEY_USER_WDOG_REPLY		'p'		/* watchdog reply from User Pico */
@@ -248,6 +251,7 @@ typedef struct
 #define DECREMENT_VOLUME	-25
 
 #define DEFAULT_VOLUME		25
+#define DEFAULT_STOREANDFORWARD	TRUE
 
 /* for use in LCD_Dispay and elsewhere		*/
 
@@ -264,6 +268,7 @@ void CDFlashWrite( u8 *writeToAddress, u32 flashAddress, u32 numberOfBytes);		//
 /* define the sector usage in FLASH here  */
 
 #define		LCD_MENU_FLASH_ADDRESS 0x000000
+#define		AUDIO_MESSAGE_FLASH_ADDRESS 0x008000
 
 #define SECTOR_SIZE		0x10000
 #define NUM_SECTORS		0x100

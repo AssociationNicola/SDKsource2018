@@ -383,6 +383,7 @@ int main( void )
 	thisNicolaSettings.aerialType = 0 ;				// earthed
 	thisNicolaSettings.aerialFrequency = (0x754F << 16) | 0x0e7F ;		// HEYPhone
 	thisNicolaSettings.toneDetectSelected = 0 ;		// tone detect off
+	thisNicolaSettings.audioForwardSelected = 1 ;	// audio forwarding off
 	thisNicolaSettings.confidenceBeepTime = 0 ;		// no confidence beep
 
 
@@ -410,7 +411,7 @@ int main( void )
 
 	// Disable for debug
 
-	BluetoothStartup();			// to Bluetooth devices of all kinds
+	//BluetoothStartup();			// to Bluetooth devices of all kinds
 
 	//uart_SendByte(STDOUT_BASEADDRESS, '5' );
 
@@ -419,7 +420,7 @@ int main( void )
 
 	//uart_SendByte(STDOUT_BASEADDRESS, '6' );
 
-	//DebugingGraham_Startup();		// start the streaming debug interface
+	DebugingGraham_Startup();		// start the streaming debug interface
 
 	RadioInterfaceInit();		// start the PL to PS comms here
 
