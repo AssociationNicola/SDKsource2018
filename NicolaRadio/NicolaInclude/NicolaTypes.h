@@ -251,7 +251,7 @@ typedef struct
 #define DECREMENT_VOLUME	-25
 
 #define DEFAULT_VOLUME		25
-#define DEFAULT_STOREANDFORWARD	TRUE
+#define DEFAULT_STOREANDFORWARD	FALSE
 
 /* for use in LCD_Dispay and elsewhere		*/
 

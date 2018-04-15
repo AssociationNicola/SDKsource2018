@@ -1,6 +1,6 @@
 NicolaCode/PSPLComms.o NicolaCode/PSPLComms.o: ../NicolaCode/PSPLComms.c \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src/platform.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src/platform_config.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/platform.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/platform_config.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xil_printf.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xil_types.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xparameters.h \
@@ -26,34 +26,31 @@ NicolaCode/PSPLComms.o NicolaCode/PSPLComms.o: ../NicolaCode/PSPLComms.c \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xllfifo.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xstreamer.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xllfifo_hw.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/FreeRTOS.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src/FreeRTOSConfig.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/FreeRTOS.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/FreeRTOSConfig.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xscuwdt.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xscuwdt_hw.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/projdefs.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/portable.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/deprecated_definitions.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\portable/portmacro.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/mpu_wrappers.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/task.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/list.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/semphr.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/queue.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/timers.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/task.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/projdefs.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/portable.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/deprecated_definitions.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable/portmacro.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/mpu_wrappers.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/task.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/list.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/semphr.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/queue.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/timers.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/task.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xgpiops.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xgpiops_hw.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xplatform_info.h \
- D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\NicolaInclude/NicolaTypes.h \
+ /home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude/NicolaTypes.h \
  ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xqspips.h \
- ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xqspips_hw.h \
- ../NicolaCode/../../../PicoSource/ToneDetectPico.c \
- ../NicolaCode/../../../PicoSource/KeyPadPico.c \
- ../NicolaCode/../../../PicoSource/UserPico.c
+ ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xqspips_hw.h
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src/platform.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/platform.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src/platform_config.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/platform_config.h:
 
 ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xil_printf.h:
 
@@ -105,35 +102,35 @@ D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src/platform_co
 
 ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xllfifo_hw.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/FreeRTOS.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/FreeRTOS.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src/FreeRTOSConfig.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/FreeRTOSConfig.h:
 
 ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xscuwdt.h:
 
 ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xscuwdt_hw.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/projdefs.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/projdefs.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/portable.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/portable.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/deprecated_definitions.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/deprecated_definitions.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\portable/portmacro.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/portable/portmacro.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/mpu_wrappers.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/mpu_wrappers.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/task.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/task.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/list.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/list.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/semphr.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/semphr.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/queue.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/queue.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/timers.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/timers.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/task.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/src/include/task.h:
 
 ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xgpiops.h:
 
@@ -141,14 +138,8 @@ D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\src\include/tas
 
 ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xplatform_info.h:
 
-D:\Documents\NicolaRadio\N3Z_TD_FIFO\N3Z_TD_FIFO.sdk\NicolaRadio\NicolaInclude/NicolaTypes.h:
+/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/NicolaInclude/NicolaTypes.h:
 
 ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xqspips.h:
 
 ../../NicolaRadio_bsp/ps7_cortexa9_0/include/xqspips_hw.h:
-
-../NicolaCode/../../../PicoSource/ToneDetectPico.c:
-
-../NicolaCode/../../../PicoSource/KeyPadPico.c:
-
-../NicolaCode/../../../PicoSource/UserPico.c:

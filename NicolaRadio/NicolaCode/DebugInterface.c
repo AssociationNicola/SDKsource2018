@@ -277,7 +277,7 @@ static void Debuging_Main( void *pvParameters )
 
 		/* get channel and number of samples */
 
-		xil_printf( "ENTER CHANNEL NUMBER (0 - 7) 1=Spkr+FIFOaudio, 7=Several Audio Path signals: ");
+		xil_printf( "ENTER CHANNEL NUMBER (0 - 3): ");
 
 		GetMsgFromUART( inBuffer, 3);	/* read character */
 

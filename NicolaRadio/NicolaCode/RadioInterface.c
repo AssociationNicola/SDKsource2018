@@ -46,7 +46,7 @@
 #include "NicolaTypes.h"
 
 
-#define  DEVELOP_TEST_AUDIO
+//#define  DEVELOP_TEST_AUDIO
 
 extern int 	MicrophoneVolume ;
 
@@ -57,6 +57,7 @@ void SetAerialFrequency(int selected );
 extern QueueHandle_t	consoleTransmitQueue ;			// in ConsoleManager.c
 extern QueueHandle_t	PLTransmitQueue ;				// in PSPLComms.c
 
+extern XLlFifo PSPLFifo;
 
 n3z_tonetest* InstancePtr = NULL;
 
@@ -87,7 +88,7 @@ void SendPresetMessage(int);
 static void Radio_Main( void *pvParameters );
 
 
-/* we will read 2046 audio samples then write the lower 16 bits of each sample to flash */
+/* we will read 256 audio samples then write the lower 16 bits of each sample to flash */
 /* to transmit we will read back the samples and rebuild the 32-bit audio word and write */
 /* back to the audio stream FIFO */
 
@@ -122,7 +123,8 @@ void RadioInterfaceInit( )
 				"Radio Main", 						/* The text name assigned to the task - for debug only as it is not used by the kernel. */
 				configMINIMAL_STACK_SIZE, 			/* The size of the stack to allocate to the task. */
 				NULL, 								/* The parameter passed to the task - not used in this case. */
-				tskIDLE_PRIORITY + 10, 				/* The priority assigned to the task. Small number low priority */
+				//tskIDLE_PRIORITY + 10, 				/* The priority assigned to the task. Small number low priority */
+				tskIDLE_PRIORITY + 1, 				/* The priority assigned to the task. Small number low priority */
 				NULL );								/* The task handle is not required, so NULL is passed. */
 #endif
 
@@ -188,16 +190,16 @@ void ReceiveAudioTest()
 
 					AudioValue = XLlFifo_RxGetWord(&DataFifo);	/* read next audio value */
 
-					if ( audioBytesReceived < 256 )
-					{
-						xil_printf("Read %X\r\n", AudioValue );
-					}
+					//if ( audioBytesReceived < 256 )
+					//{
+					//	xil_printf("Read %X\r\n", AudioValue );
+					//}
 
 					*audioBufferPtr++ = (u16) AudioValue ;
 
-					audioBytesReceived += 2;  // actual count of bytes received
+					audioBytesReceived += 1;  // actual count of audio words received
 
-					if ( (audioBytesReceived % (AUDIO_PAGE_SIZE*2) ) == 0 )
+					if ( (audioBytesReceived % (AUDIO_PAGE_SIZE) ) == 0 )
 					{
 
 						CDFlashWrite( (u8 *) audioFlashBuffer, AUDIO_MESSAGE_FLASH_ADDRESS + flashOffset, AUDIO_PAGE_SIZE*2);
@@ -218,9 +220,19 @@ void ReceiveAudioTest()
 			/* stop the FIFO to stream audio to the ARM */
     		n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* reset FIFO */
 
-    	}
+			xil_printf( "\r\nFinish Read Audio Data\r\n\n");
 
-    	vTaskDelay( pdMS_TO_TICKS(1000));
+
+			//SendAudioFromFlashTest( audioBytesReceived ) ;
+
+			vTaskDelay( pdMS_TO_TICKS(1000));
+
+    	}
+    	else
+    	{
+			vTaskDelay( pdMS_TO_TICKS(1000));
+
+    	}
     }
 
 
@@ -228,12 +240,13 @@ void ReceiveAudioTest()
 
 
 /*  routine to send audio to PL during store and forward development */
-void SendAudioFromFlashTest()
+void SendAudioFromFlashTest( int  numberWords)
 {
 	unsigned int i;
 	unsigned int j;
 	int k;
 	int configmask_in ;
+	u32	OffsetInFlash ;
 
 	vTaskDelay( pdMS_TO_TICKS( 5000 ));		// initial wait
 
@@ -251,26 +264,34 @@ void SendAudioFromFlashTest()
 	n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* stop streaming */
 
 
-	while ( 1 )
+	//while ( 1 )
 	{
 		j=0;
 		k=0;
 
-		SendMessageToPL( SEND_TRANSMIT_STATE );
+		//SendMessageToPL( SEND_TRANSMIT_STATE );
 
-		vTaskDelay( pdMS_TO_TICKS( 2000 ));		// wait for the leading warble to finish
+		vTaskDelay( pdMS_TO_TICKS( 1000 ));		// wait for the leading warble to finish
 
+		OffsetInFlash = AUDIO_MESSAGE_FLASH_ADDRESS ;
 
-
-		for ( i=0; i<64; i++ )		// since PL reads 64*512 samples per second should be 8 secs worth !
+		for ( i=0; i<numberWords; i += AUDIO_PAGE_SIZE )		// since PL reads 64*512 samples per second should be 8 secs worth !
 		{
 
-			CDFlashRead( (u8 *) audioFlashBuffer, AUDIO_MESSAGE_FLASH_ADDRESS + (i * (AUDIO_PAGE_SIZE*2)), AUDIO_PAGE_SIZE*2);
+			// do not send first 1/2 second of audio = 400 samples
+			CDFlashRead( (u8 *) audioFlashBuffer,  OffsetInFlash, AUDIO_PAGE_SIZE*2);
+
+			OffsetInFlash += AUDIO_PAGE_SIZE*2 ;
 
 			for ( j=0; j<AUDIO_PAGE_SIZE; j++ )
 			{
 
-				audioStreamBuffer[j] = audioFlashBuffer[j] | 0xE0000000 ;
+				audioStreamBuffer[j] = (audioFlashBuffer[j] & 0xFFFF) | 0xE0000000 ;
+
+				//if ( i < AUDIO_PAGE_SIZE)
+				{
+					//xil_printf( "snd %X\r\n", audioStreamBuffer[j] );
+				}
 
 			}
 
@@ -281,16 +302,19 @@ void SendAudioFromFlashTest()
 
 
 		//reset stream direction to normal
-//		audioStreamBuffer[0] = 0x8000000 ;
-//		TxSend(&DataFifo, audioStreamBuffer, 1);
+		//audioStreamBuffer[0] = 0x8000000 ;
+		//TxSend(&DataFifo, audioStreamBuffer, 1);
 
-		SendMessageToPL( SEND_RECEIVE_STATE );
+		vTaskDelay( pdMS_TO_TICKS( 2000 ));		// wait for the trailing warble to finish
+
+
+
+		//SendMessageToPL( SEND_RECEIVE_STATE );
 
 		configmask_in = n3z_tonetest_n3zconfig_read(InstancePtr ) ;
 
 		xil_printf( "Transmit Audio TESTING C %x\r\n\n", configmask_in);
 
-		vTaskDelay( pdMS_TO_TICKS( 5000 ));		// pause
 
 	}
 }
@@ -304,6 +328,9 @@ void SendAudioTest()
 	unsigned int j;
 	int k;
 	int configmask_in ;
+
+    int Status = 0 ;
+    int StatusLast = 0 ;
 
 	vTaskDelay( pdMS_TO_TICKS( 10000 ));		// initial wait
 
@@ -333,6 +360,7 @@ void SendAudioTest()
 			//j =  ((i & 0xFFF) << 4) & 0xFFFF ;
 
 			audioStreamBuffer[k] = j  + 0xE0000000;
+			//audioStreamBuffer[k] = 0x3333  + 0xE0000000;
 
 		}
 
@@ -341,7 +369,7 @@ void SendAudioTest()
 		vTaskDelay( pdMS_TO_TICKS( 2000 ));		// wait for the leading warble to finish
 
 
-		for ( i=0; i<64; i++ )		// since PL reads 64*512 samples per second should be 8 secs worth !
+		for ( i=0; i<128; i++ )		// since PL reads 64*512 samples per second should be 8 secs worth !
 		{
 
 
@@ -349,13 +377,12 @@ void SendAudioTest()
 
 				//TxSend(&DataFifo, audioOutBuffer, 256);
 				TxSend(&DataFifo, audioStreamBuffer, TEST_SEND_SIZE);
-
 		}
 
 
 		//reset stream direction to normal
-		audioStreamBuffer[0] = 0x8000000 ;
-		TxSend(&DataFifo, audioStreamBuffer, 1);
+		//audioStreamBuffer[0] = 0x8000000 ;
+		//TxSend(&DataFifo, audioStreamBuffer, 1);
 
 		SendMessageToPL( SEND_RECEIVE_STATE );
 
@@ -406,17 +433,21 @@ static void Radio_Main( void *pvParameters )
 
 #ifdef DEVELOP_TEST_AUDIO
 
-	//SendAudioTest() ;
+	SendAudioTest() ;
 
-	SendAudioFromFlashTest() ;
+#if 0
+	while ( 1 )
+	{
+		SendAudioFromFlashTest( 64 * AUDIO_PAGE_SIZE ) ;
+		vTaskDelay( pdMS_TO_TICKS( 5000 ));		// pause
+	}
+#endif
+
 
 	//ReceiveAudioTest() ;
 
 #endif
 
-
-	char debMsg[16] ;
-	sprintf( debMsg, "                " );
 
     while ( 1 )
     {
@@ -465,9 +496,9 @@ static void Radio_Main( void *pvParameters )
 
 					*audioBufferPtr++ = (u16) AudioValue ;
 
-					audioBytesReceived += 2;  // actual count of bytes received
+					audioBytesReceived += 1;  // actual count of audio values received
 
-					if ( (audioBytesReceived % (AUDIO_PAGE_SIZE*2) ) == 0 )
+					if ( (audioBytesReceived % (AUDIO_PAGE_SIZE) ) == 0 )
 					{
 
 						CDFlashWrite( (u8 *) audioFlashBuffer, AUDIO_MESSAGE_FLASH_ADDRESS + flashOffset, AUDIO_PAGE_SIZE*2);
@@ -475,10 +506,6 @@ static void Radio_Main( void *pvParameters )
 						flashOffset += AUDIO_PAGE_SIZE*2 ;
 
 						audioBufferPtr = audioFlashBuffer ;		/* beginning of buffer */
-
-						sprintf( debMsg, "write %d....", audioBytesReceived );
-
-						LCD_Write_String( 0, 0, debMsg);
 
 					}
 				}
@@ -494,8 +521,8 @@ static void Radio_Main( void *pvParameters )
        		n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* stop streaming */
 
        		//reset stream direction to normal
-    		audioStreamBuffer[0] = 0x8000000 ;
-    		TxSend(&DataFifo, audioStreamBuffer, 1);
+    		//audioStreamBuffer[0] = 0x8000000 ;
+    		//TxSend(&DataFifo, audioStreamBuffer, 1);
 
 
     		// if we have message stored in flash then transmit said message
@@ -503,15 +530,46 @@ static void Radio_Main( void *pvParameters )
 
 			xil_printf( "\n\nTransmit Audio Data %d\r\n", audioBytesReceived);
 
-			//n3z_tonetest_n3zconfig_write(InstancePtr, configMask + 0x10 ) ;		// temp debug set Text Flag
-
-																				/* bit 24 tells FPGA to stream until told to stop */
-			//n3z_tonetest_values2recover_write(ToneTestInstancePtr, 0x00000000);	/* stop streaming */
-
-			//audioBytesReceived = 32000;
-
     		if ( audioBytesReceived )
     		{
+
+
+    			SendMessageToPL( SEND_TRANSMIT_STATE );
+
+    			//vTaskDelay( pdMS_TO_TICKS( 2000 ));		// wait for the leading warble to finish
+
+
+    			for ( i=0; i<audioBytesReceived; i += AUDIO_PAGE_SIZE )		// since PL reads 64*512 samples per second should be 8 secs worth !
+    			{
+
+    				CDFlashRead( (u8 *) audioFlashBuffer, AUDIO_MESSAGE_FLASH_ADDRESS + (i*2), AUDIO_PAGE_SIZE*2);
+
+    				for ( j=0; j<AUDIO_PAGE_SIZE; j++ )
+    				{
+
+    					audioStreamBuffer[j] = audioFlashBuffer[j] | 0xE0000000 ;
+
+    					//xil_printf( "%X\r\n", audioStreamBuffer[j] ) ;
+
+    				}
+
+    				TxSend(&DataFifo, audioStreamBuffer, AUDIO_PAGE_SIZE);
+
+
+    			}
+
+
+    			//reset stream direction to normal
+    			//audioStreamBuffer[0] = 0x8000000 ;
+    			//TxSend(&DataFifo, audioStreamBuffer, 1);
+
+    			SendMessageToPL( SEND_RECEIVE_STATE );
+
+				xil_printf( "Done Transmit Audio Data\r\n");
+
+
+
+#if 0
 
         		SendMessageToPL( SEND_TRANSMIT_STATE );
 
@@ -521,7 +579,7 @@ static void Radio_Main( void *pvParameters )
 				for ( i=0; i<audioBytesReceived; i+= AUDIO_PAGE_SIZE )
 				{
 
-					CDFlashRead( (u8 *) audioFlashBuffer, AUDIO_MESSAGE_FLASH_ADDRESS + i, AUDIO_PAGE_SIZE*2);
+					CDFlashRead( (u8 *) audioFlashBuffer, AUDIO_MESSAGE_FLASH_ADDRESS + (i * (AUDIO_PAGE_SIZE*2)), AUDIO_PAGE_SIZE*2);
 
 					// copy from flash buffer to the audio buffer adding audio flags
 
@@ -533,7 +591,8 @@ static void Radio_Main( void *pvParameters )
 					{
 						for ( j=0; j<AUDIO_PAGE_SIZE; j++ )
 						{
-							*(audioStreamBuffer+j) = *(audioFlashBuffer+j) | 0xE0000000 ;
+							//*(audioStreamBuffer+j) = *(audioFlashBuffer+j) | 0xE0000000 ;
+							audioStreamBuffer[j] = audioFlashBuffer[j] | 0xE0000000 ;
 						}
 					}
 
@@ -549,11 +608,6 @@ static void Radio_Main( void *pvParameters )
 					TxSend(&DataFifo, audioStreamBuffer, AUDIO_PAGE_SIZE );
 					//TxSend(&DataFifo, audioStreamBuffer, TEST_SEND_SIZE);
 
-
-					//sprintf( debMsg, "Send %d....", i );
-					//LCD_Write_String( 1, 0, debMsg);
-					//xil_printf( "*" ) ;
-
 				}
 
 				// need to send last block....
@@ -564,7 +618,9 @@ static void Radio_Main( void *pvParameters )
 
 				xil_printf( "Done Transmit Audio Data\r\n");
 
+
     			SendMessageToPL( SEND_RECEIVE_STATE );
+#endif
 
     		}
     	}
@@ -640,11 +696,16 @@ void SetForwardMode(int selected)
 	{
 		StoreAndForwardMode = FALSE;
 
+		SetToneDetect( 0 ) ;		// also have Tone Detect off
+
+
 		xil_printf( "Audio Forward disabled\r\n");
 	}
 	else
 	{
 		StoreAndForwardMode = TRUE;
+
+		SetToneDetect( 1 ) ;		// must also have Tone Detect on
 
 		xil_printf( "Audio forward enabled\r\n");
 	}
@@ -673,13 +734,13 @@ void SetToneDetect(int selected )
 		//toneDetectMask = 0x80;
 		configMask |= 0x80;
 
-		xil_printf( "SET Tone det off\r\n");
+		xil_printf( "Set Tone det off\r\n");
 	}
 	else
 	{
 		configMask &= (~0x80) ;
 
-		xil_printf( "SET Tone det on\r\n");
+		xil_printf( "Set Tone det on\r\n");
 	}
 
 	n3z_tonetest_n3zconfig_write(InstancePtr, configMask ) ;

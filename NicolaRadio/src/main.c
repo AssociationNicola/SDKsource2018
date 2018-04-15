@@ -215,16 +215,31 @@ extern u32 QspiFlashSize;
 #endif
 
 
+#ifdef DEBUG_CODE
 
+#define DEBUG_CODE_LOCAL
 
+#endif
 /*-----------------------------------------------------------*/
 /*-----------------------------------------------------------*/
 /*-----------------------------------------------------------*/
 
 
+#ifdef DEBUG_CODE_LOCAL
 						// 6 chars for version no; rest for date
 						//   01234567890123456
-char *VersionStringStart = 	"0.1dev dd mmm yy";
+char *VersionStringStart = 	"0.2deb dd mmm yy";
+
+
+
+#else
+
+						//   01234567890123456
+char *VersionStringStart = 	"0.2pre dd mmm yy";
+
+
+#endif
+
 char VersionString[18];
 
 							// 012345678901
@@ -289,7 +304,7 @@ extern void DebugingGraham_Startup();
 //#define COPY_DATA_SECTION
 
 
-#ifndef DEBUG_CODE
+#ifndef DEBUG_CODE_LOCAL
 #define COPY_DATA_SECTION
 #endif
 
@@ -381,18 +396,25 @@ int main( void )
 
 	thisNicolaSettings.microphoneVolume = 50 ;		//
 	thisNicolaSettings.aerialType = 0 ;				// earthed
+
+#ifdef NICOLA_2_DEFAULT_FREQUENCY
+	thisNicolaSettings.aerialFrequency = (0x753E << 16) | 0x0e7d ;		// Nicola 2
+#else
 	thisNicolaSettings.aerialFrequency = (0x754F << 16) | 0x0e7F ;		// HEYPhone
+#endif
+
 	thisNicolaSettings.toneDetectSelected = 0 ;		// tone detect off
-	thisNicolaSettings.audioForwardSelected = 1 ;	// audio forwarding off
+
+	thisNicolaSettings.audioForwardSelected = 0 ;	// audio forwarding off
+
 	thisNicolaSettings.confidenceBeepTime = 0 ;		// no confidence beep
 
 
 
 	ConsoleStartup();			/* serial port interface */
 
-	PSPLComms_Initialise();
 
-	//uart_SendByte(STDOUT_BASEADDRESS, '2' );
+	PSPLComms_Initialise();
 
 
 	//FlashDump();
@@ -401,38 +423,22 @@ int main( void )
 
 	CDCardInit() ;
 
-	//uart_SendByte(STDOUT_BASEADDRESS, '3' );
-
-
 	LCD_Startup();				/* reads menu and default settings */
-
-	//uart_SendByte(STDOUT_BASEADDRESS, '4' );
 
 
 	// Disable for debug
 
 	//BluetoothStartup();			// to Bluetooth devices of all kinds
 
-	//uart_SendByte(STDOUT_BASEADDRESS, '5' );
-
-
 	TextMessageStartup();		// text message handling
 
-	//uart_SendByte(STDOUT_BASEADDRESS, '6' );
-
-	DebugingGraham_Startup();		// start the streaming debug interface
+	//DebugingGraham_Startup();		// start the streaming debug interface
 
 	RadioInterfaceInit();		// start the PL to PS comms here
 
 
-
-
-	//Flash_Startup();  THIS IS THE TEST FLASH TASK ONLY.
-
 	/* Start the tasks and timer running. */
 	vTaskStartScheduler();
-
-
 
 
 	/* Don't expect to reach here. */

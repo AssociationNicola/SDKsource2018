@@ -125,7 +125,7 @@ void CDFlashWrite( u8 *writeToAddress, u32 flashAddress, u32 numberOfBytes)
 	{
 		if ( XSdPs_WritePolled( pxSDCardInstance, flashAddress, blockCount, writeToAddress) != XST_SUCCESS )
 		{
-			xil_printf( "CD CARD READ FAILED\r\n" );
+			xil_printf( "CD CARD WRITE FAILED\r\n" );
 		}
 	}
 }

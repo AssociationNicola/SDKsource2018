@@ -1,3 +1,0 @@
-18:48:43 INFO  : Launching XSDB server: xsdb -n -interactive /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/temp_xsdb_launch_script.tcl
-18:48:44 INFO  : XSDB server has started successfully.
-18:48:44 INFO  : Processing command line option -hwspec /home/gnaylor/Dropbox/N3workingG/TE0722Rebuild/N3Vivado/N3Z_TD_FIFO/N3Z_TD_FIFO.sdk/PS_PL_wrapper.hdf.

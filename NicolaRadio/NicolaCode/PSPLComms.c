@@ -55,7 +55,12 @@
 #ifdef DEBUG_CODE
 #define RECEIVE_MESSAGE_DEBUG
 //#define SEND_MESSAGE_DEBUG
+
+#define RECEIVED_MESSAGE_SERIAL_DEBUG
+
 #endif
+
+
 
 /************************** Constant Definitions *****************************/
 
@@ -172,8 +177,8 @@ void PSPLComms_Initialise()
 
 
 
-    ConfigData=XLlFfio_LookupConfig(DataFIFO_DEV_ID);
-    ConfigPSPL=XLlFfio_LookupConfig(PS_PLFIFO_DEV_ID);
+    ConfigData=XLlFfio_LookupConfig(DataFIFO_DEV_ID);		// used in DebugInterface for send/receive debug info
+    ConfigPSPL=XLlFfio_LookupConfig(PS_PLFIFO_DEV_ID);		// PS to PL e.g. key commands
 
     Status=XLlFifo_CfgInitialize(&DataFifo,ConfigData,ConfigData->BaseAddress);
 
@@ -220,6 +225,8 @@ void PSPLComms_Initialise()
    	xil_printf("Send User Pico\n\r");
    	LoadPicoFast(UserPico, sizeof(UserPico)/4, 0);
 #endif
+
+
 
     PLTransmitQueue = xQueueCreate( 4,					// max item count
     								PL_MESSAGE_MAX ) ;				// size of each item (max) ) ;
@@ -317,25 +324,33 @@ static void PL_Receiver( void *pvParameters )
     	{
 			switch ( Buffer[1] )		// check the received key
 			{
-
 			case KEY_NONE:
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "NO KEY PRESSED\n\r" );
+#endif
 				break;
 
 			case KEY_UP:		// up = 08
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY UP\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY UP\n\r");
 #endif
 
 #ifdef LCD_DEBUG
+
 				LCD_Write_String( 1, 0 , "KEY UP");
 #endif
 
 				break;
 
 			case KEY_DOWN:		// down = 04
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY DOWN\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY DOWN\n\r");
 #endif
@@ -346,7 +361,10 @@ static void PL_Receiver( void *pvParameters )
 				break;
 
 			case KEY_RIGHT:		// right = 02
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY RIGHT\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY RIGHT\n\r");
 #endif
@@ -358,7 +376,10 @@ static void PL_Receiver( void *pvParameters )
 				break;
 
 			case KEY_LEFT:		// left = 01
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY LEFT\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY LEFT\n\r");
 #endif
@@ -370,7 +391,10 @@ static void PL_Receiver( void *pvParameters )
 				break;
 
 			case KEY_UPLEFT:		// 08 + 01
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY UP plus LEFT\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY UP plus LEFT\n\r");
 #endif
@@ -382,22 +406,32 @@ static void PL_Receiver( void *pvParameters )
 				break;
 
 			case KEY_PTT_ON:		//		'0'
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "PTT ON\n\r" );
+#endif
 				break;
 
 			case KEY_PTT_OFF:		//	'1'
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "PTT OFF\n\r" );
+#endif
 				break;
 
 			case KEY_UP_PRESSED:
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY UP PRESSED\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY UP PRESSED\n\r");
 #endif
 				break;
 
 			case KEY_DOWN_PRESSED:
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY DOWN PRESSED\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY Down PRESSED\n\r");
 #endif
@@ -409,7 +443,10 @@ static void PL_Receiver( void *pvParameters )
 				break;
 
 			case KEY_RIGHT_PRESSED:
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY RIGHT PRESSED\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY Right PRESSED\n\r");
 #endif
@@ -421,7 +458,10 @@ static void PL_Receiver( void *pvParameters )
 				break;
 
 			case KEY_LEFT_PRESSED:
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY LEFT PRESSED\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY Left PRESSED\n\r");
 #endif
@@ -433,7 +473,10 @@ static void PL_Receiver( void *pvParameters )
 				break;
 
 			case KEY_DOWNLEFT:
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY DOWN & LEFT PRESSED\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY Down&Left PRESSED\n\r");
 #endif
@@ -445,7 +488,10 @@ static void PL_Receiver( void *pvParameters )
 				break;
 
 			case KEY_UPRIGHT:
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY UP & RIGHT PRESSED\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY Up&Right PRESSED\n\r");
 #endif
@@ -458,7 +504,10 @@ static void PL_Receiver( void *pvParameters )
 
 
 			case KEY_UPDOWN:
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY UP & DOWN PRESSED\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY Up&Down PRESSED\n\r");
 #endif
@@ -471,7 +520,10 @@ static void PL_Receiver( void *pvParameters )
 
 
 			case KEY_DOWNRIGHT:
+#ifdef RECEIVED_MESSAGE_SERIAL_DEBUG
 				xil_printf( "KEY DOWN & RIGHT PRESSED\n\r" );
+#endif
+
 #ifdef BT_DEBUG
 				AddMessageToBluetoothTransmit("  KEY Down&Right PRESSED\n\r");
 #endif
@@ -498,13 +550,13 @@ static void PL_Receiver( void *pvParameters )
 				xil_printf( "31kHz frequency\n\r" );
 				break;
 
-			case KEY_USER_WDOG_REPLY:			//	's'
+			case KEY_USER_WDOG_REPLY:			//	'p'
 #ifdef RECEIVE_MESSAGE_DEBUG
 				xil_printf( "User Watchdog Reply\n\r" );
 #endif
 				break;
 
-			case KEY_KEYP_WDOG_REPLY:			//	't'
+			case KEY_KEYP_WDOG_REPLY:			//	'q'
 #ifdef RECEIVE_MESSAGE_DEBUG
 				xil_printf( "Keypad Watchdog Reply\n\r" );
 #endif
@@ -542,11 +594,11 @@ static void PL_Receiver( void *pvParameters )
 			switch ( Buffer[1] )		// check the received msg
 			{
 				case '0':
-					xil_printf( "SPEAKER DETECT OFF\n\r" );
+					xil_printf( "TONE OFF from Pico\n\r" );
 					break;
 
 				case '1':
-					xil_printf( "SPEAKER DETECT ON\n\r" );
+					xil_printf( "TONE ON from Pico\n\r" );
 					break;
 
 				case '2':
@@ -662,7 +714,6 @@ void LoadPicoFast( u32* LoadArray, u32 numberOfInstructions, u32 PicoType )
 int ReadResponse()
 {
 	int frame_len;
-	int i;
 
  	while (XLlFifo_RxOccupancy(&PSPLFifo) == 0) {
 
@@ -693,7 +744,7 @@ int ReadResponse()
 
  	//if ( Buffer[i] != 0x0D )
  	{
- 		xil_printf( "ab\r\n");
+ 		xil_printf( "  ab\r\n");
  	}
 
 #endif
@@ -728,7 +779,7 @@ int TxSend(XLlFifo *InstancePtr, u32  *SourceAddr, int no_word)
 	int errorCount = 0;
 	u32 *baseAddress = (u32 *) InstancePtr->BaseAddress ;
 	//u32 *dataCount = (u32 *) InstancePtr->BaseAddress + 0x0C;
-
+	//xil_printf( "\r\n" ) ;
 	/* Filling the buffer with data */
 	for (i=0;i<no_word;i++)
 	{
@@ -743,6 +794,8 @@ int TxSend(XLlFifo *InstancePtr, u32  *SourceAddr, int no_word)
 		XLlFifo_TxPutWord(InstancePtr,
 						  *(SourceAddr+i));
 
+		//xil_printf( "%X\r\n", *(SourceAddr+i) ) ;
+
 		//xil_printf( "ADD %X (%d) status %X\r\n", *dataCount, i, (u32) *baseAddress);
 	}
 
@@ -754,7 +807,7 @@ int TxSend(XLlFifo *InstancePtr, u32  *SourceAddr, int no_word)
 
 	/* Check for Transmission completion */
 	while( !(XLlFifo_IsTxDone(InstancePtr)) ){
-		//if (errorCount++ == 4 )
+		if (errorCount++ == 20 )
 		{
 			xil_printf( "try send to user again %X occ=%d\r\n", (u32) *baseAddress, XLlFifo_iTxVacancy(InstancePtr) );
 

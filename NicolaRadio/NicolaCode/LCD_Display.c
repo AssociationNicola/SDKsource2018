@@ -27,6 +27,9 @@
 #include "xscugic.h"
 #include "xil_exception.h"
 
+#include "xllfifo.h"
+
+
 #include "xuartps_hw.h"
 
 
@@ -36,6 +39,9 @@
 #include "semphr.h"
 #include "timers.h"
 #include "xgpiops.h"
+
+#include "n3z_tonetest.h"
+
 
 #include "NicolaTypes.h"
 
@@ -69,6 +75,8 @@ void SetKeypadCheckState(int selected );				/* in this module			*/
 
 
 extern QueueHandle_t	DebugControlQueue; 	/* in DebugInterface.c */
+
+extern n3z_tonetest		*ToneTestInstancePtr;
 
 
 
@@ -280,10 +288,10 @@ SUB_MENU_ITEM	ForwardingMode0;
 SUB_MENU_ITEM	ForwardingMode1;
 
 SUB_MENU_ITEM	ForwardingMode0 =   // 0123456789012345
-		{ &ForwardingMode1, NULL, 1, "Audio Fwd On" };
+		{ &ForwardingMode1, NULL, 0, "Audio Fwd Off" };
 
 SUB_MENU_ITEM	ForwardingMode1 =
-		{ NULL, &ForwardingMode0, 1 , "Audio FWD Off"};
+		{ NULL, &ForwardingMode0, 1 , "Audio Fwd On"};
 
 
 SUB_MENU_ITEM	ToneDetectSetting0;
@@ -440,7 +448,7 @@ MAIN_MENU_ITEM	theMenu_6 =
 
 
 MAIN_MENU_ITEM	theMenu_5 =
-{ &theMenu_6, &theMenu_4, "CONFIDENCE BEEP", 	(void *) &confidenceBeepSetting1, SetConfidenceBeepTime, 	SUB_MENU_INTEGER, MENU_ITEM_TYPE_CONFIDENCE_BEEP, 0, 0, 0, 0 };	/* 5 minutes */
+{ &theMenu_6, &theMenu_4b, "CONFIDENCE BEEP", 	(void *) &confidenceBeepSetting1, SetConfidenceBeepTime, 	SUB_MENU_INTEGER, MENU_ITEM_TYPE_CONFIDENCE_BEEP, 0, 0, 0, 0 };	/* 5 minutes */
 
 
 MAIN_MENU_ITEM	theMenu_4b =
@@ -480,6 +488,8 @@ int DisplayAerialEarthing = TRUE;			// assume legacy mode at start up until a to
 
 MAIN_MENU_ITEM *firstMenuItem = NULL;
 
+
+extern XLlFifo PSPLFifo;
 
 
 /* internal routines and variables */
@@ -1079,6 +1089,8 @@ static void LCD_Main( void *pvParameters )
 
 	memcpy( VersionNumberSubMenu.subMenuHeading, GetVersionString(), 16 ) ;
 
+	xil_printf( "%s\r\n", GetVersionString());
+
 	/* Start backlight timer */
 	if ( (LCDTimer1 = xTimerCreate( "T1",
 								30 * pdMS_TO_TICKS(1000),
@@ -1378,7 +1390,7 @@ static void LCD_Main( void *pvParameters )
 				if ( theMessage[1] == '0' )		/* speaker detect off = nothing received */
 				{
 
-					xil_printf( "Implement Tone Detect off\n\r" );
+					xil_printf( "Tone Detect off\n\r" );
 
 					DisplayAerialEarthing = FALSE;
 
@@ -1388,6 +1400,9 @@ static void LCD_Main( void *pvParameters )
 						StoreAndFowardGo = FALSE ;
 					}
 #endif
+
+			    	xil_printf( "Status is %x\r\n", n3z_tonetest_radiostatus_read( ToneTestInstancePtr ) ) ;
+
 
 #if 0
 					static int tempFix = 1 ;
@@ -1402,7 +1417,7 @@ static void LCD_Main( void *pvParameters )
 				else
 				if ( theMessage[1] == '1' )		/* speaker detect on = incoming message */
 				{
-					xil_printf( "Implement Tone Detect on\n\r" );
+					xil_printf( "Tone Detect on\n\r" );
 
 					DisplayAerialEarthing = TRUE;
 
@@ -1417,6 +1432,11 @@ static void LCD_Main( void *pvParameters )
 						StoreAndFowardGo = TRUE ;
 					}
 #endif
+
+			    	xil_printf( "Status is %x\r\n", n3z_tonetest_radiostatus_read( ToneTestInstancePtr ) ) ;
+
+
+
 				}
 				else
 				if ( theMessage[1] == '2' )		/* tone detect mode off */
@@ -3314,7 +3334,9 @@ static void ApplyDefaultSettings()
 
 	SetToneDetect( thisNicolaSettings.toneDetectSelected ) ; // tone detect setting
 
+#ifdef STORE_AND_FORWARD
 	SetForwardMode( thisNicolaSettings.audioForwardSelected ) ; // audio forward mode
+#endif
 
 	//BluetoothBeginInquiry( thisNicolaSettings.);  		//	if RADIO STARTS IN INQUIRY MODE
 
@@ -3483,7 +3505,7 @@ static int ReadMenuFromFlash( void )
 	firstMenuItem = &theMenu_3;
 
 #ifdef STORE_AND_FORWARD
-	StoreAndForwardMode = TRUE;
+	//StoreAndForwardMode = TRUE;
 #endif
 
 	xil_printf( "CD OK- Default Menu\n\r" );
