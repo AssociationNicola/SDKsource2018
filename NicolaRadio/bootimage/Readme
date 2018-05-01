@@ -1,0 +1,3 @@
+From within the directory with the appropriate bin file, to program the flash type 
+/opt/Xilinx/SDK/2016.2/bin/zynq_flash -f BOOT.bin -flash_type qspi_single -verify
+

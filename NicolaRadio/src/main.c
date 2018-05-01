@@ -226,17 +226,30 @@ extern u32 QspiFlashSize;
 
 
 #ifdef DEBUG_CODE_LOCAL
+
+#ifdef NICOLA_2_DEFAULT_FREQUENCY
+
+char *VersionStringStart = 	"0.2 N2 dd mmm yy";
+
+#else
 						// 6 chars for version no; rest for date
 						//   01234567890123456
 char *VersionStringStart = 	"0.2deb dd mmm yy";
 
+#endif
 
 
 #else
 
+#ifdef NICOLA_2_DEFAULT_FREQUENCY
+
+char *VersionStringStart = 	"0.2 N2 dd mmm yy";
+
+#else
 						//   01234567890123456
 char *VersionStringStart = 	"0.2pre dd mmm yy";
 
+#endif
 
 #endif
 
@@ -428,7 +441,7 @@ int main( void )
 
 	// Disable for debug
 
-	//BluetoothStartup();			// to Bluetooth devices of all kinds
+	BluetoothStartup();			// to Bluetooth devices of all kinds
 
 	TextMessageStartup();		// text message handling
 

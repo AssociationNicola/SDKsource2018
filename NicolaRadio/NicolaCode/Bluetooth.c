@@ -64,6 +64,7 @@ extern QueueHandle_t	KeysReceivedQueue ;					/* in LCD_Display.c */
 #define HSP_AG_TYPE		2
 #define TABLET_TYPE		3
 #define COMPUTER_TYPE	4
+#define RADIO_TYPE		5
 #define IGNORE_TYPE     9
 
 typedef struct
@@ -138,14 +139,19 @@ static int CommandDataMode = IDLE_MODE ;
 char * StartupMessages[] = {
 		//"SET RESET\n",
 		"SET CONTROL ECHO 5\n",
-		"SET CONTROL CONFIG 90 1100\n",		// 0001 0001 0000 0000
+											// optional block 1  	congig block
+		"SET CONTROL CONFIG 90 1100\n",		// 1001 0000 - 			0001 0001 0001 0000
+																	// 4 = power saving when no connections
+																	// 8 = enable SCO - required for audio
+																	// 12 = replace old pairings
 
 		//"SET CONTROL PCM 08200006 0060\n",
 		//"SET BT NAME NICOLADEFAULT\n",
 
-		"SET BT CLASS 200408\n",
+		//"SET BT CLASS 200408\n",
+		"SET BT CLASS 20041C\n",
 		"SET BT AUTH * 0000\n",
-		"SET BT PAIR *\n",
+		//"SET BT PAIR *\n",
 		"SET PROFILE HFP-AG ON\n",
 		"SET PROFILE HFP ON\n",
 		"SET PROFILE HSP-AG ON\n",
@@ -346,6 +352,11 @@ static void BluetoothMain( void *pvParameters )
 	sprintf( theSendMessage, "RESET\n");
 	AddMessageToTransmit(theSendMessage);
 
+	vTaskDelay( pdMS_TO_TICKS( 2000 ));
+
+	sprintf( theSendMessage, "LIST\n");
+	AddMessageToTransmit(theSendMessage);
+
 
     while ( 1 )
     {
@@ -380,6 +391,7 @@ static void BluetoothMain( void *pvParameters )
 					else
 					if ( CommandDataMode == COMMAND_MODE )
 					{
+#if 0
 						//SetDataMode();
 
 						//sprintf( theSendMessage, "LIST\n" );	// only 1 data link at a time
@@ -392,6 +404,8 @@ static void BluetoothMain( void *pvParameters )
 						CommandDataMode = DATA_MODE ;
 
 						xil_printf( "Data Mode\r\n");
+
+#endif
 					}
 
 					xTimerStart( BluetoothTimer2, portMAX_DELAY );		// restart command/data timer
@@ -486,6 +500,12 @@ static void BluetoothMain( void *pvParameters )
 
 				if ( strlen( theMessage ) > 10 )
 				{
+					/* stop trying to pair with smart TV at Pearl Hill */
+					if ( memcmp( &theMessage[8], "54:13:79:87:32:ce", 17 ) == 0)
+					{
+						xil_printf( "IGNORE PEARLHILL TV\r\n" ) ;
+					}
+					else
 					if ( (BluetoothChannel = AllocateChannelTable( &theMessage[8] )) != NULL )
 					{
 						DetermineChannelType( BluetoothChannel, &theMessage[26] );
@@ -509,8 +529,10 @@ static void BluetoothMain( void *pvParameters )
 						{
 
 
-							if ( ( BluetoothChannel->Type != TABLET_TYPE ) &&
-								 ( BluetoothChannel->Type != IGNORE_TYPE ) )
+							//if ( ( BluetoothChannel->Type != TABLET_TYPE ) &&
+							//	 ( BluetoothChannel->Type != IGNORE_TYPE ) )
+
+							if ( BluetoothChannel->Type != IGNORE_TYPE )
 							{
 								//sprintf( theSendMessage, "SET BT PAIR %s 3b41ca4f42401ca64ab3ca3303d8ccdc\n", BluetoothChannel->MACAddress);
 								//AddMessageToTransmit(theSendMessage);
@@ -611,6 +633,11 @@ static void BluetoothMain( void *pvParameters )
 								AddMessageToTransmit(theSendMessage);
 								break;
 
+							case RADIO_TYPE:
+								sprintf( theSendMessage, "CALL %s 1108 HSP-AG\n", BluetoothChannel->MACAddress);
+								AddMessageToTransmit(theSendMessage);
+								break;
+
 						}
 
 						countConnectedChannels += 1;
@@ -639,6 +666,7 @@ static void BluetoothMain( void *pvParameters )
 						{
 
 							if ( BluetoothChannel->Type == TABLET_TYPE )
+
 							{
 								sprintf( theSendMessage, "SET BT AUTH * 000000\n");
 								//sprintf( theSendMessage, "SET BT AUTH * 0000\n");
@@ -845,7 +873,12 @@ static void BluetoothMain( void *pvParameters )
 							AddMessageToTransmit(theSendMessage);
 						}
 
-						//char *SSPkey = "123456";
+						if ( BluetoothChannel->Type == TABLET_TYPE )
+						{
+							sprintf( theSendMessage, "CALL %s 1101 RFCOMM\n", BluetoothChannel->MACAddress);
+							AddMessageToTransmit(theSendMessage);
+						}
+			//char *SSPkey = "123456";
 						//sprintf( theSendMessage, "SSP CONFIRM %s %s ?\n", BluetoothChannel->MACAddress, SSPkey );
 						//AddMessageToTransmit(theSendMessage);
 
@@ -1053,7 +1086,7 @@ static void BluetoothMain( void *pvParameters )
 			}
 
 			else
-			if ( strncmp( theMessage, "$", 1) == 0 )		// received from Andriod tablet
+			if ( strncmp( theMessage, "$", 1) == 0 )		// received from Android tablet
 			{
 				while ( xQueueSendToBack( MessageFromAndriodQueue, theMessage, 0 ) != pdPASS )
 				{
@@ -1331,7 +1364,6 @@ BLUETOOTH_CHANNELS *AllocateChannelTable( char *theMACAddress )
 	}
 
 	return( NULL );
-
 }
 
 
@@ -1362,7 +1394,11 @@ void DetermineChannelType( BLUETOOTH_CHANNELS *BluetoothChannel, char *theType )
 	{
 		BluetoothChannel->Type = IGNORE_TYPE;
 	}
-
+	else
+	if ( strncmp( theType, "080428", 6) == 0)		// MR Radios - Simoco radio does not offer PTT support etc
+	{
+		BluetoothChannel->Type = RADIO_TYPE;		// test with AG first
+	}
 
 
 }
@@ -1481,3 +1517,8 @@ static void SetDataMode()
 }
 #endif
 
+
+void FowardAudioToRadio( int ToneDetectState )
+{
+
+}

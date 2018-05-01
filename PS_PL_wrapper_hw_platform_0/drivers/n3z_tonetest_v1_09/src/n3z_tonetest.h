@@ -165,6 +165,29 @@ void n3z_tonetest_n3zconfig_write(n3z_tonetest *InstancePtr, u32 Data);
 */
 u32 n3z_tonetest_n3zconfig_read(n3z_tonetest *InstancePtr);
 /**
+* Write to n3z_tone_config gateway of n3z_tonetest. Assignments are LSB-justified.
+*
+* @param	InstancePtr is the n3z_tone_config instance to operate on.
+* @param	Data is value to be written to gateway n3z_tone_config.
+*
+* @return	None.
+*
+* @note    .
+*
+*/
+void n3z_tonetest_n3z_tone_config_write(n3z_tonetest *InstancePtr, u32 Data);
+/**
+* Read from n3z_tone_config gateway of n3z_tonetest. Assignments are LSB-justified.
+*
+* @param	InstancePtr is the n3z_tone_config instance to operate on.
+*
+* @return	u32
+*
+* @note    .
+*
+*/
+u32 n3z_tonetest_n3z_tone_config_read(n3z_tonetest *InstancePtr);
+/**
 * Write to audiovolume gateway of n3z_tonetest. Assignments are LSB-justified.
 *
 * @param	InstancePtr is the audiovolume instance to operate on.

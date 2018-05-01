@@ -180,7 +180,7 @@ LOAD /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm
                 0x00000400                _FIQ_STACK_SIZE = DEFINED (_FIQ_STACK_SIZE)?_FIQ_STACK_SIZE:0x400
                 0x00000400                _UNDEF_STACK_SIZE = DEFINED (_UNDEF_STACK_SIZE)?_UNDEF_STACK_SIZE:0x400
 
-.text           0xfc400000    0x115b4
+.text           0xfc400000    0x115b8
  *(.freertos_vectors)
  .freertos_vectors
                 0xfc400000       0xb0 ./src/FreeRTOS_asm_vectors.o
@@ -661,9 +661,9 @@ LOAD /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm
  .text          0xfc411400        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtend.o
  .text          0xfc411400        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtn.o
  *(.text.*)
- .text.startup  0xfc411400      0x198 ./src/main.o
+ .text.startup  0xfc411400      0x19c ./src/main.o
                 0xfc411400                main
- .text.startup  0xfc411598       0x1c /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__call_atexit.o)
+ .text.startup  0xfc41159c       0x1c /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/v7-a/fpv3/hard/libc.a(lib_a-__call_atexit.o)
  *(.gnu.linkonce.t.*)
  *(.plt)
  *(.gnu_warning)
@@ -677,20 +677,20 @@ LOAD /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm
  *(.ARM.extab)
  *(.gnu.linkonce.armextab.*)
 
-.v4_bx          0xfc4115b4        0x0
+.v4_bx          0xfc4115b8        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.init           0xfc4115b4       0x18
- .init          0xfc4115b4        0xc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crti.o
-                0xfc4115b4                _init
- .init          0xfc4115c0        0xc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtn.o
+.init           0xfc4115b8       0x18
+ .init          0xfc4115b8        0xc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crti.o
+                0xfc4115b8                _init
+ .init          0xfc4115c4        0xc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtn.o
 
-.fini           0xfc4115cc       0x18
- .fini          0xfc4115cc        0xc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crti.o
-                0xfc4115cc                _fini
- .fini          0xfc4115d8        0xc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtn.o
+.fini           0xfc4115d0       0x18
+ .fini          0xfc4115d0        0xc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crti.o
+                0xfc4115d0                _fini
+ .fini          0xfc4115dc        0xc /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtn.o
 
-.iplt           0xfc4115e4        0x0
+.iplt           0xfc4115e8        0x0
  .iplt          0x00000000        0x0 /opt/Xilinx/SDK/2016.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.9.2/v7-a/fpv3/hard/crtbegin.o
 
 .mmu_tbl        0xfc414000     0x4000

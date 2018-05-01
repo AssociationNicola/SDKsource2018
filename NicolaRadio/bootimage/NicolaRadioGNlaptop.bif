@@ -3,5 +3,5 @@ the_ROM_image:
 {
 	[bootloader]/home/gnaylor/N3Z_TD_FIFO.sdk/FSBL/Debug/FSBL.elf
 	/home/gnaylor/N3Z_TD_FIFO.sdk/PS_PL_wrapper_hw_platform_0/PS_PL_wrapper.bit
-	/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/Release/NicolaRadio.elf
+	[offset = 0x400000]/home/gnaylor/N3Z_TD_FIFO.sdk/NicolaRadio/Release/NicolaRadio.elf
 }

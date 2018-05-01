@@ -457,9 +457,14 @@ MAIN_MENU_ITEM	theMenu_4b =
 MAIN_MENU_ITEM	theMenu_4a =
 { &theMenu_4b, &theMenu_4, "TONE DETECT", 			(void *) &ToneDetectSetting0, 	SetToneDetect,  	SUB_MENU_TEXT, MENU_ITEM_TYPE_TONE_DETECT,		0, 0, 0, 0 };
 
-
+#ifdef NICOLA_2_DEFAULT_FREQUENCY
+MAIN_MENU_ITEM	theMenu_4 =
+{ &theMenu_4a, &theMenu_3, "FREQUENCY", 			(void *) &frequencySetting, 	SetAerialFrequency,  	SUB_MENU_TEXT, MENU_ITEM_TYPE_FREQUENCY,		&frequencySetting2, &frequencySetting, 0, 0 };
+#else
 MAIN_MENU_ITEM	theMenu_4 =
 { &theMenu_4a, &theMenu_3, "FREQUENCY", 			(void *) &frequencySetting, 	SetAerialFrequency,  	SUB_MENU_TEXT, MENU_ITEM_TYPE_FREQUENCY,		0, 0, 0, 0 };
+#endif
+
 
 
 MAIN_MENU_ITEM	theMenu_3 =
@@ -479,6 +484,9 @@ char *Nicola3Name = "Nicola 3";		// temporary
 
 QueueHandle_t	KeysReceivedQueue ;
 
+extern void FowardAudioToRadio( int );			// in Bluetooth.c
+
+int	RadioOperational = FALSE ;			// so PTT can control MR radio and vice versa
 
 /* current menu scrolling positions and state		*/
 
@@ -487,6 +495,7 @@ int	CurrentSubMenuPosition = TOP_LEVEL;
 int DisplayAerialEarthing = TRUE;			// assume legacy mode at start up until a tone detect is received
 
 MAIN_MENU_ITEM *firstMenuItem = NULL;
+
 
 
 extern XLlFifo PSPLFifo;
@@ -1400,6 +1409,10 @@ static void LCD_Main( void *pvParameters )
 						StoreAndFowardGo = FALSE ;
 					}
 #endif
+					if ( RadioOperational )
+					{
+						FowardAudioToRadio( FALSE );
+					}
 
 			    	xil_printf( "Status is %x\r\n", n3z_tonetest_radiostatus_read( ToneTestInstancePtr ) ) ;
 
@@ -1432,6 +1445,10 @@ static void LCD_Main( void *pvParameters )
 						StoreAndFowardGo = TRUE ;
 					}
 #endif
+					if ( RadioOperational )
+					{
+						FowardAudioToRadio( TRUE );
+					}
 
 			    	xil_printf( "Status is %x\r\n", n3z_tonetest_radiostatus_read( ToneTestInstancePtr ) ) ;
 
@@ -4062,6 +4079,22 @@ void EffectTurnRadioOff(int selected )
 		}
 	}
 
+
+}
+
+
+void	RadioTypeSetting( int RadioTypeOn )
+{
+	if ( RadioTypeOn == TRUE )
+	{
+		RadioOperational = TRUE ;
+		xil_printf( "Connected to MR Radio\r\n");
+	}
+	else
+	{
+		RadioOperational = FALSE ;
+		xil_printf( "Lost connection to MR Radio\r\n");
+	}
 
 }
 

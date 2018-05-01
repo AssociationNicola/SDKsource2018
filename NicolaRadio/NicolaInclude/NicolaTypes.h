@@ -20,6 +20,10 @@
 
 #define STORE_AND_FORWARD 1
 
+// remove comment for Nicola 2 build
+
+#define NICOLA_2_DEFAULT_FREQUENCY 1
+
 /* LED definitions */
 
 

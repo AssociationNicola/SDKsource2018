@@ -202,6 +202,29 @@ Initialize n3z_tonetest pointer with a specifc instance of the device based devi
  @note    .<br/>
 <br/>
 </p>
+<h1>void n3z_tonetest_n3z_tone_config_write(n3z_tonetest *InstancePtr, u32 Data);</h1>
+<p>
+ Write to n3z_tone_config gateway of n3z_tonetest. Assignments are LSB-justified.<br/>
+<br/>
+ @param	InstancePtr is the n3z_tone_config instance to operate on.<br/>
+ @param	Data is value to be written to gateway n3z_tone_config.<br/>
+<br/>
+ @return	None.<br/>
+<br/>
+ @note    .<br/>
+<br/>
+</p>
+<h1>u32 n3z_tonetest_n3z_tone_config_read(n3z_tonetest *InstancePtr);</h1>
+<p>
+ Read from n3z_tone_config gateway of n3z_tonetest. Assignments are LSB-justified.<br/>
+<br/>
+ @param	InstancePtr is the n3z_tone_config instance to operate on.<br/>
+<br/>
+ @return	u32<br/>
+
+ @note    .<br/>
+<br/>
+</p>
 <h1>void n3z_tonetest_audiovolume_write(n3z_tonetest *InstancePtr, u32 Data);</h1>
 <p>
  Write to audiovolume gateway of n3z_tonetest. Assignments are LSB-justified.<br/>
