@@ -744,6 +744,8 @@ void SetToneDetect(int selected )
 	}
 
 	n3z_tonetest_n3zconfig_write(InstancePtr, configMask ) ;
+	n3z_tonetest_n3z_tone_config_write(InstancePtr, 0x2008 ) ;
+
 
 }
 

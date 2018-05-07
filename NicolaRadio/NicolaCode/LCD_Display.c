@@ -1677,6 +1677,15 @@ static void LCD_Main( void *pvParameters )
 			}
 
 			else
+			if ( theMessage[0] == KEY_WARBLE_COMPLETE )		/* ignore PTT operations until warble xmit done */
+			{
+				TransmitReceiveStatus = NO_TRANSMIT ;
+
+				xil_printf( "WARBLE DONE main line\r\n" ) ;
+			}
+
+
+			else
 			if ( ( CurrentMenuPosition == TOP_LEVEL ) && ( theMessage[0] != KEY_UPDOWN ) && ( theMessage[0] != KEY_LEFTRIGHT ) )
 			{
 
@@ -1741,7 +1750,7 @@ static void LCD_Main( void *pvParameters )
 				{
 					TransmitReceiveStatus = NO_TRANSMIT ;
 
-					//xil_printf( "WARBLE DONE\r\n" ) ;
+					xil_printf( "WARBLE DONE\r\n" ) ;
 				}
 
     		}

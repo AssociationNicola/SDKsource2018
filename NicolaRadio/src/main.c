@@ -225,6 +225,7 @@ extern u32 QspiFlashSize;
 /*-----------------------------------------------------------*/
 
 
+
 #ifdef DEBUG_CODE_LOCAL
 
 #ifdef NICOLA_2_DEFAULT_FREQUENCY

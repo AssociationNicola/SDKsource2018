@@ -22,7 +22,7 @@
 
 // remove comment for Nicola 2 build
 
-#define NICOLA_2_DEFAULT_FREQUENCY 1
+//#define NICOLA_2_DEFAULT_FREQUENCY 1
 
 /* LED definitions */
 
