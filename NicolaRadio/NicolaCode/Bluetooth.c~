@@ -148,8 +148,8 @@ char * StartupMessages[] = {
 		//"SET CONTROL PCM 08200006 0060\n",
 		//"SET BT NAME NICOLADEFAULT\n",
 
-		"SET BT CLASS 200408\n",
-		//"SET BT CLASS 20041C\n",
+		//"SET BT CLASS 200408\n",
+		"SET BT CLASS 20041C\n",
 		"SET BT AUTH * 0000\n",
 		//"SET BT PAIR *\n",
 		"SET PROFILE HFP-AG ON\n",
@@ -1078,7 +1078,7 @@ static void BluetoothMain( void *pvParameters )
 			}
 
 			else
-			if ( strncmp( theMessage, "\A3", 1) == 0 )		// received from computer - menu and settings download
+			if ( strncmp( theMessage, "£", 1) == 0 )		// received from computer - menu and settings download
 			{
 				MenuMessageFromHostComputer( &theMessage[1] );
 
